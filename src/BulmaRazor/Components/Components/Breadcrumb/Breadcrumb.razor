@@ -7,7 +7,6 @@
         <CascadingValue Value="this" IsFixed="true">
             @ChildContent
         </CascadingValue>
-
     </ul>
 </nav>
 
@@ -53,11 +52,6 @@
     public void AddItem(BreadcrumbItem item)
     {
         items.Add(item);
-    }
-
-    public async override Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
     }
 
 

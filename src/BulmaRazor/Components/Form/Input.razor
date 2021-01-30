@@ -4,34 +4,11 @@
 @inherits BulmaComponentBase
 
 
-<div class="@controlCls">
-    <input @attributes="AdditionalAttributes"
-           type="@Type"
-           placeholder="@Placeholder"
-           value="@Value" @onchange="OnChangeHandle"
-           disabled="@Disabled"
-           readonly="@Readonly"
-           maxlength="@Maxlength"
-           class="@classes" />
-    @if (LeftIcon.HasValue())
-    {
-        <Icon Color="textColor" Size="Size" class="is-left" IconClass="@LeftIcon"></Icon>
-    }
+<input @attributes="AdditionalAttributes" class="@classes" value="@Value" @onchange="(e=>ValueChanged.InvokeAsync(e.Value.ToString()))" />
 
-    @if (RightIcon.HasValue())
-    {
-        <Icon Color="textColor" Size="Size" class="is-right" IconClass="@RightIcon"></Icon>
-    }
-</div>
-
-
+@*//EventCallback.Factory.CreateBinder<string>
+    (this, __value => CurrentValueAsString = __value, CurrentValueAsString)*@
 @code {
-    string controlCls => CssBuilder.Default("control")
-        .AddClassFromAttributes(AdditionalAttributes)
-        .AddClass(Size.Value, Size.Value.HasValue() && IsLoading)
-        .AddClass("has-icons-left", LeftIcon)
-        .AddClass("has-icons-right", RightIcon)
-        .Build();
 
 
     string classes => CssBuilder.Default("input")
@@ -44,25 +21,6 @@
         .AddClass("is-loading", IsLoading)
         .AddClass("is-static", Static)
         .Build();
-
-    [Parameter]
-    public string Value { get; set; }
-    [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
-
-    private async Task OnChangeHandle(ChangeEventArgs e)
-    {
-        await ValueChanged.InvokeAsync(e.Value.ToString());
-    }
-
-    [Parameter]
-    public string Placeholder { get; set; }
-
-    [Parameter]
-    public int Maxlength { get; set; } = int.MaxValue;
-
-    [Parameter]
-    public InputType Type { get; set; } = InputType.Text;
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;
@@ -92,23 +50,12 @@
     [Parameter]
     public bool Static { get; set; }
 
+    [Parameter]
+    public string Value { get; set; }
 
     [Parameter]
-    public string RightIcon { get; set; }
-    [Parameter]
-    public string LeftIcon { get; set; }
-
-    private TextColor textColor = TextColor.Default;
-
-    public override Task SetParametersAsync(ParameterView parameters)
-    {
-        if (parameters.TryGetValue<Color>("Color", out Color color))
-        {
-            textColor = color.ToTextColor();
-        }
+    public EventCallback<string> ValueChanged { get; set; }
 
 
-        return base.SetParametersAsync(parameters);
-    }
 
 }

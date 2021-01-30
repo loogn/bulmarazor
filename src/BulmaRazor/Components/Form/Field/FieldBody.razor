@@ -1,0 +1,19 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</div>
+
+
+@code {
+
+    string classes => CssBuilder.Default("field-body")
+        .AddStyleFromAttributes(AdditionalAttributes)
+
+        .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

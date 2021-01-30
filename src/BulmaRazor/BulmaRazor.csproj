@@ -30,6 +30,5 @@
         <Folder Include="Components\Layout\Hero\" />
         <Folder Include="Components\Layout\Section\" />
         <Folder Include="Components\Layout\Tile\" />
-        <Folder Include="Components\Form\" />
     </ItemGroup>
 </Project>

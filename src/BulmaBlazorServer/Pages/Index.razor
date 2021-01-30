@@ -12,63 +12,21 @@
         <br />
         <br />
         <br />
-        <Buttons Align="Align.Center">
-            <Button href="" Color="Color.Dark" Size="Size.Large">开始使用</Button>
+        <Buttons Align="Align.Centered">
+            <Button Color="Color.Dark" Size="Size.Large">开始使用</Button>
         </Buttons>
     </HeroBody>
 </Hero>
 
 
 
+<Input Color="Color.Primary"  @bind-Value="str" />
+
+<Button @onclick="e=>win.alert(str)">Show</Button>
 
 @code{
-
-    private Task PageChange(int index)
-    {
-        return win.console.log(index.ToString());
-    }
+    string str = "abc";
 
 
-    string val = "Hello";
 
-    private string vv;
-    int pval = 20;
-
-    private void NotifyClose(Notification e)
-    {
-        win.alert("hello");
-
-    }
-    private Modal m1;
-    private ModalCard m2;
-    private List<SelectItem> items = new List<SelectItem>()
-{
-new SelectItem("1","北京"),
-new SelectItem{ Text="上海", Value="2" , GroupName="城市", Selected=true},
-new SelectItem("3","天津")
-};
-
-    private List<TabItem> tabItems = new List<TabItem>(){
-    new TabItem{ Text="第一个"},
-    new TabItem{ Text="第二个"},
-    new TabItem{ Text="第三个",IconClass="fa fa-camera-retro"}
-    };
-
-    @* private List<BreadcrumbItem> breadcrumbItems=new List<BreadcrumbItem>(){
-            new BreadcrumbItem{ Text="首页",IconClass="fa fa-home" }
-            ,new BreadcrumbItem{ Text="新闻列表" }
-            ,new BreadcrumbItem{ Text="新闻详细" }
-        }; *@
-
-    private void SS(SelectItem item)
-    {
-        win.console.log(item.Value, item.Text);
-    }
-
-    private void click()
-    {
-        @* m1.Show(); *@
-        m2.Show();
-
-    }
 }

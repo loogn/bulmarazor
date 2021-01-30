@@ -1,0 +1,21 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<label @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</label>
+
+
+@code {
+
+    string classes => CssBuilder.Default("label")
+        .AddStyleFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value,Size.Value)
+        .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+}

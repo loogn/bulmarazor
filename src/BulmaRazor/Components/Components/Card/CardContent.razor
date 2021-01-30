@@ -2,9 +2,9 @@
 @inherits BulmaComponentBase
 
 
-<header @attributes="AdditionalAttributes" class="@clesses">
+<div @attributes="AdditionalAttributes" class="@clesses">
     @ChildContent
-</header>
+</div>
 @code {
     string clesses => CssBuilder.Default("card-content")
         .AddClassFromAttributes(AdditionalAttributes)
@@ -13,6 +13,3 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 }
-
-
-

@@ -1,0 +1,36 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</div>
+
+
+@code {
+
+    string classes => CssBuilder.Default("control")
+        .AddStyleFromAttributes(AdditionalAttributes)
+        .AddClass("has-icons-left",HasIconsLeft)
+        .AddClass("has-icons-right",HasIconsRight)
+        .AddClass("is-expanded", IsExpanded)
+        .Build();
+
+
+
+
+
+    [Parameter]
+    public bool HasIconsLeft { get; set; }
+    [Parameter]
+    public bool HasIconsRight { get; set; }
+
+    /// <summary>
+    /// 是否填充剩余的空间
+    /// </summary>
+    [Parameter]
+    public bool IsExpanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

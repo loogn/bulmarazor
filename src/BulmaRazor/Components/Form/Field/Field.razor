@@ -1,0 +1,43 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</div>
+
+
+@code {
+
+    string classes => CssBuilder.Default("field")
+        .AddStyleFromAttributes(AdditionalAttributes)
+        .AddClass("has-addons", HasAddons)
+        .AddClass(AddonsAlign.Value, HasAddons && AddonsAlign.Value.HasValue())
+        .AddClass("is-grouped", IsGrouped)
+        .AddClass(GroupedAlign.Value, IsGrouped && GroupedAlign.Value.HasValue())
+        .AddClass("is-grouped-multiline", IsGroupedMultiline)
+        .AddClass("is-horizontal", IsHorizontal)
+        .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    //
+    [Parameter]
+    public bool HasAddons { get; set; } = true;
+
+    [Parameter]
+    public AddonsAlign AddonsAlign { get; set; } = AddonsAlign.Default;
+
+    [Parameter]
+    public bool IsGrouped { get; set; }
+
+    [Parameter]
+    public GroupedAlign GroupedAlign { get; set; } = GroupedAlign.Default;
+
+    [Parameter]
+    public bool IsGroupedMultiline { get; set; }
+
+    [Parameter]
+    public bool IsHorizontal { get; set; }
+
+}
