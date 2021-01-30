@@ -1,0 +1,15 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<button @attributes="AdditionalAttributes" class="@classes"></button>
+@code {
+    string classes => CssBuilder.Default("delete")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value, Size.Value)
+        .Build();
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+}

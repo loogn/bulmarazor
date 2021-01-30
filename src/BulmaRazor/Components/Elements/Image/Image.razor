@@ -1,0 +1,35 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<figure @attributes="AdditionalAttributes" class="@classes">
+    <img src="@Src" class="@imgClass">
+</figure>
+
+
+@code {
+    string classes => CssBuilder.Default("image")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-fullwidth", IsFullwidth)
+        .Build();
+
+    string imgClass => CssBuilder.Default("")
+        .AddClass("is-rounded", IsRounded)
+       .Build();
+
+
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    [Parameter]
+    public string Src { get; set; }
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+
+    [Parameter]
+    public bool IsFullwidth { get; set; }
+
+}

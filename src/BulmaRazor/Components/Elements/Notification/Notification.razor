@@ -1,0 +1,59 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+@if (!deleted)
+{
+    <div @attributes="AdditionalAttributes" class="@classes">
+        @if (!NoDelete)
+        {
+            <button class="delete" @onclick="deleteClickHandle"></button>
+        }
+        @ChildContent
+    </div>
+}
+
+@code{
+    string classes => CssBuilder.Default("notification")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-light", IsLight)
+@* .AddClass("is-hidden", hidden) *@
+.Build();
+    private bool deleted;
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    private void deleteClickHandle()
+    {
+        if (OnDelete.HasDelegate)
+        {
+            OnDelete.InvokeAsync(this);
+        }
+        else
+        {
+            Delete();
+        }
+    }
+
+
+    [Parameter]
+    public bool NoDelete { get; set; }
+
+    [Parameter]
+    public EventCallback<Notification> OnDelete { get; set; }
+
+
+
+    public void Delete()
+    {
+        deleted = true;
+    }
+
+    [Parameter]
+    public bool IsLight { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+} 

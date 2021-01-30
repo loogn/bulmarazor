@@ -1,0 +1,75 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+<nav @attributes="AdditionalAttributes" class="@clesses" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        @Brand
+
+        <a role="button" class="navbar-burger @activeClass" aria-label="menu" aria-expanded="false" data-target="@navBarId" @onclick="ToggleActive">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="@navBarId" class="navbar-menu @activeClass">
+        <div class="navbar-start">
+            <CascadingValue Value="dividerClass" Name="DividerClass">
+                @MenuStart
+            </CascadingValue>
+        </div>
+        <div class="navbar-end">
+            @MenuEnd
+        </div>
+    </div>
+</nav>
+
+@code {
+    string clesses => CssBuilder.Default("navbar")
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-transparent", IsTransparent)
+        .AddClass("is-spaced", IsSpaced)
+        .AddClass(Fixed.Value, Fixed.Value)
+        .Build();
+
+    string activeClass = "";
+    string dividerClass = "navbar-divider";
+
+    private Task ToggleActive()
+    {
+        if (activeClass.HasValue())
+        {
+            activeClass = "";
+        }
+        else
+        {
+            activeClass = "is-active";
+        }
+
+        return Task.CompletedTask;
+    }
+
+    string navBarId = "navbar_" + Guid.NewGuid().ToString("N");
+
+
+    [Parameter]
+    public Color Color { get; set; } = Color.White;
+
+    [Parameter]
+    public Fixed Fixed { get; set; } = Fixed.Default;
+
+    [Parameter]
+    public bool IsSpaced { get; set; }
+    [Parameter]
+    public bool IsTransparent { get; set; }
+
+    [Parameter]
+    public RenderFragment Brand { get; set; }
+
+
+    [Parameter]
+    public RenderFragment MenuStart { get; set; }
+
+    [Parameter]
+    public RenderFragment MenuEnd { get; set; }
+
+}

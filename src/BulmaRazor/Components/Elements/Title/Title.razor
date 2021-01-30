@@ -1,0 +1,42 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+@if (Size == Size.Size1)
+{
+    <h1 class="@classes">@ChildContent</h1>
+}
+else if (Size == Size.Size2)
+{
+    <h2 class="@classes">@ChildContent</h2>
+}
+else if (Size == Size.Size3)
+{
+    <h3 class="@classes">@ChildContent</h3>
+}
+else if (Size == Size.Size4)
+{
+    <h4 class="@classes">@ChildContent</h4>
+}
+else if (Size == Size.Size5)
+{
+    <h5 class="@classes">@ChildContent</h5>
+}
+else if (Size == Size.Size6)
+{
+    <h6 class="@classes">@ChildContent</h6>
+}
+
+
+@code {
+    string classes => CssBuilder.Default("title")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value, Size.Value)
+        .Build();
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Size3;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

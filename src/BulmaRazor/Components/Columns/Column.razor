@@ -1,0 +1,82 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</div>
+
+
+
+
+@code {
+    string classes => CssBuilder.Default("column")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Offset.Value)
+        .AddClass(Size.Value)
+        .AddClass("is-narrow", IsNarrow)
+        .AddClass("is-narrow-mobile", IsNarrowMobile)
+        .AddClass("is-narrow-tablet", IsNarrowTablet)
+        .AddClass("is-narrow-touch", IsNarrowTouch)
+        .AddClass("is-narrow-desktop", IsNarrowDesktop)
+        .AddClass("is-narrow-widescreen", IsNarrowWidescreen)
+        .AddClass("is-narrow-fullhd", IsNarrowFullhd)
+
+        .Build();
+
+
+    [Parameter]
+    public Offset Offset { get; set; } = Offset.Default;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    /// <summary>
+    /// 是否是窄列
+    /// </summary>
+    [Parameter]
+    public bool IsNarrow { get; set; }
+
+    /// <summary>
+    /// 是否是窄列-手机
+    /// </summary>
+    [Parameter]
+    public bool IsNarrowMobile { get; set; }
+
+
+    /// <summary>
+    /// 是否是窄列-平板
+    /// </summary>
+    [Parameter]
+    public bool IsNarrowTablet { get; set; }
+
+
+    /// <summary>
+    /// 是否是窄列-触屏
+    /// </summary>
+    [Parameter]
+    public bool IsNarrowTouch { get; set; }
+
+    /// <summary>
+    /// 是否是窄列-桌面
+    /// </summary>
+    [Parameter]
+    public bool IsNarrowDesktop { get; set; }
+
+    /// <summary>
+    /// 是否是窄列-宽屏
+    /// </summary>
+    [Parameter]
+    public bool IsNarrowWidescreen { get; set; }
+
+    /// <summary>
+    /// 是否是窄列-全高清
+    /// </summary>
+    [Parameter]
+    public bool IsNarrowFullhd { get; set; }
+
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

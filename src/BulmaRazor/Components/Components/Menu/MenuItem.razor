@@ -1,0 +1,61 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<li @attributes="AdditionalAttributes" class="@classes">
+    <a class="@aclasses" href="@Href" target="@Target">
+        @if (IconClass.HasValue())
+        {
+            <span class="@getIconClass()">
+                <i class="@IconClass" aria-hidden="true"></i>
+            </span>
+        }
+        @if (Text.HasValue())
+        {
+            <text>@Text</text>
+        }
+        else
+        {
+            <text>@ChildContent</text>
+        }
+    </a>
+
+    @if (Text.HasValue())
+    {
+        <text>@ChildContent</text>
+    }
+</li>
+
+@code{
+    string classes => CssBuilder.Default("")
+      .AddClassFromAttributes(AdditionalAttributes)
+      .Build();
+
+    string getIconClass() => CssBuilder.Default("icon")
+
+      .Build();
+
+    string aclasses => CssBuilder.Default("")
+      .AddClass("is-active", IsActive)
+      .Build();
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    [Parameter]
+    public string Href { get; set; }
+
+    [Parameter]
+    public string IconClass { get; set; }
+
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public string Target { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public MenuList NestedMenu { get; set; }
+
+}

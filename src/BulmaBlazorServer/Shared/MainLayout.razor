@@ -1,0 +1,42 @@
+﻿@inherits LayoutComponentBase
+<Navbar Color="Color.Dark">
+    <Brand>
+        <NavbarItem>
+            <img src="/images/bulma-logo-white.png" width="112" height="28" />
+            @*<img src="/images/bulma-logo.png" width="112" height="28" />*@
+        </NavbarItem>
+    </Brand>
+    <MenuStart>
+        <NavbarItem href="/">
+            首页
+        </NavbarItem>
+        <NavbarItem>
+            文档
+        </NavbarItem>
+        <NavbarItem HasDropdown>
+            <NavbarLink>更多</NavbarLink>
+            <NavbarDropdown>
+                <NavbarItem>关于</NavbarItem>
+                <NavbarItem>工作</NavbarItem>
+                <NavbarItem>联系方式</NavbarItem>
+
+                <Divider />
+                <NavbarItem href="">联系方式</NavbarItem>
+            </NavbarDropdown>
+        </NavbarItem>
+    </MenuStart>
+    <MenuEnd>
+        <NavbarItem>
+            <Buttons HasAddons="false">
+                <Button Color="Color.Primary">注册</Button>
+                <Button Color="Color.Light">登录</Button>
+            </Buttons>
+        </NavbarItem>
+    </MenuEnd>
+</Navbar>
+
+<Container>
+
+    @Body
+
+</Container>

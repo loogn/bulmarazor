@@ -1,0 +1,23 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</div>
+
+@code {
+    string classes => CssBuilder.Default("panel-block")
+  .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-active",IsActive)
+  .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

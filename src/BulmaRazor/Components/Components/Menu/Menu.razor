@@ -1,0 +1,19 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<aside @attributes="AdditionalAttributes" class="@classes">
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+</aside>
+
+@code{
+
+    string classes => CssBuilder.Default("menu")
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

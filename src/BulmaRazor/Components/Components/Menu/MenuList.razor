@@ -1,0 +1,21 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<ul @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</ul>
+
+@code{
+
+    string classes=>CssBuilder.Default("")
+    .AddClass("menu-list",!IsNested)
+    .AddClassFromAttributes(AdditionalAttributes)
+    .Build();
+
+    [Parameter]
+    public bool IsNested{get;set;}
+
+    [Parameter]
+    public RenderFragment ChildContent{get;set;}
+    
+}

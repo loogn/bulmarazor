@@ -1,0 +1,72 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+@if (!deleted)
+{
+    <article @attributes="AdditionalAttributes" class="@classes">
+        @if (Header.HasValue())
+        {
+            <div class="message-header">
+                @if (!NoDelete)
+                {
+                    <button class="@deleteClass" aria-label="delete" @onclick="deleteClickHandle"></button>
+
+                }
+                <p>@Header</p>
+            </div>
+        }
+        <div class="message-body">
+            @ChildContent
+        </div>
+    </article>
+}
+
+@code{
+    string classes => CssBuilder.Default("message")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .Build();
+
+    string deleteClass => CssBuilder.Default("delete")
+        .AddClass(Size.Value, Size.Value)
+        .Build();
+    private bool deleted;
+
+    [Parameter]
+    public string Header { get; set; }
+
+    [Parameter]
+    public bool NoDelete { get; set; }
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    private void deleteClickHandle()
+    {
+        if (OnDelete.HasDelegate)
+        {
+            OnDelete.InvokeAsync(this);
+        }
+        else
+        {
+            Delete();
+        }
+    }
+
+    [Parameter]
+    public EventCallback<Message> OnDelete { get; set; }
+
+    public void Delete()
+    {
+        deleted = true;
+    }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

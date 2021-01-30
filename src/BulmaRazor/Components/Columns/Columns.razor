@@ -1,0 +1,125 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    @*<CascadingValue Value="this" IsFixed="true">*@
+    @ChildContent
+    @*</CascadingValue>*@
+</div>
+
+
+@code {
+    string classes => CssBuilder.Default("columns")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("is-mobile", IsMobile)
+        .AddClass("is-desktop", IsDesktop)
+        .AddClass("is-gapless", IsGapless)
+        .AddClass("is-multiline", IsMultiline)
+        .AddClass("is-vcentered", IsVcentered)
+        .AddClass("is-centered", IsCentered)
+        .AddClass("is-variable", IsVarGap)
+        .AddClass(Gap.Value, Gap.Value)
+        .AddClass(GapMobile.Value, GapMobile.Value)
+        .AddClass(GapTablet.Value, GapTablet.Value)
+        .AddClass(GapDesktop.Value, GapDesktop.Value)
+        .AddClass(GapWidescreen.Value, GapWidescreen.Value)
+        .AddClass(GapFullhd.Value, GapFullhd.Value)
+        .Build();
+
+    /// <summary>
+    /// 响应式-手机
+    /// </summary>
+    [Parameter]
+    public bool IsMobile { get; set; }
+
+    /// <summary>
+    /// 响应式-桌面
+    /// </summary>
+    [Parameter]
+    public bool IsDesktop { get; set; }
+
+    /// <summary>
+    /// 是否无间隙
+    /// </summary>
+    [Parameter]
+    public bool IsGapless { get; set; }
+
+
+    /// <summary>
+    /// 可变间隙
+    /// </summary>
+    [Parameter]
+    public Gap Gap { get; set; } = Gap.Default;
+
+    /// <summary>
+    /// 可变间隔-手机
+    /// </summary>
+    [Parameter]
+    public GapMobile GapMobile { get; set; } = GapMobile.Default;
+    /// <summary>
+    /// 可变间隔-平板
+    /// </summary>
+    [Parameter]
+    public GapTablet GapTablet { get; set; } = GapTablet.Default;
+    /// <summary>
+    /// 可变间隔-桌面
+    /// </summary>
+    [Parameter]
+    public GapDesktop GapDesktop { get; set; } = GapDesktop.Default;
+    /// <summary>
+    /// 可变间隔-宽屏
+    /// </summary>
+    [Parameter]
+    public GapWidescreen GapWidescreen { get; set; } = GapWidescreen.Default;
+    /// <summary>
+    /// 可变间隔-全高清
+    /// </summary>
+    [Parameter]
+    public GapFullhd GapFullhd { get; set; } = GapFullhd.Default;
+
+    /// <summary>
+    /// 是否可变间隙
+    /// </summary>
+    private bool IsVarGap = false;
+
+    /// <summary>
+    /// 是否多行
+    /// </summary>
+    [Parameter]
+    public bool IsMultiline { get; set; }
+
+    /// <summary>
+    /// 是否垂直对齐
+    /// </summary>
+    [Parameter]
+    public bool IsVcentered { get; set; }
+
+    /// <summary>
+    /// 是否居中列
+    /// </summary>
+    [Parameter]
+    public bool IsCentered { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<Gap>("Gap", out Gap gap) && gap.Value.HasValue())
+            IsVarGap = true;
+        if (parameters.TryGetValue<Gap>("GapMobile", out Gap gapMobile) && GapMobile.Value.HasValue())
+            IsVarGap = true;
+        if (parameters.TryGetValue<Gap>("GapTablet", out Gap gapTablet) && gapTablet.Value.HasValue())
+            IsVarGap = true;
+        if (parameters.TryGetValue<Gap>("GapDesktop", out Gap gapDesktop) && gapDesktop.Value.HasValue())
+            IsVarGap = true;
+        if (parameters.TryGetValue<Gap>("GapWidescreen", out Gap gapWidescreen) && gapWidescreen.Value.HasValue())
+            IsVarGap = true;
+        if (parameters.TryGetValue<Gap>("GapFullhd", out Gap gapFullhd) && gapFullhd.Value.HasValue())
+            IsVarGap = true;
+
+
+        return base.SetParametersAsync(parameters);
+    }
+
+}

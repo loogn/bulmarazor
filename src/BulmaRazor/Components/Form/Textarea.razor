@@ -1,0 +1,80 @@
+﻿
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+
+<div class="@controlCls">
+    <textarea @attributes="AdditionalAttributes"
+              placeholder="@Placeholder"
+              @onchange="OnValueChange"
+              disabled="@Disabled"
+              readonly="@Readonly"
+              class="@classes">
+@Value
+</textarea>
+</div>
+
+
+@code {
+    string controlCls => CssBuilder.Default("control")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value, Size.Value.HasValue() && IsLoading)
+        .AddClass("is-loading", IsLoading)
+        .Build();
+
+
+    string classes => CssBuilder.Default("textarea")
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-hovered", IsHovered)
+        .AddClass("is-focused", IsFocused)
+        .AddClass("has-fixed-size", FixedSize)
+        .Build();
+
+    [Parameter]
+    public string Value { get; set; }
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task OnValueChange(ChangeEventArgs e)
+    {
+        await ValueChanged.InvokeAsync(e.Value.ToString());
+    }
+
+    [Parameter]
+    public string Placeholder { get; set; }
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+
+    [Parameter]
+    public bool IsHovered { get; set; }
+
+    [Parameter]
+    public bool IsFocused { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+
+    [Parameter]
+    public bool Readonly { get; set; }
+
+    [Parameter]
+    public bool IsLoading { get; set; }
+
+    [Parameter]
+    public bool FixedSize { get; set; }
+
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        return base.SetParametersAsync(parameters);
+    }
+
+}

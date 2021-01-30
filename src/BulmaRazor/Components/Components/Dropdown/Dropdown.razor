@@ -1,0 +1,35 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<div @attributes="AdditionalAttributes" class="@clesses">
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+</div>
+@code {
+    string clesses => CssBuilder.Default("dropdown")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("is-active", IsActive)
+        .AddClass("is-hoverable", TriggerType.Hover == TriggerType)
+       .Build();
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+
+    [Parameter]
+    public TriggerType TriggerType { get; set; } = TriggerType.Hover;
+
+
+    public void Trigger()
+    {
+
+        IsActive = !IsActive;
+        StateHasChanged();
+    }
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

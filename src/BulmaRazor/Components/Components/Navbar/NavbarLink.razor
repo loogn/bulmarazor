@@ -1,0 +1,23 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<a @attributes="AdditionalAttributes" class="@clesses">
+    @ChildContent
+</a>
+
+
+@code {
+    string clesses => CssBuilder.Default("navbar-link")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("is-arrowless", IsArrowless)
+       .Build();
+
+
+    [Parameter]
+    public bool IsArrowless { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+}

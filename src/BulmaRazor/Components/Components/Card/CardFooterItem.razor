@@ -1,0 +1,42 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+@if (hasHref)
+{
+    <a @attributes="AdditionalAttributes" class="@clesses">
+        @ChildContent
+    </a>
+}
+else
+{
+    <p @attributes="AdditionalAttributes" class="@clesses">
+        @ChildContent
+    </p>
+}
+
+@code {
+    string clesses => CssBuilder.Default("card-footer-item")
+        .AddClassFromAttributes(AdditionalAttributes)
+       .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+    private bool hasHref;
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+
+        if (AdditionalAttributes != null)
+        {
+            hasHref = AdditionalAttributes.ContainsKey("href");
+        }
+    }
+}
+
+
+
+

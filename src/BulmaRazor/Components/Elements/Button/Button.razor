@@ -1,0 +1,90 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+@if (hasHref)
+{
+    <a @attributes="AdditionalAttributes" class="@classes" disabled="@Disabled">@ChildContent</a>
+}
+else
+{
+    <button @attributes="AdditionalAttributes" class="@classes" disabled="@Disabled">@ChildContent</button>
+}
+
+
+@code {
+    string classes => CssBuilder.Default("button")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-light", IsLight)
+        .AddClass("is-fullwidth", IsFullwidth)
+        .AddClass("is-outlined", IsOutlined)
+        .AddClass("is-inverted", IsInverted)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-hovered", IsHovered)
+        .AddClass("is-focused", IsFocused)
+        .AddClass("is-active", IsActive)
+        .AddClass("is-loading", IsLoading)
+        .AddClass("is-static", IsStatic)
+        .Build();
+
+
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    [Parameter]
+    public bool IsLight { get; set; }
+
+    [Parameter]
+    public bool IsFullwidth { get; set; }
+
+    [Parameter]
+    public bool IsOutlined { get; set; }
+
+    [Parameter]
+    public bool IsInverted { get; set; }
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+
+    [Parameter]
+    public bool IsHovered { get; set; }
+    [Parameter]
+    public bool IsFocused { get; set; }
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    [Parameter]
+    public bool IsLoading { get; set; }
+
+    [Parameter]
+    public bool IsStatic { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+
+
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool hasHref;
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+
+        await base.SetParametersAsync(parameters);
+
+        if (AdditionalAttributes != null)
+        {
+            hasHref = AdditionalAttributes.ContainsKey("href");
+        }
+    }
+
+}

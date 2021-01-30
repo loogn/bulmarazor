@@ -1,0 +1,18 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<header @attributes="AdditionalAttributes" class="@clesses">
+    @ChildContent
+</header>
+@code {
+    string clesses => CssBuilder.Default("card-content")
+        .AddClassFromAttributes(AdditionalAttributes)
+       .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
+
+
+

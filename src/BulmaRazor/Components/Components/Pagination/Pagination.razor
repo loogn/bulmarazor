@@ -1,0 +1,200 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+<nav @attributes="AdditionalAttributes" class="@clesses" role="navigation" aria-label="pagination">
+
+    @if (PrevText.HasValue() || PrevSlot != null)
+    {
+        <a class="pagination-previous" disabled="@DisablePrev" @onclick="e=>PrevPage()">
+            @if (PrevSlot != null)
+            {
+                @:@PrevSlot
+            }
+            else
+            {
+                @:@PrevText
+            }
+        </a>
+    }
+    @if (NextText.HasValue() || NextSlot != null)
+    {
+        <a class="pagination-next" disabled="@DisableNext" @onclick="e=>NextPage()">
+            @if (NextSlot != null)
+            {
+                @:@NextSlot
+            }
+            else
+            {
+                @:@NextText
+            }
+        </a>
+    }
+
+
+    <ul class="pagination-list">
+
+        @itemReader(1)
+        @if (PageIndex >= ItemSize)
+        {
+            <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+        }
+        @if (PageCount > 3)
+        {
+            for (var i = StartIndex; i <= EndIndex; i++)
+            {
+                @:@itemReader(i)
+            }
+        }
+
+        @if (StartIndex + ItemSize < PageCount)
+        {
+            <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+        }
+        @if (PageCount > 1)
+        {
+            @:@itemReader(PageCount)
+        }
+    </ul>
+</nav>
+
+@code {
+    string clesses => CssBuilder.Default("pagination")
+       .AddClass(Align.Value, Align.Value)
+        .AddClass(Size.Value, Size.Value)
+       .AddClass("is-rounded", IsRounded)
+       .Build();
+
+    RenderFragment<int> itemReader => pageIndex =>
+    @<li>
+        <a class="pagination-link @CssBuilder.Css("is-current",pageIndex==PageIndex)" @onclick="e=>ChangePage(pageIndex)" aria-label="Page @pageIndex" aria-current="page">@pageIndex</a>
+    </li>;
+
+
+[Parameter]
+public Align Align { get; set; } = Align.Default;
+
+[Parameter]
+public bool IsRounded { get; set; }
+
+[Parameter]
+public Size Size { get; set; } = Size.Default;
+
+[Parameter]
+public int PageIndex { get; set; } = 1;
+[Parameter]
+public int PageSize { get; set; } = 10;
+[Parameter]
+public int TotalCount { get; set; }
+
+
+public int PageCount
+{
+   get;
+   private set;
+}
+private int StartIndex
+{
+   get
+   {
+       return Math.Max(2, Math.Min(PageIndex - (ItemSize / 2), PageCount - ItemSize));
+   }
+}
+public int EndIndex
+{
+   get
+   {
+       return Math.Min(PageCount - 1, Math.Max(StartIndex + ItemSize - 1, ItemSize + 1));
+   }
+}
+
+
+/// <summary>
+/// 大于等于 5 且小于等于 21 的奇数
+/// </summary>
+[Parameter]
+public int ItemSize { get; set; } = 5;
+
+[Parameter]
+public bool HideOnSinglePage { get; set; }
+
+
+[Parameter]
+public Func<int, Task> OnPageChange { get; set; }
+
+
+[Parameter]
+public Func<int, Task> OnPrevClick { get; set; }
+[Parameter]
+public Func<int, Task> OnNextClick { get; set; }
+
+
+
+[Parameter]
+public RenderFragment PrevSlot { get; set; }
+
+[Parameter]
+public RenderFragment NextSlot { get; set; }
+[Parameter]
+public string PrevText { get; set; }
+[Parameter]
+public string NextText { get; set; }
+
+private bool DisablePrev { get { return PageIndex == 1; } }
+private bool DisableNext { get { return PageIndex == PageCount; } }
+
+private async Task ChangePage(int currentIndex)
+{
+
+   if (OnPageChange != null)
+   {
+       await OnPageChange.Invoke(currentIndex);
+   }
+   PageIndex = currentIndex;
+}
+private async Task PrevPage()
+{
+   if (!DisablePrev)
+   {
+       var currentIndex = PageIndex - 1;
+       if (OnPrevClick != null)
+       {
+           await OnPrevClick.Invoke(currentIndex);
+       }
+       await ChangePage(currentIndex);
+   }
+}
+private async Task NextPage()
+{
+   if (!DisableNext)
+   {
+       var currentIndex = PageIndex + 1;
+       if (OnNextClick != null)
+       {
+           await OnNextClick.Invoke(currentIndex);
+       }
+       await ChangePage(currentIndex);
+   }
+}
+
+public async override Task SetParametersAsync(ParameterView parameters)
+{
+   await base.SetParametersAsync(parameters);
+
+   if (ItemSize < 5 || ItemSize > 21 || ItemSize % 2 == 0)
+   {
+       throw new ArgumentOutOfRangeException(nameof(ItemSize), $"{nameof(ItemSize)}必须是大于等于5且小于等于21的奇数");
+   }
+
+   if (TotalCount > 0 && PageSize > 0)
+   {
+       PageCount = TotalCount / PageSize;
+       if (TotalCount % PageSize > 0)
+       {
+           PageCount++;
+       }
+   }
+}
+}

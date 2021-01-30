@@ -1,0 +1,17 @@
+﻿@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<article @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</article>
+
+@code {
+
+    string classes => CssBuilder.Default("media-left")
+      .AddClassFromAttributes(AdditionalAttributes)
+      .Build();
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

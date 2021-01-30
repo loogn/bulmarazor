@@ -1,0 +1,29 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+<nav @attributes="AdditionalAttributes" class="@classes">
+
+    @if (Heading.HasValue())
+    {
+        <p class="panel-heading">
+            @Heading
+        </p>
+    }
+    @ChildContent
+</nav>
+
+@code {
+    string classes => CssBuilder.Default("panel")
+  .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+  .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+
+    [Parameter]
+    public string Heading { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,34 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<span @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</span>
+@code {
+    string classes => CssBuilder.Default("tag")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-delete", IsDelete)
+        .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+    [Parameter]
+    public bool IsDelete { get; set; }
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+}

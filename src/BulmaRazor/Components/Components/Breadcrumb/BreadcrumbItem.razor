@@ -1,0 +1,64 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<li @attributes="AdditionalAttributes" class="@getLiClass()">
+    <a href="@Href">
+        @if (IconClass.HasValue())
+        {
+            <span class="@getIconClass()">
+                <i class="@IconClass" aria-hidden="true"></i>
+            </span>
+            <span>@ChildContent</span>
+        }
+        else
+        {
+            <text>@ChildContent</text>
+        }
+    </a>
+</li>
+
+@code{
+    string getLiClass() => CssBuilder.Default("")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("is-active", IsActive)
+        .Build();
+
+    string getIconClass() => CssBuilder.Default("icon")
+        .AddClass(IconSize.Value, IconSize.Value)
+        .Build();
+
+
+    [Parameter]
+    public string Href { get; set; } = "#";
+    [Parameter]
+    public bool IsActive { get; set; }
+    [Parameter]
+    public string IconClass { get; set; }
+
+    public void Active()
+    {
+        IsActive = true;
+        this.StateHasChanged();
+    }
+
+
+    [Parameter]
+    public Size IconSize { get; set; } = Size.Small;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+    }
+
+    [CascadingParameter]
+    public Breadcrumb parent { get; set; }
+    protected override void OnInitialized()
+    {
+        parent.AddItem(this);
+        base.OnInitialized();
+    }
+
+} 
+    

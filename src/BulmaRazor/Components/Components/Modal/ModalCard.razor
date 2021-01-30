@@ -1,0 +1,85 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    <div class="modal-background" @onclick="backgroundClickHandle"></div>
+    <div class="modal-card">
+
+        <header class="modal-card-head">
+            <p class="modal-card-title">@HeaderText</p>
+            @if (!NoClose)
+            {
+                <button class="delete" aria-label="close" @onclick="closeClickHandle"></button>
+            }
+        </header>
+        <section class="modal-card-body">
+            @ChildContent
+        </section>
+        <footer class="modal-card-foot">
+            @Footer
+        </footer>
+    </div>
+</div>
+
+
+
+@code{
+    string classes => CssBuilder.Default("modal")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("is-active", isActive)
+        .Build();
+
+
+    [Parameter]
+    public string HeaderText { get; set; }
+    private bool isActive { get; set; }
+
+    [Parameter]
+    public bool CloseOnClickBackground { get; set; }
+
+    private void backgroundClickHandle()
+    {
+        if (CloseOnClickBackground)
+        {
+            Close();
+        }
+    }
+    [Parameter]
+    public bool NoClose { get; set; }
+
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    private void closeClickHandle()
+    {
+        if (OnClose.HasDelegate)
+        {
+            OnClose.InvokeAsync(this);
+        }
+        else
+        {
+            Close();
+        }
+    }
+
+    [Parameter]
+    public EventCallback<ModalCard> OnClose { get; set; }
+
+    public void Close()
+    {
+        isActive = false;
+    }
+    public void Show()
+    {
+        isActive = true;
+    }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment Footer { get; set; }
+}
+

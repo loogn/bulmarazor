@@ -1,0 +1,15 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<hr @attributes="AdditionalAttributes" class="@clesses" />
+
+@code {
+    string clesses => CssBuilder.Default(DividerClass)
+        .AddClassFromAttributes(AdditionalAttributes)
+       .Build();
+
+    [CascadingParameter(Name = "DividerClass")]
+    private string DividerClass { get; set; }
+
+}

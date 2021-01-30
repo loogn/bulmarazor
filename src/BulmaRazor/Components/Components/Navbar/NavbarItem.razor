@@ -1,0 +1,56 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+@if (!hasHref || HasDropdown)
+{
+    <div @attributes="AdditionalAttributes" class="@clesses">
+        @ChildContent
+    </div>
+}
+else
+{
+    <a @attributes="AdditionalAttributes" class="@clesses">
+        @ChildContent
+    </a>
+}
+
+@code {
+    string clesses => CssBuilder.Default("navbar-item")
+          .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("has-dropdown", HasDropdown)
+        .AddClass("has-dropdown-up", HasDropdownUp)
+        .AddClass("is-hoverable", IsHoverable)
+        .AddClass("is-active", IsActive)
+       .Build();
+
+    private bool hasHref;
+
+    [Parameter]
+    public bool IsHoverable { get; set; }
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+
+    [Parameter]
+    public bool HasDropdown { get; set; }
+
+    [Parameter]
+    public bool HasDropdownUp { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (AdditionalAttributes != null)
+        {
+            hasHref = AdditionalAttributes.ContainsKey("href");
+        }
+        if (HasDropdown)
+        {
+            IsHoverable = true;
+        }
+    }
+}

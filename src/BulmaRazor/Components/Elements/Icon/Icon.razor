@@ -1,0 +1,29 @@
+﻿@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<span @attributes="AdditionalAttributes" class="@classes">
+    <i class="@IconClass"></i>
+</span>
+
+@code {
+
+
+    string classes => CssBuilder.Default("icon")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass(Color.Value, Color.Value)
+        .Build();
+
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    [Parameter]
+    public TextColor Color { get; set; } = TextColor.Default;
+
+    [Parameter]
+    public string IconClass { get; set; }
+
+}
+

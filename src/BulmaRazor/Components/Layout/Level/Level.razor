@@ -1,0 +1,22 @@
+﻿@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<nav @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</nav>
+
+@code {
+
+    string classes => CssBuilder.Default("level")
+      .AddClassFromAttributes(AdditionalAttributes)
+      .AddClass("is-mobile", IsMobile)
+      .Build();
+
+    [Parameter]
+    public bool IsMobile { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

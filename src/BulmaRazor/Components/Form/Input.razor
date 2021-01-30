@@ -1,0 +1,114 @@
+﻿
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+
+<div class="@controlCls">
+    <input @attributes="AdditionalAttributes"
+           type="@Type"
+           placeholder="@Placeholder"
+           value="@Value" @onchange="OnChangeHandle"
+           disabled="@Disabled"
+           readonly="@Readonly"
+           maxlength="@Maxlength"
+           class="@classes" />
+    @if (LeftIcon.HasValue())
+    {
+        <Icon Color="textColor" Size="Size" class="is-left" IconClass="@LeftIcon"></Icon>
+    }
+
+    @if (RightIcon.HasValue())
+    {
+        <Icon Color="textColor" Size="Size" class="is-right" IconClass="@RightIcon"></Icon>
+    }
+</div>
+
+
+@code {
+    string controlCls => CssBuilder.Default("control")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value, Size.Value.HasValue() && IsLoading)
+        .AddClass("has-icons-left", LeftIcon)
+        .AddClass("has-icons-right", RightIcon)
+        .Build();
+
+
+    string classes => CssBuilder.Default("input")
+
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-hovered", IsHovered)
+        .AddClass("is-focused", IsFocused)
+        .AddClass("is-loading", IsLoading)
+        .AddClass("is-static", Static)
+        .Build();
+
+    [Parameter]
+    public string Value { get; set; }
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task OnChangeHandle(ChangeEventArgs e)
+    {
+        await ValueChanged.InvokeAsync(e.Value.ToString());
+    }
+
+    [Parameter]
+    public string Placeholder { get; set; }
+
+    [Parameter]
+    public int Maxlength { get; set; } = int.MaxValue;
+
+    [Parameter]
+    public InputType Type { get; set; } = InputType.Text;
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    [Parameter]
+    public bool IsHovered { get; set; }
+
+    [Parameter]
+    public bool IsFocused { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+
+    [Parameter]
+    public bool Readonly { get; set; }
+
+    [Parameter]
+    public bool IsLoading { get; set; }
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+    [Parameter]
+    public bool Static { get; set; }
+
+
+    [Parameter]
+    public string RightIcon { get; set; }
+    [Parameter]
+    public string LeftIcon { get; set; }
+
+    private TextColor textColor = TextColor.Default;
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<Color>("Color", out Color color))
+        {
+            textColor = color.ToTextColor();
+        }
+
+
+        return base.SetParametersAsync(parameters);
+    }
+
+}

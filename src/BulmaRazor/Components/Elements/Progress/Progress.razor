@@ -1,0 +1,27 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<progress @attributes="AdditionalAttributes" class="@classes">@ChildContent</progress>
+
+@code {
+    string classes => CssBuilder.Default("progress")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .Build();
+
+
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+}

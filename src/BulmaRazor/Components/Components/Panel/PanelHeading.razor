@@ -1,0 +1,14 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+<p @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</p>
+
+@code {
+    string classes => CssBuilder.Default("panel-heading")
+  .AddClassFromAttributes(AdditionalAttributes)
+  .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

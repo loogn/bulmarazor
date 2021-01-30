@@ -1,0 +1,28 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<div @attributes="AdditionalAttributes" class="@clesses" @onclick="clickHandle">
+    @ChildContent
+</div>
+@code {
+    string clesses => CssBuilder.Default("dropdown-trigger")
+        .AddClassFromAttributes(AdditionalAttributes)
+       .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [CascadingParameter]
+    private Dropdown dropdown { get; set; }
+
+
+    private void clickHandle()
+    {
+        if (dropdown != null && dropdown.TriggerType == TriggerType.Click)
+        {
+            dropdown.Trigger();
+        }
+    }
+
+}

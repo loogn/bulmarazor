@@ -1,0 +1,75 @@
+@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+
+@if (WithContainer)
+{
+    <div class="table-container">
+        <table @attributes="AdditionalAttributes" class="@classes">
+            @ChildContent
+        </table>
+    </div>
+}
+else
+{
+
+    <table @attributes="AdditionalAttributes" class="@classes">
+        @ChildContent
+    </table>
+}
+
+
+@code {
+
+
+
+    string classes => CssBuilder.Default("table")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("is-bordered", IsBordered)
+        .AddClass("is-striped", IsStriped)
+        .AddClass("is-narrow", IsNarrow)
+        .AddClass("is-hoverable", IsHoverable)
+        .AddClass("is-fullwidth", IsFullwidth)
+        .Build();
+
+    /// <summary>
+    /// 是否有边框
+    /// </summary>
+    [Parameter]
+    public bool IsBordered { get; set; }
+
+    /// <summary>
+    /// 是否有条纹
+    /// </summary>
+    [Parameter]
+    public bool IsStriped { get; set; }
+
+    /// <summary>
+    /// 是否狭窄
+    /// </summary>
+    [Parameter]
+    public bool IsNarrow { get; set; }
+
+    /// <summary>
+    /// 是否悬停便样式
+    /// </summary>
+    [Parameter]
+    public bool IsHoverable { get; set; }
+
+    /// <summary>
+    /// 是否全宽
+    /// </summary>
+    [Parameter]
+    public bool IsFullwidth { get; set; }
+
+
+    [Parameter]
+    public bool WithContainer { get; set; }
+
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

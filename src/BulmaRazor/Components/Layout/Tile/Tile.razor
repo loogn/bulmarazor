@@ -1,0 +1,39 @@
+﻿@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</div>
+
+@code {
+
+    string classes => CssBuilder.Default("tile")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Seniority.Value, Seniority.Value)
+        .AddClass("is-vertical", IsVertical)
+        .Build();
+
+    /// <summary>
+    /// 尺寸
+    /// </summary>
+    [Parameter]
+    public Seniority Seniority { get; set; } = Seniority.Default;
+
+    /// <summary>
+    /// 是否垂直
+    /// </summary>
+    [Parameter]
+    public bool IsVertical { get; set; }
+
+    /// <summary>
+    /// 水平尺寸
+    /// </summary>
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BulmaRazor\BulmaRazor.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JSRuntimeWindow" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\documentation\layout\" />
+    <Folder Include="Pages\documentation\columns\" />
+    <Folder Include="Pages\documentation\components\" />
+    <Folder Include="Pages\documentation\form\" />
+    <Folder Include="Pages\documentation\elements\" />
+    <Folder Include="Pages\documentation\helpers\" />
+  </ItemGroup>
+</Project>

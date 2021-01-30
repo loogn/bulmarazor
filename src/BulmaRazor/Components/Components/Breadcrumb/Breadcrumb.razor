@@ -1,0 +1,64 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<nav @attributes="AdditionalAttributes" class="@classes" aria-label="breadcrumbs">
+    <ul>
+        <CascadingValue Value="this" IsFixed="true">
+            @ChildContent
+        </CascadingValue>
+
+    </ul>
+</nav>
+
+@code{
+    string classes => CssBuilder.Default("breadcrumb")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass(Separator.Value, Separator.Value)
+        .AddClass(Align.Value, Align.Value)
+        .Build();
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    [Parameter]
+    public Size IconSize { get; set; } = Size.Small;
+
+    [Parameter]
+    public Separator Separator { get; set; } = Separator.Default;
+
+    [Parameter]
+    public Align Align { get; set; } = Align.Default;
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private List<BreadcrumbItem> items { get; set; } = new List<BreadcrumbItem>();
+
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            if (items != null && !items.Any(x => x.IsActive))
+            {
+                items.LastOrDefault().Active();
+            }
+        }
+    }
+
+    public void AddItem(BreadcrumbItem item)
+    {
+        items.Add(item);
+    }
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+    }
+
+
+}

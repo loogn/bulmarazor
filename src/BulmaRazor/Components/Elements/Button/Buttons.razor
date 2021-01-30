@@ -1,0 +1,23 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">@ChildContent</div>
+
+@code {
+    string classes => CssBuilder.Default("buttons ")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Align.Value, Align.Value)
+        .AddClass("has-addons", HasAddons)
+        .Build();
+
+
+    [Parameter]
+    public bool HasAddons { get; set; } = true;
+
+    [Parameter]
+    public Align Align { get; set; } =Align.Default;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Version>0.0.1</Version>
+        <Description>BulmaRazor</Description>
+        <Copyright>loogn@2021</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl></PackageProjectUrl>
+        <RepositoryUrl>https://gitee.com/loogn/bulma-blazor</RepositoryUrl>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <PackageId>BulmaRazor</PackageId>
+    </PropertyGroup>
+    <ItemGroup>
+      <Compile Remove="ExampleJsInterop.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Remove="wwwroot\exampleJsInterop.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Components\Columns\" />
+        <Folder Include="Components\Layout\Level\" />
+        <Folder Include="Components\Layout\Media\" />
+        <Folder Include="Components\Layout\Hero\" />
+        <Folder Include="Components\Layout\Section\" />
+        <Folder Include="Components\Layout\Tile\" />
+        <Folder Include="Components\Form\" />
+    </ItemGroup>
+</Project>

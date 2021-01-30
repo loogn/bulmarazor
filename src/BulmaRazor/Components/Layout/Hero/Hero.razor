@@ -1,0 +1,39 @@
+﻿@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<nav @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</nav>
+
+@code {
+
+    string classes => CssBuilder.Default("hero")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-bold", IsBold)
+        .Build();
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    /// <summary>
+    /// 尺寸
+    /// </summary>
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    /// <summary>
+    /// 是否渐变
+    /// </summary>
+    [Parameter]
+    public bool IsBold { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

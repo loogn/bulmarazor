@@ -1,0 +1,20 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<p @attributes="AdditionalAttributes" class="@classes">
+    @ChildContent
+</p>
+
+@code {
+    string classes => CssBuilder.Default("panel-tabs")
+  .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
+  .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

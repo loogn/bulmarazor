@@ -1,0 +1,30 @@
+﻿<Menu>
+  <MenuLabel>General</MenuLabel>
+  <MenuList>
+    <MenuItem Href="#" Text="Dashboard"></MenuItem>
+    <MenuItem Href="#">Customers</MenuItem>
+  </MenuList>
+  <MenuLabel>
+    Administration
+  </MenuLabel>
+  <MenuList>
+    <MenuItem Href="#">Team Settings</MenuItem>
+    <MenuItem Href="#" IconClass="fa fa-home"  Text="ManageYour Team">
+      <MenuList IsNested>
+        <MenuItem Href="#" IsActive>Members222</MenuItem>
+        <MenuItem Href="#">Plugins222</MenuItem>
+      </MenuList>
+    </MenuItem>
+  </MenuList>
+</Menu>
+
+@code {
+  private bool collapseNavMenu = true;
+
+  private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+  private void ToggleNavMenu()
+  {
+    collapseNavMenu = !collapseNavMenu;
+  }
+}
