@@ -20,13 +20,14 @@
 
 
 
-<Input Color="Color.Primary"  @bind-Value="str" />
+<Input Color="Color.Primary" @bind-Value="i" BindEvent="oninput"/>
+
+<span>@str</span>
+<span>@i</span>
 
 <Button @onclick="e=>win.alert(str)">Show</Button>
 
 @code{
     string str = "abc";
-
-
-
+    int? i = 23;
 }

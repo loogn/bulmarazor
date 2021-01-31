@@ -2,17 +2,16 @@
 @namespace BulmaRazor.Components
 
 @inherits BulmaComponentBase
+@typeparam TValue
 
 
-<input @attributes="AdditionalAttributes" class="@classes" value="@Value" @onchange="(e=>ValueChanged.InvokeAsync(e.Value.ToString()))" />
+<input @attributes="AdditionalAttributes" @bind-value="@CurrentValue" @bind-value:event="@BindEvent" class="@classes" />
 
-@*//EventCallback.Factory.CreateBinder<string>
-    (this, __value => CurrentValueAsString = __value, CurrentValueAsString)*@
 @code {
 
 
     string classes => CssBuilder.Default("input")
-
+        .AddClassFromAttributes(AdditionalAttributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-rounded", IsRounded)
@@ -50,12 +49,47 @@
     [Parameter]
     public bool Static { get; set; }
 
+
+
     [Parameter]
-    public string Value { get; set; }
+    public string BindEvent { get; set; } = "onchange";
 
     [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
+    public TValue Value { get; set; }
 
 
+    private TValue _value;
 
+    private TValue CurrentValue
+    {
+        get { return _value; }
+        set
+        {
+            _value = value;
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(_value).GetAwaiter().GetResult();
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        //牛叉
+        if (typeof(TValue) == typeof(int))
+        {
+            if (AdditionalAttributes == null)
+            {
+                AdditionalAttributes = new Dictionary<string, object>();
+                AdditionalAttributes.Add("type", "number");
+            }
+        }
+
+        await base.SetParametersAsync(parameters);
+        _value = Value;
+
+    }
 }
