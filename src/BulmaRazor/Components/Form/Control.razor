@@ -13,10 +13,15 @@
         .AddClass("has-icons-left",HasIconsLeft)
         .AddClass("has-icons-right",HasIconsRight)
         .AddClass("is-expanded", IsExpanded)
+        .AddClass("is-loading",IsLoading)
         .Build();
 
 
-
+    /// <summary>
+    /// 用于textbox
+    /// </summary>
+    [Parameter]
+    public bool IsLoading { get; set; }
 
 
     [Parameter]

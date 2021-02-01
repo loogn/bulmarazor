@@ -3,7 +3,7 @@ namespace BulmaRazor.Components
 {
 
 
-    public class SelectItem
+    public class SelectItem<TValue>
     {
         /// <summary>
         /// 构造函数
@@ -13,7 +13,7 @@ namespace BulmaRazor.Components
         /// <summary>
         /// 构造函数
         /// </summary>
-        public SelectItem(string value, string text) => (Value, Text) = (value, text);
+        public SelectItem(TValue value, string text) => (Value, Text) = (value, text);
 
         /// <summary>
         /// 获得/设置 显示名称
@@ -23,7 +23,7 @@ namespace BulmaRazor.Components
         /// <summary>
         /// 获得/设置 选项值
         /// </summary>
-        public string Value { get; set; } = "";
+        public TValue Value { get; set; }
 
         /// <summary>
         /// 获得/设置 是否选中

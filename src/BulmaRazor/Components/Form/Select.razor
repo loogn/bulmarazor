@@ -1,58 +1,22 @@
 ﻿@namespace BulmaRazor.Components
 
 @inherits BulmaComponentBase
+@typeparam TValue
 
-
-<div class="@controlCls">
-    <div class="@selectCls">
-        <select @attributes="AdditionalAttributes"
-                @onchange="OnChangeHandle"
-                disabled="@Disabled"
-                multiple="@Multiple">
-            @if (Items != null)
-            {
-                foreach (var gp in Items.GroupBy(x => x.GroupName))
-                {
-                    if (gp.Key.HasValue())
-                    {
-                        <optgroup label="@gp.Key">
-                            @foreach (var item in gp)
-                            {
-                                <option selected="@item.Selected" value="@item.Value">@item.Text</option>
-                            }
-                        </optgroup>
-                    }
-                    else
-                    {
-                        @foreach (var item in gp)
-                        {
-                            <option selected="@item.Selected" value="@item.Value">@item.Text</option>
-                        }
-                    }
-                }
-            }
-            else
-            {
-                @:@ChildContent
-            }
-        </select>
-    </div>
-    @if (LeftIcon.HasValue())
-    {
-        <Icon Color="textColor" Size="Size" class="is-left" IconClass="@LeftIcon"></Icon>
-    }
+<div class="@selectCls">
+    <select @attributes="AdditionalAttributes"
+            @bind="@CurrentValue">
+        @ChildContent
+    </select>
 </div>
 
+
+
 @code {
-    string controlCls => CssBuilder.Default("control")
-        .AddClassFromAttributes(AdditionalAttributes)
-        .AddClass(Size.Value, Size.Value.HasValue() && IsLoading)
-        .AddClass("is-multiple", Multiple)
-        .AddClass("has-icons-left", LeftIcon)
-        .Build();
+
 
     string selectCls => CssBuilder.Default("select")
-        .AddClass("is-multiple", Multiple)
+        .AddClass("is-multiple", multiple)
         .AddClass("is-rounded", IsRounded)
          .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
@@ -61,26 +25,16 @@
         .AddClass(Size.Value, Size.Value)
         .Build();
 
-    [Parameter]
-    public string Value { get; set; }
+
+
+    private bool multiple;
+
+
+
+
 
     [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
-
-    [Parameter]
-    public EventCallback<SelectItem> OnSelectChanged { get; set; }
-
-    private async Task OnChangeHandle(ChangeEventArgs e)
-    {
-        var val = e.Value.ToString();
-        await ValueChanged.InvokeAsync(val);
-
-        var item = Items.FirstOrDefault(x => x.Value == val);
-        await OnSelectChanged.InvokeAsync(item);
-    }
-
-    [Parameter]
-    public IList<SelectItem> Items { get; set; }
+    public IList<SelectItem<TValue>> Items { get; set; }
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;
@@ -88,8 +42,7 @@
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
-    [Parameter]
-    public bool Multiple { get; set; }
+
     [Parameter]
     public bool IsHovered { get; set; }
 
@@ -105,22 +58,47 @@
     [Parameter]
     public bool IsRounded { get; set; }
 
-    [Parameter]
-    public string LeftIcon { get; set; }
+
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    private TextColor textColor = TextColor.Default;
 
-    public override Task SetParametersAsync(ParameterView parameters)
+    [Parameter]
+    public TValue Value { get; set; }
+
+
+    private TValue _value;
+
+    private TValue CurrentValue
     {
-        if (parameters.TryGetValue<Color>("Color", out Color color))
+        get { return _value; }
+        set
         {
-            textColor = color.ToTextColor();
-        }
+            _value = value;
 
-        return base.SetParametersAsync(parameters);
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(_value).GetAwaiter().GetResult();
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+
+    [Parameter]
+    public EventCallback<SelectItem<TValue>> OnSelectChanged { get; set; }
+
+    public async override Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (AdditionalAttributes != null)
+        {
+            multiple = AdditionalAttributes.ContainsKey("multiple");
+        }
+        _value = Value;
     }
 
 }

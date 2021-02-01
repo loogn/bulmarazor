@@ -18,16 +18,30 @@
     </HeroBody>
 </Hero>
 
+<Input Color="Color.Primary" Value="@i" BindEvent="oninput"/>
 
-
-<Input Color="Color.Primary" @bind-Value="i" BindEvent="oninput"/>
-
+<Textarea Color="Color.Dark" Value="@str"  BindEvent="oninput" placeholder="hadsfsd"></Textarea>
 <span>@str</span>
 <span>@i</span>
+
+<select @bind="@str">
+    <option value="">---</option>
+    <option value="1">111</option>
+    <option value="2">222</option>
+    <option value="3">333</option>
+</select>
+<Select @bind-Value="@str" multiple Color="Color.Primary">
+    <option value="">---</option>
+    <option value="1">111</option>
+    <option value="2">222</option>
+    <option >232323sdf</option>
+    <option value="3">333</option>
+</Select>
+
 
 <Button @onclick="e=>win.alert(str)">Show</Button>
 
 @code{
-    string str = "abc";
+    string str = "2";
     int? i = 23;
 }

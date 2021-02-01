@@ -23,12 +23,12 @@
 	Title ：☆☆☆☆
 Form
 	CheckBox:☆☆
-	Input:☆☆
+	Input:☆☆☆☆☆
 	Radio:☆☆
 	Select:☆☆
-	Textarea:☆☆
-	Field:
-	Control:
+	Textarea:☆☆☆☆☆
+	Field:☆☆☆☆☆
+	Control:☆☆☆☆☆
 	File:
 Layout
 	Container : ☆☆☆☆
