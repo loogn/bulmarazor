@@ -6,7 +6,9 @@
 <span @attributes="AdditionalAttributes" class="@classes">
     <Icon Size="Size" IconClass="@IconClass">
     </Icon>
-    <span>@Text</span>
+    <span>
+        @ChildContent
+    </span>
 </span>
 
 @code {
@@ -17,9 +19,6 @@
         .Build();
 
     [Parameter]
-    public string Text { get; set; }
-
-    [Parameter]
     public Size Size { get; set; } = Size.Default;
 
     [Parameter]
@@ -27,6 +26,9 @@
 
     [Parameter]
     public string IconClass { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
 }
 

@@ -16,4 +16,28 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    private List<MenuItem> items = new List<MenuItem>();
+
+
+    private int index = 0;
+    public void AddItem(MenuItem item)
+    {
+        item.Index = index++;
+        items.Add(item);
+    }
+
+    [Parameter]
+    public EventCallback<MenuItem> OnItemClick { get; set; }
+
+    public async Task ClickItem(MenuItem currItem)
+    {
+        foreach (var item in items)
+        {
+            item.Active(item == currItem);
+        }
+        if (OnItemClick.HasDelegate)
+        {
+            await OnItemClick.InvokeAsync(currItem);
+        }
+    }
 }

@@ -1,14 +1,14 @@
 ﻿Components
-	Breadcrumb :	☆☆☆
+	Breadcrumb :	☆☆☆☆☆
 	Card :			☆☆☆☆☆
-	Dropdown ：		☆☆
-	Menu ：			☆☆☆
+	Dropdown ：		☆☆☆☆
+	Menu ：			☆☆☆☆☆
 	Message ：		☆☆☆☆☆
 	Modal ：		☆☆☆☆☆
 	Navbar ：		☆☆☆☆☆
 	Pagination ：	☆☆☆☆☆
 	Panel :			☆☆☆☆☆
-	Tabs :			☆☆
+	Tabs :			☆☆☆☆☆
 	Block :			☆☆☆☆☆
 	Box :			☆☆☆☆☆
 	Button :		☆☆☆☆☆

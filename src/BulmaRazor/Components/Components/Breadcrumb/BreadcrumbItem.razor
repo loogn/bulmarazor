@@ -1,60 +1,67 @@
 @namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<li @attributes="AdditionalAttributes" class="@getLiClass()">
-    <a href="@Href">
-        @if (IconClass.HasValue())
-        {
-            <span class="@getIconClass()">
-                <i class="@IconClass" aria-hidden="true"></i>
-            </span>
-            <span>@ChildContent</span>
-        }
-        else
-        {
-            <text>@ChildContent</text>
-        }
+
+
+<li @attributes="AdditionalAttributes" class='@classes'>
+    <a @attributes="AddAtts">
+        @ChildContent
     </a>
 </li>
 
+
 @code{
-    string getLiClass() => CssBuilder.Default("")
+    string classes => CssBuilder.Default("")
         .AddClassFromAttributes(AdditionalAttributes)
         .AddClass("is-active", IsActive)
         .Build();
 
-    string getIconClass() => CssBuilder.Default("icon")
-        .AddClass(IconSize.Value, IconSize.Value)
-        .Build();
-
-
-    [Parameter]
-    public string Href { get; set; } = "#";
     [Parameter]
     public bool IsActive { get; set; }
-    [Parameter]
-    public string IconClass { get; set; }
 
-    public void Active()
+    private Dictionary<string, object> AddAtts = new Dictionary<string, object>();
+
+    [Parameter]
+    public string Href { get; set; }
+    [Parameter]
+    public string Target { get; set; }
+
+    public void Active(bool isActive)
     {
-        IsActive = true;
-        this.StateHasChanged();
+        if (isActive != IsActive)
+        {
+            IsActive = isActive;
+            StateHasChanged();
+        }
     }
 
+    public int Index { get; set; }
 
-    [Parameter]
-    public Size IconSize { get; set; } = Size.Small;
+
+    [CascadingParameter]
+    public Breadcrumb Parent { get; set; }
+
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    [CascadingParameter]
-    public Breadcrumb parent { get; set; }
     protected override void OnInitialized()
     {
-        parent.AddItem(this);
         base.OnInitialized();
+        //º”»Î∏∏¿‡
+        if (Parent != null)
+        {
+            Parent.AddItem(this);
+        }
+
+        if (Href.HasValue())
+        {
+            AddAtts.Add("href", Href);
+        }
+        if (Target.HasValue())
+        {
+            AddAtts.Add("target", Target);
+        }
     }
 
-} 
-    
+}

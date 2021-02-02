@@ -7,15 +7,27 @@
 
 @code{
 
-    string classes=>CssBuilder.Default("")
-    .AddClass("menu-list",!IsNested)
+    string classes => CssBuilder.Default("")
+    .AddClass("menu-list", !isNested)
     .AddClassFromAttributes(AdditionalAttributes)
     .Build();
 
-    [Parameter]
-    public bool IsNested{get;set;}
+
+    bool isNested { get; set; }
 
     [Parameter]
-    public RenderFragment ChildContent{get;set;}
-    
+    public RenderFragment ChildContent { get; set; }
+
+    [CascadingParameter]
+    public MenuItem Parent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Parent != null)
+        {
+            isNested = true;
+        }
+    }
+
 }

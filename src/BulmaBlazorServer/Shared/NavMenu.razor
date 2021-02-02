@@ -1,30 +1,36 @@
 ﻿<Menu>
-  <MenuLabel>General</MenuLabel>
-  <MenuList>
-    <MenuItem Href="#" Text="Dashboard"></MenuItem>
-    <MenuItem Href="#">Customers</MenuItem>
-  </MenuList>
-  <MenuLabel>
-    Administration
-  </MenuLabel>
-  <MenuList>
-    <MenuItem Href="#">Team Settings</MenuItem>
-    <MenuItem Href="#" IconClass="fa fa-home"  Text="ManageYour Team">
-      <MenuList IsNested>
-        <MenuItem Href="#" IsActive>Members222</MenuItem>
-        <MenuItem Href="#">Plugins222</MenuItem>
-      </MenuList>
-    </MenuItem>
-  </MenuList>
+    <MenuList>
+        <MenuItem Href="#" IsActive>Dashboard</MenuItem>
+        <MenuItem Href="#">Customers</MenuItem>
+        <MenuItem Href="#">Team Settings</MenuItem>
+        <MenuItem Href="#">
+            <ChildContent>
+                <IconText IconClass="fa fa-home">ManageYour Team</IconText>
+            </ChildContent>
+            <MenuList>
+                <MenuItem Href="#">Members222</MenuItem>
+                <MenuItem Href="#">Plugins222</MenuItem>
+                <MenuItem Href="#">
+                    <ChildContent>
+                        <IconText IconClass="fa fa-home">ManageYour Team</IconText>
+                    </ChildContent>
+                    <MenuList>
+                        <MenuItem Href="#">2323</MenuItem>
+                        <MenuItem Href="#">23233</MenuItem>
+                    </MenuList>
+                </MenuItem>
+            </MenuList>
+        </MenuItem>
+    </MenuList>
 </Menu>
 
 @code {
-  private bool collapseNavMenu = true;
+    private bool collapseNavMenu = true;
 
-  private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-  private void ToggleNavMenu()
-  {
-    collapseNavMenu = !collapseNavMenu;
-  }
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
 }

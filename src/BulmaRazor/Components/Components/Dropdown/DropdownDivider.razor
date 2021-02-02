@@ -1,0 +1,12 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<hr @attributes="AdditionalAttributes" class="@clesses" />
+
+@code {
+    string clesses => CssBuilder.Default("dropdown-divider")
+        .AddClassFromAttributes(AdditionalAttributes)
+       .Build();
+
+}

@@ -20,8 +20,6 @@
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
-    [Parameter]
-    public Size IconSize { get; set; } = Size.Small;
 
     [Parameter]
     public Separator Separator { get; set; } = Separator.Default;
@@ -29,12 +27,10 @@
     [Parameter]
     public Align Align { get; set; } = Align.Default;
 
-
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     private List<BreadcrumbItem> items { get; set; } = new List<BreadcrumbItem>();
-
 
     protected async override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -44,13 +40,15 @@
         {
             if (items != null && !items.Any(x => x.IsActive))
             {
-                items.LastOrDefault().Active();
+                items.LastOrDefault().Active(true);
             }
         }
     }
 
+    private int index = 0;
     public void AddItem(BreadcrumbItem item)
     {
+        item.Index = index++;
         items.Add(item);
     }
 

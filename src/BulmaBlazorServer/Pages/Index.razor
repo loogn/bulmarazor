@@ -2,7 +2,7 @@
 @inject JSWindow win
 
 
-<Hero Size="Size.Medium">
+<Hero Size="Size.Medium" class="is-hidden">
     <HeroBody>
         <Container>
             <Title Size="Size.Size2">
@@ -18,18 +18,51 @@
     </HeroBody>
 </Hero>
 
-<Input Color="Color.Primary" Value="@i" BindEvent="oninput"/>
+<Input Color="Color.Primary" Value="@i" BindEvent="oninput" />
 
-<Textarea Color="Color.Dark" Value="@str"  BindEvent="oninput" placeholder="hadsfsd"></Textarea>
+<Textarea Color="Color.Dark" Value="@str" BindEvent="oninput" placeholder="hadsfsd"></Textarea>
 
 <p>i的值: @i</p>
 
 
-<input type="radio" name="g" @bind="i"/>
+<input type="radio" name="g" @bind="i" />
 
-<input type="radio" name="g" @bind="i"  />
+<input type="radio" name="g" @bind="i" />
 
 
+<Breadcrumb>
+    <BreadcrumbItem Href="#">首页</BreadcrumbItem>
+    <BreadcrumbItem>列表</BreadcrumbItem>
+    <BreadcrumbItem>详细</BreadcrumbItem>
+</Breadcrumb>
+
+<Tabs IsToggleRounded OnItemClick="show">
+    <TabsItem>
+        <IconText IconClass="fa fa-image">图片</IconText>
+    </TabsItem>
+    <TabsItem>
+        <IconText IconClass="fa fa-music">音乐</IconText>
+    </TabsItem>
+    <TabsItem>
+        <IconText IconClass="fa fa-film">视频</IconText>
+    </TabsItem>
+</Tabs>
+
+<Dropdown IsClickOpen >
+    <TriggerSlot>
+        <Button>
+            <span>dropdown</span>
+            <Icon IconClass="fa fa-angle-down"></Icon>
+        </Button>
+    </TriggerSlot>
+    <MenuSlot>
+        <DropdownItem Href="#">sdfsafd</DropdownItem>
+        <DropdownItem  Href="#">sdfsafd</DropdownItem>
+        <DropdownItem  Href="#">sdfsafd</DropdownItem>
+        <DropdownItem></DropdownItem>
+        <DropdownItem  Href="#">sdfsafd</DropdownItem>
+    </MenuSlot>
+</Dropdown>
 
 <Button @onclick="e=>win.alert(str)">Show</Button>
 
@@ -40,5 +73,12 @@
     void f(string v)
     {
         win.console.log(v);
+    }
+
+    Task show(TabsItem item)
+    {
+
+        win.alert(item.Index.ToString());
+        return Task.CompletedTask;
     }
 }
