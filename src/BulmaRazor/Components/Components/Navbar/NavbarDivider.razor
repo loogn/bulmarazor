@@ -5,11 +5,8 @@
 <hr @attributes="AdditionalAttributes" class="@clesses" />
 
 @code {
-    string clesses => CssBuilder.Default(DividerClass)
+    string clesses => CssBuilder.Default("navbar-divider")
         .AddClassFromAttributes(AdditionalAttributes)
        .Build();
-
-    [CascadingParameter(Name = "DividerClass")]
-    private string DividerClass { get; set; }
 
 }

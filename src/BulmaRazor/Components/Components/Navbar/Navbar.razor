@@ -13,9 +13,7 @@
 
     <div id="@navBarId" class="navbar-menu @activeClass">
         <div class="navbar-start">
-            <CascadingValue Value="dividerClass" Name="DividerClass">
-                @MenuStart
-            </CascadingValue>
+            @MenuStart
         </div>
         <div class="navbar-end">
             @MenuEnd
@@ -32,7 +30,6 @@
         .Build();
 
     string activeClass = "";
-    string dividerClass = "navbar-divider";
 
     private Task ToggleActive()
     {

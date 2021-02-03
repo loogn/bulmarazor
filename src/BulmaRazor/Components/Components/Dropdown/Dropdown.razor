@@ -29,8 +29,6 @@
     [Parameter]
     public bool IsClickOpen { get; set; }
 
-    //[Parameter]
-    //public bool IsMouseoutClose { get; set; }
 
 
     public void Trigger(bool? isActive = null)
@@ -55,13 +53,7 @@
         }
     }
 
-    //private void mouseoutHandle()
-    //{
-    //    if (IsMouseoutClose)
-    //    {
-    //        IsActive = false;
-    //    }
-    //}
+
 
     [Parameter]
     public RenderFragment TriggerSlot { get; set; }

@@ -1,7 +1,7 @@
 ﻿Components
 	Breadcrumb :	☆☆☆☆☆
 	Card :			☆☆☆☆☆
-	Dropdown ：		☆☆☆☆
+	Dropdown ：		☆☆☆☆☆
 	Menu ：			☆☆☆☆☆
 	Message ：		☆☆☆☆☆
 	Modal ：		☆☆☆☆☆
@@ -22,9 +22,9 @@
 	Tag ：			☆☆☆☆☆
 	Title ：		☆☆☆☆☆
 Form
-	CheckBox:		☆☆
 	Input:			☆☆☆☆☆
-	Radio:			☆☆
+	CheckBox:		☆☆
+	Radio:			☆☆☆☆☆
 	Select:			☆☆
 	Textarea:		☆☆☆☆☆
 	Field:			☆☆☆☆☆
