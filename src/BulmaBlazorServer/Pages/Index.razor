@@ -18,46 +18,53 @@
     </HeroBody>
 </Hero>
 
+<p>i的值: @_ck</p>
 
-<p>i的值: @i</p>
-
-
-
-
-<Radios @bind-Value="@i">
-    <Radio Name="ab" Value="1">111</Radio>
-    <Radio Name="ab" Value="2">222</Radio>
-</Radios>
-
-<br />
-
-<Radios @bind-Value="@i">
-    <Radio Name="aba" Value="1">111</Radio>
-    <Radio Name="aba" Value="2">222</Radio>
-</Radios>
+<p>str的值: @str</p>
+<p>list的值: @String.Join(',', list) </p>
 
 
-@*<input value="_bindValue1" @onchange="(e) => { _bindValue1 = int.TryParse(e.Value.ToString(), out var val) ? val : _bindValue1;}" />*@
+<hr />
+<Select @bind-Values="list" Multiple Rows="3">
+    @foreach (var item in values)
+    {
+        <Option Value="@item">@item</Option>
+    }
+</Select>
+<hr />
 
+<Select @bind-Value="str">
+    @foreach (var item in values)
+    {
+        <Option Value="@item">@item</Option>
+    }
+</Select>
 
+<Button @onclick="f2">多</Button>
 
-<Button @onclick="f">Show</Button>
+<Button @onclick="f1">单</Button>
 
 @code{
-    string str = "2";
+    string str = "11";
     int i = 0;
 
     bool _ck;
 
+    List<string> values = new List<string> { "11", "22", "33", "44" };
+    HashSet<string> list = new HashSet<string> { "22" };
+
     void CH(ChangeEventArgs e)
     {
-        _ck = true;
+        win.alert(e.Value.ToString());
     }
 
-    void f()
+    void f1()
     {
-        i = 2;
-
+        str = "22";
+    }
+    void f2()
+    {
+        list.Add("22");
     }
 
 }

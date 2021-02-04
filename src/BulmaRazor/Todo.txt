@@ -23,7 +23,7 @@
 	Title ：		☆☆☆☆☆
 Form
 	Input:			☆☆☆☆☆
-	CheckBox:		☆☆
+	CheckBox:		☆☆☆☆☆
 	Radio:			☆☆☆☆☆
 	Select:			☆☆
 	Textarea:		☆☆☆☆☆

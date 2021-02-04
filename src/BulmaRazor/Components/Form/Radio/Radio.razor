@@ -43,7 +43,7 @@
     [CascadingParameter]
     public Radios<TValue> Parent { get; set; }
 
-
+    public int Index { get; set; }
     protected override void OnInitialized()
     {
         if (Parent == null) throw new ArgumentException("Radio必须是Radios的子组件");

@@ -1,7 +1,68 @@
-﻿<h3>Option</h3>
+﻿
+@namespace BulmaRazor.Components
 
-<option value=""></option>
+@inherits BulmaComponentBase
+@typeparam TValue
+
+<option @ref="opt" @attributes="AdditionalAttributes" class="@classes" value="@Value" selected="@Selected">@ChildContent</option>
 
 @code {
 
+    string classes => CssBuilder.Default("")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+
+    [Parameter]
+    public bool Selected { get; set; }
+
+    private ElementReference opt;
+    public async Task<bool> GetSelected()
+    {
+        var result = await JSRuntime.InvokeAsync<bool>("getOptionSelected", new object[] { opt });
+        Selected = result;
+        return Selected;
+    }
+
+
+    public void SetSelected(bool ck)
+    {
+        Selected = ck;
+        if (Parent.Multiple)
+        {
+            JSRuntime.InvokeAsync<bool>("setOptionSelected", new object[] { opt, ck });
+        }
+        else
+        {
+            StateHasChanged();
+        }
+
+    }
+
+    [Parameter]
+    public TValue Value { get; set; }
+
+
+    [CascadingParameter]
+    public Select<TValue> Parent { get; set; }
+
+    public int Index { get; set; }
+    protected override void OnInitialized()
+    {
+        if (Parent == null) throw new ArgumentException("Option必须是Select的子组件");
+        base.OnInitialized();
+
+        Parent.AddItem(this);
+        if (Parent.Multiple)
+        {
+            Selected = Parent.Values.Contains(Value);
+        }
+        else
+        {
+            Selected = Parent.Value.Equals(Value);
+        }
+    }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 }

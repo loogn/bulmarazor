@@ -4,22 +4,18 @@
 @typeparam TValue
 
 <div class="@selectCls">
-    <select @attributes="AdditionalAttributes"
-            @bind="@CurrentValue">
-        <option onselect=""></option>
-        @ChildContent
-        
-        
+    <select @attributes="AdditionalAttributes" @onchange="ChangeHandle" multiple="@Multiple" size="@Rows">
+        <CascadingValue Value="this" IsFixed="true">
+            @ChildContent
+        </CascadingValue>
     </select>
 </div>
 
 
-
 @code {
 
-
     string selectCls => CssBuilder.Default("select")
-        .AddClass("is-multiple", multiple)
+        .AddClass("is-multiple", Multiple)
         .AddClass("is-rounded", IsRounded)
          .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
@@ -28,16 +24,6 @@
         .AddClass(Size.Value, Size.Value)
         .Build();
 
-
-
-    private bool multiple;
-
-
-
-
-
-    [Parameter]
-    public IList<SelectItem<TValue>> Items { get; set; }
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;
@@ -62,27 +48,21 @@
     public bool IsRounded { get; set; }
 
 
-
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
 
-    [Parameter]
-    public TValue Value { get; set; }
-
-
     private TValue _value;
-
-    private TValue CurrentValue
+    [Parameter]
+    public TValue Value
     {
         get { return _value; }
         set
         {
             _value = value;
-
-            if (ValueChanged.HasDelegate)
+            foreach (var item in items)
             {
-                ValueChanged.InvokeAsync(_value).GetAwaiter().GetResult();
+                item.SetSelected(item.Value.Equals(_value));
             }
         }
     }
@@ -91,19 +71,69 @@
     public EventCallback<TValue> ValueChanged { get; set; }
 
 
-    //[Parameter]
 
-    //public EventCallback<TValue> OnSelectChanged { get; set; }
-
-    public async override Task SetParametersAsync(ParameterView parameters)
+    private async Task ChangeHandle(ChangeEventArgs e)
     {
-        await base.SetParametersAsync(parameters);
-        if (AdditionalAttributes != null)
+        if (Multiple)
         {
-            multiple = AdditionalAttributes.ContainsKey("multiple");
+            _values.Clear();
+            foreach (var item in items)
+            {
+                if (await item.GetSelected())
+                {
+                    _values.Add(item.Value);
+                }
+            }
+            if (ValuesChanged.HasDelegate)
+            {
+                await ValuesChanged.InvokeAsync(Values);
+            }
         }
+        else
+        {
+            Value = (TValue)e.Value;
 
-        _value = Value;
+            if (ValueChanged.HasDelegate)
+            {
+                await ValueChanged.InvokeAsync(Value);
+            }
+        }
     }
+
+    private List<Option<TValue>> items { get; set; } = new List<Option<TValue>>();
+
+    private int index = 0;
+    public void AddItem(Option<TValue> item)
+    {
+        item.Index = index++;
+        items.Add(item);
+    }
+
+
+    //多选逻辑
+
+    [Parameter]
+    public bool Multiple { get; set; }
+    [Parameter]
+    public int Rows { get; set; }
+
+
+    private HashSet<TValue> _values;
+    [Parameter]
+    public HashSet<TValue> Values
+    {
+        get { return _values; }
+        set
+        {
+            _values = value;
+            foreach (var item in items)
+            {
+                item.SetSelected(_values.Contains(item.Value));
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
 
 }

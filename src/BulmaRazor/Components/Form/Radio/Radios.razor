@@ -51,8 +51,10 @@
 
     private List<Radio<TValue>> items = new List<Radio<TValue>>();
 
+    private int index;
     public void AddItem(Radio<TValue> item)
     {
+        item.Index = index++;
         items.Add(item);
     }
 
