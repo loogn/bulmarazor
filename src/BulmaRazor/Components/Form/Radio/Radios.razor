@@ -17,6 +17,10 @@
         set
         {
             _value = value;
+            foreach (var item in items)
+            {
+                item.SetChecked(item.Value.Equals(_value));
+            }
         }
     }
 
@@ -26,24 +30,30 @@
     [Parameter]
     public Action<TValue> OnValueChanged { get; set; }
 
-    public async override Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
-        _value = Value;
-    }
 
-
-    public async Task SetValue(TValue value)
+    public async Task UnCheckAll(TValue value)
     {
-        _value = value;
+        foreach (var item in items)
+        {
+            item.SetChecked(false);
+        }
         if (OnValueChanged != null)
         {
             OnValueChanged.Invoke(value);
         }
+
         if (ValueChanged.HasDelegate)
         {
-            await ValueChanged.InvokeAsync(_value);
+            await ValueChanged.InvokeAsync(value);
         }
+    }
+
+
+    private List<Radio<TValue>> items = new List<Radio<TValue>>();
+
+    public void AddItem(Radio<TValue> item)
+    {
+        items.Add(item);
     }
 
     [Parameter]

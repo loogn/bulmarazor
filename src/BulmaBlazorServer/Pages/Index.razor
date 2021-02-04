@@ -24,40 +24,40 @@
 
 
 
-<Radios @bind-Value="@i" OnValueChanged="FF">
-    <Radio Name="ab" Value="1" style="color:red">111</Radio>
+<Radios @bind-Value="@i">
+    <Radio Name="ab" Value="1">111</Radio>
     <Radio Name="ab" Value="2">222</Radio>
-    <Radio Name="ab" Value="3" Disabled>333</Radio>
-    <Radio Name="ab" Value="4">444</Radio>
 </Radios>
 
-<p>@i</p>
+<br />
 
-<Button @onclick="e=>win.alert(str)">Show</Button>
+<Radios @bind-Value="@i">
+    <Radio Name="aba" Value="1">111</Radio>
+    <Radio Name="aba" Value="2">222</Radio>
+</Radios>
+
+
+@*<input value="_bindValue1" @onchange="(e) => { _bindValue1 = int.TryParse(e.Value.ToString(), out var val) ? val : _bindValue1;}" />*@
+
+
+
+<Button @onclick="f">Show</Button>
 
 @code{
     string str = "2";
-    int i = 2;
+    int i = 0;
 
-    private Dropdown ddl;
+    bool _ck;
 
-    void f(string v)
+    void CH(ChangeEventArgs e)
     {
-        win.console.log(v);
-    }
-    void FF(int i)
-    {
-        win.alert(i.ToString());
-    }
-    void closeddl()
-    {
-        ddl.Trigger(false);
+        _ck = true;
     }
 
-    Task show(TabsItem item)
+    void f()
     {
+        i = 2;
 
-        win.alert(item.Index.ToString());
-        return Task.CompletedTask;
     }
+
 }
