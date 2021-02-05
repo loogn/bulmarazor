@@ -10,17 +10,22 @@
 
     string classes => CssBuilder.Default("content")
         .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass("has-text-centered", HasTextCentered)
         .AddClass(Size.Value, Size.Value)
         .Build();
 
-  
+
     /// <summary>
     /// 尺寸
     /// </summary>
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
- 
+    [Parameter]
+    public bool HasTextCentered { get; set; }
+
+
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

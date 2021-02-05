@@ -13,11 +13,11 @@
     <PackageReference Include="JSRuntimeWindow" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\documentation\layout\" />
-    <Folder Include="Pages\documentation\columns\" />
-    <Folder Include="Pages\documentation\components\" />
-    <Folder Include="Pages\documentation\form\" />
-    <Folder Include="Pages\documentation\elements\" />
-    <Folder Include="Pages\documentation\helpers\" />
+    <Folder Include="Pages\docs\layout\" />
+    <Folder Include="Pages\docs\columns\" />
+    <Folder Include="Pages\docs\components\" />
+    <Folder Include="Pages\docs\form\" />
+    <Folder Include="Pages\docs\elements\" />
+    <Folder Include="Pages\docs\helpers\" />
   </ItemGroup>
 </Project>

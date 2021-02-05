@@ -1,49 +1,52 @@
 ﻿@inherits LayoutComponentBase
-<Navbar Color="Color.Dark">
-    <Brand>
+
+<Container>
+    
+</Container>
+<Navbar Color="Color.Black">
+    <BrandSlot>
+
         <NavbarItem>
-            <img src="/images/bulma-logo-white.png" width="112" height="28" />
-            @*<img src="/images/bulma-logo.png" width="112" height="28" />*@
+            <a href="/">
+                <Image Src="/images/bulma-logo-white.png" style="width:112px;height:28px"></Image>
+            </a>
         </NavbarItem>
-    </Brand>
-    <MenuStart>
+
+    </BrandSlot>
+
+    <StartSlot>
         <NavbarItem href="/">
             首页
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem href="/docs/overview/start">
             文档
         </NavbarItem>
-        <NavbarItem HasDropdown>
-            <NavbarLink>更多</NavbarLink>
-            <NavbarDropdown>
-                <NavbarItem>关于</NavbarItem>
-                <NavbarItem>工作</NavbarItem>
-                <NavbarItem>联系方式</NavbarItem>
-
-                <NavbarDivider />
-                <NavbarItem href="">联系方式</NavbarItem>
-            </NavbarDropdown>
-        </NavbarItem>
-    </MenuStart>
-    <MenuEnd>
+    </StartSlot>
+    <EndSlot>
         <NavbarItem>
-            <Buttons HasAddons="false">
-                <Button Color="Color.Primary">注册</Button>
-                <Button Color="Color.Light">登录</Button>
+            <Buttons>
+                <Button Color="Color.Dark">
+                    <Icon IconClass="fa fa-github"></Icon>
+                    <span>Github</span>
+                </Button>
+                <Button Color="Color.Danger" href="https://gitee.com/loogn/bulmarazor">
+                    <Icon IconClass="fa fa-gg-circle"></Icon>
+                    <span>Gitee</span>
+                </Button>
             </Buttons>
         </NavbarItem>
-    </MenuEnd>
+    </EndSlot>
 </Navbar>
+@Body
 
-<Container>
-    <Columns>
-        <Column IsNarrow Size="Size.Size3">
-            <NavMenu></NavMenu>
-        </Column>
-        <Column>
-            @Body
-        </Column>
-    </Columns>
+<Footer>
+    <Content HasTextCentered>
+        <p>
+            © 2021 <strong>BulmaRazor</strong> by <a href="http://bulmarazor.loogn.net">念初</a>， <strong>Bulma</strong> by <a href="https://jgthms.com" target="_blank">Jeremy Thomas</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>
+        </p>
+    </Content>
+</Footer>
 
 
-</Container>
+

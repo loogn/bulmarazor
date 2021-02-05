@@ -1,0 +1,16 @@
+﻿@inherits LayoutComponentBase
+@layout MainLayout
+
+
+    <Columns>
+
+        <Column IsNarrow Size="Size.Size2" style="overflow-y:auto;max-height:600px; " class="has-background-light">
+            <Section>
+                <NavMenu />
+            </Section>
+        </Column>
+        <Column>
+            @Body
+        </Column>
+    </Columns>
+

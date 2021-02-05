@@ -8,11 +8,9 @@
         @ChildContent
     </a>
 
-    @if (MenuList != null)
+    @if (NestedSlot != null)
     {
-        <ul>
-            @MenuList
-        </ul>
+        @:@NestedSlot
     }
 </li>
 
@@ -21,8 +19,6 @@
         .AddClassFromAttributes(AdditionalAttributes)
         .AddClass("is-active", IsActive)
         .Build();
-
-
 
     [Parameter]
     public bool IsActive { get; set; }
@@ -63,7 +59,7 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public RenderFragment MenuList { get; set; }
+    public RenderFragment NestedSlot { get; set; }
 
     protected override void OnInitialized()
     {

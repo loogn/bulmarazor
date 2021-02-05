@@ -2,7 +2,7 @@
 @inherits BulmaComponentBase
 <nav @attributes="AdditionalAttributes" class="@clesses" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        @Brand
+        @BrandSlot
 
         <a role="button" class="navbar-burger @activeClass" aria-label="menu" aria-expanded="false" data-target="@navBarId" @onclick="ToggleActive">
             <span aria-hidden="true"></span>
@@ -13,10 +13,10 @@
 
     <div id="@navBarId" class="navbar-menu @activeClass">
         <div class="navbar-start">
-            @MenuStart
+            @StartSlot
         </div>
         <div class="navbar-end">
-            @MenuEnd
+            @EndSlot
         </div>
     </div>
 </nav>
@@ -60,13 +60,13 @@
     public bool IsTransparent { get; set; }
 
     [Parameter]
-    public RenderFragment Brand { get; set; }
+    public RenderFragment BrandSlot { get; set; }
 
 
     [Parameter]
-    public RenderFragment MenuStart { get; set; }
+    public RenderFragment StartSlot { get; set; }
 
     [Parameter]
-    public RenderFragment MenuEnd { get; set; }
+    public RenderFragment EndSlot { get; set; }
 
 }

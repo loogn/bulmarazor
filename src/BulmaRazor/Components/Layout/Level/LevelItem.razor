@@ -10,7 +10,11 @@
 
     string classes => CssBuilder.Default("level-item")
       .AddClassFromAttributes(AdditionalAttributes)
+      .AddClass("has-text-centered", HasTextCentered)
       .Build();
+
+    [Parameter]
+    public bool HasTextCentered { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

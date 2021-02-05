@@ -1,27 +1,37 @@
-﻿<Menu>
+﻿@inject NavigationManager  nm
+
+<Menu>
+    <MenuLabel>概述(Overview)</MenuLabel>
     <MenuList>
-        <MenuItem Href="#" IsActive>Dashboard</MenuItem>
-        <MenuItem Href="#">Customers</MenuItem>
-        <MenuItem Href="#">Team Settings</MenuItem>
-        <MenuItem Href="#">
-            <ChildContent>
-                <IconText IconClass="fa fa-home">ManageYour Team</IconText>
-            </ChildContent>
-            <MenuList>
-                <MenuItem Href="#">Members222</MenuItem>
-                <MenuItem Href="#">Plugins222</MenuItem>
-                <MenuItem Href="#">
-                    <ChildContent>
-                        <IconText IconClass="fa fa-home">ManageYour Team</IconText>
-                    </ChildContent>
-                    <MenuList>
-                        <MenuItem Href="#">2323</MenuItem>
-                        <MenuItem Href="#">23233</MenuItem>
-                    </MenuList>
-                </MenuItem>
-            </MenuList>
-        </MenuItem>
+        <MenuItem Href="/docs/overview/start">开始使用</MenuItem>
+        <MenuItem Href="/docs/overview/classes">公共属性</MenuItem>
     </MenuList>
+
+    <MenuLabel>列(Columns)</MenuLabel>
+    <MenuList>
+        <MenuItem Href="/docs/columns/start">基础</MenuItem>
+        <MenuItem Href="/docs/columns/sizes">尺寸</MenuItem>
+        <MenuItem Href="/docs/columns/responsiveness">响应式</MenuItem>
+        <MenuItem Href="/docs/columns/nesting">嵌套</MenuItem>
+        <MenuItem Href="/docs/columns/gap">列间隙</MenuItem>
+        <MenuItem Href="/docs/columns/options">选项</MenuItem>
+    </MenuList>
+    <MenuLabel>布局(Layout)</MenuLabel>
+    <MenuList>
+
+        <MenuItem Href="/docs/layout/container">Container</MenuItem>
+        <MenuItem Href="/docs/layout/level">Level</MenuItem>
+        <MenuItem Href="/docs/layout/mediaobject">Media</MenuItem>
+        <MenuItem Href="/docs/layout/container">Hero</MenuItem>
+        <MenuItem Href="/docs/layout/section">Section</MenuItem>
+        <MenuItem Href="/docs/layout/footer">Footer</MenuItem>
+        <MenuItem Href="/docs/layout/tiles">Tile</MenuItem>
+
+    </MenuList>
+    <MenuLabel>表单(Form)</MenuLabel>
+    <MenuLabel>元素(Elements)</MenuLabel>
+    <MenuLabel>组件(Components)</MenuLabel>
+
 </Menu>
 
 @code {
@@ -30,7 +40,9 @@
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
+
     {
+
         collapseNavMenu = !collapseNavMenu;
     }
 }

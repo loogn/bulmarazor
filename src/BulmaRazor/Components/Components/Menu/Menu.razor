@@ -1,5 +1,6 @@
 @namespace BulmaRazor.Components
 @inherits BulmaComponentBase
+@inject NavigationManager nm
 
 <aside @attributes="AdditionalAttributes" class="@classes">
     <CascadingValue Value="this" IsFixed="true">
@@ -40,4 +41,19 @@
             await OnItemClick.InvokeAsync(currItem);
         }
     }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        foreach (var item in items)
+        {
+            if (nm.Uri.EndsWith(item.Href, StringComparison.OrdinalIgnoreCase))
+            {
+                item.Active(true);
+                break;
+            }
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+
 }

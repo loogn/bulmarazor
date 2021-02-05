@@ -2,9 +2,27 @@
 
 @inherits BulmaComponentBase
 
-<nav @attributes="AdditionalAttributes" class="@classes">
-    @ChildContent
-</nav>
+<section @attributes="AdditionalAttributes" class="@classes">
+
+    @if (HeadSlot != null)
+    {
+        <div class="hero-head">
+            @HeadSlot
+        </div>
+    }
+    @if (BodySlot != null)
+    {
+        <div class="hero-body">
+            @BodySlot
+        </div>
+    }
+    @if (FootSlot != null)
+    {
+        <div class="hero-foot">
+            @FootSlot
+        </div>
+    }
+</section>
 
 @code {
 
@@ -13,6 +31,8 @@
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-bold", IsBold)
+        .AddClass("is-fullheight", IsFullheight)
+        .AddClass("is-fullheight-with-navbar", IsFullheightWithNavbar)
         .Build();
 
     /// <summary>
@@ -27,6 +47,13 @@
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
+
+    [Parameter]
+    public bool IsFullheight { get; set; }
+
+    [Parameter]
+    public bool IsFullheightWithNavbar { get; set; }
+
     /// <summary>
     /// 是否渐变
     /// </summary>
@@ -34,6 +61,12 @@
     public bool IsBold { get; set; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment HeadSlot { get; set; }
+
+    [Parameter]
+    public RenderFragment BodySlot { get; set; }
+
+    [Parameter]
+    public RenderFragment FootSlot { get; set; }
 
 }

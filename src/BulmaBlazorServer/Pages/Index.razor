@@ -2,57 +2,33 @@
 @inject JSWindow win
 
 
-<Hero Size="Size.Medium" class="is-hidden">
-    <HeroBody>
+<Hero Size="Size.Medium" Color="Color.Primary" IsBold IsFullheightWithNavbar>
+    <BodySlot>
+
         <Container>
-            <Title Size="Size.Size2">
-                BulmaRazor 是基于 Bulma 框架、免费开源的 Razor 组件库。
+            <Title Size="Size.Size1">
+                BulmaRazor
             </Title>
+            <Subtitle Size="Size.Size3">
+                BulmaRazor 是一个基于 Blazor 和 Bluma 样式框架构建的弹性组件库。
+            </Subtitle>
+
+            <Buttons>
+                <Button href="https://gitee.com/loogn/bulmarazor" target="_blank" Color="Color.Info" IsOutlined IsInverted Size="Size.Large">在Gitee上访问</Button>
+                <Button href="https://gitee.com/loogn/bulmarazor" target="_blank" Color="Color.Primary" IsOutlined IsInverted Size="Size.Large">在Gitee上访问</Button>
+            </Buttons>
         </Container>
-        <br />
-        <br />
-        <br />
-        <Buttons Align="Align.Centered">
-            <Button Color="Color.Dark" Size="Size.Large">开始使用</Button>
-        </Buttons>
-    </HeroBody>
+    </BodySlot>
+
 </Hero>
 
-<p>i的值: @_ck</p>
-
-<p>str的值: @str</p>
-<p>list的值: @String.Join(',', list) </p>
-
-
-<hr />
-<Select @bind-Values="list" Multiple Rows="3">
-    @foreach (var item in values)
-    {
-        <Option Value="@item">@item</Option>
-    }
-</Select>
-<hr />
-
-<Select @bind-Value="str">
-    @foreach (var item in values)
-    {
-        <Option Value="@item">@item</Option>
-    }
-</Select>
-
-<Button @onclick="f2">多</Button>
-
-<Button @onclick="f1">单</Button>
-
-<File OnChange="Up" HasName Color="Color.Primary" IsBoxed Align="Align.Centered" DefaultName="没有文件"></File>
-<File HasName Color="Color.Info" Align="Align.Right"></File>
 
 
 
 @code{
     string str = "11";
     int i = 0;
-
+    
     bool _ck;
 
     List<string> values = new List<string> { "11", "22", "33", "44" };
