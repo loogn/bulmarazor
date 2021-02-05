@@ -1,0 +1,88 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    <label class="file-label">
+
+        <InputFile OnChange="ChangeHandle" multiple="@Multiple" class="file-input" />
+        <span class="file-cta">
+            <span class="file-icon">
+                <i class="fa fa-upload"></i>
+            </span>
+            <span class="file-label">
+                @Label
+            </span>
+        </span>
+        @if (HasName)
+        {
+            <span class="file-name">
+                @name
+            </span>
+        }
+    </label>
+</div>
+
+@code {
+    string classes => CssBuilder.Default("file")
+     .AddClassFromAttributes(AdditionalAttributes)
+     .AddClass(Color.Value, Color.Value)
+     .AddClass(Size.Value, Size.Value)
+     .AddClass("has-name", HasName)
+     .AddClass("is-fullwidth", IsFullwidth)
+     .AddClass(Align.Value, Align.Value)
+     .AddClass("is-boxed", IsBoxed)
+     .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+    [Parameter]
+    public bool HasName { get; set; }
+
+    [Parameter]
+    public Align Align { get; set; } = Align.Default;
+    [Parameter]
+    public bool IsFullwidth { get; set; }
+    [Parameter]
+    public bool IsBoxed { get; set; }
+
+    [Parameter]
+    public string Label { get; set; } = "选择文件";
+
+    [Parameter]
+    public bool Multiple { get; set; }
+
+    [Parameter]
+    public int MaxCount { get; set; } = 1;
+    [Parameter]
+    public string DefaultName { get; set; } = "没有文件";
+
+    private string name = "";
+
+    private async Task ChangeHandle(InputFileChangeEventArgs e)
+    {
+        if (e.FileCount > MaxCount)
+        {
+
+            return;
+        }
+        name = e.File.Name;
+
+        if (OnChange.HasDelegate)
+        {
+            await OnChange.InvokeAsync(e);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<InputFileChangeEventArgs> OnChange { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        name = DefaultName;
+    }
+}

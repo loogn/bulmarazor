@@ -25,13 +25,13 @@ Form
 	Input:			☆☆☆☆☆
 	CheckBox:		☆☆☆☆☆
 	Radio:			☆☆☆☆☆
-	Select:			☆☆
+	Select:			☆☆☆☆☆
 	Textarea:		☆☆☆☆☆
 	Field:			☆☆☆☆☆
 	Help:			☆☆☆☆☆
 	Label:			☆☆☆☆☆
 	Control:		☆☆☆☆☆
-	File:			☆
+	File:			☆☆☆☆☆
 Layout
 	Container :		☆☆☆☆☆
 	Footer :		☆☆☆☆☆
