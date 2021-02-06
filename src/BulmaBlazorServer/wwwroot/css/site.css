@@ -1,33 +1,31 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-
 html, body {
+    height: 100%;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-
-a, .btn-link {
-    color: #0366d6;
+.layoutPage{
+    display: flex; 
+    height:100%;
+    overflow:hidden;
+    flex-direction: column;
+}
+.layoutPage1{
+    flex-shrink: 0;
+}
+.layoutPage2{
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+}
+.layoutMenu{
+    flex-shrink: 0;
+    width:200px;
+    overflow: auto;
+}
+.layoutContent{
+    flex-grow: 1;
+    overflow: auto;
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-
-
-
-.valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
-}
-
-.invalid {
-    outline: 1px solid red;
-}
-
-.validation-message {
-    color: red;
-}
 
 #blazor-error-ui {
     background: lightyellow;

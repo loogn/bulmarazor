@@ -1,10 +1,7 @@
 ﻿@page "/"
 @inject JSWindow win
-
-
-<Hero Size="Size.Medium" Color="Color.Primary" IsBold IsFullheightWithNavbar>
+<Hero Size="Size.Medium" Color="Color.Primary" style="width:100%" IsBold IsFullheightWithNavbar>
     <BodySlot>
-
         <Container>
             <Title Size="Size.Size1">
                 BulmaRazor
@@ -12,44 +9,59 @@
             <Subtitle Size="Size.Size3">
                 BulmaRazor 是一个基于 Blazor 和 Bluma 样式框架构建的弹性组件库。
             </Subtitle>
+            <Section>
+            <Media>
+                <LeftSlot>
+                    <Title Size="Size.Size5">1</Title>
+                </LeftSlot>
+                <ContentSlot>
+                    <Title Size="Size.Size5">引入Nuget包</Title>
+                    <figure>
+                        <code>Install-Package BulmaRazor</code>
+                    </figure>
+                </ContentSlot>
+            </Media>
+
+            <Media>
+                <LeftSlot>
+                    <Title Size="Size.Size5">2</Title>
+                </LeftSlot>
+                <ContentSlot>
+                    <Title Size="Size.Size5">_Host.cshtml或index.html中引入CSS样式</Title>
+                    <figure>
+                        <code>_content/BulmaRazor/font-awesome/css/font-awesome.css<br/>
+                            _content/BulmaRazor/bulma.css
+                            @((MarkupString)csslinks)
+                            </code>
+                    </figure>
+                </ContentSlot>
+            </Media>
+            <Media>
+                <LeftSlot>
+                    <Title Size="Size.Size5">3</Title>
+                </LeftSlot>
+                <ContentSlot>
+                    <Title Size="Size.Size5">在_Imports.razor中导入名称空间</Title>
+                    <figure>
+                        <code>@@using BulmaRazor.Components</code>
+                    </figure>
+                </ContentSlot>
+            </Media>
+</Section>
 
             <Buttons>
-                <Button href="https://gitee.com/loogn/bulmarazor" target="_blank" Color="Color.Info" IsOutlined IsInverted Size="Size.Large">在Gitee上访问</Button>
-                <Button href="https://gitee.com/loogn/bulmarazor" target="_blank" Color="Color.Primary" IsOutlined IsInverted Size="Size.Large">在Gitee上访问</Button>
+                <Button href="https://bulma.io/" target="_blank" Color="Color.Info" IsOutlined IsInverted Size="Size.Large">bulma官网</Button>
+                <Button href="https://bulma.zcopy.site/" target="_blank" Color="Color.Primary" IsOutlined IsInverted Size="Size.Large">bulma中文文档</Button>
             </Buttons>
         </Container>
     </BodySlot>
-
 </Hero>
 
 
 
 
 @code{
-    string str = "11";
-    int i = 0;
+
     
-    bool _ck;
-
-    List<string> values = new List<string> { "11", "22", "33", "44" };
-    HashSet<string> list = new HashSet<string> { "22" };
-
-    void CH(ChangeEventArgs e)
-    {
-        win.alert(e.Value.ToString());
-    }
-
-    void f1()
-    {
-        str = "22";
-    }
-    void f2()
-    {
-        list.Add("22");
-    }
-    void Up(InputFileChangeEventArgs e)
-    {
-        win.alert(e.FileCount.ToString());
-    }
-
+    string csslinks=@"<link href='_content/BulmaRazor/font-awesome/css/font-awesome.css' rel='stylesheet' />";
 }

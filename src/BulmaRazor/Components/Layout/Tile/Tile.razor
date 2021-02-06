@@ -11,6 +11,7 @@
     string classes => CssBuilder.Default("tile")
         .AddClassFromAttributes(AdditionalAttributes)
         .AddClass(Seniority.Value, Seniority.Value)
+        .AddClass(Size.Value,Size.Value)
         .AddClass("is-vertical", IsVertical)
         .Build();
 

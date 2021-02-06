@@ -2,9 +2,43 @@
 @layout DocLayout
 
 
-<h3>start</h3>
+
+<Title>开始使用BulmaRazor</Title>
+<Subtitle Size="Size.Size4">使用nuget引入即可使用</Subtitle>
+
+<Content>
+    <Media>
+        <LeftSlot>
+            <Title Size="Size.Size5">1</Title>
+        </LeftSlot>
+        <ContentSlot>
+            <Title Size="Size.Size5">通过nuget引入BulmaRazor包</Title>
+            <pre>
+                <code class="shell">Install-Package BulmaRazor</code>
+            </pre>
+        </ContentSlot>
+    </Media>
+</Content>
+
+<Content>
+    <Media>
+        <LeftSlot>
+            <Title Size="Size.Size5">2</Title>
+        </LeftSlot>
+        <ContentSlot>
+            <Title Size="Size.Size5">_Hhost.cshtml或者index.html进入样式</Title>
+            <pre>
+                <code class="xml">@links</code>
+            </pre>
+        </ContentSlot>
+    </Media>
+</Content>
+
+
 
 
 @code {
+    MarkupString links=(MarkupString)@"<link href='_content/BulmaRazor/font-awesome/css/font-awesome.css' rel='stylesheet' />
+    <link href='_content/BulmaRazor/bulma.css' rel='stylesheet' />";
 
 }

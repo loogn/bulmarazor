@@ -1,52 +1,59 @@
 ﻿@inherits LayoutComponentBase
 
-<Container>
-    
-</Container>
-<Navbar Color="Color.Black">
-    <BrandSlot>
 
-        <NavbarItem>
-            <a href="/">
-                <Image Src="/images/bulma-logo-white.png" style="width:112px;height:28px"></Image>
-            </a>
-        </NavbarItem>
+<div class="layoutPage">
+    <div class="layoutPage1">
 
-    </BrandSlot>
+        <Navbar Color="Color.Black">
+            <BrandSlot>
 
-    <StartSlot>
-        <NavbarItem href="/">
-            首页
-        </NavbarItem>
-        <NavbarItem href="/docs/overview/start">
-            文档
-        </NavbarItem>
-    </StartSlot>
-    <EndSlot>
-        <NavbarItem>
-            <Buttons>
-                <Button Color="Color.Dark">
-                    <Icon IconClass="fa fa-github"></Icon>
-                    <span>Github</span>
-                </Button>
-                <Button Color="Color.Danger" href="https://gitee.com/loogn/bulmarazor">
-                    <Icon IconClass="fa fa-gg-circle"></Icon>
-                    <span>Gitee</span>
-                </Button>
-            </Buttons>
-        </NavbarItem>
-    </EndSlot>
-</Navbar>
-@Body
+                <NavbarItem>
+                    <a href="/">
+                        <Title class="has-text-white">BulmaRazor</Title>
+                        @* <Image Src="/images/bulma-logo-white.png" style="width:112px;height:28px"></Image> *@
+                    </a>
+                </NavbarItem>
 
+            </BrandSlot>
+
+            @* <StartSlot>
+                <NavbarItem href="/">
+                    首页
+                </NavbarItem>
+                <NavbarItem href="/docs/overview/start">
+                    文档
+                </NavbarItem>
+            </StartSlot> *@
+            <EndSlot>
+                <NavbarItem>
+                    <Buttons>
+                        <Button Color="Color.Dark" href="https://github.com/loogn/bulmarazor" target="_blank">
+                            <Icon IconClass="fa fa-github"></Icon>
+                            <span>Github</span>
+                        </Button>
+                        <Button Color="Color.Danger" href="https://gitee.com/loogn/bulmarazor" target="_blank">
+                            <Icon IconClass="fa fa-gg-circle"></Icon>
+                            <span>Gitee</span>
+                        </Button>
+                    </Buttons>
+                </NavbarItem>
+            </EndSlot>
+        </Navbar>
+
+    </div>
+    <div class="layoutPage2">
+        @Body
+    </div>
+</div>
+
+
+@* 
 <Footer>
     <Content HasTextCentered>
         <p>
-            © 2021 <strong>BulmaRazor</strong> by <a href="http://bulmarazor.loogn.net">念初</a>， <strong>Bulma</strong> by <a href="https://jgthms.com" target="_blank">Jeremy Thomas</a>. The source code is licensed
+            © 2021 <strong>BulmaRazor</strong> by <a href="http://bulmarazor.loogn.net">念初</a>， <strong>Bulma</strong>
+            by <a href="https://jgthms.com" target="_blank">Jeremy Thomas</a>. The source code is licensed
             <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>
         </p>
     </Content>
-</Footer>
-
-
-
+</Footer> *@

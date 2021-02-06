@@ -32,10 +32,14 @@ else if (Size == Size.Size6)
     string classes => CssBuilder.Default("title")
         .AddClassFromAttributes(AdditionalAttributes)
         .AddClass(Size.Value, Size.Value)
+        .AddClass("is-spaced", IsSpaced)
         .Build();
 
     [Parameter]
     public Size Size { get; set; } = Size.Size3;
+
+    [Parameter]
+    public bool IsSpaced { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
