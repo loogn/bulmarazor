@@ -29,10 +29,7 @@
                 <ContentSlot>
                     <Title Size="Size.Size5">_Host.cshtml或index.html中引入CSS样式</Title>
                     <figure>
-                        <code>_content/BulmaRazor/font-awesome/css/font-awesome.css<br/>
-                            _content/BulmaRazor/bulma.css
-                            @((MarkupString)csslinks)
-                            </code>
+                        <code>@(csslinks1.Value)<br>@(csslinks2.Value)</code>
                     </figure>
                 </ContentSlot>
             </Media>
@@ -63,5 +60,7 @@
 @code{
 
     
-    string csslinks=@"<link href='_content/BulmaRazor/font-awesome/css/font-awesome.css' rel='stylesheet' />";
+    MarkupString csslinks1=(MarkupString)@"<link href='_content/BulmaRazor/font-awesome/css/font-awesome.css' rel='stylesheet' />";
+    MarkupString csslinks2=(MarkupString)@"<link href='_content/BulmaRazor/bulma.css' rel='stylesheet' />";
+    
 }
