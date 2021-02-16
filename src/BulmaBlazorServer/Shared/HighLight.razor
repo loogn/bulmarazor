@@ -49,6 +49,8 @@
   protected async override Task OnAfterRenderAsync(bool firstRender)
   {
     await base.OnAfterRenderAsync(firstRender);
-    await JSRuntime.InvokeAsync<object>("hlb",Id);
+    if(firstRender){
+      await JSRuntime.InvokeAsync<object>("hlb",Id);
+    }
   }
 }
