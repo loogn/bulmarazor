@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace BulmaRazor
@@ -11,20 +12,26 @@ namespace BulmaRazor
     // This class can be registered as scoped DI service and then injected into Blazor
     // components for use.
 
-    public class ExampleJsInterop : IAsyncDisposable
+    public class BulmaRazorJsInterop : IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
-        public ExampleJsInterop(IJSRuntime jsRuntime)
+        public BulmaRazorJsInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-               "import", "./_content/BulmaRazor/exampleJsInterop.js").AsTask());
+               "import", "./_content/BulmaRazor/JsInterop.js").AsTask());
         }
 
-        public async ValueTask<string> Prompt(string message)
+        public async ValueTask<bool> GetOptionSelected(ElementReference element)
         {
             var module = await moduleTask.Value;
-            return await module.InvokeAsync<string>("showPrompt", message);
+            return await module.InvokeAsync<bool>("getOptionSelected", element);
+        }
+
+        public async ValueTask<object> SetOptionSelected(ElementReference element,bool val)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<object>("setOptionSelected", element,val);
         }
 
         public async ValueTask DisposeAsync()

@@ -1,13 +1,13 @@
-﻿
-@namespace BulmaRazor.Components
+﻿@namespace BulmaRazor.Components
 
 @inherits BulmaComponentBase
 @typeparam TValue
+@inject BulmaRazorJsInterop jsInterop
 
-<option @ref="opt" @attributes="AdditionalAttributes" class="@classes" value="@Value" selected="@Selected">@ChildContent</option>
+<option @ref="opt" @attributes="AdditionalAttributes" class="@classes" value="@Value" selected="@Selected">@ChildContent
+</option>
 
 @code {
-
     string classes => CssBuilder.Default("")
         .AddClassFromAttributes(AdditionalAttributes)
         .Build();
@@ -19,7 +19,7 @@
     private ElementReference opt;
     public async Task<bool> GetSelected()
     {
-        var result = await JSRuntime.InvokeAsync<bool>("getOptionSelected", new object[] { opt });
+        var result = await jsInterop.GetOptionSelected(opt);
         Selected = result;
         return Selected;
     }
@@ -30,13 +30,12 @@
         Selected = ck;
         if (Parent.Multiple)
         {
-            JSRuntime.InvokeAsync<bool>("setOptionSelected", new object[] { opt, ck });
+            jsInterop.SetOptionSelected(opt, ck).GetAwaiter().GetResult();
         }
         else
         {
             StateHasChanged();
         }
-
     }
 
     [Parameter]
