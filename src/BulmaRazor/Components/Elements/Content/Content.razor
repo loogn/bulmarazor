@@ -10,7 +10,7 @@
 
     string classes => CssBuilder.Default("content")
         .AddClassFromAttributes(AdditionalAttributes)
-        .AddClass("has-text-centered", HasTextCentered)
+        .AddClass(TextAlign.Value, TextAlign.Value)
         .AddClass(Size.Value, Size.Value)
         .Build();
 
@@ -22,7 +22,7 @@
     public Size Size { get; set; } = Size.Default;
 
     [Parameter]
-    public bool HasTextCentered { get; set; }
+    public TextAlign TextAlign { get; set; }=TextAlign.Default;
 
 
 

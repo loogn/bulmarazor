@@ -13,9 +13,7 @@
         </LeftSlot>
         <ContentSlot>
             <Title Size="Size.Size5">通过nuget引入BulmaRazor包</Title>
-            <pre>
-                <code class="shell">Install-Package BulmaRazor</code>
-            </pre>
+            <HighLight Language="powershell">Install-Package BulmaRazor</HighLight>
         </ContentSlot>
     </Media>
 </Content>
@@ -27,18 +25,26 @@
         </LeftSlot>
         <ContentSlot>
             <Title Size="Size.Size5">_Hhost.cshtml或者index.html进入样式</Title>
-            <pre>
-                <code class="xml">@links</code>
-            </pre>
+            <HighLight FilePath="pages/docs/overview/start1.html"></HighLight>
         </ContentSlot>
     </Media>
 </Content>
 
 
+<Content>
+    <Media>
+        <LeftSlot>
+            <Title Size="Size.Size5">3</Title>
+        </LeftSlot>
+        <ContentSlot>
+            <Title Size="Size.Size5">在_Imports.razor中导入名称空间</Title>
+            <HighLight Language="csharp">@@using BulmaRazor.Components</HighLight>
+
+        </ContentSlot>
+    </Media>
+</Content>
 
 
 @code {
-    MarkupString links=(MarkupString)@"<link href='_content/BulmaRazor/font-awesome/css/font-awesome.css' rel='stylesheet' />
-    <link href='_content/BulmaRazor/bulma.css' rel='stylesheet' />";
 
 }

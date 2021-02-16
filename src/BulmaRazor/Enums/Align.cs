@@ -35,4 +35,16 @@ namespace BulmaRazor.Components
         public static GroupedAlign Right = new GroupedAlign("is-grouped-right");
         public static GroupedAlign Centered = new GroupedAlign("is-grouped-centered");
     }
+
+    public class TextAlign : EnumBase
+    {
+        private TextAlign(string value) : base(value)
+        {
+        }
+
+        public static TextAlign Default = new TextAlign("");
+        public static TextAlign Centered = new TextAlign("has-text-centered");
+        public static TextAlign Right = new TextAlign("has-text-right");
+        public static TextAlign Left = new TextAlign("has-text-left");
+    }
 }

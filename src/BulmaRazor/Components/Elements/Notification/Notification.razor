@@ -5,7 +5,7 @@
 @if (!deleted)
 {
     <div @attributes="AdditionalAttributes" class="@classes">
-        @if (!NoDelete)
+        @if (HasDelete)
         {
             <button class="delete" @onclick="deleteClickHandle"></button>
         }
@@ -17,6 +17,7 @@
     string classes => CssBuilder.Default("notification")
         .AddClassFromAttributes(AdditionalAttributes)
         .AddClass(Color.Value, Color.Value)
+        .AddClass(TextAlign.Value,TextAlign.Value)
         .AddClass("is-light", IsLight)
 @* .AddClass("is-hidden", hidden) *@
 .Build();
@@ -39,7 +40,10 @@
 
 
     [Parameter]
-    public bool NoDelete { get; set; }
+    public bool HasDelete { get; set; }
+
+    [Parameter]
+    public TextAlign TextAlign { get; set; }=TextAlign.Default;
 
     [Parameter]
     public EventCallback<Notification> OnDelete { get; set; }

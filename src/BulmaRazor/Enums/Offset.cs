@@ -19,22 +19,22 @@ namespace BulmaRazor.Components
         /// <summary>
         /// 五分之一
         /// </summary>
-        public static Offset OneFifth = new Offset("is-one-fifth");
+        public static Offset OneFifth = new Offset("is-offset-one-fifth");
 
         /// <summary>
         /// 四分之一
         /// </summary>
-        public static Offset OneQuarter = new Offset("is-one-quarter");
+        public static Offset OneQuarter = new Offset("is-offset-one-quarter");
 
         /// <summary>
         /// 三分之一
         /// </summary>
-        public static Offset OneThird = new Offset("is-one-third");
+        public static Offset OneThird = new Offset("is-offset-one-third");
 
         /// <summary>
         /// 五分之二
         /// </summary>
-        public static Offset TwoFifths = new Offset("is-two-fifths");
+        public static Offset TwoFifths = new Offset("is-offset-two-fifths");
 
         /// <summary>
         /// 二分之一

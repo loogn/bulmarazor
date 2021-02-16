@@ -1,0 +1,54 @@
+@inject IJSRuntime JSRuntime
+
+<div style="margin-bottom: 1.5rem;">
+  <pre style="@GetStyle">
+      <code id="@Id" class="@Language">
+          @if (string.IsNullOrEmpty(FilePath))
+      {
+                          @:@ChildContent
+
+      }
+      else
+      {
+                          @:@System.IO.File.ReadAllText(FilePath)
+
+      }
+      </code>
+</pre>
+  @if (HasMore)
+  {
+    <div class="has-text-centered has-background-grey-lighter is-clickable" @onclick="ShowMore">
+      <IconText IconClass="fa fa-code">Show Code</IconText>
+    </div>
+  }
+</div>
+
+
+@code{
+  [Parameter]
+  public string FilePath { get; set; }
+
+  [Parameter]
+  public string Language{get;set;}="xml";
+  private string Id = "hl" + Guid.NewGuid().ToString("N");
+
+  [Parameter]
+  public RenderFragment ChildContent { get; set; }
+
+  [Parameter]
+  public bool HasMore { get; set; }
+
+  private bool showMore;
+  private string GetStyle =>"background-color: unset;padding:unset;"+ ((showMore || !HasMore) ? "" : "max-height: 200px; overflow-y:auto");
+
+  private void ShowMore()
+  {
+    showMore = !showMore;
+  }
+
+  protected async override Task OnAfterRenderAsync(bool firstRender)
+  {
+    await base.OnAfterRenderAsync(firstRender);
+    await JSRuntime.InvokeAsync<object>("hlb",Id);
+  }
+}
