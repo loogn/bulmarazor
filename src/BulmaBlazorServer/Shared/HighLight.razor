@@ -15,7 +15,7 @@
       }
       </code>
 </pre>
-  @if (HasMore)
+  @if (HasMore && !showMore)
   {
     <div class="has-text-centered has-background-grey-lighter is-clickable" @onclick="ShowMore">
       <IconText IconClass="fa fa-code">Show Code</IconText>
@@ -39,7 +39,7 @@
   public bool HasMore { get; set; }
 
   private bool showMore;
-  private string GetStyle =>"background-color: unset;padding:unset;"+ ((showMore || !HasMore) ? "" : "max-height: 200px; overflow-y:auto");
+  private string GetStyle =>"background-color: unset;padding:unset;"+ ((showMore || !HasMore) ? "" : "max-height: 100px; overflow-y:auto");
 
   private void ShowMore()
   {

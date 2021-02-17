@@ -1,0 +1,61 @@
+<Content>
+    <Level>
+        <LevelLeft>
+            <LevelItem>
+                <strong>Gap:</strong>
+            </LevelItem>
+            <LevelItem>
+                @(gaps.IndexOf(curGap)*0.25)rem
+            </LevelItem>
+        </LevelLeft>
+        <LevelRight>
+            <LevelItem>
+                <Tags>
+                    @foreach (var gap in gaps)
+                    {
+                        <Tag @onmouseover="e=>changeGap(gap)" class="is-clickable"
+                            Color="gap==curGap?Color.Info:Color.Default">@gap.Value</Tag>
+                    }
+                </Tags>
+            </LevelItem>
+        </LevelRight>
+    </Level>
+</Content>
+
+<Columns Gap="curGap">
+    <Column Size="Size.Size3">
+        <Notification Color="Color.Primary">Side</Notification>
+    </Column>
+    <Column Size="Size.Size9">
+        <Notification Color="Color.Primary">Main</Notification>
+    </Column>
+</Columns>
+<Columns Gap="curGap">
+    @for (var j = 0; j < 3; j++)
+    {
+        <Column Size="Size.Size4">
+            <Notification Color="Color.Primary">Three columns</Notification>
+        </Column>
+    }
+</Columns>
+<Columns Gap="curGap">
+    @for (var i = 1; i <= 12; i++)
+    {
+        var ci = i;
+        <Column>
+            <Notification Color="Color.Primary">@ci</Notification>
+        </Column>
+    }
+</Columns>
+
+@code{
+    List<Gap> gaps = new List<Gap>(){
+    Gap.Gap0,Gap.Gap1,Gap.Gap2,Gap.Gap3,Gap.Gap4,Gap.Gap5,Gap.Gap6,Gap.Gap7,Gap.Gap8
+    };
+    Gap curGap = Gap.Gap0;
+
+    void changeGap(Gap gap)
+    {
+        curGap = gap;
+    }
+}

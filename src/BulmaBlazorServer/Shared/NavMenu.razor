@@ -1,10 +1,12 @@
-﻿@inject NavigationManager  nm
+﻿@inject NavigationManager nm
+@inject IJSRuntime js
+@inject BulmaRazor.BulmaRazorJsInterop JSInterop
 
-<Menu>
+<Menu OnItemClick="OnMenuClick">
     <MenuLabel>概述(Overview)</MenuLabel>
     <MenuList>
         <MenuItem Href="/docs/overview/start">开始使用</MenuItem>
-        <MenuItem Href="/docs/overview/classes">公共属性</MenuItem>
+        <MenuItem Href="/docs/overview/commons">公共属性</MenuItem>
     </MenuList>
 
     <MenuLabel>列(Columns)</MenuLabel>
@@ -47,11 +49,10 @@
     private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-
+    private async Task OnMenuClick(MenuItem item)
     {
-
-        collapseNavMenu = !collapseNavMenu;
+        @* var ele = await JSInterop.GetElementById("layoutContent"); *@
+        @* await JSInterop.ScrollTo(ele, 0, 0); *@
+        await js.InvokeVoidAsync("docScrollTop");
     }
 }

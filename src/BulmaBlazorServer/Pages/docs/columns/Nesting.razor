@@ -1,0 +1,49 @@
+@page "/docs/columns/nesting"
+@layout DocLayout
+
+
+
+<Title>嵌套列(Nesting columns)</Title>
+<Subtitle Size="Size.Size4">
+    构建 <strong>响应式列(responsive columns)</strong>的简单方式
+</Subtitle>
+<hr>
+
+<Content>
+    <p>
+        你只要遵循以下结构，就可以在你的设计中灵活的<strong>嵌套列</strong>:
+    </p>
+    <ul>
+        <li>
+            <code>Columns</code>: 顶层列容器
+            <ul>
+                <li>
+                    <code>Column</code>
+                    <ul>
+                        <li>
+                            <code>Columns</code>: 嵌套列
+                            <ul>
+                                <li>
+                                    <code>Column</code> 等等...
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    @* <p>
+        与 <a href="/documentation/columns/options/#multiline">多行 列布局</a> 不同的是 HTML 代码的<strong>顺序</strong> : 所有的 <strong
+        class="has-text-info">blue</strong> 列 将会出现在 <strong class="has-text-danger">red</strong> 列之前. 整为更窄的视口以查看结果。
+        </p> *@
+</Content>
+
+
+<Nesting1 />
+@* <Content>
+    <p>
+    多行列在每行之间也会有一个<strong>间隙(gap)</strong>。
+    </p>
+    </Content> *@
+<HighLight FilePath="Pages/docs/columns/Nesting1.razor"></HighLight>

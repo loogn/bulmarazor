@@ -5,13 +5,12 @@
 @if (!deleted)
 {
     <article @attributes="AdditionalAttributes" class="@classes">
-        @if (Header.HasValue())
+    @if (Header.HasValue())
         {
             <div class="message-header">
-                @if (!NoDelete)
+                @if (HasDelete)
                 {
                     <button class="@deleteClass" aria-label="delete" @onclick="deleteClickHandle"></button>
-
                 }
                 <p>@Header</p>
             </div>
@@ -38,7 +37,7 @@
     public string Header { get; set; }
 
     [Parameter]
-    public bool NoDelete { get; set; }
+    public bool HasDelete { get; set; }
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -21,17 +22,45 @@ namespace BulmaRazor
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                "import", "./_content/BulmaRazor/JsInterop.js").AsTask());
         }
-
+        public async ValueTask<string> Prompt(string message)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<string>("showPrompt", message);
+        }
         public async ValueTask<bool> GetOptionSelected(ElementReference element)
         {
             var module = await moduleTask.Value;
             return await module.InvokeAsync<bool>("getOptionSelected", element);
         }
 
-        public async ValueTask<object> SetOptionSelected(ElementReference element,bool val)
+        public async ValueTask SetOptionSelected(ElementReference element, bool val)
         {
             var module = await moduleTask.Value;
-            return await module.InvokeAsync<object>("setOptionSelected", element,val);
+            await module.InvokeVoidAsync("setOptionSelected", element, val);
+        }
+
+        public async ValueTask<ElementReference> GetElementById(string id)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<ElementReference>("getElementById", id);
+        }
+
+        public async ValueTask<List<ElementReference>> GetElementsByClassName(string classNames)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<List<ElementReference>>("getElementsByClassName", classNames);
+        }
+
+        public async ValueTask<List<ElementReference>> GetElementsByTagName(string tagName)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<List<ElementReference>>("getElementsByTagName", tagName);
+        }
+
+        public async ValueTask ScrollTo(ElementReference element, double x, double y)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("scrollTo", element, x, y);
         }
 
         public async ValueTask DisposeAsync()

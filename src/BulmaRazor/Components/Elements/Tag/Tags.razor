@@ -1,0 +1,28 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="AdditionalAttributes" class="@classes">
+    <CascadingValue Value="this" IsFixed>
+        @ChildContent
+    </CascadingValue>
+</div>
+@code {
+    string classes => CssBuilder.Default("tags")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClass(AreSize.Value, AreSize.Value)
+        .AddClass("has-addons", HasAddons)
+        .Build();
+
+
+
+    [Parameter]
+    public AreSize AreSize { get; set; } = AreSize.Default;
+
+    [Parameter]
+    public bool HasAddons { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+}

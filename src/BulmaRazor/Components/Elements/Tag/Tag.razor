@@ -10,12 +10,16 @@
         .AddClassFromAttributes(AdditionalAttributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
+        .AddClass("is-light",IsLight)
         .AddClass("is-rounded", IsRounded)
         .AddClass("is-delete", IsDelete)
         .Build();
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsLight{get;set;}
 
     [Parameter]
     public Size Size { get; set; } = Size.Default;

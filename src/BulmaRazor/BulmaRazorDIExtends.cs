@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddBulmaRazor(this IServiceCollection services)
         {
 
-            services.AddSingleton<BulmaRazorJsInterop>();
+            services.AddScoped<BulmaRazorJsInterop>();
             return services;
         }
 

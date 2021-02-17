@@ -105,15 +105,16 @@
     {
         if (parameters.TryGetValue<Gap>("Gap", out Gap gap) && gap.Value.HasValue())
             IsVarGap = true;
-        if (parameters.TryGetValue<Gap>("GapMobile", out Gap gapMobile) && GapMobile.Value.HasValue())
+        if (parameters.TryGetValue<GapMobile>("GapMobile", out GapMobile gapMobile) && GapMobile.Value.HasValue())
             IsVarGap = true;
-        if (parameters.TryGetValue<Gap>("GapTablet", out Gap gapTablet) && gapTablet.Value.HasValue())
+        if (parameters.TryGetValue<GapTablet>("GapTablet", out GapTablet gapTablet) && gapTablet.Value.HasValue())
             IsVarGap = true;
-        if (parameters.TryGetValue<Gap>("GapDesktop", out Gap gapDesktop) && gapDesktop.Value.HasValue())
+        if (parameters.TryGetValue<GapDesktop>("GapDesktop", out GapDesktop gapDesktop) && gapDesktop.Value.HasValue())
             IsVarGap = true;
-        if (parameters.TryGetValue<Gap>("GapWidescreen", out Gap gapWidescreen) && gapWidescreen.Value.HasValue())
+        if (parameters.TryGetValue<GapWidescreen>("GapWidescreen", out GapWidescreen gapWidescreen) &&
+            gapWidescreen.Value.HasValue())
             IsVarGap = true;
-        if (parameters.TryGetValue<Gap>("GapFullhd", out Gap gapFullhd) && gapFullhd.Value.HasValue())
+        if (parameters.TryGetValue<GapFullhd>("GapFullhd", out GapFullhd gapFullhd) && gapFullhd.Value.HasValue())
             IsVarGap = true;
 
 

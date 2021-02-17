@@ -1,0 +1,43 @@
+﻿@page "/docs/overview/commons"
+@layout DocLayout
+
+
+
+<Title>公共属性</Title>
+<Subtitle Size="Size.Size4">很多组件使用到的几个属性</Subtitle>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    颜色（Color）
+</Title>
+<Content>
+    <p>
+        很多组件可以使用Color属性控制主体色
+    </p>
+</Content>
+<Commons1 />
+<HighLight FilePath="Pages/docs/overview/Commons1.razor" HasMore></HighLight>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    尺寸（Size）
+</Title>
+<Content>
+    <p>
+        很多组件可以使用Size属性控制尺寸，根据组件的不同，可以使用的值也不同，大概分为以下几个系列：
+    <ol>
+        <li>名称尺寸 Size.Small、Size.Normal、Size.Medium、Size.Large，比如Button、Tag</li>
+        <li>数字尺寸 Size.Size1 ~ Size.Size12，比如Column</li>
+        <li>平方尺寸 Size.Square16 ~ Size.Square128 比如Image</li>
+        <li>比列尺寸 Size.Half、Size.Full、Size.TwoThirds等等，比如Column</li>
+    </ol>
+    </p>
+</Content>
+<Commons2 />
+<HighLight FilePath="Pages/docs/overview/Commons2.razor" HasMore></HighLight>
+
+
+@code {
+
+}
