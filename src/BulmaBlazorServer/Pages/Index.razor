@@ -1,9 +1,13 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.Rendering
 @inject JSWindow win
-<Hero Size="Size.Medium" Color="Color.Primary" style="width:100%" IsBold IsFullheightWithNavbar>
-    <BodySlot>
+@inject BulmaRazor.BulmaRazorJsInterop jsInterop
+@inject IJSRuntime jsruntime
+<Hero Size="Size.Medium" Color="Color.Info" IsBold IsFullheightWithNavbar style="width:100%;">
+    <HeroBody>
         <Container>
+
+
             <Title Size="Size.Size1">
                 BulmaRazor
             </Title>
@@ -12,20 +16,18 @@
             </Subtitle>
             <Buttons>
                 <Button href="https://bulma.io/" target="_blank" Color="Color.Info" IsOutlined IsInverted
-                    Size="Size.Large">bulma官网</Button>
+                        Size="Size.Large">
+                    bulma官网
+                </Button>
                 <Button href="https://bulma.zcopy.site/" target="_blank" Color="Color.Primary" IsOutlined IsInverted
-                    Size="Size.Large">bulma中文文档</Button>
+                        Size="Size.Large">
+                    bulma中文文档
+                </Button>
             </Buttons>
         </Container>
-    </BodySlot>
+    </HeroBody>
 </Hero>
 
-
-
-
 @code{
-    MarkupString csslinks1 = (MarkupString)@"<link href='_content/BulmaRazor/font-awesome/css/font-awesome.css'
-rel='stylesheet' />";
-    MarkupString csslinks2 = (MarkupString)@"<link href='_content/BulmaRazor/bulma.css' rel='stylesheet' />";
 
 }

@@ -1,0 +1,53 @@
+﻿@page "/docs/form/general"
+@layout DocLayout
+
+<Title>容器(Container)</Title>
+<Subtitle Size="Size.Size4">
+    一个可以内容水平居中的简单容器
+</Subtitle>
+<hr>
+
+<div class="content">
+    <p>
+        Bulma 支持如下 HTML内建表单元素: <code>&lt;form&gt;</code> <code>&lt;button&gt;</code> <code>&lt;input&gt;</code> <code>&lt;textarea&gt;</code> and <code>&lt;label&gt;</code>.
+    </p>
+    <p>
+        支持一下 CSS <strong>类</strong>:
+    </p>
+    <ul>
+        <li><code>Label</code></li>
+        <li><code>Input</code></li>
+        <li><code>Textarea</code></li>
+        <li><code>Select</code></li>
+        <li><code>Checkbox</code></li>
+        <li><code>Radio</code></li>
+        <li><code>Button</code></li>
+        <li><code>Help</code></li>
+    </ul>
+</div>
+<div class="content">
+    <p>
+        为了保持设计均匀平衡，Bulma 提供了一个非常有用的<code>Control</code>容器，您可以在其中包装表单控件。<br>
+        当在表单中组合多个控件时，请使用<code>Field</code>类作为容器，以保持间距一致。
+    </p>
+</div>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    完整表单示例
+</Title>
+
+<Columns>
+    <Column>
+        <General1 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General1.razor" HasMore MaxHeight="500"></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>
+        为了使用Bulma获得最佳效果，建议尽可能多地使用<code>Control</code>组件
+    </p>
+</div>

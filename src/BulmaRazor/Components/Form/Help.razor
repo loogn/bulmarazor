@@ -10,7 +10,12 @@
 
     string classes => CssBuilder.Default("help")
         .AddStyleFromAttributes(AdditionalAttributes)
+        .AddClass(Color.Value, Color.Value)
         .Build();
+
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

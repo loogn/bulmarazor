@@ -9,22 +9,27 @@
 @code {
     string classes => CssBuilder.Default("container")
         .AddClassFromAttributes(AdditionalAttributes)
-        .AddClass(Device.Value, Device.Value)
-        .AddClass(MaxDevice.Value, MaxDevice.Value)
+        .AddClass("is-widescreen", IsWidescreen)
+        .AddClass("is-fullhd", IsFullhd)
+        .AddClass("is-max-desktop", IsMaxDesktop)
+        .AddClass("is-max-widescreen", IsMaxWidescreen)
         .AddClass("is-fluid", IsFluid)
         .Build();
 
-    /// <summary>
-    /// 设备宽度
-    /// </summary>
-    [Parameter]
-    public Device Device { get; set; } = Device.Default;
 
-    /// <summary>
-    /// 设备最大宽度
-    /// </summary>
+
     [Parameter]
-    public MaxDevice MaxDevice { get; set; } = MaxDevice.Default;
+    public bool IsWidescreen { get; set; }
+
+    [Parameter]
+    public bool IsFullhd { get; set; }
+
+
+    [Parameter]
+    public bool IsMaxDesktop { get; set; }
+
+    [Parameter]
+    public bool IsMaxWidescreen { get; set; }
 
 
     /// <summary>

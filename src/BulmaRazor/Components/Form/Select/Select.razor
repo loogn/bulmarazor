@@ -70,8 +70,6 @@
     [Parameter]
     public EventCallback<TValue> ValueChanged { get; set; }
 
-
-
     private async Task ChangeHandle(ChangeEventArgs e)
     {
         if (Multiple)
@@ -86,12 +84,13 @@
             }
             if (ValuesChanged.HasDelegate)
             {
-                await ValuesChanged.InvokeAsync(Values);
+                await ValuesChanged.InvokeAsync(_values);
             }
         }
         else
         {
-            Value = (TValue)e.Value;
+            //Value = (TValue)Convert.ChangeType(e.Value, typeof(TValue));
+            _value = (TValue)Convert.ChangeType(e.Value, typeof(TValue));
 
             if (ValueChanged.HasDelegate)
             {

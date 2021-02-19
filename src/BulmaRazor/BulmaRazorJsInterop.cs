@@ -25,8 +25,15 @@ namespace BulmaRazor
         public async ValueTask<string> Prompt(string message)
         {
             var module = await moduleTask.Value;
-            return await module.InvokeAsync<string>("showPrompt", message);
+            return await module.InvokeAsync<string>("prompt", message);
         }
+
+        public async ValueTask ConsoleLog(params object[] args)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("consolelog", args);
+        }
+
         public async ValueTask<bool> GetOptionSelected(ElementReference element)
         {
             var module = await moduleTask.Value;

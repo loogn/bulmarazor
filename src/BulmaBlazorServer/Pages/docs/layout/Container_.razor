@@ -69,13 +69,13 @@
             <td><code>1344px</code></td>
         </tr>
         <tr>
-            <td><code>Device.Widescreen</code></td>
+            <td><code>IsWidescreen</code></td>
             <td colspan="2" class="has-text-grey-light has-background-white-ter">Full width</td>
             <td><code>1152px</code></td>
             <td><code>1344px</code></td>
         </tr>
         <tr>
-            <td><code>Device.Fullhd</code></td>
+            <td><code>IsFullhd</code></td>
             <td colspan="3" class="has-text-grey-light has-background-white-ter">Full width</td>
             <td><code>1344px</code></td>
         </tr>
@@ -88,12 +88,12 @@
             </td>
         </tr>
         <tr>
-            <td><code>MaxDevice.Desktop</code></td>
+            <td><code>IsMaxDesktop</code></td>
             <td class="has-text-grey-light has-background-white-ter">Full width</td>
             <td colspan="3"><code>960px</code></td>
         </tr>
         <tr>
-            <td><code>MaxDevice.Widescreen</code></td>
+            <td><code>IsMaxWidescreen</code></td>
             <td class="has-text-grey-light has-background-white-ter">Full width</td>
             <td><code>960px</code></td>
             <td colspan="2"><code>1152px</code></td>
@@ -139,7 +139,7 @@
 </Title>
 <Content>
     <p>
-        使用Device属性，可以使Container在Device断点没有达到指定宽度的时候呈现100%的宽度
+        使用IsWidescreen和IsFullhd属性，可以使Container在$device断点没有达到指定宽度的时候呈现100%的宽度
     </p>
 </Content>
 <Container2 />
@@ -158,14 +158,14 @@
 </Tags>
 <Content>
     <p>
-        有时候，你可能想在宽屏上要一个狭窄的Container，可以通过MaxDevice的两个属性来控制：
+        有时候，你可能想在宽屏上要一个狭窄的Container，可以通过两个属性来控制：
     </p>
     <ul>
         <li>
-            <code>MaxDevice.Desktop</code> 行为表现为Desktop下的Container
+            <code>IsMaxDesktop</code> 行为表现为Desktop下的Container
         </li>
         <li>
-            <code>MaxDevice.Widescreen</code> 行为表现为Widescreen下的Container
+            <code>IsMaxWidescreen</code> 行为表现为Widescreen下的Container
         </li>
     </ul>
 </Content>

@@ -24,7 +24,10 @@
     private async Task ChangeHandle(ChangeEventArgs e)
     {
         Checked = !Checked;
-        await Parent.CheckTagger(Checked, Value);
+        if (Parent != null)
+        {
+            await Parent.CheckTagger(Checked, Value);
+        }
 
         if (CheckedChanged.HasDelegate)
         {

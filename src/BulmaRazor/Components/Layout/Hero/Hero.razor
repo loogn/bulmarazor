@@ -3,25 +3,7 @@
 @inherits BulmaComponentBase
 
 <section @attributes="AdditionalAttributes" class="@classes">
-
-    @if (HeadSlot != null)
-    {
-        <div class="hero-head">
-            @HeadSlot
-        </div>
-    }
-    @if (BodySlot != null)
-    {
-        <div class="hero-body">
-            @BodySlot
-        </div>
-    }
-    @if (FootSlot != null)
-    {
-        <div class="hero-foot">
-            @FootSlot
-        </div>
-    }
+    @ChildContent
 </section>
 
 @code {
@@ -61,12 +43,5 @@
     public bool IsBold { get; set; }
 
     [Parameter]
-    public RenderFragment HeadSlot { get; set; }
-
-    [Parameter]
-    public RenderFragment BodySlot { get; set; }
-
-    [Parameter]
-    public RenderFragment FootSlot { get; set; }
-
+    public RenderFragment ChildContent { get; set; }
 }

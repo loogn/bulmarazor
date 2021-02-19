@@ -7,7 +7,7 @@
 }
 else
 {
-    <button @attributes="AdditionalAttributes" class="@classes" disabled="@Disabled">@ChildContent</button>
+    <button type="@ButtonType.Value" @attributes="AdditionalAttributes" class="@classes" disabled="@Disabled">@ChildContent</button>
 }
 
 
@@ -27,7 +27,8 @@ else
         .AddClass("is-static", IsStatic)
         .Build();
 
-
+    [Parameter]
+    public ButtonType ButtonType { get; set; } = ButtonType.Button;
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;

@@ -1,0 +1,63 @@
+﻿<form>
+    <Field>
+        <Label>Name</Label>
+        <Control>
+            <Input placeholder="Text input" TValue="string" />
+        </Control>
+    </Field>
+    <Field>
+        <label>Username</label>
+        <Control HasIconsLeft HasIconsRight>
+            <Input Color="Color.Success" TValue="string" placeholder="Text input" value="bulmarazor" />
+            <Icon Align="Align.Left" Size="Size.Small" IconClass="fa fa-user"></Icon>
+            <Icon Align="Align.Right" Size="Size.Small" IconClass="fa fa-check"></Icon>
+        </Control>
+        <Help Color="Color.Success">This username is available</Help>
+    </Field>
+    <Field>
+        <Label>Email</Label>
+        <Control HasIconsLeft HasIconsRight>
+            <Input Color="Color.Danger" type="email" TValue="string" placeholder="Email input" value="hello" />
+            <Icon Align="Align.Left" Size="Size.Small" IconClass="fa fa-envelope"></Icon>
+            <Icon Align="Align.Right" Size="Size.Small" IconClass="fa fa-exclamation-triangle"></Icon>
+        </Control>
+        <Help Color="Color.Danger">This email is invalid</Help>
+    </Field>
+    <Field>
+        <Label>Subject</Label>
+        <Control>
+            <Select Value="1">
+                <Option  Value="1">Select dropdown</Option>
+                <Option  Value="2">With options</Option>
+            </Select>
+        </Control>
+    </Field>
+    <Field>
+        <Label>Message</Label>
+        <Control>
+            <Textarea placeholder="Textarea"></Textarea>
+        </Control>
+    </Field>
+    <Field>
+        <Label></Label>
+        <Control>
+            <CheckBox TValue="string"> I agree to the <a href="#">terms and conditions</a></CheckBox>
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Radios TValue="int">
+                <Radio Name="aa" Value="1" TValue="int">Yes</Radio>
+                <Radio Name="aa" Value="0" TValue="int">No</Radio>
+            </Radios>
+        </Control>
+    </Field>
+    <Field IsGrouped>
+        <Control>
+            <Button Color="Color.Link">Submit</Button>
+        </Control>
+        <Control>
+            <Button Color="Color.Link" IsLight>Cancel</Button>
+        </Control>
+    </Field>
+</form>

@@ -17,6 +17,7 @@
     public bool Selected { get; set; }
 
     private ElementReference opt;
+
     public async Task<bool> GetSelected()
     {
         var result = await jsInterop.GetOptionSelected(opt);

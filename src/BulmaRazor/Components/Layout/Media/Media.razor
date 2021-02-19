@@ -3,25 +3,8 @@
 @inherits BulmaComponentBase
 
 <article @attributes="AdditionalAttributes" class="@classes">
-    @if (LeftSlot != null)
-    {
-        <figure class="media-left">
-            @LeftSlot
-        </figure>
-    }
-    @if (ContentSlot != null)
-    {
-        <div class="media-content">
-            @ContentSlot
-        </div>
-    }
-    @if (RightSlot != null)
-    {
-        <div class="media-right">
-            @RightSlot
-        </div>
-    }
 
+    @ChildContent
 </article>
 
 @code {
@@ -31,11 +14,7 @@
       .Build();
 
     [Parameter]
-    public RenderFragment LeftSlot { get; set; }
-    [Parameter]
-    public RenderFragment ContentSlot { get; set; }
-    [Parameter]
-    public RenderFragment RightSlot { get; set; }
+    public RenderFragment ChildContent { get; set; }
 
 }
 
