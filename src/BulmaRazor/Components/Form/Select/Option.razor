@@ -53,11 +53,11 @@
         base.OnInitialized();
 
         Parent.AddItem(this);
-        if (Parent.Multiple)
+        if (Parent.Multiple && Parent.Values!=null)
         {
             Selected = Parent.Values.Contains(Value);
         }
-        else
+        else if(Parent.Value!=null)
         {
             Selected = Parent.Value.Equals(Value);
         }

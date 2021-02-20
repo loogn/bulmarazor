@@ -7,7 +7,8 @@
 }
 else
 {
-    <button type="@ButtonType.Value" @attributes="AdditionalAttributes" class="@classes" disabled="@Disabled">@ChildContent</button>
+    <button @attributes="AdditionalAttributes" class="@classes"
+    disabled="@Disabled">@ChildContent</button>
 }
 
 
@@ -27,8 +28,6 @@ else
         .AddClass("is-static", IsStatic)
         .Build();
 
-    [Parameter]
-    public ButtonType ButtonType { get; set; } = ButtonType.Button;
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;
@@ -81,10 +80,14 @@ else
     {
 
         await base.SetParametersAsync(parameters);
-
-        if (AdditionalAttributes != null)
+        if (AdditionalAttributes == null)
         {
-            hasHref = AdditionalAttributes.ContainsKey("href");
+            AdditionalAttributes = new Dictionary<string, object>();
+        }
+        hasHref = AdditionalAttributes.ContainsKey("href");
+        if (!AdditionalAttributes.ContainsKey("type"))
+        {
+            AdditionalAttributes["type"] = "button";
         }
     }
 
