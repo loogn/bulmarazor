@@ -2,23 +2,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Version>0.0.2</Version>
+        <Version>0.0.3</Version>
         <Description>BulmaRazor</Description>
         <Copyright>loogn@2021</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl></PackageProjectUrl>
+        <PackageProjectUrl>http://bulmarazor.loogn.net/</PackageProjectUrl>
         <RepositoryUrl>https://gitee.com/loogn/bulmarazor</RepositoryUrl>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageId>BulmaRazor</PackageId>
-        <AssemblyVersion>0.0.2.0</AssemblyVersion>
+        <AssemblyVersion>0.0.3.0</AssemblyVersion>
         <PackageIcon>nuget-logo.png</PackageIcon>
     </PropertyGroup>
-    <ItemGroup>
-      <Compile Remove="ExampleJsInterop.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <Content Remove="wwwroot\exampleJsInterop.js" />
-    </ItemGroup>
     <ItemGroup>
         <SupportedPlatform Include="browser" />
     </ItemGroup>
