@@ -1,7 +1,7 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<p @attributes="AdditionalAttributes" class="@classes">
+<p @attributes="Attributes" class="@classes">
     @ChildContent
 </p>
 
@@ -9,7 +9,7 @@
 @code {
 
     string classes => CssBuilder.Default("help")
-        .AddStyleFromAttributes(AdditionalAttributes)
+        .AddStyleFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .Build();
 

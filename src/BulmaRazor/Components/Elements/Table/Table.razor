@@ -6,7 +6,7 @@
 @if (WithContainer)
 {
     <div class="table-container">
-        <table @attributes="AdditionalAttributes" class="@classes">
+        <table @attributes="Attributes" class="@classes">
             @ChildContent
         </table>
     </div>
@@ -14,7 +14,7 @@
 else
 {
 
-    <table @attributes="AdditionalAttributes" class="@classes">
+    <table @attributes="Attributes" class="@classes">
         @ChildContent
     </table>
 }
@@ -25,7 +25,7 @@ else
 
 
     string classes => CssBuilder.Default("table")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass("is-bordered", IsBordered)
         .AddClass("is-striped", IsStriped)
         .AddClass("is-narrow", IsNarrow)
@@ -34,31 +34,31 @@ else
         .Build();
 
     /// <summary>
-    /// ÊÇ·ñÓÐ±ß¿ò
+    /// ï¿½Ç·ï¿½ï¿½Ð±ß¿ï¿½
     /// </summary>
     [Parameter]
     public bool IsBordered { get; set; }
 
     /// <summary>
-    /// ÊÇ·ñÓÐÌõÎÆ
+    /// ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     [Parameter]
     public bool IsStriped { get; set; }
 
     /// <summary>
-    /// ÊÇ·ñÏÁÕ­
+    /// ï¿½Ç·ï¿½ï¿½ï¿½Õ­
     /// </summary>
     [Parameter]
     public bool IsNarrow { get; set; }
 
     /// <summary>
-    /// ÊÇ·ñÐüÍ£±ãÑùÊ½
+    /// ï¿½Ç·ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ê½
     /// </summary>
     [Parameter]
     public bool IsHoverable { get; set; }
 
     /// <summary>
-    /// ÊÇ·ñÈ«¿í
+    /// ï¿½Ç·ï¿½È«ï¿½ï¿½
     /// </summary>
     [Parameter]
     public bool IsFullwidth { get; set; }

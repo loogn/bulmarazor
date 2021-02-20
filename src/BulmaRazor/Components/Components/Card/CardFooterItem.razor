@@ -4,20 +4,20 @@
 
 @if (hasHref)
 {
-    <a @attributes="AdditionalAttributes" class="@clesses">
+    <a @attributes="Attributes" class="@clesses">
         @ChildContent
     </a>
 }
 else
 {
-    <p @attributes="AdditionalAttributes" class="@clesses">
+    <p @attributes="Attributes" class="@clesses">
         @ChildContent
     </p>
 }
 
 @code {
     string clesses => CssBuilder.Default("card-footer-item")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
        .Build();
 
     [Parameter]
@@ -30,9 +30,9 @@ else
     {
         await base.SetParametersAsync(parameters);
 
-        if (AdditionalAttributes != null)
+        if (Attributes != null)
         {
-            hasHref = AdditionalAttributes.ContainsKey("href");
+            hasHref = Attributes.ContainsKey("href");
         }
     }
 }

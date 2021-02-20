@@ -3,7 +3,7 @@
 
 
 
-<li @attributes="AdditionalAttributes" class='@classes'>
+<li @attributes="Attributes" class='@classes'>
     <a @attributes="AddAtts">
         @ChildContent
     </a>
@@ -12,7 +12,7 @@
 
 @code{
     string classes => CssBuilder.Default("")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
 
@@ -48,7 +48,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        //¼ÓÈë¸¸Àà
+        //ï¿½ï¿½ï¿½ë¸¸ï¿½ï¿½
         if (Parent != null)
         {
             Parent.AddItem(this);

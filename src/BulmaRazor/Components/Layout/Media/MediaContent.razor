@@ -2,14 +2,14 @@
 
 @inherits BulmaComponentBase
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     @ChildContent
 </div>
 
 @code {
 
     string classes => CssBuilder.Default("media-content")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .Build();
 
     [Parameter]

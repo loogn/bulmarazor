@@ -2,15 +2,14 @@
 
 @inherits BulmaComponentBase
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     @ChildContent
 </div>
 
 @code {
 
     string classes => CssBuilder.Default("content")
-        .AddClassFromAttributes(AdditionalAttributes)
-        .AddClass(TextAlign.Value, TextAlign.Value)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .Build();
 
@@ -20,11 +19,6 @@
     /// </summary>
     [Parameter]
     public Size Size { get; set; } = Size.Default;
-
-    [Parameter]
-    public TextAlign TextAlign { get; set; }=TextAlign.Default;
-
-
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

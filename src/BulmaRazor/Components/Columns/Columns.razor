@@ -1,14 +1,14 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     @ChildContent
 </div>
 
 
 @code {
     string classes => CssBuilder.Default("columns")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass("is-mobile", IsMobile)
         .AddClass("is-desktop", IsDesktop)
         .AddClass("is-gapless", IsGapless)

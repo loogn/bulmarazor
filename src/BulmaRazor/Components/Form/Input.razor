@@ -1,17 +1,14 @@
-﻿
-@namespace BulmaRazor.Components
+﻿@namespace BulmaRazor.Components
 
 @inherits BulmaComponentBase
 @typeparam TValue
 
 
-<input @attributes="AdditionalAttributes" @bind-value="@CurrentValue" @bind-value:event="@BindEvent" class="@classes" />
+<input @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent" class="@classes" />
 
 @code {
-
-
     string classes => CssBuilder.Default("input")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-rounded", IsRounded)
@@ -43,17 +40,34 @@
     [Parameter]
     public bool Static { get; set; }
 
-
-
     [Parameter]
     public string BindEvent { get; set; } = "onchange";
 
     [Parameter]
     public TValue Value { get; set; }
 
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+    [Parameter]
+    public string Format { get; set; }
 
     private TValue _value;
 
+
+    private string ShowValue
+    {
+        get { return _value.ToString(); }
+        set
+        {
+            //value是否可以转成Value
+            _value = (TValue)Convert.ChangeType(value, typeof(TValue));
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(_value).GetAwaiter().GetResult();
+            }
+        }
+    }
     private TValue CurrentValue
     {
         get { return _value; }
@@ -67,24 +81,18 @@
         }
     }
 
-    [Parameter]
-    public EventCallback<TValue> ValueChanged { get; set; }
+
 
     public async override Task SetParametersAsync(ParameterView parameters)
     {
+        await base.SetParametersAsync(parameters);
         if (typeof(TValue).IsNumber())
         {
-            if (AdditionalAttributes == null)
+            if (!Attributes.ContainsKey("type"))
             {
-                AdditionalAttributes = new Dictionary<string, object>();
-            }
-            if (!AdditionalAttributes.ContainsKey("type"))
-            {
-                AdditionalAttributes.Add("type", "number");
+                Attributes.Add("type", "number");
             }
         }
-
-        await base.SetParametersAsync(parameters);
         _value = Value;
     }
 }

@@ -2,7 +2,7 @@
 @inherits BulmaComponentBase
 @inject NavigationManager nm
 
-<aside @attributes="AdditionalAttributes" class="@classes">
+<aside @attributes="Attributes" class="@classes">
     <CascadingValue Value="this" IsFixed="true">
         @ChildContent
     </CascadingValue>
@@ -11,7 +11,7 @@
 @code{
 
     string classes => CssBuilder.Default("menu")
-    .AddClassFromAttributes(AdditionalAttributes)
+    .AddClassFromAttributes(Attributes)
     .Build();
 
     [Parameter]

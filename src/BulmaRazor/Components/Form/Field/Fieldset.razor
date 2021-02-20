@@ -1,7 +1,7 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<fieldset @attributes="AdditionalAttributes" class="@classes" disabled="@Disabled">
+<fieldset @attributes="Attributes" class="@classes" disabled="@Disabled">
     @ChildContent
 </fieldset>
 
@@ -9,7 +9,7 @@
 @code {
 
     string classes => CssBuilder.Default("field-body")
-        .AddStyleFromAttributes(AdditionalAttributes)
+        .AddStyleFromAttributes(Attributes)
 
         .Build();
 

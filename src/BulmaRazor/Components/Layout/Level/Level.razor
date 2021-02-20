@@ -2,14 +2,14 @@
 
 @inherits BulmaComponentBase
 
-<nav @attributes="AdditionalAttributes" class="@classes">
+<nav @attributes="Attributes" class="@classes">
     @ChildContent
 </nav>
 
 @code {
 
     string classes => CssBuilder.Default("level")
-      .AddClassFromAttributes(AdditionalAttributes)
+      .AddClassFromAttributes(Attributes)
       .AddClass("is-mobile", IsMobile)
       .Build();
 

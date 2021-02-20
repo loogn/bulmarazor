@@ -1,6 +1,6 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
-<nav @attributes="AdditionalAttributes" class="@clesses" role="navigation" aria-label="main navigation">
+<nav @attributes="Attributes" class="@clesses" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         @BrandSlot
 
@@ -26,7 +26,8 @@
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-transparent", IsTransparent)
         .AddClass("is-spaced", IsSpaced)
-        .AddClass(Fixed.Value, Fixed.Value)
+        .AddClass("is-fixed-top",IsFixedTop)
+        .AddClass("is-fixed-bottom",IsFixedBottom)
         .Build();
 
     string activeClass = "";
@@ -52,8 +53,9 @@
     public Color Color { get; set; } = Color.White;
 
     [Parameter]
-    public Fixed Fixed { get; set; } = Fixed.Default;
-
+    public bool IsFixedTop{get;set;}
+    [Parameter]
+    public bool IsFixedBottom{get;set;}
     [Parameter]
     public bool IsSpaced { get; set; }
     [Parameter]

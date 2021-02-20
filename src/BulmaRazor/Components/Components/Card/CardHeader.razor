@@ -2,12 +2,12 @@
 @inherits BulmaComponentBase
 
 
-<header @attributes="AdditionalAttributes" class="@clesses">
+<header @attributes="Attributes" class="@clesses">
     @ChildContent
 </header>
 @code {
     string clesses => CssBuilder.Default("card-header")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
        .Build();
 
     [Parameter]

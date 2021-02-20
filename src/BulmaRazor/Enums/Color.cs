@@ -22,10 +22,7 @@ namespace BulmaRazor.Components
         public static Color Danger = new Color("is-danger");
 
         public static Color Ghost = new Color("is-ghost");
-        public TextColor ToTextColor()
-        {
-            return new TextColor(Value.Replace("is-", "has-text-"));
-        }
+       
 
     }
 }

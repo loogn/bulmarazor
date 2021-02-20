@@ -4,7 +4,7 @@
 
 @if (!deleted)
 {
-    <article @attributes="AdditionalAttributes" class="@classes">
+    <article @attributes="Attributes" class="@classes">
     @if (Header.HasValue())
         {
             <div class="message-header">
@@ -23,7 +23,7 @@
 
 @code{
     string classes => CssBuilder.Default("message")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .Build();

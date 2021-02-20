@@ -2,7 +2,7 @@
 @inherits BulmaComponentBase
 
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     <ul>
         <CascadingValue Value="this" IsFixed="true">
             @ChildContent
@@ -12,7 +12,7 @@
 
 @code{
     string classes => CssBuilder.Default("tabs")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-boxed", IsBoxed)
         .AddClass("is-toggle", IsToggle || IsToggleRounded)

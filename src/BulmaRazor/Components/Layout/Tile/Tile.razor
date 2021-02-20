@@ -2,14 +2,14 @@
 
 @inherits BulmaComponentBase
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     @ChildContent
 </div>
 
 @code {
 
     string classes => CssBuilder.Default("tile")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Seniority.Value, Seniority.Value)
         .AddClass(Size.Value,Size.Value)
         .AddClass("is-vertical", IsVertical)

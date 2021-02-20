@@ -1,14 +1,14 @@
 @namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<figure @attributes="AdditionalAttributes" class="@classes">
+<figure @attributes="Attributes" class="@classes">
     <img src="@Src" class="@imgClass">
 </figure>
 
 
 @code {
     string classes => CssBuilder.Default("image")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-fullwidth", IsFullwidth)
         .Build();

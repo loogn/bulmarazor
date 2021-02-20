@@ -1,7 +1,7 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     @ChildContent
 </div>
 
@@ -10,7 +10,7 @@
 
 @code {
     string classes => CssBuilder.Default("column")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Offset.Value)
         .AddClass(Size.Value)
         .AddClass("is-narrow", IsNarrow)

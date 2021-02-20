@@ -1,14 +1,14 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<div @attributes="AdditionalAttributes" class="@clesses">
+<div @attributes="Attributes" class="@clesses">
     @ChildContent
 </div>
 
 
 @code {
     string clesses => CssBuilder.Default("navbar-dropdown")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass("is-right", IsRight)
         .AddClass("is-boxed", IsBoxed)
        .Build();

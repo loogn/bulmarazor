@@ -2,14 +2,14 @@
 
 @inherits BulmaComponentBase
 
-<figure @attributes="AdditionalAttributes" class="@classes">
+<figure @attributes="Attributes" class="@classes">
     @ChildContent
 </figure>
 
 @code {
 
     string classes => CssBuilder.Default("media-left")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .Build();
 
     [Parameter]

@@ -2,12 +2,12 @@
 
 @inherits BulmaComponentBase
 
-<span @attributes="AdditionalAttributes" class="@classes">
+<span @attributes="Attributes" class="@classes">
     @ChildContent
 </span>
 @code {
     string classes => CssBuilder.Default("tag")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-light",IsLight)

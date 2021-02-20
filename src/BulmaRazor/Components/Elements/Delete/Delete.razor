@@ -2,10 +2,10 @@
 
 @inherits BulmaComponentBase
 
-<button @attributes="AdditionalAttributes" class="@classes"></button>
+<button @attributes="Attributes" class="@classes"></button>
 @code {
     string classes => CssBuilder.Default("delete")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .Build();
 

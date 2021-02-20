@@ -4,12 +4,12 @@
 @typeparam TValue
 @inject BulmaRazorJsInterop jsInterop
 
-<option @ref="opt" @attributes="AdditionalAttributes" class="@classes" value="@Value" selected="@Selected">@ChildContent
+<option @ref="opt" @attributes="Attributes" class="@classes" value="@Value" selected="@Selected">@ChildContent
 </option>
 
 @code {
     string classes => CssBuilder.Default("")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .Build();
 
 

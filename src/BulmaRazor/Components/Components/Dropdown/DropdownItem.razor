@@ -3,19 +3,19 @@
 
 @if (Href.HasValue())
 {
-    <a @attributes="AdditionalAttributes" class="@clesses" href="@Href" target="@Target">
+    <a @attributes="Attributes" class="@clesses" href="@Href" target="@Target">
         @ChildContent
     </a>
 }
 else
 {
-    <div @attributes="AdditionalAttributes" class="@clesses">
+    <div @attributes="Attributes" class="@clesses">
         @ChildContent
     </div>
 }
 @code {
     string clesses => CssBuilder.Default("dropdown-item")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
        .Build();
 
     [Parameter]

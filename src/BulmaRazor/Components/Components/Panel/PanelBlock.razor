@@ -1,13 +1,13 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     @ChildContent
 </div>
 
 @code {
     string classes => CssBuilder.Default("panel-block")
-  .AddClassFromAttributes(AdditionalAttributes)
+  .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-active",IsActive)
   .Build();

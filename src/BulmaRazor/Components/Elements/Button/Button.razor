@@ -3,18 +3,18 @@
 
 @if (hasHref)
 {
-    <a @attributes="AdditionalAttributes" class="@classes" disabled="@Disabled">@ChildContent</a>
+    <a @attributes="Attributes" class="@classes" disabled="@Disabled">@ChildContent</a>
 }
 else
 {
-    <button @attributes="AdditionalAttributes" class="@classes"
+    <button @attributes="Attributes" class="@classes"
     disabled="@Disabled">@ChildContent</button>
 }
 
 
 @code {
     string classes => CssBuilder.Default("button")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-light", IsLight)
         .AddClass("is-fullwidth", IsFullwidth)
@@ -69,8 +69,6 @@ else
 
 
 
-
-
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
@@ -78,16 +76,12 @@ else
 
     public async override Task SetParametersAsync(ParameterView parameters)
     {
-
         await base.SetParametersAsync(parameters);
-        if (AdditionalAttributes == null)
+        
+        hasHref = Attributes.ContainsKey("href");
+        if (!Attributes.ContainsKey("type"))
         {
-            AdditionalAttributes = new Dictionary<string, object>();
-        }
-        hasHref = AdditionalAttributes.ContainsKey("href");
-        if (!AdditionalAttributes.ContainsKey("type"))
-        {
-            AdditionalAttributes["type"] = "button";
+            Attributes["type"] = "button";
         }
     }
 

@@ -4,7 +4,7 @@
 @typeparam TValue
 
 <div class="@selectCls">
-    <select @attributes="AdditionalAttributes" @onchange="ChangeHandle" multiple="@Multiple" size="@Rows">
+    <select @attributes="Attributes" @onchange="ChangeHandle" multiple="@Multiple" size="@Rows">
         <CascadingValue Value="this" IsFixed="true">
             @ChildContent
         </CascadingValue>

@@ -4,7 +4,7 @@
 
 
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     <div class="modal-background" @onclick="backgroundClickHandle"></div>
     <div class="modal-content">
         @ChildContent
@@ -18,7 +18,7 @@
 
 @code{
     string classes => CssBuilder.Default("modal")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass("is-active", isActive)
         .Build();
 

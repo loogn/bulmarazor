@@ -2,7 +2,7 @@
 @inherits BulmaComponentBase
 
 
-<div @attributes="AdditionalAttributes" class="@classes">
+<div @attributes="Attributes" class="@classes">
     <label class="file-label">
 
         <InputFile OnChange="ChangeHandle" multiple="@Multiple" class="file-input" />
@@ -25,7 +25,7 @@
 
 @code {
     string classes => CssBuilder.Default("file")
-     .AddClassFromAttributes(AdditionalAttributes)
+     .AddClassFromAttributes(Attributes)
      .AddClass(Color.Value, Color.Value)
      .AddClass(Size.Value, Size.Value)
      .AddClass("has-name", HasName)

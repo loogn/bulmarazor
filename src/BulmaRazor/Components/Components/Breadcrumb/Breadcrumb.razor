@@ -2,7 +2,7 @@
 @inherits BulmaComponentBase
 
 
-<nav @attributes="AdditionalAttributes" class="@classes" aria-label="breadcrumbs">
+<nav @attributes="Attributes" class="@classes" aria-label="breadcrumbs">
     <ul>
         <CascadingValue Value="this" IsFixed="true">
             @ChildContent
@@ -12,7 +12,7 @@
 
 @code{
     string classes => CssBuilder.Default("breadcrumb")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .AddClass(Separator.Value, Separator.Value)
         .AddClass(Align.Value, Align.Value)

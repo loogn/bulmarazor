@@ -1,7 +1,7 @@
 @namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<ul @attributes="AdditionalAttributes" class="@classes">
+<ul @attributes="Attributes" class="@classes">
     @ChildContent
 </ul>
 
@@ -9,7 +9,7 @@
 
     string classes => CssBuilder.Default("")
     .AddClass("menu-list", !isNested)
-    .AddClassFromAttributes(AdditionalAttributes)
+    .AddClassFromAttributes(Attributes)
     .Build();
 
 

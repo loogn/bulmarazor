@@ -1,0 +1,18 @@
+
+<Input @bind-Value="dateTime" />
+
+
+
+
+<div>
+    str:<span>@str</span><br>
+    i:<span>@i</span><br>
+    dt:<span>@dateTime</span>
+</div>
+@code{
+    private string str = "23d";
+    DateTime dateTime=DateTime.Now;
+
+    private int i = 23;
+
+}

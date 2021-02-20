@@ -1,7 +1,7 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<footer @attributes="AdditionalAttributes" class="@classes">
+<footer @attributes="Attributes" class="@classes">
     @ChildContent
 </footer>
 
@@ -9,7 +9,7 @@
 @code {
 
     string classes => CssBuilder.Default("footer")
-        .AddStyleFromAttributes(AdditionalAttributes)
+        .AddStyleFromAttributes(Attributes)
         .Build();
 
     [Parameter]

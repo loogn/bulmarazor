@@ -1,14 +1,14 @@
 @namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<p @attributes="AdditionalAttributes" class="@classes">
+<p @attributes="Attributes" class="@classes">
     @ChildContent
 </p>
 
 @code{
 
     string classes=>CssBuilder.Default("menu-label")
-    .AddClassFromAttributes(AdditionalAttributes)
+    .AddClassFromAttributes(Attributes)
     .Build();
 
     [Parameter]

@@ -2,11 +2,11 @@
 
 @inherits BulmaComponentBase
 
-<progress @attributes="AdditionalAttributes" class="@classes">@ChildContent</progress>
+<progress @attributes="Attributes" class="@classes">@ChildContent</progress>
 
 @code {
     string classes => CssBuilder.Default("progress")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .Build();

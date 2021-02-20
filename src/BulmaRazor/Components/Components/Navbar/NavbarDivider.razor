@@ -2,11 +2,11 @@
 @inherits BulmaComponentBase
 
 
-<hr @attributes="AdditionalAttributes" class="@clesses" />
+<hr @attributes="Attributes" class="@clesses" />
 
 @code {
     string clesses => CssBuilder.Default("navbar-divider")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
        .Build();
 
 }

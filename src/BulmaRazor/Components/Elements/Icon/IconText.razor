@@ -3,7 +3,7 @@
 
 @inherits BulmaComponentBase
 
-<span @attributes="AdditionalAttributes" class="@classes">
+<span @attributes="Attributes" class="@classes">
     <Icon Size="Size" IconClass="@IconClass">
     </Icon>
     <span>
@@ -14,7 +14,7 @@
 @code {
 
     string classes => CssBuilder.Default("icon-text")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .Build();
 

@@ -1,13 +1,13 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<p @attributes="AdditionalAttributes" class="@classes">
+<p @attributes="Attributes" class="@classes">
     @ChildContent
 </p>
 
 @code {
     string classes => CssBuilder.Default("panel-tabs")
-  .AddClassFromAttributes(AdditionalAttributes)
+  .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
   .Build();
 

@@ -2,7 +2,7 @@
 
 @inherits BulmaComponentBase
 
-<span @attributes="AdditionalAttributes" class="@classes">
+<span @attributes="Attributes" class="@classes">
     <i class="@IconClass" aria-hidden="true"></i>
 </span>
 
@@ -11,7 +11,7 @@
 
 
     string classes => CssBuilder.Default("panel-icon")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .Build();
 
 

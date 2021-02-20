@@ -2,7 +2,7 @@
 @inherits BulmaComponentBase
 
 
-<div @attributes="AdditionalAttributes" class="@clesses">
+<div @attributes="Attributes" class="@clesses">
     <CascadingValue Value="this" IsFixed="true">
         <div class="dropdown-trigger" @onclick="clickHandle">
             @TriggerSlot
@@ -17,7 +17,7 @@
 </div>
 @code {
     string clesses => CssBuilder.Default("dropdown")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .AddClass("is-hoverable", !IsClickOpen)
        .Build();

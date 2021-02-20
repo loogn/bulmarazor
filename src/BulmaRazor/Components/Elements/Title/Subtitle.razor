@@ -32,7 +32,7 @@ else if (Size == Size.Size6)
 
 @code {
     string classes => CssBuilder.Default("subtitle")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-spaced", IsSpaced)
         .Build();

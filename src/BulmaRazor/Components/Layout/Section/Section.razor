@@ -2,14 +2,14 @@
 
 @inherits BulmaComponentBase
 
-<section @attributes="AdditionalAttributes" class="@classes">
+<section @attributes="Attributes" class="@classes">
     @ChildContent
 </section>
 
 @code {
 
     string classes => CssBuilder.Default("section")
-        .AddClassFromAttributes(AdditionalAttributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .Build();
 
