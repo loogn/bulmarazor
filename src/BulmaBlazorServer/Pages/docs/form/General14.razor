@@ -1,0 +1,58 @@
+﻿<Field IsHorizontal>
+   <FieldLabel class="is-normal">
+      <Label>From</Label>
+   </FieldLabel>
+   <FieldBody>
+      <Field>
+         <Control IsExpanded HasIconsLeft>
+            <Input placeholder="Name" TValue="string" />
+            <Icon IconClass="fa fa-user" Size="Size.Small" IsLeft></Icon>
+         </Control>
+      </Field>
+      <Field>
+         <Control IsExpanded HasIconsLeft HasIconsRight>
+            <Input type="email" placeholder="Email" value="alex@smith.com" TValue="string" />
+            <Icon IsLeft Size="Size.Small" IconClass="fa fa-envelope"></Icon>
+            <Icon IsRight Size="Size.Small" IconClass="fa fa-check"></Icon>
+         </Control>
+      </Field>
+   </FieldBody>
+</Field>
+<Field IsHorizontal>
+   <FieldLabel>
+      <Label></Label>
+   </FieldLabel>
+   <FieldBody>
+      <Field IsExpanded>
+         <Field HasAddons>
+            <Control>
+               <Button IsStatic>+44</Button>
+            </Control>
+            <Control IsExpanded>
+               <Input type="tel" placeholder="Your phone number" TValue="string" />
+            </Control>
+         </Field>
+         <Help>Do not enter the first zero</Help>
+      </Field>
+   </FieldBody>
+</Field>
+<Field IsHorizontal>
+   <FieldLabel>Question</FieldLabel>
+   <FieldBody>
+      <Field>
+         <Control>
+            <Textarea placeholder="Explain how we can help you"></Textarea>
+         </Control>
+      </Field>
+   </FieldBody>
+</Field>
+<Field IsHorizontal>
+   <FieldLabel></FieldLabel>
+   <FieldBody>
+      <Field>
+         <Control>
+            <Button Color="Color.Primary">Send message</Button>
+         </Control>
+      </Field>
+   </FieldBody>
+</Field>

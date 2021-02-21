@@ -4,7 +4,8 @@
 @typeparam TValue
 
 
-<input @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent" class="@classes" />
+<input @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent"
+    class="@classes" />
 
 @code {
     string classes => CssBuilder.Default("input")
@@ -15,7 +16,7 @@
         .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
         .AddClass("is-loading", IsLoading)
-        .AddClass("is-static", Static)
+        .AddClass("is-static", IsStatic)
         .Build();
 
     [Parameter]
@@ -38,7 +39,7 @@
     public bool IsRounded { get; set; }
 
     [Parameter]
-    public bool Static { get; set; }
+    public bool IsStatic { get; set; }
 
     [Parameter]
     public string BindEvent { get; set; } = "onchange";
@@ -52,36 +53,24 @@
     [Parameter]
     public string Format { get; set; }
 
-    private TValue _value;
-
-
     private string ShowValue
     {
-        get { return _value.ToString(); }
+        get
+        {
+            return Value.GetShowValue(Format);
+        }
         set
         {
-            //value是否可以转成Value
-            _value = (TValue)Convert.ChangeType(value, typeof(TValue));
-            if (ValueChanged.HasDelegate)
+            if (value.SetRealValue(out TValue val))
             {
-                ValueChanged.InvokeAsync(_value).GetAwaiter().GetResult();
+                Value = val;
+                if (ValueChanged.HasDelegate)
+                {
+                    ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+                }
             }
         }
     }
-    private TValue CurrentValue
-    {
-        get { return _value; }
-        set
-        {
-            _value = value;
-            if (ValueChanged.HasDelegate)
-            {
-                ValueChanged.InvokeAsync(_value).GetAwaiter().GetResult();
-            }
-        }
-    }
-
-
 
     public async override Task SetParametersAsync(ParameterView parameters)
     {
@@ -93,6 +82,5 @@
                 Attributes.Add("type", "number");
             }
         }
-        _value = Value;
     }
 }

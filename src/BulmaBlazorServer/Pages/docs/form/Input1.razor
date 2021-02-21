@@ -1,0 +1,17 @@
+<Content>
+    <Field>
+        <Label>输入框：</Label>
+        <Control>
+            <Input @bind-Value="val" placeholder="输入数据，移开光标">
+        </Control>
+    </Field>
+    <Field>
+        <Label>Val的值：</Label>
+        <Control>
+            <Input Value="val" IsStatic />
+        </Control>
+    </Field>
+</Content>
+@code{
+    string val = "";
+}

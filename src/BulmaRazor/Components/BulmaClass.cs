@@ -11,7 +11,7 @@ namespace BulmaRazor.Components
     public static class B
     {
         #region Color
-        //字体颜色
+        // font-color
         public static readonly string TextWhite = "has-text-white";
         public static readonly string TextBlack = "has-text-black";
         public static readonly string TextLight = "has-text-light";
@@ -23,7 +23,7 @@ namespace BulmaRazor.Components
         public static readonly string TextWarning = "has-text-warning";
         public static readonly string TextDanger = "has-text-danger";
 
-        //灰色阴影
+        // shadow
         public static readonly string TextBlackBis = "has-text-black-bis";
         public static readonly string TextBlackTer = "has-text-black-ter";
         public static readonly string TextGreyDarker = "has-text-grey-darker";
@@ -49,7 +49,7 @@ namespace BulmaRazor.Components
         public static readonly string TextWarningDark = "has-text-warning-dark";
         public static readonly string TextDangerDark = "has-text-danger-dark";
 
-        //背景色
+        // background color
         public static readonly string BackgroundWhite = "has-background-white";
         public static readonly string BackgroundBlack = "has-background-black";
         public static readonly string BackgroundLight = "has-background-light";

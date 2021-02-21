@@ -17,6 +17,7 @@
         .AddClass("is-grouped-centered", IsGroupedCentered)
         .AddClass("is-grouped-multiline", IsGroupedMultiline)
         .AddClass("is-horizontal", IsHorizontal)
+        .AddClass("is-expanded",IsExpanded)
         .Build();
 
     [Parameter]
@@ -24,6 +25,9 @@
 
     [Parameter]
     public bool HasAddons { get; set; }
+
+    [Parameter]
+    public bool IsExpanded{get;set;}
 
     [Parameter]
     public bool HasAddonsCentered { get; set; }

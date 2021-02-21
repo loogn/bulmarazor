@@ -1,0 +1,18 @@
+<Content>
+    <Field>
+        <Control>
+            <Input @bind-Value="date1" Format="yyyy-MM-dd" Color="Color.Primary">
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Input TValue="DateTimeOffset" @bind-Value="date2" Format="yyyy-MM-dd HH:mm">
+        </Control>
+    </Field>
+    <p>date1的值：<span>@date1</span></p>
+    <p>date2的值：<span>@date2</span></p>
+</Content>
+@code{
+    DateTime date1 = DateTime.Now;
+    DateTimeOffset date2 = DateTimeOffset.Now;
+}

@@ -56,17 +56,15 @@
     public string Value { get; set; }
 
 
-    private string _value;
-
     private string CurrentValue
     {
-        get { return _value; }
+        get { return Value; }
         set
         {
-            _value = value;
+            Value = value;
             if (ValueChanged.HasDelegate)
             {
-                ValueChanged.InvokeAsync(_value).GetAwaiter().GetResult();
+                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
             }
         }
     }
@@ -78,7 +76,5 @@
     public async override Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
-        _value = Value;
     }
-
 }

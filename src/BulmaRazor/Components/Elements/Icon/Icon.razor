@@ -7,13 +7,12 @@
 </span>
 
 @code {
-
-
     string classes => CssBuilder.Default("icon")
         .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
         .AddClass(Color.Value, Color.Value)
-        .AddClass(Align.Value,Align.Value)
+        .AddClass("is-left", IsLeft)
+        .AddClass("is-right", IsRight)
         .Build();
 
 
@@ -27,7 +26,8 @@
     public string IconClass { get; set; }
 
     [Parameter]
-    public Align Align { get; set; } = Align.Default;
+    public bool IsLeft { get; set; }
+    [Parameter]
+    public bool IsRight { get; set; }
 
 }
-

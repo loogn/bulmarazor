@@ -11,19 +11,17 @@
     </select>
 </div>
 
-
 @code {
-
     string selectCls => CssBuilder.Default("select")
         .AddClass("is-multiple", Multiple)
         .AddClass("is-rounded", IsRounded)
-         .AddClass("is-hovered", IsHovered)
+        .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
         .AddClass("is-loading", IsLoading)
+        .AddClass("is-fullwidth", IsFullwidth)
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .Build();
-
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;
@@ -31,6 +29,8 @@
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
+    [Parameter]
+    public bool IsFullwidth { get; set; }
 
     [Parameter]
     public bool IsHovered { get; set; }
@@ -89,12 +89,13 @@
         }
         else
         {
-            //Value = (TValue)Convert.ChangeType(e.Value, typeof(TValue));
-            _value = (TValue)Convert.ChangeType(e.Value, typeof(TValue));
-
-            if (ValueChanged.HasDelegate)
+            if (e.Value.ToString().SetRealValue<TValue>(out TValue val))
             {
-                await ValueChanged.InvokeAsync(Value);
+                _value = val;
+                if (ValueChanged.HasDelegate)
+                {
+                    await ValueChanged.InvokeAsync(Value);
+                }
             }
         }
     }
@@ -109,16 +110,15 @@
     }
 
 
-    //多选逻辑
-
-    [Parameter]
+    @* [Parameter] *@
     public bool Multiple { get; set; }
-    [Parameter]
+    @* [Parameter] *@
     public int Rows { get; set; }
 
 
+
     private HashSet<TValue> _values;
-    [Parameter]
+    @* [Parameter] *@
     public HashSet<TValue> Values
     {
         get { return _values; }
@@ -132,7 +132,7 @@
         }
     }
 
-    [Parameter]
+    @* [Parameter] *@
     public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
 
 }

@@ -1,0 +1,18 @@
+<Content>
+    <Field>
+        <Control>
+            <Input @bind-Value="i1" Color="Color.Primary">
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Input @bind-Value="i2" Color="Color.Danger">
+        </Control>
+    </Field>
+    <p>i1的值：<span>@i1</span></p>
+    <p>i2的值：<span>@i2</span></p>
+</Content>
+@code{
+    int i1 = 23;
+    int? i2 = 4;
+}

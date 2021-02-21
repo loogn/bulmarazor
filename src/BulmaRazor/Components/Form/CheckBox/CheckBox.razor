@@ -5,7 +5,7 @@
 @typeparam TValue
 
 <label @attributes="Attributes" class="@classes">
-    <input disabled="@Disabled" name="@Name" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle" />
+    <input disabled="@Disabled" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle" />
     @ChildContent
 </label>
 @code {
@@ -44,9 +44,6 @@
     public TValue Value { get; set; }
 
     [Parameter]
-    public string Name { get; set; }
-
-    [Parameter]
     public bool Disabled { get; set; }
 
 
@@ -60,7 +57,7 @@
         if (Parent != null)
         {
             Parent.AddItem(this);
-            if (Parent.Values.Contains(Value))
+            if (Parent.Values!=null && Parent.Values.Contains(Value))
             {
                 Checked = true;
             }

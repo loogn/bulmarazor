@@ -1,18 +1,18 @@
+@inject IJSRuntime js
 
-<Input @bind-Value="dateTime" />
-
-
-
-
-<div>
-    str:<span>@str</span><br>
-    i:<span>@i</span><br>
-    dt:<span>@dateTime</span>
-</div>
 @code{
     private string str = "23d";
-    DateTime dateTime=DateTime.Now;
 
-    private int i = 23;
+    bool? b=true;
+    DateTime? dateTime=DateTime.Now;
+    HashSet<int> list=new HashSet<int>{1,2};
+    private int i = 2;
+    async Task clk(){
 
+        await js.InvokeVoidAsync("BulmaRazor.Log",str);
+        str+="s";
+        i+=1;
+        b=!b.Value;
+        dateTime=dateTime.Value.AddDays(1);
+    }
 }

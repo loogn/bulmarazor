@@ -150,3 +150,151 @@
     </Column>
 </Columns>
 <hr>
+
+
+
+
+<Title Size="Size.Size4" IsSpaced>
+    使用图标(With icons)
+</Title>
+<div class="content">
+    <p>您可以在控件上附加如下2个修饰符之一:</p>
+    <ul>
+        <li>
+            <code>HasIconsLeft</code>
+        </li>
+        <li>
+            和/或 <code>HasIconsRight</code>
+        </li>
+    </ul>
+    <p>您还需要在图标上添加修饰符:</p>
+    <ul>
+        <li>
+            如果使用 <code>HasIconsLeft</code> Icon需要添加<code>IsLeft</code>
+        </li>
+        <li>
+            如果使用<code>has-icons-right</code> Icon需要添加<code>IsRight</code>
+        </li>
+    </ul>
+    <p>图标容器的大小将由 Input 容器定义。</p>
+</div>
+<Columns>
+    <Column>
+        <General7 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General7.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<div class="content">
+    <p>
+        您也可以在 下拉框 中添加图标。
+    </p>
+</div>
+<Columns>
+    <Column>
+        <General8 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General8.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<div class="content">
+    <p>
+        如果控件中包含图标，Bulma 将会确保图标保持 居中，不用担心 input 或 图标的大小。
+    </p>
+</div>
+
+<Columns>
+    <Column>
+        <General9 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General9.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<Columns>
+    <Column>
+        <General10 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General10.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    表单插件(Form addons)
+</Title>
+<div class="content">
+    <p>
+        如果您要同时使用 附件控件,请在 <code>Field</code> 容器上添加 <code>HasAddons</code> 修饰符:</p>
+</div>
+
+<Columns>
+    <Column>
+        <General11 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General11.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>您 只能 在 inputs, buttons, and dropdowns 中使用追加</p>
+</div>
+<div class="content">
+    <p>追加一个静态按钮将会很有用。</p>
+</div>
+
+<Columns>
+    <Column>
+        <General12 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General12.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>
+        使用 <code>IsExpanded</code> 修饰符填充剩余的空间 (本例中, 是 input 元素):
+    </p>
+</div>
+<Columns>
+    <Column>
+        <General13 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General13.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    水平表单(Horizontal form)
+</Title>
+
+<div class="content">
+    <p>如果你想要一个 水平的 的表单控件，请在 <code>field</code> 容器上添加 <code>is-horizontal</code> 修饰符:
+    </p>
+    <ul>
+        <li>
+            <code>FieldLabel</code> for the side label
+        </li>
+        <li>
+            <code>FieldBody</code> for the input/select/textarea container
+        </li>
+    </ul>
+    <p>您可以在子元素上使用 <code>IsGrouped</code> 和 <code>HasAddons</code></p>
+</div>
+
+<Columns>
+    <Column>
+        <General14 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/General14.razor" HasMore MaxHeight="500"></HighLight>
+    </Column>
+</Columns>

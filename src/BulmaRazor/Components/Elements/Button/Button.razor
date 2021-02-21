@@ -3,12 +3,11 @@
 
 @if (hasHref)
 {
-    <a @attributes="Attributes" class="@classes" disabled="@Disabled">@ChildContent</a>
+    <a @attributes="Attributes" class="@classes">@ChildContent</a>
 }
 else
 {
-    <button @attributes="Attributes" class="@classes"
-    disabled="@Disabled">@ChildContent</button>
+    <button @attributes="Attributes" class="@classes" >@ChildContent</button>
 }
 
 
@@ -63,10 +62,6 @@ else
 
     [Parameter]
     public bool IsStatic { get; set; }
-
-    [Parameter]
-    public bool Disabled { get; set; }
-
 
 
     [Parameter]

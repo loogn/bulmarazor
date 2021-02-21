@@ -1,11 +1,19 @@
 ﻿@namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 @typeparam TValue
-@inject BulmaRazorJsInterop jsInterop
+@inject IJSRuntime js
 
-<option @ref="opt" @attributes="Attributes" class="@classes" value="@Value" selected="@Selected">@ChildContent
+@if (Selected)
+{
+    <option @ref="opt" @attributes="Attributes" class="@classes" value="@Value" selected>@ChildContent
 </option>
+}
+else
+{
+    <option @ref="opt" @attributes="Attributes" class="@classes" value="@Value">@ChildContent
+</option>
+}
+
 
 @code {
     string classes => CssBuilder.Default("")
@@ -20,7 +28,7 @@
 
     public async Task<bool> GetSelected()
     {
-        var result = await jsInterop.GetOptionSelected(opt);
+        var result = await js.InvokeAsync<bool>("BulmaRazor.GetOptionSelected", new object[] { opt });
         Selected = result;
         return Selected;
     }
@@ -31,7 +39,7 @@
         Selected = ck;
         if (Parent.Multiple)
         {
-            jsInterop.SetOptionSelected(opt, ck).GetAwaiter().GetResult();
+            js.InvokeVoidAsync("BulmaRazor.SetOptionSelected", new object[] { opt, ck }).GetAwaiter().GetResult();
         }
         else
         {
@@ -53,11 +61,11 @@
         base.OnInitialized();
 
         Parent.AddItem(this);
-        if (Parent.Multiple && Parent.Values!=null)
+        if (Parent.Multiple && Parent.Values != null)
         {
             Selected = Parent.Values.Contains(Value);
         }
-        else if(Parent.Value!=null)
+        else if (Parent.Value != null)
         {
             Selected = Parent.Value.Equals(Value);
         }

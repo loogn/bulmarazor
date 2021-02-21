@@ -1,0 +1,104 @@
+@page "/docs/form/input"
+@layout DocLayout
+
+<Title>Input表单控件</Title>
+<Subtitle Size="Size.Size4">
+    用于绑定的输入控件
+</Subtitle>
+<hr>
+
+
+<div class="content">
+    <p>
+        Input 支持以下type属性:
+    </p>
+    <ul>
+        <li><code>type="text"</code></li>
+        <li><code>type="password"</code></li>
+        <li><code>type="email"</code></li>
+        <li><code>type="tel"</code></li>
+    </ul>
+    <p>
+        支持 几个修饰符，这些修饰符会影响:
+    </p>
+    <ul>
+        <li>Color</li>
+        <li>Size</li>
+        <li>IsRounded</li>
+        <li>IsHovered</li>
+        <li>IsFocused</li>
+        <li>IsLoading</li>
+        <li>IsStatic</li>
+        <li>disabled 和 readonly</li>
+    </ul>
+    <p>
+        Input支持Icon，请参考通用控件
+    </p>
+</div>
+<hr>
+
+
+
+<Title Size="Size.Size4" IsSpaced>
+    数据绑定
+</Title>
+<Columns>
+    <Column>
+        <Input1 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/Input1.razor"></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>
+        绑定事件默认是onchange,可以使用BindEvent属性设置成oninput
+    </p>
+</div>
+<Columns>
+    <Column>
+        <Input2 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/Input2.razor"></HighLight>
+    </Column>
+</Columns>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    绑定数字
+</Title>
+<div class="content">
+    <p>
+        Input绑定数字类型的时候，会有输入验证，如果不能转换成对应的数字类型，会返回原值。
+    </p>
+    <p>如何想接受空值，请使用对应的可空类型，下面例子中，i2对应的输入框可以清空</p>
+</div>
+
+<Columns>
+    <Column>
+        <Input3 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/Input3.razor"></HighLight>
+    </Column>
+</Columns>
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    绑定日期
+</Title>
+<div class="content">
+    <p>
+        在绑定DateTime和DateTimeOffset以及他们的可空类型的时候，可以使用Format属性设置显示格式
+    </p>
+</div>
+
+<Columns>
+    <Column>
+        <Input4 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/Input4.razor"></HighLight>
+    </Column>
+</Columns>

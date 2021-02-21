@@ -1,0 +1,26 @@
+<Content>
+    <Field>
+        <Label>输入框：</Label>
+        <Control>
+            <Input @bind-Value="val" BindEvent="oninput" placeholder="输入数据，移开光标">
+    </Control>
+    </Field>
+    <Field>
+        <Label>Val的值：</Label>
+        <Control>
+            <Input Value="val" IsStatic />
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Button Color="Color.Info" @onclick="setNewValue">设置新值</Button>
+        </Control>
+    </Field>
+</Content>
+@code{
+    string val = "";
+    void setNewValue()
+    {
+        val = Guid.NewGuid().ToString("N");
+    }
+}
