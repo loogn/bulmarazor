@@ -5,7 +5,7 @@
 
 Bulma 是一个基于 Flexbox 构建的免费、开源的 CSS 框架，已经有超过200,000开发者在使用。而BulmaRazor是基于Bulma样式框架开发的一套适用于Blazor的组件库。
 
-![qq群](http://bulmarazor.loogn.net/images/qqqun.png)
+![qq群:995865650](http://bulmarazor.loogn.net/images/qqqun.png)
 
 # 安装
 通过nuget引入BulmaRazor包
