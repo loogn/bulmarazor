@@ -1,0 +1,25 @@
+<Content>
+    <Field>
+        <Label>Val的值：</Label>
+        <Control>
+            <Input Value="string.Join(',',val)" IsStatic />
+        </Control>
+    </Field>
+    <Field>
+        <Label>复选框列表：</Label>
+        <Control>
+            <CheckBoxes @bind-Values="val">
+                @for (var i = 0; i < 8; i++)
+                {
+                    var newi=i;
+                    <CheckBox Value="newi">
+                        name@(newi)
+                    </CheckBox>
+                }
+            </CheckBoxes>
+        </Control>
+    </Field>
+</Content>
+@code{
+    HashSet<int> val = new HashSet<int>() { 1, 2 };
+}

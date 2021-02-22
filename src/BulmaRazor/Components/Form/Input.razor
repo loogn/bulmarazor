@@ -15,7 +15,6 @@
         .AddClass("is-rounded", IsRounded)
         .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
-        .AddClass("is-loading", IsLoading)
         .AddClass("is-static", IsStatic)
         .Build();
 
@@ -30,10 +29,6 @@
 
     [Parameter]
     public bool IsFocused { get; set; }
-
-
-    [Parameter]
-    public bool IsLoading { get; set; }
 
     [Parameter]
     public bool IsRounded { get; set; }

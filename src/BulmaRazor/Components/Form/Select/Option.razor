@@ -5,12 +5,12 @@
 
 @if (Selected)
 {
-    <option @ref="opt" @attributes="Attributes" class="@classes" value="@Value" selected>@ChildContent
+    <option @ref="opt" @attributes="Attributes" class="@classes" value="@ShowValue" selected>@ChildContent
 </option>
 }
 else
 {
-    <option @ref="opt" @attributes="Attributes" class="@classes" value="@Value">@ChildContent
+    <option @ref="opt" @attributes="Attributes" class="@classes" value="@ShowValue">@ChildContent
 </option>
 }
 
@@ -50,6 +50,13 @@ else
     [Parameter]
     public TValue Value { get; set; }
 
+    private string ShowValue
+    {
+        get
+        {
+            return Value.GetShowValue(string.Empty);
+        }
+    }
 
     [CascadingParameter]
     public Select<TValue> Parent { get; set; }

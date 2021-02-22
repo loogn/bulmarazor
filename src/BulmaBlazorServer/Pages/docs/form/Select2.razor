@@ -1,0 +1,41 @@
+<Content>
+    <Field>
+        <Label>country的值：</Label>
+        <Control>
+            <Input Value="country" IsStatic />
+        </Control>
+    </Field>
+    <Field>
+        <Label>选择框：</Label>
+        <Control>
+            <Select @bind-Value="country">
+                @foreach (var item in list)
+                {
+                <Option TValue="int?" Value="item.value">@item.text</Option>    
+                }
+            </Select>
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Button Color="Color.Info" @onclick="setNewValue">绑定值+1</Button>
+        </Control>
+    </Field>
+</Content>
+@code{
+    record Item(int? value,string text);
+    List<Item> list=new List<Item>{
+        new Item(null,"请选择"),
+        new Item(1,"中国"),
+        new Item(2,"美国"),
+        new Item(3,"俄罗斯"),
+        };
+    int? country =null;
+    void setNewValue()
+    {
+        if(country!=null){
+            country=country.Value+1;
+        }
+        
+    }
+}

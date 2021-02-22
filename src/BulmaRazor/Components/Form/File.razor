@@ -8,7 +8,7 @@
         <InputFile OnChange="ChangeHandle" multiple="@Multiple" class="file-input" />
         <span class="file-cta">
             <span class="file-icon">
-                <i class="fa fa-upload"></i>
+                <i class="@IconClass"></i>
             </span>
             <span class="file-label">
                 @Label
@@ -25,14 +25,15 @@
 
 @code {
     string classes => CssBuilder.Default("file")
-     .AddClassFromAttributes(Attributes)
-     .AddClass(Color.Value, Color.Value)
-     .AddClass(Size.Value, Size.Value)
-     .AddClass("has-name", HasName)
-     .AddClass("is-fullwidth", IsFullwidth)
-     .AddClass(Align.Value, Align.Value)
-     .AddClass("is-boxed", IsBoxed)
-     .Build();
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass("has-name", HasName)
+        .AddClass("is-fullwidth", IsFullwidth)
+        .AddClass("is-centered",IsCentered)
+        .AddClass("is-right",IsRight)
+        .AddClass("is-boxed", IsBoxed)
+        .Build();
 
     [Parameter]
     public Color Color { get; set; } = Color.Default;
@@ -43,7 +44,10 @@
     public bool HasName { get; set; }
 
     [Parameter]
-    public Align Align { get; set; } = Align.Default;
+    public bool IsCentered{get;set;}
+    [Parameter]
+    public bool IsRight{get;set;}
+
     [Parameter]
     public bool IsFullwidth { get; set; }
     [Parameter]
@@ -59,6 +63,9 @@
     public int MaxCount { get; set; } = 1;
     [Parameter]
     public string DefaultName { get; set; } = "没有文件";
+
+    [Parameter]
+    public string IconClass { get; set; } = "fa fa-upload";
 
     private string name = "";
 

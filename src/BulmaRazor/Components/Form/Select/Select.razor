@@ -94,7 +94,7 @@
                 _value = val;
                 if (ValueChanged.HasDelegate)
                 {
-                    await ValueChanged.InvokeAsync(Value);
+                    await ValueChanged.InvokeAsync(_value);
                 }
             }
         }

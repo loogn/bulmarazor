@@ -1,0 +1,48 @@
+@page "/docs/form/checkbox"
+@layout DocLayout
+
+<Title>CheckBox表单控件</Title>
+<Subtitle Size="Size.Size4">
+    复选框
+</Subtitle>
+<hr>
+
+
+<div class="content">
+    <p>
+        复选框可以单独使用，和可以包含在CheckBoxes中多选使用
+    </p>
+</div>
+
+<Title Size="Size.Size4" IsSpaced>
+    数据绑定
+</Title>
+<div class="content">
+    <p>
+        单个复选框使用@@bind-Checked, 绑定值必须是bool，因为是泛型，需要随便设置一个TValue
+    </p>
+</div>
+<Columns>
+    <Column>
+        <Checkbox1 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/Checkbox1.razor"></HighLight>
+    </Column>
+</Columns>
+<div class="content">
+    <p>
+        复选框列表使用在CheckBoxes上使用@@bind-Checked, CheckBox需要设置好Value
+    </p>
+    <p>
+        CheckBoxes是空标签，只需要把CheckBox放在其中即可，样式需要自己控制
+    </p>
+</div>
+<Columns>
+    <Column>
+        <Checkbox2 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/Checkbox2.razor"></HighLight>
+    </Column>
+</Columns>
