@@ -9,15 +9,19 @@
 @code {
     string classes => CssBuilder.Default("tags")
         .AddClassFromAttributes(Attributes)
-        .AddClass(AreSize.Value, AreSize.Value)
+        .AddClass("are-small", AreSmall)
+        .AddClass("are-medium", AreMedium)
+        .AddClass("are-large", AreLarge)
         .AddClass("has-addons", HasAddons)
         .Build();
 
 
-
     [Parameter]
-    public AreSize AreSize { get; set; } = AreSize.Default;
-
+    public bool AreSmall { get; set; }
+    [Parameter]
+    public bool AreMedium { get; set; }
+    [Parameter]
+    public bool AreLarge { get; set; }
 
     [Parameter]
     public bool HasAddons { get; set; }

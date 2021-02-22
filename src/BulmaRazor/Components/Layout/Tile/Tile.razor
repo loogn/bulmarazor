@@ -7,19 +7,29 @@
 </div>
 
 @code {
-
     string classes => CssBuilder.Default("tile")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Seniority.Value, Seniority.Value)
-        .AddClass(Size.Value,Size.Value)
+        .AddClass("is-child", IsChild)
+        .AddClass("is-ancestor", IsAncestor)
+        .AddClass("is-parent", IsParent)
+        .AddClass(Size.Value, Size.Value)
         .AddClass("is-vertical", IsVertical)
         .Build();
 
-    /// <summary>
-    /// 尺寸
-    /// </summary>
+
+
+
     [Parameter]
-    public Seniority Seniority { get; set; } = Seniority.Default;
+    public bool IsAncestor { get; set; }
+
+    [Parameter]
+    public bool IsParent { get; set; }
+
+    /// <summary>
+    /// 孩子
+    /// </summary>
+    public bool IsChild { get; set; }
+
 
     /// <summary>
     /// 是否垂直

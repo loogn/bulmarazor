@@ -384,7 +384,10 @@ namespace BulmaRazor.Components
         public static readonly string Clickable = "is-clickable";
         public static readonly string Relative = "is-relative";
 
-        public static readonly string Fullwidth="is-fullwidth";
+        public static readonly string Fullwidth = "is-fullwidth";
+        public static readonly string Centered = "is-centered";
+        public static readonly string Right = "is-right";
+        public static readonly string Left = "is-left";
 
         #endregion
 

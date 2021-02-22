@@ -4,15 +4,10 @@
 @inherits BulmaComponentBase
 
 <span @attributes="Attributes" class="@classes">
-    <Icon Size="Size" IconClass="@IconClass">
-    </Icon>
-    <span>
-        @ChildContent
-    </span>
+    @ChildContent
 </span>
 
 @code {
-
     string classes => CssBuilder.Default("icon-text")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
@@ -22,13 +17,9 @@
     public Size Size { get; set; } = Size.Default;
 
     [Parameter]
-    public TextColor Color { get; set; } = TextColor.Default;
-
-    [Parameter]
-    public string IconClass { get; set; }
+    public Color Color { get; set; } = Color.Default;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
 }
-

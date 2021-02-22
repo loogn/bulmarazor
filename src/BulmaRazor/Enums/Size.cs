@@ -18,7 +18,8 @@ namespace BulmaRazor.Components
         /// <summary>
         /// HeroSize
         /// </summary>
-        public static Size Fullheight = new Size("is-fullheight");
+        public static Size FullHeight = new Size("is-fullheight");
+        public static Size HalfHeight = new Size("is-halfheight");
 
         public static Size Size1 = new Size("is-1");
         public static Size Size2 = new Size("is-2");

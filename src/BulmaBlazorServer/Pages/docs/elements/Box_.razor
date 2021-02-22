@@ -1,0 +1,28 @@
+@page "/docs/elements/box"
+@layout DocLayout
+
+<Title>Box</Title>
+<Subtitle Size="Size.Size4">
+    一个可以包含其他元素的白色盒子
+</Subtitle>
+<hr>
+
+<Content>
+    <p>Box是一个简单容器，有白色背景，一些padding，和一个阴影盒子</p>
+</Content>
+
+<Content style="width:200px">
+    <Box>
+        I'm in a box.
+    </Box>
+</Content>
+
+
+<Columns>
+    <Column>
+        <Box1 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Box1.razor"></HighLight>
+    </Column>
+</Columns>

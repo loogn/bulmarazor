@@ -6,7 +6,8 @@
 @code {
     string classes => CssBuilder.Default("buttons ")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Align.Value, Align.Value)
+        .AddClass("is-centered", IsCentered)
+        .AddClass("is-right", IsRight)
         .AddClass("has-addons", HasAddons)
         .Build();
 
@@ -15,7 +16,10 @@
     public bool HasAddons { get; set; }
 
     [Parameter]
-    public Align Align { get; set; } = Align.Default;
+    public bool IsCentered { get; set; }
+    [Parameter]
+    public bool IsRight { get; set; }
+
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

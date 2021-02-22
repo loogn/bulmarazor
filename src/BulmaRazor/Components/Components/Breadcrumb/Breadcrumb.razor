@@ -14,18 +14,30 @@
     string classes => CssBuilder.Default("breadcrumb")
         .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
-        .AddClass(Separator.Value, Separator.Value)
-        .AddClass(Align.Value, Align.Value)
+        .AddClass("has-arrow-separator", HasArrowSeparator)
+        .AddClass("has-bullet-separator", HasBulletSeparator)
+        .AddClass("has-dot-separator", HasDotSeparator)
+        .AddClass("has-succeeds-separator", HasSucceedsSeparator)
+        .AddClass("is-centered", IsCentered)
+        .AddClass("is-right", IsRight)
         .Build();
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
+    [Parameter]
+    public bool HasArrowSeparator { get; set; }
+    [Parameter]
+    public bool HasBulletSeparator { get; set; }
+    [Parameter]
+    public bool HasDotSeparator { get; set; }
+    [Parameter]
+    public bool HasSucceedsSeparator { get; set; }
+
 
     [Parameter]
-    public Separator Separator { get; set; } = Separator.Default;
-
+    public bool IsCentered { get; set; }
     [Parameter]
-    public Align Align { get; set; } = Align.Default;
+    public bool IsRight { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

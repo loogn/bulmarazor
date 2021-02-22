@@ -18,7 +18,10 @@
     @if (HasMore && !showMore)
     {
         <div class="has-text-centered has-background-grey-lighter is-clickable" @onclick="ShowMore">
-            <IconText IconClass="fa fa-code">Show Code</IconText>
+            <IconText >
+                <Icon IconClass="fa fa-code"></Icon>
+                <span>Show Code</span>
+                </IconText>
         </div>
     }
 </div>

@@ -13,8 +13,7 @@
         .AddClass(Color.Value, Color.Value)
         .AddClass(Size.Value, Size.Value)
         .AddClass("is-bold", IsBold)
-        .AddClass("is-fullheight", IsFullheight)
-        .AddClass("is-fullheight-with-navbar", IsFullheightWithNavbar)
+        .AddClass("is-fullheight-with-navbar", IsFullHeightWithNavbar)
         .Build();
 
     /// <summary>
@@ -29,12 +28,8 @@
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
-
     [Parameter]
-    public bool IsFullheight { get; set; }
-
-    [Parameter]
-    public bool IsFullheightWithNavbar { get; set; }
+    public bool IsFullHeightWithNavbar { get; set; }
 
     /// <summary>
     /// 是否渐变

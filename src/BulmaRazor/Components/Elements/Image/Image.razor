@@ -10,6 +10,7 @@
     string classes => CssBuilder.Default("image")
         .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
+        .AddClass(Ratio.Value, Ratio.Value)
         .AddClass("is-fullwidth", IsFullwidth)
         .Build();
 
@@ -22,6 +23,8 @@
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
+    [Parameter]
+    public Ratio Ratio{get;set;} =Ratio.Default;
     [Parameter]
     public string Src { get; set; }
 
