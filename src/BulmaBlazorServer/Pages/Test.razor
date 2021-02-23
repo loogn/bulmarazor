@@ -3,22 +3,39 @@
 @* *@
 @* <Input @bind-Value="str" /> *@
 @* <Button @onclick="clk">Click</Button> *@
-@code{
-    private string str = "23d";
 
-    bool? b=true;
-    DateTime? dateTime=DateTime.Now;
-    HashSet<int> list=new HashSet<int>{1,2};
+<DataGrid Data="data" ThClass="@B.TextCentered" TItem="Person" IsBordered IsStriped IsFullwidth>
+    <DataGridColumn TItem="Person" Label="Id" Prop="Id"></DataGridColumn>
+    <DataGridColumn ThClass="@B.TextRight" TItem="Person" Label="名称" Prop="Name">
+        <span> @context.Name.ToUpper()</span>
+    </DataGridColumn>
+    <DataGridColumn TItem="Person" Label="年龄" Prop="Age">
+    </DataGridColumn>
+    <DataGridColumn TItem="Person" Label="生日" Format="yyyy-MM-dd" Prop="Birthday"></DataGridColumn>
+    <DataGridColumn TItem="Person" Label="操作">
+        <Button Color="Color.Danger">del</Button>
+    </DataGridColumn>
+</DataGrid>
+
+@code{
+
+    List<Person> data = new List<Person>()
+    {
+        new Person(1, "loong", 23, DateTime.Now),
+        new Person(1, "loong", 23, DateTime.Now),
+        new Person(1, "loong", 23, DateTime.Now),
+        new Person(1, "loong", 23, DateTime.Now),
+        new Person(1, "loong", 23, DateTime.Now)
+    };
+
+
+    bool? b = true;
+    DateTime? dateTime = DateTime.Now;
+    HashSet<int> list = new HashSet<int> {1, 2};
     private int i = 2;
+
     async Task clk()
     {
-        if (await JsInterop.Confirm("弹出还是Log"))
-        {
-            await JsInterop.Alert(str);    
-        }
-        else
-        {
-            await JsInterop.Log("jsinterop",str);
-        }
     }
+
 }
