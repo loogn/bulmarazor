@@ -13,9 +13,4 @@
   <ItemGroup>
     <PackageReference Include="JSRuntimeWindow" Version="1.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\docs\columns\" />
-    <Folder Include="Pages\docs\components\" />
-    <Folder Include="Pages\docs\elements\" />
-  </ItemGroup>
 </Project>

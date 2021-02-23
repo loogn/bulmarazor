@@ -1,6 +1,5 @@
 using System;
-using BulmaRazor;
-using Microsoft.Extensions.DependencyInjection;
+using BulmaRazor.Components;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -8,10 +7,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddBulmaRazor(this IServiceCollection services)
         {
-
             services.AddScoped<BulmaRazorJsInterop>();
             return services;
         }
-
     }
 }

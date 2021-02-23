@@ -5,7 +5,7 @@
 @if (!deleted)
 {
     <div @attributes="Attributes" class="@classes">
-        @if (HasDelete)
+        @if (!NoDelete)
         {
             <button class="delete" @onclick="deleteClickHandle"></button>
         }
@@ -18,8 +18,7 @@
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-light", IsLight)
-@* .AddClass("is-hidden", hidden) *@
-.Build();
+        .Build();
     private bool deleted;
 
     [Parameter]
@@ -29,7 +28,7 @@
     {
         if (OnDelete.HasDelegate)
         {
-            OnDelete.InvokeAsync(this);
+            OnDelete.InvokeAsync();
         }
         else
         {
@@ -39,11 +38,11 @@
 
 
     [Parameter]
-    public bool HasDelete { get; set; }
+    public bool NoDelete { get; set; }
 
 
     [Parameter]
-    public EventCallback<Notification> OnDelete { get; set; }
+    public EventCallback OnDelete { get; set; }
 
 
 

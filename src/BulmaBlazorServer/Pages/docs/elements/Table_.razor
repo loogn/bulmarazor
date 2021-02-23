@@ -1,0 +1,160 @@
+@page "/docs/elements/table"
+@layout DocLayout
+
+<Title>Table表格</Title>
+<Subtitle Size="Size.Size4">
+    美化后的Html table
+</Subtitle>
+<hr>
+
+<Content>
+    Table只是个简单容器，里面和table里一样，您可以通过将is-selected(@@B.Selected)修饰符附加到tr，来展示选中行
+</Content>
+
+<Content>
+    <Columns>
+        <Column>默认Table</Column>
+        <Column>
+            <Table>
+                <thead>
+                <tr>
+                    <th>One</th><th>Two</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                </tbody>
+            </Table>
+        </Column>
+        <Column></Column>
+    </Columns>
+</Content>
+
+<Content>
+    <Columns>
+        <Column>边框 IsBordered </Column>
+        <Column>
+            <Table IsBordered>
+                <thead>
+                <tr>
+                    <th>One</th><th>Two</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr class="@B.Selected">
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                </tbody>
+            </Table>
+        </Column>
+        <Column></Column>
+    </Columns>
+</Content>
+
+<Content>
+    <Columns>
+        <Column>条纹 IsStriped </Column>
+        <Column>
+            <Table IsStriped>
+                <thead>
+                <tr>
+                    <th>One</th><th>Two</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                </tbody>
+            </Table>
+        </Column>
+        <Column></Column>
+    </Columns>
+</Content>
+<Content>
+    <Columns>
+        <Column>狭窄 IsNarrow </Column>
+        <Column>
+            <Table IsNarrow>
+                <thead>
+                <tr>
+                    <th>One</th><th>Two</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                </tbody>
+            </Table>
+        </Column>
+        <Column></Column>
+    </Columns>
+</Content>
+
+<Content>
+    <Columns>
+        <Column> 悬停 IsHoverable </Column>
+        <Column>
+            <Table IsHoverable>
+                <thead>
+                <tr>
+                    <th>One</th><th>Two</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                <tr>
+                    <td>one</td><td>two</td>
+                </tr>
+                </tbody>
+            </Table>
+        </Column>
+        <Column></Column>
+    </Columns>
+</Content>
+
+<Title Size="Size.Size4" IsSpaced>
+    左右滚动Table
+</Title>
+<Content>
+    您可以通过添加WithContainer属性将表格包装在table-container元素中来创建可滚动表格
+</Content>
+
+<Table WithContainer IsBordered>
+    @for (int i = 0; i < 5; i++)
+    {
+        <tr>
+            @for (int j = 1; j <= 50; j++)
+            {
+                <td>@(i.ToString()+"."+j.ToString())</td>
+            }
+        </tr>
+    }
+
+</Table>

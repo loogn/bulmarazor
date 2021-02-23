@@ -1,0 +1,84 @@
+@page "/docs/elements/image"
+@layout DocLayout
+
+<Title>Image</Title>
+<Subtitle Size="Size.Size4">
+    一个响应式的Image容器
+</Subtitle>
+<hr>
+
+<Content>
+    <p>因为加载图像可能需要几秒钟（或者根本不需要），所以请使用图像容器指定精确大小的容器，这样布局就不会因为图像加载或图像错误而中断。</p>
+    <p>使用Size属性可以设置几个固定大小值，@@Size.Square16,@@Size.Square24,@@Size.Square32,@@Size.Square48,@@Size.Square64,@@Size.Square96,@@Size.Square128</p>
+</Content>
+
+<Columns>
+    <Column>
+        <Image1/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Image1.razor"></HighLight>
+    </Column>
+</Columns>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    圆形图片
+</Title>
+<Columns>
+    <Column>
+        <Image2/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Image2.razor"></HighLight>
+    </Column>
+</Columns>
+<Title Size="Size.Size4" IsSpaced>
+    带比例的响应图片
+</Title>
+<Content>
+    <p>如果您不知道确切的尺寸，而是知道比率，则可以使用Ratio属性，有16个比率修改器，其中包括静态照片中常见的纵横比</p>
+    <p>唯一的要求是父元素已经具有特定的宽度。</p>
+    <p>默认情况图像容器通常会占据整个宽度，同时保持最佳比例。如果不是，则可以通过属性IsFullwidth来强制使用它。</p>
+    <p>
+        Image的Ratio特性可以包含除了img外的任何其他元素，只需要在元素上加"has-ratio"类即可，或者用"B.Ratio"
+    </p>
+</Content>
+
+<Table IsBordered>
+    @foreach (var kv in ratios)
+    {
+        <tr>
+            <td>@kv.Key</td>
+            <td style="width:200px">
+                <Image Ratio="kv.Value">
+                    <img src="images/image-placeholder.jpg"/>
+                </Image>
+            </td>
+        </tr>
+    }
+</Table>
+
+@code{
+
+    Dictionary<string, Ratio> ratios = new Dictionary<string, Ratio>()
+    {
+        {nameof(Ratio.Square), Ratio.Square},
+        {nameof(Ratio.Ratio1by1), Ratio.Ratio1by1},
+        {nameof(Ratio.Ratio5by4), Ratio.Ratio5by4},
+        {nameof(Ratio.Ratio4by3), Ratio.Ratio4by3},
+        {nameof(Ratio.Ratio3by2), Ratio.Ratio3by2},
+        {nameof(Ratio.Ratio5by3), Ratio.Ratio5by3},
+        {nameof(Ratio.Ratio16by9), Ratio.Ratio16by9},
+        {nameof(Ratio.Ratio2by1), Ratio.Ratio2by1},
+        {nameof(Ratio.Ratio3by1), Ratio.Ratio3by1},
+        {nameof(Ratio.Ratio4by5), Ratio.Ratio4by5},
+        {nameof(Ratio.Ratio3by4), Ratio.Ratio3by4},
+        {nameof(Ratio.Ratio2by3), Ratio.Ratio2by3},
+        {nameof(Ratio.Ratio3by5), Ratio.Ratio3by5},
+        {nameof(Ratio.Ratio9by16), Ratio.Ratio9by16},
+        {nameof(Ratio.Ratio1by2), Ratio.Ratio1by2},
+        {nameof(Ratio.Ratio1by3), Ratio.Ratio1by3}
+    };
+
+}

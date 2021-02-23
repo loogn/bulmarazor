@@ -2,15 +2,16 @@ using System;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+
 namespace BulmaRazor.Components
 {
-
     /// <summary>
     /// BulmaClass Helper
     /// </summary>
     public static class B
     {
         #region Color
+
         // font-color
         public static readonly string TextWhite = "has-text-white";
         public static readonly string TextBlack = "has-text-black";
@@ -85,6 +86,7 @@ namespace BulmaRazor.Components
         public static readonly string BackgroundSuccessDark = "has-background-success-dark";
         public static readonly string BackgroundWarningDark = "has-background-warning-dark";
         public static readonly string BackgroundDangerDark = "has-background-danger-dark";
+
         #endregion
 
 
@@ -205,6 +207,7 @@ namespace BulmaRazor.Components
         #endregion
 
         #region Typography
+
         //font-size
         public static readonly string Size1 = "is-size-1";
         public static readonly string Size2 = "is-size-2";
@@ -212,7 +215,9 @@ namespace BulmaRazor.Components
         public static readonly string Size4 = "is-size-4";
         public static readonly string Size5 = "is-size-5";
         public static readonly string Size6 = "is-size-6";
+
         public static readonly string Size7 = "is-size-7";
+
         //Responsive size
         public static readonly string Size1Mobile = "is-size-1-mobile";
         public static readonly string Size2Touch = "is-size-2-touch";
@@ -289,10 +294,10 @@ namespace BulmaRazor.Components
         public static readonly string FamilySecondary = "is-family-secondary";
         public static readonly string FamilyCode = "is-family-code";
 
-
         #endregion
 
         #region Visibility
+
         public static readonly string Block = "is-block";
         public static readonly string Flex = "is-flex";
         public static readonly string Inline = "is-inline";
@@ -368,11 +373,67 @@ namespace BulmaRazor.Components
         #endregion
 
         #region Flexbox
-        //todo
+
+        public static readonly string FlexDirectionRow = "is-flex-direction-row";
+        public static readonly string FlexDirectionRowReverse = "is-flex-direction-row-reverse";
+        public static readonly string FlexDirectionColumn = "is-flex-direction-column";
+        public static readonly string FlexDirectionColumnReverse = "is-flex-direction-column-reverse";
+        public static readonly string FlexWrapNowrap = "is-flex-wrap-nowrap";
+        public static readonly string FlexWrapWrap = "is-flex-wrap-wrap";
+        public static readonly string FlexWrapWrapReverse = "is-flex-wrap-wrap-reverse";
+        public static readonly string JustifyContentFlexStart = "is-justify-content-flex-start";
+        public static readonly string JustifyContentFlexEnd = "is-justify-content-flex-end";
+        public static readonly string JustifyContentCenter = "is-justify-content-center";
+        public static readonly string JustifyContentSpaceBetween = "is-justify-content-space-between";
+        public static readonly string JustifyContentSpaceAround = "is-justify-content-space-around";
+        public static readonly string JustifyContentSpaceEvenly = "is-justify-content-space-evenly";
+        public static readonly string JustifyContentStart = "is-justify-content-start";
+        public static readonly string JustifyContentEnd = "is-justify-content-end";
+        public static readonly string JustifyContentLeft = "is-justify-content-left";
+        public static readonly string JustifyContentRight = "is-justify-content-right";
+        public static readonly string AlignContentFlexStart = "is-align-content-flex-start";
+        public static readonly string AlignContentFlexEnd = "is-align-content-flex-end";
+        public static readonly string AlignContentCenter = "is-align-content-center";
+        public static readonly string AlignContentSpaceBetween = "is-align-content-space-between";
+        public static readonly string AlignContentSpaceAround = "is-align-content-space-around";
+        public static readonly string AlignContentSpaceEvenly = "is-align-content-space-evenly";
+        public static readonly string AlignContentStretch = "is-align-content-stretch";
+        public static readonly string AlignContentStart = "is-align-content-start";
+        public static readonly string AlignContentEnd = "is-align-content-end";
+        public static readonly string AlignContentBaseline = "is-align-content-baseline";
+        public static readonly string AlignItemsStretch = "is-align-items-stretch";
+        public static readonly string AlignItemsFlexStart = "is-align-items-flex-start";
+        public static readonly string AlignItemsFlexEnd = "is-align-items-flex-end";
+        public static readonly string AlignItemsCenter = "is-align-items-center";
+        public static readonly string AlignItemsBaseline = "is-align-items-baseline";
+        public static readonly string AlignItemsStart = "is-align-items-start";
+        public static readonly string AlignItemsEnd = "is-align-items-end";
+        public static readonly string AlignItemsSelfStart = "is-align-items-self-start";
+        public static readonly string AlignItemsSelfEnd = "is-align-items-self-end";
+        public static readonly string AlignSelfAuto = "is-align-self-auto";
+        public static readonly string AlignSelfFlexStart = "is-align-self-flex-start";
+        public static readonly string AlignSelfFlexEnd = "is-align-self-flex-end";
+        public static readonly string AlignSelfCenter = "is-align-self-center";
+        public static readonly string AlignSelfBaseline = "is-align-self-baseline";
+        public static readonly string AlignSelfStretch = "is-align-self-stretch";
+        public static readonly string FlexGrow0 = "is-flex-grow-0";
+        public static readonly string FlexGrow1 = "is-flex-grow-1";
+        public static readonly string FlexGrow2 = "is-flex-grow-2";
+        public static readonly string FlexGrow3 = "is-flex-grow-3";
+        public static readonly string FlexGrow4 = "is-flex-grow-4";
+        public static readonly string FlexGrow5 = "is-flex-grow-5";
+        public static readonly string FlexShrink0 = "is-flex-shrink-0";
+        public static readonly string FlexShrink1 = "is-flex-shrink-1";
+        public static readonly string FlexShrink2 = "is-flex-shrink-2";
+        public static readonly string FlexShrink3 = "is-flex-shrink-3";
+        public static readonly string FlexShrink4 = "is-flex-shrink-4";
+        public static readonly string FlexShrink5 = "is-flex-shrink-5";
+
         #endregion
 
 
         #region OtherClass
+
         public static readonly string Clearfix = "is-clearfix";
         public static readonly string PulledLeft = "is-pulled-left";
         public static readonly string PulledRight = "is-pulled-right";
@@ -388,8 +449,10 @@ namespace BulmaRazor.Components
         public static readonly string Centered = "is-centered";
         public static readonly string Right = "is-right";
         public static readonly string Left = "is-left";
+        public static readonly string Rounded = "is-rounded";
+        public static readonly string Ratio = "has-ratio";
+        public static readonly string Selected = "is-selected";
 
         #endregion
-
     }
 }

@@ -2,11 +2,12 @@
 @inherits BulmaComponentBase
 
 <figure @attributes="Attributes" class="@classes">
-    <img src="@Src" class="@imgClass">
+    @ChildContent
 </figure>
 
 
 @code {
+
     string classes => CssBuilder.Default("image")
         .AddClassFromAttributes(Attributes)
         .AddClass(Size.Value, Size.Value)
@@ -14,25 +15,17 @@
         .AddClass("is-fullwidth", IsFullwidth)
         .Build();
 
-    string imgClass => CssBuilder.Default("")
-        .AddClass("is-rounded", IsRounded)
-       .Build();
-
-
 
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
     [Parameter]
-    public Ratio Ratio{get;set;} =Ratio.Default;
-    [Parameter]
-    public string Src { get; set; }
-
-    [Parameter]
-    public bool IsRounded { get; set; }
-
+    public Ratio Ratio { get; set; } = Ratio.Default;
 
     [Parameter]
     public bool IsFullwidth { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
 }

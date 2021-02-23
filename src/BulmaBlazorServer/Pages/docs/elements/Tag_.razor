@@ -1,0 +1,119 @@
+@page "/docs/elements/tag"
+@layout DocLayout
+
+<Title>Tag标签</Title>
+<Subtitle Size="Size.Size4">
+    小标签可插入到任何地方
+</Subtitle>
+<hr>
+
+<Content>
+    <p>
+        标签是一个很小但用途广泛的元素。 这是将信息附加到块或其他组件的一种非常有用的方法。 它的大小也使得它很容易以数字显示，使其适合一长串项目。
+    </p>
+    <p>
+        默认情况下，标签是1.5rem高的标签。 <Tag>Tag label</Tag>
+    </p>
+</Content>
+
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    Colors颜色
+</Title>
+
+<Content>
+    <p>
+        与按钮一样，有10种不同的颜色可用。
+    </p>
+</Content>
+
+
+<Columns>
+    <Column>
+        <Tag1/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Tag1.razor"/>
+    </Column>
+</Columns>
+
+<Content>
+    现在，您可以选择颜色的浅色版本。
+</Content>
+<Columns>
+    <Column>
+        <Tag2/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Tag2.razor"/>
+    </Column>
+</Columns>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    Size尺寸
+</Title>
+
+<Columns>
+    <Column>
+        <Tag3/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Tag3.razor"/>
+    </Column>
+</Columns>
+
+<Title Size="Size.Size4" IsSpaced>
+    IsRounded和IsDelete修饰
+</Title>
+
+<Columns>
+    <Column>
+        <Tag4/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Tag4.razor"/>
+    </Column>
+</Columns>
+
+<Title Size="Size.Size4" IsSpaced>
+    Tags标签列表，插件
+</Title>
+<Content>
+    <p>
+        您现在可以使用Tags容器创建标签列表。如果列表很长，它将自动换行，同时保持所有标签均匀间隔。
+    </p>
+    <p>
+        使用HasAddons可以使两个Tag吸附到一起
+    </p>
+</Content>
+
+<Columns>
+    <Column>
+        <Tag5/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Tag5.razor" HasMore MaxHeight="100"/>
+    </Column>
+</Columns>
+
+<Columns>
+    <Column>
+        <Tag6/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Tag6.razor" />
+    </Column>
+</Columns>
+
+<Columns>
+    <Column>
+        <Content>
+            如果要将Tags附加在一起，只需用Field组件的IsGrouped和IsGroupedMultiline。
+        </Content>
+        <Tag7/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/Tag7.razor" />
+    </Column>
+</Columns>

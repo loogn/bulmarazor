@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.Rendering
 @inject JSWindow win
-@inject BulmaRazor.BulmaRazorJsInterop jsInterop
+@inject BulmaRazorJsInterop jsInterop
 @inject IJSRuntime jsruntime
 <Hero Size="Size.Medium" Color="Color.Info" IsBold IsFullheightWithNavbar style="width:100%;">
     <HeroBody>
@@ -14,7 +14,6 @@
                 BulmaRazor（布尔玛·瑞）是基于Bulma框架开发的一套适用于Blazor的组件库。
             </Subtitle>
             <Buttons>
-
                 <Button href="/docs/overview/start" Color="Color.Info" IsOutlined IsInverted
                     Size="Size.Large">
                     开始BulmaRazor之旅

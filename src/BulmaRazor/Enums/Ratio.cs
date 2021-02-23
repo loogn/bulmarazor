@@ -34,7 +34,7 @@ namespace BulmaRazor.Components
         /// <summary>
         /// HeroSize
         /// </summary>
-        public static Ratio Fullheight = new Ratio("is-fullheight");
+        // public static Ratio Fullheight = new Ratio("is-fullheight");
 
         public static Ratio Ratio1 = new Ratio("is-1");
         public static Ratio Ratio2 = new Ratio("is-2");
@@ -50,13 +50,13 @@ namespace BulmaRazor.Components
         public static Ratio Ratio12 = new Ratio("is-12");
 
 
-        public static Ratio Square16 = new Ratio("is-16x16");
-        public static Ratio Square24 = new Ratio("is-24x24");
-        public static Ratio Square32 = new Ratio("is-32x32");
-        public static Ratio Square48 = new Ratio("is-48x48");
-        public static Ratio Square64 = new Ratio("is-64x64");
-        public static Ratio Square96 = new Ratio("is-96x96");
-        public static Ratio Square128 = new Ratio("is-128x128");
+        // public static Ratio Square16 = new Ratio("is-16x16");
+        // public static Ratio Square24 = new Ratio("is-24x24");
+        // public static Ratio Square32 = new Ratio("is-32x32");
+        // public static Ratio Square48 = new Ratio("is-48x48");
+        // public static Ratio Square64 = new Ratio("is-64x64");
+        // public static Ratio Square96 = new Ratio("is-96x96");
+        // public static Ratio Square128 = new Ratio("is-128x128");
 
 
 
