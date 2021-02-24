@@ -59,6 +59,7 @@ Install-Package BulmaRazor
 	- Control:		☆☆☆☆☆
 	- File:			☆☆☆☆☆
 - Components 
+  -   DataTable     ☆
 	- Breadcrumb :	☆☆☆☆
 	- Card :			☆☆☆☆☆
 	- Dropdown ：		☆☆☆☆☆

@@ -1,0 +1,92 @@
+@inject BulmaRazorJsInterop JsInterop
+
+
+<Button @onclick="Add">Add</Button>
+<Button @onclick="() => t1.ClearCheckedRows()">Clear</Button>
+<Button @onclick="() => t1.ToggleCheckedRows()">Toggle</Button>
+<Button @onclick="() => showChecked()">Show Checked Count</Button>
+
+<DataTable @ref="t1" Data="data" TdClass="@B.TextCentered" ThClass="@B.TextCentered" TItem="Person" 
+            IsNarrow IsHoverable IsBordered IsStriped>
+    <DataTableColumn TItem="Person" IsCheckBox>
+        @context.Id
+    </DataTableColumn>
+    <DataTableColumn TItem="Person" Sortable Label="Id" Prop="Id"/>
+    <DataTableColumn TItem="Person" Sortable SortFunc="sortNameByLength" ThClass="@B.TextRight" Label="名称" Prop="Name"/>
+    <DataTableColumn TItem="Person" Sortable Label="年龄" Prop="Age">
+    </DataTableColumn>
+    <DataTableColumn TItem="Person" Sortable Label="性别" Prop="Gender"/>
+    <DataTableColumn TItem="Person" Label="生日" Format="yyyy-MM-dd HH:mm" Prop="Birthday"/>
+    <DataTableColumn TItem="Person" Label="操作">
+        <TdSlot>
+            <Button Color="Color.Danger">del</Button>
+        </TdSlot>
+        <ThSlot>
+            操作吧
+        </ThSlot>
+    </DataTableColumn>
+</DataTable>
+
+@code{
+
+    DataTable<Person> t1;
+
+    List<Person> data = new List<Person>()
+    {
+        new Person(1, "jake2323", 98, DateTime.Now, Gender.Famle),
+        new Person(5, "bulma", 3, DateTime.Now, Gender.Famle),
+        new Person(6, "razor", 8, DateTime.Now, Gender.Male),
+        new Person(9, "loogn", 31, DateTime.Now, Gender.Famle),
+        new Person(2, "dan", 31, DateTime.Now, Gender.Male)
+    };
+    //自定义排序
+    object sortNameByLength(Person person)
+    {
+        return person.Name.Length;
+    }
+    async Task Add()
+    {
+        var id = new Random().Next(10,20);
+        data.Add(new Person()
+        {
+            Id = id,
+            Name = "anme" + id,
+            Birthday = DateTime.Now.AddDays(-id),
+            Age = id+2,
+            Gender = Gender.Famle
+        });
+    }
+
+    async Task showChecked()
+    {
+        var rows = t1.GetCheckedRows();
+        await JsInterop.Alert(rows.Count.ToString());
+    }
+
+    public enum Gender
+    {
+        Famle,
+        Male
+    }
+    public class Person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public Gender Gender { get; set; }
+        public DateTime Birthday { get; set; }
+
+        public Person(int id, string name, int age, DateTime birthday, Gender gender)
+        {
+            Id = id;
+            Name = name;
+            Age = age;
+            Birthday = birthday;
+            Gender = gender;
+        }
+        public Person()
+        {
+        }
+    }
+    
+}

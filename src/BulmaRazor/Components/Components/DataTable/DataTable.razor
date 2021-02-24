@@ -1,0 +1,139 @@
+@namespace BulmaRazor.Components
+@typeparam TItem
+@using BulmaRazor.Utils
+@inherits BulmaComponentBase
+
+@if (WithContainer)
+{
+    <div class="table-container">
+        @RenderTable
+    </div>
+}
+else
+{
+    @:@RenderTable
+}
+<CascadingValue Value="this" IsFixed="true">
+    @ChildContent
+</CascadingValue>
+
+@code{
+
+    RenderFragment RenderTable =>
+        @<table @attributes="Attributes" class="@classes">
+            @if (!NoHeader)
+            {
+                <thead>
+                <tr>
+                    @foreach (var col in columns)
+                    {
+                        <th class="@(col.ThClass ?? ThClass)">
+                            @if (col.Sortable)
+                            {
+                                <IconText class="@B.Clickable" @onclick="() => Sort(col)">
+                                    <span>
+                                        @if (col.ThSlot != null)
+                                        {
+                                            @:@col.ThSlot(col)
+                                        }
+                                        else
+                                        {
+                                            @:@col.Label 
+                                        }
+                                    </span>
+                                    <Icon IconClass="fa fa-sort"></Icon>
+                                </IconText>
+                            }
+                            else if (col.IsCheckBox)
+                            {
+                                <CheckBox TValue="string">
+                                    @if (col.ThSlot != null)
+                                    {
+                                        @:@col.ThSlot(col)
+                                    }
+                                    else
+                                    {
+                                        @:@col.Label 
+                                    }
+                                </CheckBox>
+                            }
+                            else
+                            {
+                                <span>
+                                    @if (col.ThSlot != null)
+                                    {
+                                        @:@col.ThSlot(col)
+                                    }
+                                    else
+                                    {
+                                        @:@col.Label 
+                                    }
+                                </span>
+                            }
+                        </th>
+                    }
+                </tr>
+                </thead>
+            }
+            <tbody>
+            @foreach (var row in View)
+            {
+                DataTableColumn<TItem> expandColumn = null;
+                <tr class="@CssBuilder.Css(B.Selected, row.IsSelected)" @onclick="() => TrClick(row)">
+                    @foreach (var col in columns)
+                    {
+                        <td class="@(col.TdClass ?? TdClass)">
+                            @if (col.IsIndex)
+                            {
+                                @:@(row.Index + 1)
+                            }
+                            else if (col.IsCheckBox)
+                            {
+                                <span @onclick="() => CheckBoxClick(row)">
+                                    <CheckBox TValue="string" @bind-Checked="@row.IsChecked">@col.ChildContent?.Invoke(row.Item)</CheckBox>
+                                </span>
+                            }
+                            else if (col.IsExpand)
+                            {
+                                expandColumn = col;
+                                if (row.IsExpanded)
+                                {
+                                    <Icon @onclick="() => TaggleExpand(row)" IconClass="fa fa-chevron-down"></Icon>
+                                }
+                                else
+                                {
+                                    <Icon @onclick="() => TaggleExpand(row)" IconClass="fa fa-chevron-right"></Icon>
+                                }
+                            }
+                            else
+                            {
+                                if (col.ChildContent != null)
+                                {
+                                    @:@col.ChildContent(row.Item) 
+                                }
+                                else if (col.TdSlot != null)
+                                {
+                                    @:@col.TdSlot(row.Item)
+                                }
+                                else
+                                {
+                                    var field = row.Fields[col.Prop];
+                                    @:@ExtendMethods.GetShowValue(field.Type, field.Value, col.Format)
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+                if (expandColumn != null && row.IsExpanded)
+                {
+                    <tr>
+                        <td colspan="@columns.Count">
+                            @expandColumn.ExpandSlot(row.Item)
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>;
+
+}

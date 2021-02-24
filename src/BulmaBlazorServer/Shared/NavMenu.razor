@@ -1,82 +1,148 @@
 ﻿@inject NavigationManager nm
 @inject IJSRuntime js
 
+<Input @ref="kwInput" class="@B.MB2" placeholder="Enter for search" @bind-Value="kw" @onkeypress="inputHandle">
 <Menu OnItemClick="OnMenuClick">
-    <MenuLabel>概述(Overview)</MenuLabel>
-    <MenuList>
-        <MenuItem Href="/docs/overview/start">开始使用</MenuItem>
-        <MenuItem Href="/docs/overview/commons">Helpers</MenuItem>
-    </MenuList>
-
-    <MenuLabel>列(Columns)</MenuLabel>
-    <MenuList>
-        <MenuItem Href="/docs/columns/basics">基础</MenuItem>
-        <MenuItem Href="/docs/columns/sizes">尺寸</MenuItem>
-        <MenuItem Href="/docs/columns/responsiveness">响应式</MenuItem>
-        <MenuItem Href="/docs/columns/nesting">嵌套</MenuItem>
-        <MenuItem Href="/docs/columns/gap">列间隙</MenuItem>
-        <MenuItem Href="/docs/columns/options">选项</MenuItem>
-    </MenuList>
-    <MenuLabel>布局(Layout)</MenuLabel>
-    <MenuList>
-
-        <MenuItem Href="/docs/layout/container">Container</MenuItem>
-        <MenuItem Href="/docs/layout/level">Level</MenuItem>
-        <MenuItem Href="/docs/layout/mediaobject">Media</MenuItem>
-        <MenuItem Href="/docs/layout/hero">Hero</MenuItem>
-        <MenuItem Href="/docs/layout/section">Section</MenuItem>
-        <MenuItem Href="/docs/layout/footer">Footer</MenuItem>
-        <MenuItem Href="/docs/layout/tiles">Tile</MenuItem>
-
-    </MenuList>
-    <MenuLabel>表单(Form)</MenuLabel>
-    <MenuList>
-        <MenuItem Href="/docs/form/general">通用控件</MenuItem>
-        <MenuItem Href="/docs/form/input">Input</MenuItem>
-        <MenuItem Href="/docs/form/textarea">Textarea</MenuItem>
-        <MenuItem Href="/docs/form/select">Select</MenuItem>
-        <MenuItem Href="/docs/form/checkbox">Checkbox</MenuItem>
-        <MenuItem Href="/docs/form/radio">Radio</MenuItem>
-        <MenuItem Href="/docs/form/file">File</MenuItem>
-    </MenuList>
-    <MenuLabel>元素(Elements)</MenuLabel>
-    <MenuList>
-        <MenuItem Href="/docs/elements/block">Block</MenuItem>
-        <MenuItem Href="/docs/elements/box">Box</MenuItem>
-        <MenuItem Href="/docs/elements/button">Button</MenuItem>
-        <MenuItem Href="/docs/elements/content">Content</MenuItem>
-        <MenuItem Href="/docs/elements/delete">Delete</MenuItem>
-        <MenuItem Href="/docs/elements/icon">Icon</MenuItem>
-        <MenuItem Href="/docs/elements/image">Image</MenuItem>
-        <MenuItem Href="/docs/elements/notification">Notification</MenuItem>
-        <MenuItem Href="/docs/elements/progress">ProgressBar</MenuItem>
-        <MenuItem Href="/docs/elements/table">Table</MenuItem>
-        <MenuItem Href="/docs/elements/tag">Tag</MenuItem>
-        <MenuItem Href="/docs/elements/title">Title</MenuItem>
-    </MenuList>
-    <MenuLabel>组件(Components)</MenuLabel>
-     <MenuList>
-        <MenuItem Href="/docs/components/breadcrumb">Breadcrumb</MenuItem>
-        <MenuItem Href="/docs/components/card">Card</MenuItem>
-        <MenuItem Href="/docs/components/dropdown">Dropdown</MenuItem>
-        <MenuItem Href="/docs/components/menu">Menu</MenuItem>
-        <MenuItem Href="/docs/components/message">Message</MenuItem>
-        <MenuItem Href="/docs/components/modal">Modal</MenuItem>
-        <MenuItem Href="/docs/components/navbar">Navbar</MenuItem>
-        <MenuItem Href="/docs/components/pagination">Pagination</MenuItem>
-        <MenuItem Href="/docs/components/panel">Panel</MenuItem>
-        <MenuItem Href="/docs/components/tabs">Tabs</MenuItem>
-    </MenuList>
+    @foreach (var item in MenuData)
+    {
+        <MenuLabel>@item.Label</MenuLabel>
+        <MenuList>
+            @foreach (var sub in item.Children)
+            {
+                var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) | item.Keywords.Contains(kw.ToLower())));
+                var cls = flag ? "" : B.Hidden;
+                <MenuItem class="@cls" guid="@sub.Guid" Href="@sub.Href">@(sub.Label)</MenuItem>
+            }
+        </MenuList>
+    }
 </Menu>
 
 @code {
+
+    class MItem
+    {
+        public  Guid Guid { get; set; }
+        public string Label { get; set; }
+        public string Href { get; set; }
+        public HashSet<string> Keywords { get; set; }
+        public List<MItem> Children { get; set; }
+
+        public MItem(string label, string href = "", string kws = "")
+        {
+            Guid = Guid.NewGuid();
+            Label = label;
+            Href = href;
+            Keywords = new HashSet<string>(kws.Split(',', StringSplitOptions.RemoveEmptyEntries));
+        }
+    }
+
+    void inputHandle(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            kw = kwInput.Value;
+        }
+    }
+
+    string kw = "";
+    Input<string> kwInput;
+
+
+    private List<MItem> MenuData = new()
+    {
+        new MItem("概述(Overview)", "", "start,开始,概述")
+        {
+            Children = new List<MItem>()
+            {
+                new MItem("开始使用", "/docs/overview/start", ""),
+                new MItem("Helpers", "/docs/overview/commons", "common,helper,color,size,颜色,尺寸"),
+            }
+        },
+        new MItem("列(Columns)", "", "column,列")
+        {
+            Children = new List<MItem>()
+            {
+                new MItem("基础", "/docs/columns/basics", "base"),
+                new MItem("尺寸", "/docs/columns/sizes", "size"),
+                new MItem("响应式", "/docs/columns/responsiveness", "responsiveness,response,响应"),
+                new MItem("嵌套", "/docs/columns/nesting", "nest,nesting,嵌套"),
+                new MItem("列间隙", "/docs/columns/gap", "gap,间隙"),
+                new MItem("选项", "/docs/columns/options", "option"),
+            }
+        },
+        new MItem("布局(Layout)", "", "layout,布局")
+        {
+            Children = new List<MItem>()
+            {
+                new MItem("容器(Container)", "/docs/layout/container", "容器,container"),
+                new MItem("水平(Level)", "/docs/layout/level", "水平,level"),
+                new MItem("媒体(Media)", "/docs/layout/mediaobject", "media,媒体,文章,article"),
+                new MItem("雄伟(Hero)", "/docs/layout/hero", "hero,雄伟,壮观,显著"),
+                new MItem("节(Section)", "/docs/layout/section", "section,节,部分"),
+                new MItem("页脚(Footer)", "/docs/layout/section", "脚,页脚,foot,footer"),
+                new MItem("块(Tile)", "/docs/layout/tiles", "块,Tile"),
+            }
+        },
+        new MItem("表单(Form)", "", "表单,form")
+        {
+            Children = new List<MItem>()
+            {
+                new MItem("通用(General)", "/docs/form/general", "general,edit"),
+                new MItem("输入框(Input)", "/docs/form/input", "input,text,输入,文本"),
+                new MItem("文本域(Textarea)", "/docs/form/textarea", "textarea,文本,text,域"),
+                new MItem("下拉框(Select)", "/docs/form/select", "select,下拉框"),
+                new MItem("复选框(CheckBox)", "/docs/form/checkbox", "checkbox,复选"),
+                new MItem("单选框(Radio)", "/docs/form/radio", "单选,radio"),
+                new MItem("文件(File)", "/docs/form/file", "file,上传,文件"),
+            }
+        },
+        new MItem("元素(Elements)", "", "元素,element")
+        {
+            Children = new List<MItem>()
+            {
+                new MItem("块(Block)", "/docs/elements/block", "block,块"),
+                new MItem("盒子(Box)", "/docs/elements/box", "box,盒子,箱子"),
+                new MItem("按钮(Button)", "/docs/elements/button", "button,按钮"),
+                new MItem("内容(Content)", "/docs/elements/content", "content,内容"),
+                new MItem("删除(Delete)", "/docs/elements/delete", "delete,删除,remove"),
+                new MItem("图标(Icon)", "/docs/elements/icon", "icon,图标,icon"),
+                new MItem("图片(Image)", "/docs/elements/image", "image,图片,"),
+                new MItem("通知(Notification)", "/docs/elements/notification", "notification,notify,通知"),
+                new MItem("进度条(Progress)", "/docs/elements/progress", "progress,进度条"),
+                new MItem("表格(Table)", "/docs/elements/table", "table,表格"),
+                new MItem("标签(Tag)", "/docs/elements/tag", "tag,标签,label"),
+                new MItem("标题(Title)", "/docs/elements/title", "title,标题,h1,h2,h3,h3,h4,h6"),
+            }
+        },
+        new MItem("组件(Components)", "", "组件,com,component")
+        {
+            Children = new List<MItem>()
+            {
+                new MItem("数据表(DataTable)", "/docs/components/datatable", "table,data,datatable,表格"),
+                new MItem("面包屑(Breadcrumb)", "/docs/components/breadcrumb", "breadcrumb,面包屑,导航"),
+                new MItem("卡片(Card)", "/docs/components/card", "card,卡片"),
+                new MItem("下拉(Dropdown)", "/docs/components/dropdown", "dropdown,下拉"),
+                new MItem("菜单(Menu)", "/docs/components/menu", "menu,菜单"),
+                new MItem("消息(Message)", "/docs/components/message", "message,消息"),
+                new MItem("对话框(Modal)", "/docs/components/modal", "modal,对话框"),
+                new MItem("导航(Navbar)", "/docs/components/navbar", "navbar,导航"),
+                new MItem("分页(Pagination)", "/docs/components/pagination", "pagination,page,分页"),
+                new MItem("面板(Panel)", "/docs/components/panel", "panel,面板"),
+                new MItem("标签切换(Tabs)", "/docs/components/tabs", "tabs,切换,tab"),
+            }
+        },
+    };
+
+
     private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
     private async Task OnMenuClick(MenuItem item)
     {
         @* var ele = await JSInterop.GetElementById("layoutContent"); *@
         @* await JSInterop.ScrollTo(ele, 0, 0); *@
         await js.InvokeVoidAsync("docScrollTop");
     }
+
 }
