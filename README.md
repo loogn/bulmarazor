@@ -71,6 +71,7 @@ Install-Package BulmaRazor
 	- Panel :			☆☆☆☆☆
     - LinkTabs :	☆☆☆☆
     - Tabs :	
+- Elements
 	- Block :			☆☆☆☆☆
 	- Box :			☆☆☆☆☆
 	- Button :		☆☆☆☆☆
