@@ -3,6 +3,70 @@
 
 <Title>Dropdown卡片</Title>
 <Subtitle Size="Size.Size4">
-    
+    用于发现内容的交互式下拉菜单
 </Subtitle>
 <hr>
+<Content>
+    <p>Dropdown有两Slot：TriggerSlot和MenuSlot, MenuSlot可以使用子组件DropdownItem和DropdownDivider填充</p>
+</Content>
+
+<Columns>
+    <Column>
+        <Dropdown1/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/Dropdown1.razor"/>
+    </Column>
+</Columns>
+
+<Title Size="Size.Size4" IsSpaced>
+    Dropdown content
+</Title>
+
+<Content>
+    DropdownItem可以添加Href属性表现为a标签，也可以不加，里面包含其他内容
+</Content>
+
+<Columns>
+    <Column>
+        <Dropdown2/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/Dropdown2.razor"/>
+    </Column>
+</Columns>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    Hoverable or Toggable
+</Title>
+
+<Content>
+    默认清空下是Hoverable，可以加IsClickTrigger改变
+</Content>
+
+<Columns>
+    <Column>
+        <Dropdown3/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/Dropdown3.razor"/>
+    </Column>
+</Columns>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    IsRight和IsUp
+</Title>
+
+<Content>
+    使用IsRight改变Item的对齐方向，使用IsUp改变现实方向
+</Content>
+<Columns>
+    <Column>
+        <Dropdown4/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/Dropdown4.razor"/>
+    </Column>
+</Columns>

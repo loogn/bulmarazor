@@ -8,23 +8,23 @@
 
         <header class="modal-card-head">
             <p class="modal-card-title">@HeaderText</p>
-            @if (!NoClose)
+            @if (ShowClose)
             {
-                <button class="delete" aria-label="close" @onclick="closeClickHandle"></button>
+                <button class="delete" aria-label="close" @onclick="Close"></button>
             }
         </header>
         <section class="modal-card-body">
-            @ChildContent
+            @BodySlot
         </section>
         <footer class="modal-card-foot">
-            @Footer
+            @FootSlot
         </footer>
     </div>
 </div>
 
 
-
 @code{
+
     string classes => CssBuilder.Default("modal")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", isActive)
@@ -33,53 +33,45 @@
 
     [Parameter]
     public string HeaderText { get; set; }
+
     private bool isActive { get; set; }
 
     [Parameter]
-    public bool CloseOnClickBackground { get; set; }
+    public Size Size { get; set; } = Size.Default;
+    
+    [Parameter]
+    public bool CloseOnClickModal { get; set; } = false;
 
     private void backgroundClickHandle()
     {
-        if (CloseOnClickBackground)
-        {
-            Close();
-        }
-    }
-    [Parameter]
-    public bool NoClose { get; set; }
-
-
-    [Parameter]
-    public Size Size { get; set; } = Size.Default;
-
-    private void closeClickHandle()
-    {
-        if (OnClose.HasDelegate)
-        {
-            OnClose.InvokeAsync(this);
-        }
-        else
+        if (CloseOnClickModal)
         {
             Close();
         }
     }
 
     [Parameter]
-    public EventCallback<ModalCard> OnClose { get; set; }
+    public bool ShowClose { get; set; } = true;
+
+
+    [Parameter]
+    public Action OnClose { get; set; }
 
     public void Close()
     {
         isActive = false;
+        OnClose?.Invoke();
     }
+
     public void Show()
     {
         isActive = true;
     }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment BodySlot { get; set; }
 
     [Parameter]
-    public RenderFragment Footer { get; set; }
-}
+    public RenderFragment FootSlot { get; set; }
 
+}

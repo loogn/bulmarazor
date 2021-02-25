@@ -18,7 +18,7 @@ html, body {
 }
 .layoutMenu{
     flex-shrink: 0;
-    width:200px;
+    width:260px;
     overflow: auto;
     background-color: #fafafa;
 }

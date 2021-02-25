@@ -1,0 +1,31 @@
+<Navbar>
+    <BrandSlot>
+        <NavbarItem href="">
+            <img src="/images/bulmarazor-logo.png" width="112" height="28"/>
+        </NavbarItem>
+    </BrandSlot>
+    <StartSlot>
+        <NavbarItem href="/">首页</NavbarItem>
+        <NavbarItem href="">文档</NavbarItem>
+        <NavbarItem HasDropdown IsHoverable>
+            <NavbarLink>More</NavbarLink>
+            <NavbarDropdown>
+                <NavbarItem href="">About</NavbarItem>
+                <NavbarItem href="">Jobs</NavbarItem>
+                <NavbarItem href="">Contact</NavbarItem>
+                <NavbarDivider/>
+                <NavbarItem href="">Report an issue</NavbarItem>
+            </NavbarDropdown>
+        </NavbarItem>
+    </StartSlot>
+    <EndSlot>
+        <NavbarItem>
+            <Buttons>
+                <Button Color="Color.Primary">
+                    <strong>Sign up</strong>
+                </Button>
+                <Button IsLight>Log in</Button>
+            </Buttons>
+        </NavbarItem>
+    </EndSlot>
+</Navbar>

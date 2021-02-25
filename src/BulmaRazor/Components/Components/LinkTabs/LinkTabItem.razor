@@ -2,15 +2,14 @@
 @inherits BulmaComponentBase
 
 
-
-<li @attributes="Attributes" class='@classes' @onclick="e=>HandleClick()">
+<li @attributes="Attributes" class='@classes' @onclick="e => HandleClick()">
     <a @attributes="AddAtts">
         @ChildContent
     </a>
 </li>
 
-
 @code{
+
     string classes => CssBuilder.Default("")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
@@ -20,11 +19,6 @@
     public bool IsActive { get; set; }
 
     private Dictionary<string, object> AddAtts = new Dictionary<string, object>();
-
-    [Parameter]
-    public string Href { get; set; }
-    [Parameter]
-    public string Target { get; set; }
 
     public void Active(bool isActive)
     {
@@ -48,22 +42,22 @@
     public int Index { get; set; }
 
     [CascadingParameter]
-    public Tabs Parent { get; set; }
-
+    public LinkTabs Parent { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    [Parameter]
+    public string Href { get; set; }
+
+    [Parameter]
+    public string Target { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        //���븸��
-        if (Parent != null)
-        {
-            Parent.AddItem(this);
-        }
-
-
+    //添加
+        Parent?.AddItem(this);
         if (Href.HasValue())
         {
             AddAtts.Add("href", Href);
@@ -73,4 +67,5 @@
             AddAtts.Add("target", Target);
         }
     }
+
 }

@@ -6,10 +6,16 @@
 @code {
     string classes => CssBuilder.Default("delete")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .Build();
 
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsSmall { get; set; }
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
 
 }

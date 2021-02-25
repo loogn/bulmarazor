@@ -2,53 +2,39 @@
 
 @inherits BulmaComponentBase
 
-@if (!deleted)
-{
-    <div @attributes="Attributes" class="@classes">
-        @if (!NoDelete)
-        {
-            <button class="delete" @onclick="deleteClickHandle"></button>
-        }
-        @ChildContent
-    </div>
+@if(!isRemoved){}
+<div @attributes="Attributes" class="@classes">
+    @if (Removable)
+    {
+        <button class="delete" @onclick="Remove"></button>
+    }
+    @ChildContent
+</div>
 }
 
 @code{
+
     string classes => CssBuilder.Default("notification")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-light", IsLight)
         .Build();
-    private bool deleted;
-
+    
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
-    private void deleteClickHandle()
-    {
-        if (OnDelete.HasDelegate)
-        {
-            OnDelete.InvokeAsync();
-        }
-        else
-        {
-            Delete();
-        }
-    }
-
+    [Parameter]
+    public bool Removable { get; set; }
 
     [Parameter]
-    public bool NoDelete { get; set; }
+    public Action OnRemove { get; set; }
 
+    private bool isRemoved { get; set; }
 
-    [Parameter]
-    public EventCallback OnDelete { get; set; }
-
-
-
-    public void Delete()
+    public void Remove()
     {
-        deleted = true;
+        isRemoved = true;
+        OnRemove?.Invoke();
     }
 
     [Parameter]
@@ -56,4 +42,5 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-} 
+
+}

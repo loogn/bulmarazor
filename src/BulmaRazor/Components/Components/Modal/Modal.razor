@@ -3,15 +3,14 @@
 @inherits BulmaComponentBase
 
 
-
 <div @attributes="Attributes" class="@classes">
     <div class="modal-background" @onclick="backgroundClickHandle"></div>
     <div class="modal-content">
         @ChildContent
     </div>
-    @if (!NoClose)
+    @if (ShowClose)
     {
-        <button class="modal-close is-large" aria-label="close" @onclick="closeClickHandle"></button>
+        <button class="modal-close is-large" aria-label="close" @onclick="Close"></button>
     }
 </div>
 
@@ -19,51 +18,42 @@
 @code{
     string classes => CssBuilder.Default("modal")
         .AddClassFromAttributes(Attributes)
-        .AddClass("is-active", isActive)
+        .AddClass("is-active", IsActive)
         .Build();
-
-
-    private bool isActive { get; set; }
+    
+    [Parameter]
+    public bool IsActive { get; set; }
 
     [Parameter]
-    public bool CloseOnClickBackground { get; set; }
+    public bool CloseOnClickModal { get; set; } = true;
 
     private void backgroundClickHandle()
     {
-        if (CloseOnClickBackground)
+        if (CloseOnClickModal)
         {
             Close();
         }
     }
+
     [Parameter]
-    public bool NoClose { get; set; }
+    public bool ShowClose { get; set; } = true;
 
 
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
-    private void closeClickHandle()
-    {
-        if (OnClose.HasDelegate)
-        {
-            OnClose.InvokeAsync(this);
-        }
-        else
-        {
-            Close();
-        }
-    }
 
     [Parameter]
-    public EventCallback<Modal> OnClose { get; set; }
+    public Action OnClose { get; set; }
 
     public void Close()
     {
-        isActive = false;
+        IsActive = false;
+        OnClose?.Invoke();
     }
     public void Show()
     {
-        isActive = true;
+        IsActive = true;
     }
 
     [Parameter]

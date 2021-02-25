@@ -10,7 +10,10 @@
 
     string classes => CssBuilder.Default("field-label")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .Build();
 
 
@@ -18,6 +21,12 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsSmall { get; set; }
+    [Parameter]
+    public bool IsNormal { get; set; }
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
 
 }

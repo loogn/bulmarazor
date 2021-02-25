@@ -13,7 +13,9 @@
 @code{
     string classes => CssBuilder.Default("breadcrumb")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .AddClass("has-arrow-separator", HasArrowSeparator)
         .AddClass("has-bullet-separator", HasBulletSeparator)
         .AddClass("has-dot-separator", HasDotSeparator)
@@ -22,7 +24,12 @@
         .AddClass("is-right", IsRight)
         .Build();
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsSmall { get; set; }
+    
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
 
     [Parameter]
     public bool HasArrowSeparator { get; set; }

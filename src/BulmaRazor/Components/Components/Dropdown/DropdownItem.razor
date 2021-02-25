@@ -16,11 +16,13 @@ else
 @code {
     string clesses => CssBuilder.Default("dropdown-item")
         .AddClassFromAttributes(Attributes)
+        .AddClass("is-active",IsActive)
        .Build();
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
+    [Parameter]
+    public  bool IsActive { get; set; }
 
     [Parameter]
     public string Href { get; set; }

@@ -11,7 +11,10 @@
     string classes => CssBuilder.Default("input")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .AddClass("is-rounded", IsRounded)
         .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
@@ -21,8 +24,15 @@
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsSmall { get; set; }
+    [Parameter]
+    public bool IsNormal { get; set; }
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
 
     [Parameter]
     public bool IsHovered { get; set; }

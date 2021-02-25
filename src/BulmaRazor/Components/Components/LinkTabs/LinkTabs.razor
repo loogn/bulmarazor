@@ -11,24 +11,29 @@
 </div>
 
 @code{
+
     string classes => CssBuilder.Default("tabs")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .AddClass("is-boxed", IsBoxed)
         .AddClass("is-toggle", IsToggle || IsToggleRounded)
         .AddClass("is-toggle-rounded", IsToggleRounded)
         .AddClass("is-fullwidth", IsFullwidth)
         .AddClass("is-centered", IsCentered)
+        .AddClass("is-right", IsRight)
         .Build();
 
 
-
+    [Parameter]
+    public bool IsSmall { get; set; }
 
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsMedium { get; set; }
 
     [Parameter]
-    public Size IconSize { get; set; } = Size.Small;
+    public bool IsLarge { get; set; }
 
     [Parameter]
     public bool IsBoxed { get; set; }
@@ -41,34 +46,37 @@
 
     [Parameter]
     public bool IsFullwidth { get; set; }
+
     [Parameter]
     public bool IsCentered { get; set; }
 
+    [Parameter]
+    public bool IsRight { get; set; }
 
-    private List<TabsItem> items = new List<TabsItem>();
+
+    private List<LinkTabItem> items = new List<LinkTabItem>();
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     private int index = 0;
-    public void AddItem(TabsItem item)
+
+    public void AddItem(LinkTabItem item)
     {
         item.Index = index++;
         items.Add(item);
     }
 
     [Parameter]
-    public EventCallback<TabsItem> OnItemClick { get; set; }
+    public EventCallback<LinkTabItem> OnItemClick { get; set; }
 
-    public async Task ClickItem(TabsItem currItem)
+    public async Task ClickItem(LinkTabItem currItem)
     {
         foreach (var item in items)
         {
             item.Active(item == currItem);
         }
-        if (OnItemClick.HasDelegate)
-        {
-            await OnItemClick.InvokeAsync(currItem);
-        }
+        await OnItemClick.InvokeAsync(currItem);
     }
+
 }

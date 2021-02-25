@@ -19,7 +19,9 @@
     string clesses => CssBuilder.Default("dropdown")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
-        .AddClass("is-hoverable", !IsClickOpen)
+        .AddClass("is-up",IsUp)
+        .AddClass("is-right",IsRight)
+        .AddClass("is-hoverable", !IsClickTrigger)
        .Build();
 
     [Parameter]
@@ -27,9 +29,13 @@
 
 
     [Parameter]
-    public bool IsClickOpen { get; set; }
+    public bool IsClickTrigger { get; set; }
 
-
+    [Parameter]
+    public  bool IsUp { get; set; }
+    
+    [Parameter]
+    public  bool IsRight { get; set; }
 
     public void Trigger(bool? isActive = null)
     {
@@ -47,7 +53,7 @@
 
     private void clickHandle()
     {
-        if (IsClickOpen)
+        if (IsClickTrigger)
         {
             Trigger();
         }

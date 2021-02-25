@@ -1,0 +1,16 @@
+<Modal @ref="m1">
+    <Content class="@B.BackgroundLight">
+        <p>
+        Any other Bulma elements you want    
+        </p>
+    </Content>
+</Modal>
+<Button @onclick=Show>Open</Button>
+
+@code{
+    Modal m1;
+    void Show()
+    {
+        m1.Show();
+    }
+}

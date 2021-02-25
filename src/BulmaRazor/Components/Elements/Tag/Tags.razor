@@ -9,7 +9,7 @@
 @code {
     string classes => CssBuilder.Default("tags")
         .AddClassFromAttributes(Attributes)
-        .AddClass("are-small", AreSmall)
+        .AddClass("are-normal", AreNormal)
         .AddClass("are-medium", AreMedium)
         .AddClass("are-large", AreLarge)
         .AddClass("has-addons", HasAddons)
@@ -17,7 +17,7 @@
 
 
     [Parameter]
-    public bool AreSmall { get; set; }
+    public bool AreNormal { get; set; }
     [Parameter]
     public bool AreMedium { get; set; }
     [Parameter]

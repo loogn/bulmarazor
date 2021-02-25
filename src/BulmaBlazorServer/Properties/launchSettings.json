@@ -17,7 +17,7 @@
     },
     "BulmaBlazorServer": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "http://localhost:8009",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -10,10 +10,10 @@ namespace BulmaRazor.Components
 
         public static Size Default = new Size("");
 
-        public static Size Small = new Size("is-small");
-        public static Size Normal = new Size("is-normal");
-        public static Size Medium = new Size("is-medium");
-        public static Size Large = new Size("is-large");
+        // public static readonly Size Small = new Size("is-small");
+        // public static Size Normal = new Size("is-normal");
+        // public static Size Medium = new Size("is-medium");
+        // public static Size Large = new Size("is-large");
 
         /// <summary>
         /// HeroSize

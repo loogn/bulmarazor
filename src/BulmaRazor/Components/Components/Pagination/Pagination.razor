@@ -8,12 +8,10 @@
             @if (PrevSlot != null)
             {
                 @:@PrevSlot
-
             }
             else
             {
                 @:@PrevText
-
             }
         </a>
     }
@@ -68,7 +66,9 @@
 
 @code {
     string clesses => CssBuilder.Default("pagination")
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .AddClass("is-centered", IsCentered)
         .AddClass("is-right", IsRight)
         .AddClass("is-rounded", IsRounded)
@@ -91,7 +91,11 @@
     public bool IsRounded { get; set; }
 
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsSmall { get; set; }
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
 
     [Parameter]
     public int PageIndex { get; set; } = 1;
@@ -99,27 +103,15 @@
     public int PageSize { get; set; } = 10;
     [Parameter]
     public int TotalCount { get; set; }
-
-
+    
     public int PageCount
     {
         get;
         private set;
     }
-    private int StartIndex
-    {
-        get
-        {
-            return Math.Max(2, Math.Min(PageIndex - (ItemSize / 2), PageCount - ItemSize));
-        }
-    }
-    public int EndIndex
-    {
-        get
-        {
-            return Math.Min(PageCount - 1, Math.Max(StartIndex + ItemSize - 1, ItemSize + 1));
-        }
-    }
+    private int StartIndex => Math.Max(2, Math.Min(PageIndex - (ItemSize / 2), PageCount - ItemSize));
+
+    private int EndIndex => Math.Min(PageCount - 1, Math.Max(StartIndex + ItemSize - 1, ItemSize + 1));
 
 
     /// <summary>
@@ -130,19 +122,15 @@
 
     [Parameter]
     public bool HideOnSinglePage { get; set; }
-
-
+    
     [Parameter]
-    public Func<int, Task> OnPageChange { get; set; }
-
-
+    public EventCallback<int> OnPageChange { get; set; }
+    
     [Parameter]
-    public Func<int, Task> OnPrevClick { get; set; }
+    public EventCallback<int> OnPrevClick { get; set; }
     [Parameter]
-    public Func<int, Task> OnNextClick { get; set; }
-
-
-
+    public EventCallback<int> OnNextClick { get; set; }
+    
     [Parameter]
     public RenderFragment PrevSlot { get; set; }
 
@@ -158,11 +146,7 @@
 
     private async Task ChangePage(int currentIndex)
     {
-
-        if (OnPageChange != null)
-        {
-            await OnPageChange.Invoke(currentIndex);
-        }
+        await OnPageChange.InvokeAsync(currentIndex);   
         PageIndex = currentIndex;
     }
     private async Task PrevPage()
@@ -170,10 +154,7 @@
         if (!DisablePrev)
         {
             var currentIndex = PageIndex - 1;
-            if (OnPrevClick != null)
-            {
-                await OnPrevClick.Invoke(currentIndex);
-            }
+            await OnPrevClick.InvokeAsync(currentIndex);
             await ChangePage(currentIndex);
         }
     }
@@ -182,10 +163,7 @@
         if (!DisableNext)
         {
             var currentIndex = PageIndex + 1;
-            if (OnNextClick != null)
-            {
-                await OnNextClick.Invoke(currentIndex);
-            }
+            await OnNextClick.InvokeAsync(currentIndex);
             await ChangePage(currentIndex);
         }
     }

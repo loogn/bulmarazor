@@ -1,5 +1,4 @@
-﻿
-@namespace BulmaRazor.Components
+﻿@namespace BulmaRazor.Components
 
 @inherits BulmaComponentBase
 
@@ -15,7 +14,9 @@
 
     string classes => CssBuilder.Default("textarea")
         .AddClass(Color.Value, Color.Value)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
         .AddClass("has-fixed-size", FixedSize)
@@ -26,7 +27,13 @@
     public Color Color { get; set; } = Color.Default;
 
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
 
 
     [Parameter]
@@ -67,4 +74,5 @@
     {
         await base.SetParametersAsync(parameters);
     }
+
 }

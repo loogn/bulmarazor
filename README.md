@@ -69,7 +69,8 @@ Install-Package BulmaRazor
 	- Navbar ：		☆☆☆☆
 	- Pagination ：	☆☆☆☆
 	- Panel :			☆☆☆☆☆
-	- Tabs :			☆☆☆☆
+    - LinkTabs :	☆☆☆☆
+    - Tabs :	
 	- Block :			☆☆☆☆☆
 	- Box :			☆☆☆☆☆
 	- Button :		☆☆☆☆☆

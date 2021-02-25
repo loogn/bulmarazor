@@ -11,7 +11,11 @@
     string classes => CssBuilder.Default("hero")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-halfheight", IsHalfHeight)
+        .AddClass("is-fullheight", IsFullHeight)
         .AddClass("is-bold", IsBold)
         .AddClass("is-fullheight-with-navbar", IsFullHeightWithNavbar)
         .Build();
@@ -26,8 +30,16 @@
     /// 尺寸
     /// </summary>
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
-
+    public bool IsSmall { get; set; }
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
+    [Parameter]
+    public bool IsHalfHeight { get; set; }
+    [Parameter]
+    public bool IsFullHeight { get; set; }
+    
     [Parameter]
     public bool IsFullHeightWithNavbar { get; set; }
 

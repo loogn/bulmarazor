@@ -2,10 +2,14 @@
 @inherits BulmaComponentBase
 <nav @attributes="Attributes" class="@classes">
 
-    @if (Heading.HasValue())
+    @if (HeaderText.HasValue() || HeaderSlot!=null)
     {
         <p class="panel-heading">
-            @Heading
+            @if(HeaderSlot!=null){
+                @:@HeaderSlot
+            }else{
+                @:@HeaderText
+            }
         </p>
     }
     @ChildContent
@@ -22,7 +26,10 @@
 
 
     [Parameter]
-    public string Heading { get; set; }
+    public string HeaderText { get; set; }
+
+    [Parameter]
+    public RenderFragment HeaderSlot { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

@@ -9,7 +9,9 @@
     string classes => CssBuilder.Default("tag")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
         .AddClass("is-light",IsLight)
         .AddClass("is-rounded", IsRounded)
         .AddClass("is-delete", IsDelete)
@@ -21,8 +23,13 @@
     [Parameter]
     public bool IsLight{get;set;}
 
+    
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsNormal { get; set; }
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
 
     [Parameter]
     public bool IsRounded { get; set; }

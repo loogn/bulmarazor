@@ -8,10 +8,13 @@
 @code {
     string clesses => CssBuilder.Default("card-header-title")
         .AddClassFromAttributes(Attributes)
+        .AddClass("is-centered",IsCentered)
        .Build();
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public bool  IsCentered { get; set; }
 }
 
 
