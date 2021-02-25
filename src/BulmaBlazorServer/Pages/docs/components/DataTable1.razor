@@ -8,7 +8,7 @@
 
 <DataTable @ref="t1" Data="data" TdClass="@B.TextCentered" ThClass="@B.TextCentered" TItem="Person" 
             IsNarrow IsHoverable IsBordered IsStriped>
-    <DataTableColumn TItem="Person" IsCheckBox>
+    <DataTableColumn Width="100px" TItem="Person" IsCheckBox Label="全选">
         @context.Id
     </DataTableColumn>
     <DataTableColumn TItem="Person" Sortable Label="Id" Prop="Id"/>

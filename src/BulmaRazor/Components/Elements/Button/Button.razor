@@ -9,8 +9,6 @@ else
 {
     <button @attributes="Attributes" class="@classes">@ChildContent</button>
 }
-
-
 @code {
 
     string classes => CssBuilder.Default("button")
@@ -44,13 +42,6 @@ else
     public bool IsMedium { get; set; }
     [Parameter]
     public bool IsLarge { get; set; }
-
-    //
-    // public static readonly Size Small = new Size("is-small");
-    //    public static Size Normal = new Size("is-normal");
-    //    public static Size Medium = new Size("is-medium");
-    //    public static Size Large = new Size("is-large");
-    //
 
 
     [Parameter]
@@ -92,7 +83,7 @@ else
 
     private bool hasHref;
 
-    public async override Task SetParametersAsync(ParameterView parameters)
+    public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
 

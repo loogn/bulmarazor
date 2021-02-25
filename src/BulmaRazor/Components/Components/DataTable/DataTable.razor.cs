@@ -193,7 +193,7 @@ namespace BulmaRazor.Components
 
         private List<DataTableRow<TItem>> checkedRows = new List<DataTableRow<TItem>>();
 
-        private void CheckBoxClick( DataTableRow<TItem> row)
+        private void CheckBoxClick(DataTableRow<TItem> row)
         {
             checkColumn.CheckItemSet.Add(row.Item);
             OnChecked?.Invoke(GetCheckedRows(), row);
@@ -225,6 +225,24 @@ namespace BulmaRazor.Components
                     {
                         dv.IsChecked = false;
                     }
+                }
+            }
+        }
+
+        private void checkAll(bool cked)
+        {
+            foreach (var dv in dataView)
+            {
+                if (cked && !dv.IsChecked)
+                {
+                    checkColumn.CheckItemSet.Add(dv.Item);
+                    dv.IsChecked = true;
+                }
+
+                if (!cked && dv.IsChecked)
+                {
+                    checkColumn.CheckItemSet.Remove(dv.Item);
+                    dv.IsChecked = false;
                 }
             }
         }

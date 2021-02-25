@@ -18,7 +18,8 @@ else
 </CascadingValue>
 
 @code{
-
+    
+    
     RenderFragment RenderTable =>
         @<table @attributes="Attributes" class="@classes">
             @if (!NoHeader)
@@ -27,7 +28,7 @@ else
                 <tr>
                     @foreach (var col in columns)
                     {
-                        <th class="@(col.ThClass ?? ThClass)">
+                        <th class="@(col.ThClass ?? ThClass)" style="@col.ThStyle">
                             @if (col.Sortable)
                             {
                                 <IconText class="@B.Clickable" @onclick="() => Sort(col)">
@@ -46,7 +47,7 @@ else
                             }
                             else if (col.IsCheckBox)
                             {
-                                <CheckBox TValue="string">
+                                <CheckBox TValue="string" OnCheckedChanged="checkAll" @bind-Checked="@col.checkedAll">
                                     @if (col.ThSlot != null)
                                     {
                                         @:@col.ThSlot(col)

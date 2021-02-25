@@ -1,13 +1,13 @@
-
 @namespace BulmaRazor.Components
 
 @inherits BulmaComponentBase
 @typeparam TValue
 
 <label @attributes="Attributes" class="@classes">
-    <input disabled="@Disabled" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle" />
+    <input disabled="@Disabled" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle"/>
     @ChildContent
 </label>
+
 @code {
 
     string classes => CssBuilder.Default("checkbox")
@@ -17,8 +17,12 @@
 
     [Parameter]
     public bool Checked { get; set; }
+
     [Parameter]
     public EventCallback<bool> CheckedChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnCheckedChanged { get; set; }
 
 
     private async Task ChangeHandle(ChangeEventArgs e)
@@ -28,11 +32,8 @@
         {
             await Parent.CheckTagger(Checked, Value);
         }
-
-        if (CheckedChanged.HasDelegate)
-        {
-            await CheckedChanged.InvokeAsync(Checked);
-        }
+        await CheckedChanged.InvokeAsync(Checked);
+        await OnCheckedChanged.InvokeAsync(Checked);
     }
 
     public void SetChecked(bool ck)
@@ -51,13 +52,14 @@
     public CheckBoxes<TValue> Parent { get; set; }
 
     public int Index { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
         if (Parent != null)
         {
             Parent.AddItem(this);
-            if (Parent.Values!=null && Parent.Values.Contains(Value))
+            if (Parent.Values != null && Parent.Values.Contains(Value))
             {
                 Checked = true;
             }
@@ -66,4 +68,5 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

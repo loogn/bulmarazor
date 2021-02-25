@@ -11,20 +11,31 @@ namespace BulmaRazor.Components
     {
         public int Index { get; set; }
 
-        public HashSet<TItem> CheckItemSet { get; set; } = new();
-        
+        [Parameter] public string Width { get; set; }
+
+        internal string ThStyle => CssBuilder.Default()
+            .AddClass("width:" + Width, Width)
+            .Build();
+
+        internal HashSet<TItem> CheckItemSet { get; set; }
+        internal bool checkedAll;
         /// <summary>
         /// 是否是索引列
         /// </summary>
-        [Parameter] public bool IsIndex { get; set; }
+        [Parameter]
+        public bool IsIndex { get; set; }
+
         /// <summary>
         /// 是否是复选框
         /// </summary>
-        [Parameter] public bool IsCheckBox { get; set; }
+        [Parameter]
+        public bool IsCheckBox { get; set; }
+
         /// <summary>
         /// 是否是展开列
         /// </summary>
-        [Parameter] public bool IsExpand { get; set; }
+        [Parameter]
+        public bool IsExpand { get; set; }
 
         [Parameter] public string Label { get; set; }
 
@@ -45,8 +56,8 @@ namespace BulmaRazor.Components
         [Parameter] public RenderFragment<TItem> ChildContent { get; set; }
         [Parameter] public RenderFragment<DataTableColumn<TItem>> ThSlot { get; set; }
         [Parameter] public RenderFragment<TItem> TdSlot { get; set; }
-        
-        [Parameter] public  RenderFragment<TItem> ExpandSlot { get; set; }
+
+        [Parameter] public RenderFragment<TItem> ExpandSlot { get; set; }
 
         public override async Task SetParametersAsync(ParameterView parameters)
         {
@@ -58,6 +69,10 @@ namespace BulmaRazor.Components
             if (DataGrid == null)
             {
                 throw new ArgumentNullException(nameof(DataGrid), "DataGridColumn must in DataGrid");
+            }
+            if (IsCheckBox)
+            {
+                CheckItemSet = new HashSet<TItem>();
             }
 
             base.OnInitialized();
