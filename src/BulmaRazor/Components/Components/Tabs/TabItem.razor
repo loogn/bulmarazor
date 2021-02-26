@@ -4,7 +4,7 @@
 
 <li @attributes="Attributes" class='@classes' @onclick="e => HandleClick()">
     <a @attributes="AddAtts">
-        @ChildContent
+        @LabelSlot
     </a>
 </li>
 
@@ -12,37 +12,41 @@
 
     string classes => CssBuilder.Default("")
         .AddClassFromAttributes(Attributes)
-        .AddClass("is-active", IsActive)
+        .AddClass("is-active", isActive)
         .Build();
 
-    [Parameter]
-    public bool IsActive { get; set; }
+    internal string contentCls => CssBuilder.Default("content")
+        .AddClass(B.Hidden, !isActive)
+        .Build();
+    
+    bool isActive { get; set; }
 
     private Dictionary<string, object> AddAtts = new Dictionary<string, object>();
 
-    public void Active(bool isActive)
+    internal void Active(bool isAct)
     {
-        if (isActive != IsActive)
-        {
-            IsActive = isActive;
-            StateHasChanged();
-        }
+        isActive = isAct;
+        StateHasChanged();
     }
-
 
     private Task HandleClick()
     {
-        if (Parent != null)
-        {
-            return Parent.ClickItem(this);
-        }
-        return Task.CompletedTask;
+        return Tabs.ClickTab(this);
     }
 
     public int Index { get; set; }
 
     [CascadingParameter]
-    public LinkTabs Parent { get; set; }
+    public Tabs Tabs { get; set; }
+
+    [Parameter]
+    public string Label { get; set; }
+
+    [Parameter]
+    public RenderFragment LabelSlot { get; set; }
+
+    [Parameter]
+    public RenderFragment ContentSlot { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -53,11 +57,19 @@
     [Parameter]
     public string Target { get; set; }
 
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        LabelSlot ??= builder => builder.AddContent(0, Label ?? "");
+        ContentSlot ??= ChildContent;
+    }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        if (Tabs == null) throw new ArgumentException("TabItem must in Tabs");
     //添加
-        Parent?.AddItem(this);
+        Tabs.AddItem(this);
         if (Href.HasValue())
         {
             AddAtts.Add("href", Href);

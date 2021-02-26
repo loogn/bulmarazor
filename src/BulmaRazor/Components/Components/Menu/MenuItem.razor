@@ -3,13 +3,13 @@
 
 
 <li @attributes="Attributes">
-    <a @attributes="AddAtts" class='@classes' @onclick="e=>HandleClick()">
+    <a @attributes="AddAtts" class="@classes" @onclick="e=>HandleClick()">
         @ChildContent
     </a>
 
     @if (NestedSlot != null)
     {
-        @:@NestedSlot
+        <text>@NestedSlot</text>
     }
 </li>
 
@@ -22,7 +22,7 @@
     [Parameter]
     public bool IsActive { get; set; }
 
-    private Dictionary<string, object> AddAtts = new Dictionary<string, object>();
+    private Dictionary<string, object> AddAtts = new();
 
     [Parameter]
     public string Href { get; set; }
@@ -63,11 +63,8 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        //���븸��
-        if (Parent != null)
-        {
-            Parent.AddItem(this);
-        }
+
+        Parent?.AddItem(this);
 
         if (Href.HasValue())
         {

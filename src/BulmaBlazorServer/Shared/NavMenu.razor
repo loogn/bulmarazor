@@ -1,7 +1,7 @@
 ﻿@inject NavigationManager nm
 @inject IJSRuntime js
 
-<Input @ref="kwInput" class="@B.MB2" placeholder="Enter for search" @bind-Value="kw" @onkeypress="inputHandle">
+<Input @ref="kwInput" class="@B.MB2" placeholder="Enter for search" @bind-Value="kw" @onkeypress="inputHandle"/>
 <Menu OnItemClick="OnMenuClick">
     @foreach (var item in MenuData)
     {
@@ -11,7 +11,7 @@
             {
                 var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) | item.Keywords.Contains(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
-                <MenuItem class="@cls" guid="@sub.Guid" Href="@sub.Href">@(sub.Label)</MenuItem>
+                <MenuItem class="@cls" Href="@sub.Href">@sub.Label</MenuItem>
             }
         </MenuList>
     }
@@ -21,7 +21,6 @@
 
     class MItem
     {
-        public  Guid Guid { get; set; }
         public string Label { get; set; }
         public string Href { get; set; }
         public HashSet<string> Keywords { get; set; }
@@ -29,7 +28,6 @@
 
         public MItem(string label, string href = "", string kws = "")
         {
-            Guid = Guid.NewGuid();
             Label = label;
             Href = href;
             Keywords = new HashSet<string>(kws.Split(',', StringSplitOptions.RemoveEmptyEntries));
@@ -128,7 +126,7 @@
                 new MItem("导航(Navbar)", "/docs/components/navbar", "navbar,导航"),
                 new MItem("分页(Pagination)", "/docs/components/pagination", "pagination,page,分页"),
                 new MItem("面板(Panel)", "/docs/components/panel", "panel,面板"),
-                new MItem("Link切换(LinkTabs)", "/docs/components/linktabs", "tabs,切换,tab"),
+                new MItem("Tab切换(Tabs)", "/docs/components/tabs", "tabs,切换,tab"),
             }
         },
     };

@@ -5,6 +5,7 @@
 
 <div @attributes="Attributes" class="@classes">
     <div class="modal-background" @onclick="backgroundClickHandle"></div>
+
     <div class="modal-content">
         @ChildContent
     </div>
@@ -14,22 +15,22 @@
     }
 </div>
 
-
 @code{
+
     string classes => CssBuilder.Default("modal")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
-    
+
     [Parameter]
     public bool IsActive { get; set; }
 
     [Parameter]
-    public bool CloseOnClickModal { get; set; } = true;
+    public bool CloseOnClickBackground { get; set; } = true;
 
     private void backgroundClickHandle()
     {
-        if (CloseOnClickModal)
+        if (CloseOnClickBackground)
         {
             Close();
         }
@@ -51,6 +52,7 @@
         IsActive = false;
         OnClose?.Invoke();
     }
+
     public void Show()
     {
         IsActive = true;
@@ -58,4 +60,5 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

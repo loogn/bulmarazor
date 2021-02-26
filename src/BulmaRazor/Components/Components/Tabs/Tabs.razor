@@ -9,6 +9,15 @@
         </CascadingValue>
     </ul>
 </div>
+@if (!IsTabOnly)
+{
+    foreach (var item in items)
+    {
+        <div class="@item.contentCls">
+            @item.ContentSlot
+        </div>
+    }
+}
 
 @code{
 
@@ -53,30 +62,52 @@
     [Parameter]
     public bool IsRight { get; set; }
 
+    [Parameter]
+    public bool IsTabOnly { get; set; }
 
-    private List<LinkTabItem> items = new List<LinkTabItem>();
+    [Parameter]
+    public int DefaultTabIndex { get; set; }
+
+    private List<TabItem> items = new List<TabItem>();
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     private int index = 0;
 
-    public void AddItem(LinkTabItem item)
+    public void AddItem(TabItem item)
     {
         item.Index = index++;
+        if (item.Index == DefaultTabIndex)
+        {
+            item.Active(true);
+        }
         items.Add(item);
+        StateHasChanged();
     }
 
     [Parameter]
-    public EventCallback<LinkTabItem> OnItemClick { get; set; }
+    public EventCallback<TabItem> OnTabClick { get; set; }
 
-    public async Task ClickItem(LinkTabItem currItem)
+    internal async Task ClickTab(TabItem currItem)
     {
         foreach (var item in items)
         {
             item.Active(item == currItem);
         }
-        await OnItemClick.InvokeAsync(currItem);
+        StateHasChanged();
+        await OnTabClick.InvokeAsync(currItem);
     }
 
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (IsTabOnly)
+        {
+            if (!parameters.ToDictionary().ContainsKey("DefaultTabIndex"))
+            {
+                DefaultTabIndex = -1;
+            }
+        }
+    }
 }

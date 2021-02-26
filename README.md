@@ -63,14 +63,13 @@ Install-Package BulmaRazor
 	- Breadcrumb :	☆☆☆☆
 	- Card :			☆☆☆☆☆
 	- Dropdown ：		☆☆☆☆☆
-	- Menu ：			☆☆☆☆
+	- Menu ：			☆☆☆
 	- Message ：		☆☆☆☆☆
 	- Modal ：		☆☆☆☆☆
 	- Navbar ：		☆☆☆☆
 	- Pagination ：	☆☆☆☆
 	- Panel :			☆☆☆☆☆
-    - LinkTabs :	☆☆☆☆
-    - Tabs :	
+    - Tabs :	☆☆☆☆	
 - Elements
 	- Block :			☆☆☆☆☆
 	- Box :			☆☆☆☆☆

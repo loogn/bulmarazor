@@ -11,7 +11,7 @@
             {
                 var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) | item.Keywords.Contains(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
-                <MenuItem class="@cls" guid="@sub.Guid" Href="@sub.Href">@(sub.Label)</MenuItem>
+                <MenuItem class="@cls" guid="@sub.Guid" Href="@sub.Href">@sub.Label</MenuItem>
             }
         </MenuList>
     }
@@ -128,7 +128,7 @@
                 new MItem("导航(Navbar)", "/docs/components/navbar", "navbar,导航"),
                 new MItem("分页(Pagination)", "/docs/components/pagination", "pagination,page,分页"),
                 new MItem("面板(Panel)", "/docs/components/panel", "panel,面板"),
-                new MItem("Link切换(LinkTabs)", "/docs/components/linktabs", "tabs,切换,tab"),
+                new MItem("Tab切换(Tabs)", "/docs/components/tabs", "tabs,切换,tab"),
             }
         },
     };

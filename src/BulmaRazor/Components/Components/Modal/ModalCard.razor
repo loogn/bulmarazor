@@ -38,13 +38,14 @@
 
     [Parameter]
     public Size Size { get; set; } = Size.Default;
-    
+
+
     [Parameter]
-    public bool CloseOnClickModal { get; set; } = false;
+    public bool CloseOnClickBackground { get; set; } = false;
 
     private void backgroundClickHandle()
     {
-        if (CloseOnClickModal)
+        if (CloseOnClickBackground)
         {
             Close();
         }
