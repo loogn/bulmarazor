@@ -2,14 +2,15 @@
 
 @inherits BulmaComponentBase
 
-@if(!isRemoved){}
-<div @attributes="Attributes" class="@classes">
-    @if (Removable)
-    {
-        <button class="delete" @onclick="Remove"></button>
-    }
-    @ChildContent
-</div>
+@if (!isRemoved)
+{
+    <div @attributes="Attributes" class="@classes">
+        @if (Removable)
+        {
+            <button class="delete" @onclick="Remove"></button>
+        }
+        @ChildContent
+    </div>
 }
 
 @code{
@@ -19,7 +20,7 @@
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-light", IsLight)
         .Build();
-    
+
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 

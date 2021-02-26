@@ -27,9 +27,13 @@ namespace BulmaRazorServer
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            //services.AddSingleton<WeatherForecastService>();
+            
             services.AddJSWindow();
-            services.AddBulmaRazor();
+            services.AddBulmaRazor(options =>
+            {
+                options.DefaultToastConfig.Duration = 1500;
+                options.DefaultToastConfig.Position = "center";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

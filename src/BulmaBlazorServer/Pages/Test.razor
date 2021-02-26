@@ -1,10 +1,21 @@
 @using BulmaRazorServer.Pages.docs.elements
 @inject BulmaRazorJsInterop JsInterop
+@inject ToastJs toast
 
+<Button @onclick="fun">CLick</Button>
 
 @code{
 
-  
-
+    void fun()
+    {
+        toast.Toast(new ToastOptions()
+        {
+            Message = "Hello world 你好世界",
+            Color = Color.Primary,
+            // Dismissible = false,
+            
+            Animate = new ToastAnimate("backInDown", "fadeOutDownBig")
+        });
+    }
 
 }
