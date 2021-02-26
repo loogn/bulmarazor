@@ -2,7 +2,11 @@
 @inject BulmaRazorJsInterop JsInterop
 @inject ToastJs toast
 
-<Button @onclick="fun">CLick</Button>
+<Button @onclick="fun">
+    <Badge Color="Color.Info" IsBottomLeft>8</Badge>
+    CLick
+</Button>
+
 
 @code{
 
@@ -12,7 +16,7 @@
         {
             Message = "Hello world 你好世界",
             Color = Color.Primary,
-            // Dismissible = false,
+    // Dismissible = false,
             
             Animate = new ToastAnimate("backInDown", "fadeOutDownBig")
         });

@@ -1,0 +1,59 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+
+<input id="@id" @attributes="Attributes" class="@classes" disabled="@Disabled" type="checkbox" checked="@Checked" @onchange="ChangeHandle"/>
+<label for="@id">@ChildContent</label>
+
+@code {
+
+    string classes => CssBuilder.Default("switch")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .Build();
+
+    string id => "switch_" + Guid.NewGuid().ToString("N");
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsNormal { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+
+    [Parameter]
+    public bool Checked { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> CheckedChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnCheckedChanged { get; set; }
+
+
+    private async Task ChangeHandle(ChangeEventArgs e)
+    {
+        Checked = !Checked;
+        await CheckedChanged.InvokeAsync(Checked);
+        await OnCheckedChanged.InvokeAsync(Checked);
+    }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

@@ -3,20 +3,62 @@
 @inherits BulmaComponentBase
 @typeparam TValue
 
-<label @attributes="Attributes" class="@classes">
-    <input disabled="@Disabled" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle"/>
+
+<input id="@id" @attributes="Attributes" class="@classes" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle"/>
+<label for="@id">
     @ChildContent
 </label>
 
 @code {
 
-    string classes => CssBuilder.Default("checkbox")
+    string classes => CssBuilder.Default("is-checkradio")
         .AddClassFromAttributes(Attributes)
+        .AddClass("is-rtl", IsRTL)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-circle", IsCircle)
+        .AddClass("is-block", IsBlock)
+        .AddClass("has-no-border", HasNoBorder)
+        .AddClass("has-background-color", HasBackgroundColor)
         .Build();
 
+    string id = "check_" + Guid.NewGuid().ToString("N");
+
+    [Parameter]
+    public bool IsRTL { get; set; }
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsNormal { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
 
     [Parameter]
     public bool Checked { get; set; }
+
+    [Parameter]
+    public bool IsCircle { get; set; }
+
+    [Parameter]
+    public bool IsBlock { get; set; }
+
+    [Parameter]
+    public bool HasNoBorder { get; set; }
+
+    [Parameter]
+    public bool HasBackgroundColor { get; set; }
 
     [Parameter]
     public EventCallback<bool> CheckedChanged { get; set; }
@@ -43,10 +85,6 @@
 
     [Parameter]
     public TValue Value { get; set; }
-
-    [Parameter]
-    public bool Disabled { get; set; }
-
 
     [CascadingParameter]
     public CheckBoxes<TValue> Parent { get; set; }

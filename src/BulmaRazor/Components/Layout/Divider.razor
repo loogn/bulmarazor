@@ -1,0 +1,37 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@classes">
+    @ChildContent
+</div>
+
+@code {
+    // https://github.com/CreativeBulma/bulma-divider/tree/master/dist
+    
+    string classes => CssBuilder.Default("divider")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-left", IsLeft)
+        .AddClass("is-right", IsRight)
+        .AddClass("is-light", IsLight)
+        .AddClass("is-vertical", IsVertical)
+        .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+    
+    [Parameter]
+    public bool IsLeft { get; set; }
+    [Parameter]
+    public bool IsRight { get; set; }
+    
+    [Parameter]
+    public bool IsLight { get; set; }
+    
+    [Parameter]
+    public bool IsVertical { get; set; }
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

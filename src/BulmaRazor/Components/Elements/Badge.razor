@@ -1,0 +1,61 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<span @attributes="Attributes" class="@classes">@ChildContent</span>
+
+@code {
+    //https://bulma-badge.netlify.app/get-started/
+    
+    string classes => CssBuilder.Default("badge")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-light", IsLight)
+        .AddClass("is-outlined", IsOutlined)
+        .AddClass("is-top-left", IsTopLeft)
+        .AddClass("is-top", IsTop)
+        .AddClass("is-top-right", IsTopRight)
+        .AddClass("is-right", IsRight)
+        .AddClass("is-bottom-right", IsBottomRight)
+        .AddClass("is-bottom", IsBottom)
+        .AddClass("is-bottom-left", IsBottomLeft)
+        .AddClass("is-left", IsLeft)
+        .Build();
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsLight { get; set; }
+
+    [Parameter]
+    public bool IsOutlined { get; set; }
+
+    [Parameter]
+    public bool IsTopLeft { get; set; }
+
+    [Parameter]
+    public bool IsTop { get; set; }
+
+    [Parameter]
+    public bool IsTopRight { get; set; }
+
+    [Parameter]
+    public bool IsRight { get; set; }
+
+
+    [Parameter]
+    public bool IsBottomRight { get; set; }
+
+    [Parameter]
+    public bool IsBottom { get; set; }
+
+
+    [Parameter]
+    public bool IsBottomLeft { get; set; }
+
+    [Parameter]
+    public bool IsLeft { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
