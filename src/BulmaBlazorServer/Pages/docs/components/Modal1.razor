@@ -1,4 +1,4 @@
-<Modal @ref="m1">
+<Modal @ref="m1" IsActive="isV">
     <Content class="@B.BackgroundLight">
         <p>
         Any other Bulma elements you want    
@@ -8,9 +8,11 @@
 <Button @onclick=Show>Open</Button>
 
 @code{
+    bool isV = false;
     Modal m1;
     void Show()
     {
-        m1.Show();
+        isV = true;
+        // or  m1.Show();
     }
 }

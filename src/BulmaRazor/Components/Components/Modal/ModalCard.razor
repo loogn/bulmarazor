@@ -27,14 +27,15 @@
 
     string classes => CssBuilder.Default("modal")
         .AddClassFromAttributes(Attributes)
-        .AddClass("is-active", isActive)
+        .AddClass("is-active", IsActive)
         .Build();
 
 
     [Parameter]
     public string HeaderText { get; set; }
 
-    private bool isActive { get; set; }
+    [Parameter]
+    public bool IsActive { get; set; }
 
     [Parameter]
     public Size Size { get; set; } = Size.Default;
@@ -56,17 +57,18 @@
 
 
     [Parameter]
-    public Action OnClose { get; set; }
+    public EventCallback OnClose { get; set; }
 
-    public void Close()
+    public Task Close()
     {
-        isActive = false;
-        OnClose?.Invoke();
+        IsActive = false;
+        return OnClose.InvokeAsync();
     }
 
     public void Show()
     {
-        isActive = true;
+        IsActive = true;
+        StateHasChanged();
     }
 
     [Parameter]

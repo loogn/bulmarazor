@@ -17,7 +17,7 @@ namespace BulmaRazor.Components
         /// <summary>
         /// 颜色，对应type
         /// </summary>
-        public Color Color { get; set; } = Color.Default;
+        public Color Color { get; set; }
 
         /// <summary>
         /// 消息显示时间，默认2000毫秒
@@ -61,7 +61,7 @@ namespace BulmaRazor.Components
 
             ps.AddNotNull("message", Message);
 
-            ps.AddNotNull("type", Color?.Value);
+            ps.AddNotNull("type", Color?.Value ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Color?.Value);
 
             ps.AddNotNull("duration", Duration ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Duration);
 
@@ -76,7 +76,7 @@ namespace BulmaRazor.Components
 
             ps.AddNotNull("opacity", Opacity ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Opacity);
 
-            ps.AddNotNull("animate", Animate);
+            ps.AddNotNull("animate", Animate ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Animate);
 
             return ps;
         }

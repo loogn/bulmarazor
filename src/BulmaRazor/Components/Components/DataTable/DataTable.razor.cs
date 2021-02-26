@@ -148,6 +148,22 @@ namespace BulmaRazor.Components
 
         [Parameter] public Action<DataTableColumn<TItem>, bool> OnSortChange { get; set; }
 
+        string getSortIconClass(DataTableColumn<TItem> column)
+        {
+            return column == sortColumn ? "icon has-text-link" : "has-text-grey-lighter";
+        }
+
+        string getSortIconClassName(DataTableColumn<TItem> column)
+        {
+            if (column == sortColumn)
+            {
+                return sortAsc ? "fa fa-sort-asc" : "fa fa-sort-desc";
+            }
+
+            return "fa fa-sort";
+        }
+
+
         private void Sort(DataTableColumn<TItem> column)
         {
             if (sortColumn == column)
@@ -253,31 +269,34 @@ namespace BulmaRazor.Components
 
             dataView = new List<DataTableRow<TItem>>();
             var index = 0;
-            foreach (var item in Data)
+            if (Data != null)
             {
-                var dv = new DataTableRow<TItem>()
+                foreach (var item in Data)
                 {
-                    Index = index++,
-                    Item = item,
-                    Fields = new Dictionary<string, DataTableRowField>()
-                };
-                foreach (var column in columns)
-                {
-                    var field = new DataTableRowField()
+                    var dv = new DataTableRow<TItem>()
                     {
-                        Prop = column.Prop,
+                        Index = index++,
+                        Item = item,
+                        Fields = new Dictionary<string, DataTableRowField>()
                     };
-                    if (column.Prop.HasValue())
+                    foreach (var column in columns)
                     {
-                        TypeCachedInfo<TItem>.Accessor accessor = typeCachedInfo.GetAccessor(column.Prop);
-                        field.Value = accessor.Get(dv.Item);
-                        field.Type = accessor.prop.PropertyType;
+                        var field = new DataTableRowField()
+                        {
+                            Prop = column.Prop,
+                        };
+                        if (column.Prop.HasValue())
+                        {
+                            TypeCachedInfo<TItem>.Accessor accessor = typeCachedInfo.GetAccessor(column.Prop);
+                            field.Value = accessor.Get(dv.Item);
+                            field.Type = accessor.prop.PropertyType;
+                        }
+
+                        dv.Fields.Add(column.Prop ?? "field_" + column.Index, field);
                     }
 
-                    dv.Fields.Add(column.Prop ?? "field_" + column.Index, field);
+                    dataView.Add(dv);
                 }
-
-                dataView.Add(dv);
             }
         }
     }

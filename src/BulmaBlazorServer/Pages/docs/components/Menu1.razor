@@ -11,7 +11,7 @@
             {
                 var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) | item.Keywords.Contains(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
-                <MenuItem class="@cls" guid="@sub.Guid" Href="@sub.Href">@sub.Label</MenuItem>
+                <MenuItem class="@cls" Href="@sub.Href">@sub.Label</MenuItem>
             }
         </MenuList>
     }
@@ -21,7 +21,6 @@
 
     class MItem
     {
-        public  Guid Guid { get; set; }
         public string Label { get; set; }
         public string Href { get; set; }
         public HashSet<string> Keywords { get; set; }
@@ -29,7 +28,6 @@
 
         public MItem(string label, string href = "", string kws = "")
         {
-            Guid = Guid.NewGuid();
             Label = label;
             Href = href;
             Keywords = new HashSet<string>(kws.Split(',', StringSplitOptions.RemoveEmptyEntries));

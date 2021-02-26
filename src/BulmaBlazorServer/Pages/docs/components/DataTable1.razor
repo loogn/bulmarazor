@@ -1,73 +1,114 @@
 @inject BulmaRazorJsInterop JsInterop
+@inject ToastJs toastjs
 
-
-<Button @onclick="Add">Add</Button>
 <Button @onclick="() => t1.ClearCheckedRows()">Clear</Button>
 <Button @onclick="() => t1.ToggleCheckedRows()">Toggle</Button>
 <Button @onclick="() => showChecked()">Show Checked Count</Button>
 
-<DataTable @ref="t1" Data="data" TdClass="@B.TextCentered" ThClass="@B.TextCentered" TItem="Person" 
-            IsNarrow IsHoverable IsBordered IsStriped>
+<DataTable @ref="t1" Data="data" TdClass="@B.TextCentered" ThClass="@B.TextCentered" TItem="Person"
+            IsNarrow IsHoverable IsBordered IsStriped IsFullwidth>
     <DataTableColumn Width="100px" TItem="Person" IsCheckBox Label="全选">
         @context.Id
     </DataTableColumn>
     <DataTableColumn TItem="Person" Sortable Label="Id" Prop="Id"/>
-    <DataTableColumn TItem="Person" Sortable SortFunc="sortNameByLength" ThClass="@B.TextRight" Label="名称" Prop="Name"/>
+    <DataTableColumn TItem="Person" Sortable SortFunc="sortNameByLength" ThClass="@B.TextRight" Label="名称" Prop="Name">
+        <TdSlot>
+            <a @onclick="() => showName(context.Name)">@context.Name</a>
+        </TdSlot>
+    </DataTableColumn>
     <DataTableColumn TItem="Person" Sortable Label="年龄" Prop="Age">
     </DataTableColumn>
     <DataTableColumn TItem="Person" Sortable Label="性别" Prop="Gender"/>
     <DataTableColumn TItem="Person" Label="生日" Format="yyyy-MM-dd HH:mm" Prop="Birthday"/>
-    <DataTableColumn TItem="Person" Label="操作">
+    <DataTableColumn TItem="Person" Label="操作" Width="180px">
         <TdSlot>
-            <Button Color="Color.Danger">del</Button>
+            <Buttons HasAddons>
+                <Button IsSmall Color="Color.Info">Edit</Button>
+                <Button IsSmall Color="Color.Danger">Delete</Button>
+            </Buttons>
         </TdSlot>
         <ThSlot>
             操作吧
         </ThSlot>
     </DataTableColumn>
 </DataTable>
+<Pagination TotalCount="@totalCount" PageIndex="pageIndex" PageSize="pageSize" OnPageChange="onPage"
+            NextText="下一页" PrevText="上一页" IsCentered/>
 
 @code{
+    int pageIndex = 1;
+    int pageSize = 10;
+    int totalCount = 0;
+    IEnumerable<Person> data;
+    void onPage(int page)
+    {
+        pageIndex = page;
+        search();
+    }
+    
+    void search()
+    {
+        data=GetPageData(pageIndex, pageSize, out int total);
+        totalCount = total;
+    }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        search();
+    }
+
+    void showName(string name)
+    {
+        toastjs.Toast(new ToastOptions() {Message = "自定义TdSlot，显示名字：" + name});
+    }
 
     DataTable<Person> t1;
-
-    List<Person> data = new List<Person>()
+    
+    //表示从后台获取数据
+    List<Person> allData;
+    private IEnumerable<Person> GetPageData(int pageIndex, int pageSize, out int totalCount)
     {
-        new Person(1, "jake2323", 98, DateTime.Now, Gender.Famle),
-        new Person(5, "bulma", 3, DateTime.Now, Gender.Famle),
-        new Person(6, "razor", 8, DateTime.Now, Gender.Male),
-        new Person(9, "loogn", 31, DateTime.Now, Gender.Famle),
-        new Person(2, "dan", 31, DateTime.Now, Gender.Male)
-    };
+        if (allData == null)
+        {
+            allData = new List<Person>();
+            for (int i = 0; i < 1983; i++)
+            {
+                allData.Add(new Person()
+                {
+                    Id = i, 
+                    Name = "name" + i,
+                    Birthday = DateTime.Now.AddDays(-i),
+                    Age = i + 2,
+                    Gender = i % 3 == 0 ? Gender.Famle : Gender.Male
+                });
+            }
+        }
+        totalCount = allData.Count;
+        return allData.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+    }
+
+
     //自定义排序
     object sortNameByLength(Person person)
     {
         return person.Name.Length;
     }
-    async Task Add()
-    {
-        var id = new Random().Next(10,20);
-        data.Add(new Person()
-        {
-            Id = id,
-            Name = "anme" + id,
-            Birthday = DateTime.Now.AddDays(-id),
-            Age = id+2,
-            Gender = Gender.Famle
-        });
-    }
 
+    //显示
     async Task showChecked()
     {
         var rows = t1.GetCheckedRows();
-        await JsInterop.Alert(rows.Count.ToString());
+        await toastjs.Toast(new ToastOptions(){Message ="选中行数："+ rows.Count});
     }
 
+    
+    //以下是数据模型
     public enum Gender
     {
         Famle,
         Male
     }
+
     public class Person
     {
         public int Id { get; set; }
@@ -84,9 +125,10 @@
             Birthday = birthday;
             Gender = gender;
         }
+
         public Person()
         {
         }
     }
-    
+
 }

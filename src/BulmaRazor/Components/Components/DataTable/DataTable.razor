@@ -18,8 +18,8 @@ else
 </CascadingValue>
 
 @code{
-    
-    
+
+
     RenderFragment RenderTable =>
         @<table @attributes="Attributes" class="@classes">
             @if (!NoHeader)
@@ -42,7 +42,7 @@ else
                                             @:@col.Label 
                                         }
                                     </span>
-                                    <Icon IconClass="fa fa-sort"></Icon>
+                                    <Icon class="@getSortIconClass(col)" IconClass="@getSortIconClassName(col)"></Icon>
                                 </IconText>
                             }
                             else if (col.IsCheckBox)

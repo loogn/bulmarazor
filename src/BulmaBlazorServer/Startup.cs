@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BulmaRazor.Components;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +33,9 @@ namespace BulmaRazorServer
             services.AddBulmaRazor(options =>
             {
                 options.DefaultToastConfig.Duration = 1500;
-                options.DefaultToastConfig.Position = "center";
+                options.DefaultToastConfig.Position = "top-center";
+                options.DefaultToastConfig.Color=Color.Primary;
+                options.DefaultToastConfig.Animate = new ToastAnimate("fadeIn", "fadeOut");
             });
         }
 
