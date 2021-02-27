@@ -47,6 +47,7 @@ Install-Package BulmaRazor
 	- Media :			☆☆☆☆☆
 	- Section :		☆☆☆☆☆
 	- Tile :			☆☆☆☆☆
+	- Divider : 		☆☆☆☆☆
 - Form
 	- Input:			☆☆☆☆☆
 	- CheckBox:		☆☆☆☆☆
@@ -82,7 +83,9 @@ Install-Package BulmaRazor
 	- Progress ：		☆☆☆☆☆
 	- Table ：		☆☆☆☆☆
 	- Tag ：			☆☆☆☆☆
+	- Badge ：		☆☆☆
 	- Title ：		☆☆☆☆☆
+	
 
 # 许可
 

@@ -5,14 +5,13 @@
 
 
 <input id="@id" @attributes="Attributes" class="@classes" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle"/>
-<label for="@id">
-    @ChildContent
-</label>
+<label for="@id">@ChildContent</label>
 
 @code {
 
     string classes => CssBuilder.Default("is-checkradio")
         .AddClassFromAttributes(Attributes)
+        .AddClass(B.Invisible)
         .AddClass("is-rtl", IsRTL)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-small", IsSmall)

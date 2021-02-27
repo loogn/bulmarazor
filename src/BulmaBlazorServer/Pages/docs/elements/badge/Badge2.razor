@@ -1,0 +1,22 @@
+<Buttons>
+    @foreach (Color color in Colors)
+    {
+        <Button><Badge Color="color">8</Badge>Button</Button>
+    }
+    @foreach (Color color in Colors)
+    {
+        <Button><Badge Color="color" IsLight>8</Badge>Button</Button>
+    }
+    @foreach (Color color in Colors)
+    {
+        <Button><Badge Color="color" IsOutlined IsLight>8</Badge>Button</Button>
+    }
+</Buttons>
+
+@code{
+    List<Color> Colors = new()
+    {
+        Color.Default, Color.Dark, Color.Info,
+        Color.Link, Color.Success, Color.Warning, Color.Danger
+    };
+}

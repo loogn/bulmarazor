@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace BulmaRazor.Components
 {
     public class Color : EnumBase
@@ -21,6 +23,9 @@ namespace BulmaRazor.Components
         public static Color Warning = new Color("is-warning");
         public static Color Danger = new Color("is-danger");
 
+       
+        
+        
         public static Color Ghost = new Color("is-ghost");
 
 
