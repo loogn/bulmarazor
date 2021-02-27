@@ -14,7 +14,6 @@ namespace BulmaRazor.Utils
     /// </summary>
     class TypeCachedInfo
     {
-        public string TableName;
         public Func<object> NewInvoker;
         public Dictionary<string, PropAccessor> PropInvokerDict;
         public TypeCachedInfo(Type type)
