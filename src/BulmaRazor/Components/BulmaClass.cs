@@ -10,6 +10,12 @@ namespace BulmaRazor.Components
     /// </summary>
     public static class B
     {
+        public static string Join(params string[] cls)
+        {
+            return string.Join(' ', cls);
+        }
+
+
         #region Color
 
         // font-color
@@ -452,6 +458,81 @@ namespace BulmaRazor.Components
         public static readonly string Rounded = "is-rounded";
         public static readonly string Ratio = "has-ratio";
         public static readonly string Selected = "is-selected";
+
+        #endregion
+
+        #region tooltip
+
+        /// <summary>
+        /// 是否有箭头
+        /// </summary>
+        public static readonly string TooltipArrow = "has-tooltip-arrow";
+
+        /// <summary>
+        /// has-tooltip-active 是否一直显示
+        /// </summary>
+        public static readonly string TooltipActive = "has-tooltip-active";
+
+        /// <summary>
+        /// has-tooltip-right
+        /// </summary>
+        public static readonly string TooltipRight = "has-tooltip-right";
+
+        /// <summary>
+        /// has-tooltip-bottom
+        /// </summary>
+        public static readonly string TooltipBottom = "has-tooltip-bottom";
+
+        /// <summary>
+        /// has-tooltip-left
+        /// </summary>
+        public static readonly string TooltipLeft = "has-tooltip-left";
+
+        /// <summary>
+        /// has-tooltip-multiline 是否多行
+        /// </summary>
+        public static readonly string TooltipMultiline = "has-tooltip-multiline";
+
+        /// <summary>
+        /// has-tooltip-text-left
+        /// </summary>
+        public static readonly string TooltipTextLeft = "has-tooltip-text-left";
+
+        /// <summary>
+        /// has-tooltip-text-centered
+        /// </summary>
+        public static readonly string TooltipTextCentered = "has-tooltip-text-centered";
+
+        /// <summary>
+        /// has-tooltip-text-right
+        /// </summary>
+        public static readonly string TooltipTextRight = "has-tooltip-text-right";
+
+
+        /// <summary>
+        /// has-tooltip-info
+        /// </summary>
+        public static readonly string TooltipInfo = "has-tooltip-info";
+
+        /// <summary>
+        /// has-tooltip-warning
+        /// </summary>
+        public static readonly string TooltipWarning = "has-tooltip-warning";
+
+        /// <summary>
+        /// has-tooltip-primary
+        /// </summary>
+        public static readonly string TooltipPrimary = "has-tooltip-primary";
+
+        /// <summary>
+        /// has-tooltip-success
+        /// </summary>
+        public static readonly string TooltipSuccess = "has-tooltip-success";
+
+        /// <summary>
+        /// has-tooltip-danger
+        /// </summary>
+        public static readonly string TooltipDanger = "has-tooltip-danger";
 
         #endregion
     }

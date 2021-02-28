@@ -3,20 +3,38 @@
 
 
 <input id="@id" @attributes="Attributes" class="@classes" disabled="@Disabled" type="checkbox" checked="@Checked" @onchange="ChangeHandle"/>
-<label for="@id">@ChildContent</label>
+<label for="@id">
+    @if (Checked)
+    {
+        @:@(OnSlot ?? ChildContent)
+    }
+    else
+    {
+        @:@(OffSlot ?? ChildContent) 
+    }
+</label>
 
 @code {
 
     string classes => CssBuilder.Default("switch")
         .AddClassFromAttributes(Attributes)
+        .AddClass(B.Invisible)
+        .AddClass("is-rtl", IsRTL)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-small", IsSmall)
         .AddClass("is-normal", IsNormal)
         .AddClass("is-medium", IsMedium)
         .AddClass("is-large", IsLarge)
+        .AddClass("is-thin", IsThin)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-outlined", IsOutlined)
         .Build();
 
-    string id => "switch_" + Guid.NewGuid().ToString("N");
+    string id = "switch_" + Guid.NewGuid().ToString("N");
+
+    [Parameter]
+    public bool IsRTL { get; set; }
+
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
@@ -32,6 +50,14 @@
     [Parameter]
     public bool IsLarge { get; set; }
 
+    [Parameter]
+    public bool IsThin { get; set; }
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+    [Parameter]
+    public bool IsOutlined { get; set; }
 
     [Parameter]
     public bool Checked { get; set; }
@@ -41,7 +67,6 @@
 
     [Parameter]
     public EventCallback<bool> OnCheckedChanged { get; set; }
-
 
     private async Task ChangeHandle(ChangeEventArgs e)
     {
@@ -55,5 +80,12 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment OnSlot { get; set; }
+
+    [Parameter]
+    public RenderFragment OffSlot { get; set; }
+
 
 }

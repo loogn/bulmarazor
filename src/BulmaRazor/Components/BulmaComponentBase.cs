@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace BulmaRazor.Components
 {
-
-    public abstract class BulmaComponentBase : ComponentBase, IDisposable
+    public abstract class BulmaComponentBase : ComponentBase, IAsyncDisposable
     {
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> Attributes { get; set; }
 
-        public async override Task SetParametersAsync(ParameterView parameters)
+        public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
             if (Attributes == null)
@@ -20,23 +19,34 @@ namespace BulmaRazor.Components
             }
         }
 
-        /// <summary>
-        /// Dispose 方法
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected virtual void Dispose(bool disposing)
-        {
+        // /// <summary>
+        // /// Dispose 方法
+        // /// </summary>
+        // /// <param name="disposing"></param>
+        // protected virtual void Dispose(bool disposing)
+        // {
+        // }
+        //
+        //
+        // /// <summary>
+        // /// Dispose 方法
+        // /// </summary>
+        // public void Dispose()
+        // {
+        //     Dispose(disposing: true);
+        //     GC.SuppressFinalize(this);
+        // }
 
+
+        protected virtual ValueTask DisposeAsync(bool disposing)
+        {
+            return ValueTask.CompletedTask;
         }
 
-        /// <summary>
-        /// Dispose 方法
-        /// </summary>
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
-            Dispose(disposing: true);
+            await DisposeAsync(disposing: true);
             GC.SuppressFinalize(this);
         }
     }
 }
-

@@ -51,6 +51,7 @@ Install-Package BulmaRazor
 - Form
 	- Input:			☆☆☆☆☆
 	- CheckBox:		☆☆☆☆☆
+	- Switch:		☆☆☆☆
 	- Radio:			☆☆☆☆☆
 	- Select:			☆☆☆ 不支持多选
 	- Textarea:		☆☆☆☆☆

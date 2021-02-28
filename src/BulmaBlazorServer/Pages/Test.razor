@@ -1,11 +1,29 @@
+@page "/test"
+
 @using BulmaRazorServer.Pages.docs.elements
 @inject BulmaRazorJsInterop JsInterop
 @inject ToastJs toast
 
+<Container>
+    <Button @onclick="() => cal.Show()" >Show</Button>
+    <p>Date:<span>@date</span></p>
+    <Calendar @ref="cal" @bind-Value="date" type="date" Options="@_options"></Calendar>
+
+</Container>
 
 
 @code{
+    private Calendar<DateTime?> cal;
+    
+    CalenderOptions _options = new()
+    {
+        type = "date",
+        displayMode = "dialog",
+        disabledWeekDays = new List<int> {1,2},
+        disabledDates = new List<DateTime>() {DateTime.Now}
+    };
 
+    DateTime? date;
     void fun()
     {
         toast.Toast(new ToastOptions()

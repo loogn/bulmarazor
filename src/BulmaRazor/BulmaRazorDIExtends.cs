@@ -15,6 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<BulmaRazorJsInterop>();
             services.AddScoped<ToastJs>();
+            services.AddScoped<CalendarJs>();
             
             setOptions?.Invoke(BulmaRazorOptions.DefaultOptions);
             

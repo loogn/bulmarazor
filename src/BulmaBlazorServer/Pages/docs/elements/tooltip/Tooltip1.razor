@@ -1,0 +1,33 @@
+<p>
+    Lorem ipsum dolor sit amet,
+    <span data-tooltip="Tooltip content">consectetur adipisicing elit</span>.
+    Ipsa fugit dolores earum quod distinctio ducimus non dignissimos
+    molestias amet corrupti voluptatum assumenda impedit beatae veritatis nemo
+    veniam error, hic cumque.
+</p>
+<br>
+<Buttons>
+    <Button data-tooltip="Tooltip Text">默认</Button>
+    <Button class="@B.TooltipActive" data-tooltip="Tooltip Text">一直显示</Button>
+    <Button class="@B.TooltipArrow" data-tooltip="Tooltip Text">有箭头</Button>
+</Buttons>
+<br>
+<Buttons>
+    <Button class="@B.TooltipRight" data-tooltip="Tooltip Text">Right</Button>
+    <Button class="@B.TooltipLeft" data-tooltip="Tooltip Text">Left</Button>
+    <Button class="@B.TooltipBottom" data-tooltip="Tooltip Text">Bottom</Button>
+</Buttons>
+<br>
+<Buttons>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipTextLeft))" data-tooltip="Tooltip Text">TextLeft</Button>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipTextCentered))" data-tooltip="Tooltip Text">TextCentered</Button>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipTextRight))" data-tooltip="Tooltip Text">TextRight</Button>
+</Buttons>
+<br>
+<Buttons>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipInfo))" data-tooltip="Tooltip Text">Info</Button>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipDanger))" data-tooltip="Tooltip Text">Danger</Button>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipPrimary))" data-tooltip="Tooltip Text">Primary</Button>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipWarning))" data-tooltip="Tooltip Text">Warning</Button>
+    <Button class="@(B.Join(B.TooltipArrow, B.TooltipSuccess))" data-tooltip="Tooltip Text">Success</Button>
+</Buttons>

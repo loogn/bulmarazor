@@ -1,0 +1,127 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject CalendarJs calendarjs
+@typeparam TValue
+@* *@
+@* <input @ref="_this" @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent" *@
+@*         class="@classes"/> *@
+
+<input @ref="_this" @attributes="Attributes" class="@classes" @onchange="changeHandle"/>
+
+@code {
+
+    string classes => CssBuilder.Default("input")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-hovered", IsHovered)
+        .AddClass("is-focused", IsFocused)
+        .AddClass("is-static", IsStatic)
+        .Build();
+
+    private void changeHandle(ChangeEventArgs e)
+    {
+        if (e.Value != null) ShowValue = e.Value.ToString();
+    }
+
+    private ElementReference _this;
+    private IJSObjectReference _obj;
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsNormal { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+    [Parameter]
+    public bool IsHovered { get; set; }
+
+    [Parameter]
+    public bool IsFocused { get; set; }
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+    [Parameter]
+    public bool IsStatic { get; set; }
+
+    [Parameter]
+    public string BindEvent { get; set; } = "onchange";
+
+    [Parameter]
+    public TValue Value { get; set; }
+
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+    [Parameter]
+    public string Format { get; set; }
+
+    [Parameter]
+    public CalenderOptions Options { get; set; }
+
+    private string ShowValue
+    {
+        get { return ExtendMethods.GetShowValue(Value, Format); }
+        set
+        {
+            if (value.SetRealValue(out TValue val))
+            {
+                Value = val;
+                if (ValueChanged.HasDelegate)
+                {
+                    ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+                }
+            }
+        }
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (typeof(TValue).IsNumber())
+        {
+            if (!Attributes.ContainsKey("type"))
+            {
+                Attributes.Add("type", "number");
+            }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            _obj = await calendarjs.Attach(_this, Options);
+            var a = _obj;
+        }
+    }
+
+    public void Show()
+    {
+        _obj.InvokeVoidAsync("show");
+    }
+
+    protected override async ValueTask DisposeAsync(bool disposing)
+    {
+        if (_obj != null)
+        {
+            await _obj.DisposeAsync();
+        }
+    }
+
+}
