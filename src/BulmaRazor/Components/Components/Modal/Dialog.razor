@@ -5,7 +5,6 @@
 <div @attributes="Attributes" class="@classes">
     <div class="modal-background" @onclick="backgroundClickHandle"></div>
     <div class="modal-card">
-
         <header class="modal-card-head">
             <p class="modal-card-title">@HeaderText</p>
             @if (ShowClose)
@@ -23,11 +22,28 @@
 </div>
 
 @code{
-    
+
     string classes => CssBuilder.Default("modal")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
+    
+
+    public void Alert(string msg)
+    {
+        IsActive = true;
+        BodySlot = builder =>
+        {
+            builder.AddContent(0, 
+                @<IconText>
+                    <Icon IconClass="fa fa-info-circle"></Icon>
+                    <span>@msg</span>
+                </IconText>
+                );
+            
+        };
+        StateHasChanged();
+    }
 
 
     [Parameter]
@@ -35,9 +51,6 @@
 
     [Parameter]
     public bool IsActive { get; set; }
-
-    [Parameter]
-    public Size Size { get; set; } = Size.Default;
 
 
     [Parameter]

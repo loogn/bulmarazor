@@ -16,18 +16,63 @@ namespace BulmaRazor.Components
     public class BulmaRazorJsInterop : IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+        private readonly Lazy<Task<IJSObjectReference>> calendarModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> toastModuleTask;
 
         public BulmaRazorJsInterop(IJSRuntime jsRuntime)
         {
+            //公共js
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-               "import", "./_content/BulmaRazor/JsInterop.js").AsTask());
+                "import", "./_content/BulmaRazor/JsInterop.js").AsTask());
+
+            //calendar
+            calendarModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/jsplugin/bulma-calendar.js").AsTask());
+            
+            //toast
+            toastModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/jsplugin/toast.js").AsTask());
         }
-        public async ValueTask<string> Prompt(string message,string defValue)
+
+        public async ValueTask<IJSObjectReference> CalendarAttach(string guid, CalenderOptions options)
+        {
+            var module = await calendarModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("bulmaCalendar.attach", "#"+guid,
+                options ?? new CalenderOptions()
+            );
+        }
+
+        #region toast
+
+        public async ValueTask ToastShow(ToastOptions options)
+        {
+            var module = await toastModuleTask.Value;
+            await module.InvokeVoidAsync("toast", options.ToParams());
+        }
+
+        public async ValueTask ToastSetDefaults(ToastConfig config)
+        {
+            var module = await toastModuleTask.Value;
+            await module.InvokeVoidAsync("setDefaults", config);
+        }
+
+        public async ValueTask ToastResetDefaults()
+        {
+            var module = await toastModuleTask.Value;
+            await module.InvokeVoidAsync("resetDefaults");
+        }
+
+        #endregion
+
+
+        #region 公共
+
+        public async ValueTask<string> Prompt(string message, string defValue)
         {
             var module = await moduleTask.Value;
-            return await module.InvokeAsync<string>("Prompt", message,defValue);
+            return await module.InvokeAsync<string>("Prompt", message, defValue);
         }
-        
+
         public async ValueTask<bool> Confirm(string message)
         {
             var module = await moduleTask.Value;
@@ -39,12 +84,14 @@ namespace BulmaRazor.Components
             var module = await moduleTask.Value;
             await module.InvokeVoidAsync("Alert", message);
         }
-        
+
         public async ValueTask Log(params object[] args)
         {
             var module = await moduleTask.Value;
             await module.InvokeVoidAsync("Log", args);
         }
+
+        #endregion
 
         // public async ValueTask<bool> GetOptionSelected(ElementReference element)
         // {
@@ -85,6 +132,18 @@ namespace BulmaRazor.Components
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)
+            {
+                var module = await moduleTask.Value;
+                await module.DisposeAsync();
+            }
+
+            if (calendarModuleTask.IsValueCreated)
+            {
+                var module = await calendarModuleTask.Value;
+                await module.DisposeAsync();
+            }
+
+            if (toastModuleTask.IsValueCreated)
             {
                 var module = await moduleTask.Value;
                 await module.DisposeAsync();

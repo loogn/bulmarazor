@@ -8,17 +8,17 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddBulmaRazor(this IServiceCollection services)
         {
-            return AddBulmaRazor(services,null);
+            return AddBulmaRazor(services, null);
         }
-        
-        public static IServiceCollection AddBulmaRazor(this IServiceCollection services,Action<BulmaRazorOptions> setOptions)
+
+        public static IServiceCollection AddBulmaRazor(this IServiceCollection services,
+            Action<BulmaRazorOptions> setOptions)
         {
             services.AddScoped<BulmaRazorJsInterop>();
-            services.AddScoped<ToastJs>();
-            services.AddScoped<CalendarJs>();
-            
+            services.AddScoped<ToastService>();
+
             setOptions?.Invoke(BulmaRazorOptions.DefaultOptions);
-            
+
             return services;
         }
     }

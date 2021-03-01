@@ -39,7 +39,7 @@ namespace BulmaRazor.Components
         /// <summary>
         /// timeFormat	Time format pattern	HH:mm
         /// </summary>
-        public string timeFormat { get; set; } = "HH:mm";
+        public string timeFormat { get; set; } = "HH:mm:ss";
 
         /// <summary>
         /// displayMode	Display mode: default|dialog|inline	default

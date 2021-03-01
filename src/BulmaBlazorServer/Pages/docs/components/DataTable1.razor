@@ -1,5 +1,5 @@
 @inject BulmaRazorJsInterop JsInterop
-@inject ToastJs toastjs
+@inject ToastService ToastService
 
 <Button @onclick="() => t1.ClearCheckedRows()">Clear</Button>
 <Button @onclick="() => t1.ToggleCheckedRows()">Toggle</Button>
@@ -59,7 +59,7 @@
 
     void showName(string name)
     {
-        toastjs.Toast(new ToastOptions() {Message = "自定义TdSlot，显示名字：" + name});
+        ToastService.Show(new ToastOptions() {Message = "自定义TdSlot，显示名字：" + name});
     }
 
     DataTable<Person> t1;
@@ -98,7 +98,7 @@
     async Task showChecked()
     {
         var rows = t1.GetCheckedRows();
-        await toastjs.Toast(new ToastOptions(){Message ="选中行数："+ rows.Count});
+        await ToastService.Show(new ToastOptions(){Message ="选中行数："+ rows.Count});
     }
 
     

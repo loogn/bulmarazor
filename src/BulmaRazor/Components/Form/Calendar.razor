@@ -1,65 +1,18 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
-@inject CalendarJs calendarjs
+@inject BulmaRazorJsInterop JsInterop
 @typeparam TValue
-@* *@
-@* <input @ref="_this" @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent" *@
-@*         class="@classes"/> *@
 
-<input @ref="_this" @attributes="Attributes" class="@classes" @onchange="changeHandle"/>
+<input id="@id" @attributes="Attributes"/>
 
 @code {
 
-    string classes => CssBuilder.Default("input")
+    string classes => CssBuilder.Default()
         .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
-        .AddClass("is-small", IsSmall)
-        .AddClass("is-normal", IsNormal)
-        .AddClass("is-medium", IsMedium)
-        .AddClass("is-large", IsLarge)
-        .AddClass("is-rounded", IsRounded)
-        .AddClass("is-hovered", IsHovered)
-        .AddClass("is-focused", IsFocused)
-        .AddClass("is-static", IsStatic)
         .Build();
 
-    private void changeHandle(ChangeEventArgs e)
-    {
-        if (e.Value != null) ShowValue = e.Value.ToString();
-    }
-
-    private ElementReference _this;
+    private string id = "calender_" + Guid.NewGuid().ToString("N");
     private IJSObjectReference _obj;
-
-    [Parameter]
-    public Color Color { get; set; } = Color.Default;
-
-    [Parameter]
-    public bool IsSmall { get; set; }
-
-    [Parameter]
-    public bool IsNormal { get; set; }
-
-    [Parameter]
-    public bool IsMedium { get; set; }
-
-    [Parameter]
-    public bool IsLarge { get; set; }
-
-    [Parameter]
-    public bool IsHovered { get; set; }
-
-    [Parameter]
-    public bool IsFocused { get; set; }
-
-    [Parameter]
-    public bool IsRounded { get; set; }
-
-    [Parameter]
-    public bool IsStatic { get; set; }
-
-    [Parameter]
-    public string BindEvent { get; set; } = "onchange";
 
     [Parameter]
     public TValue Value { get; set; }
@@ -81,23 +34,26 @@
             if (value.SetRealValue(out TValue val))
             {
                 Value = val;
-                if (ValueChanged.HasDelegate)
-                {
-                    ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
-                }
+                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
             }
         }
+    }
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Attributes.Add("value", ShowValue);
+        CalendarCSharp.SetAction(id, (s => ShowValue = s));
     }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
-        if (typeof(TValue).IsNumber())
+
+        if (!Attributes.ContainsKey("type"))
         {
-            if (!Attributes.ContainsKey("type"))
-            {
-                Attributes.Add("type", "number");
-            }
+            Attributes.Add("type", "date");
         }
     }
 
@@ -106,18 +62,49 @@
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
-            _obj = await calendarjs.Attach(_this, Options);
-            var a = _obj;
+            _obj = await JsInterop.CalendarAttach(id, Options);
         }
     }
 
+    #region Calendar Funs
+
     public void Show()
     {
-        _obj.InvokeVoidAsync("show");
+        _obj?.InvokeVoidAsync("show");
     }
+
+    public void Hide()
+    {
+        _obj?.InvokeVoidAsync("hide");
+    }
+
+    public ValueTask<bool> IsOpen()
+    {
+        return _obj?.InvokeAsync<bool>("isOpen") ?? new ValueTask<bool>(false);
+    }
+
+    //public Value()
+
+    public void Refresh()
+    {
+        _obj?.InvokeVoidAsync("refresh");
+    }
+
+    public void Save()
+    {
+        _obj?.InvokeVoidAsync("save");
+    }
+
+    public void Clear()
+    {
+        _obj?.InvokeVoidAsync("clear");
+    }
+
+    #endregion
 
     protected override async ValueTask DisposeAsync(bool disposing)
     {
+        CalendarCSharp.RemoveAction(id);
         if (_obj != null)
         {
             await _obj.DisposeAsync();

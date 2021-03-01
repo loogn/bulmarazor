@@ -2,31 +2,70 @@
 
 @using BulmaRazorServer.Pages.docs.elements
 @inject BulmaRazorJsInterop JsInterop
-@inject ToastJs toast
+@inject ToastService ToastService
 
 <Container>
-    <Button @onclick="() => cal.Show()" >Show</Button>
-    <p>Date:<span>@date</span></p>
-    <Calendar @ref="cal" @bind-Value="date" type="date" Options="@_options"></Calendar>
+    <Field>
+        <Button @onclick="() => cal.Show()">Show</Button>
+        <p>Date:<span>@date</span></p>
+    </Field>
+    <Field>
+        <Control>
+            <Calendar @ref="cal" @bind-Value="date" type="date" Options="@_options"></Calendar>
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Container>
+                <Calendar @ref="cal2" @bind-Value="ts" type="time" Options="@_options2"></Calendar>
+            </Container>
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Input @bind-Value="ts"></Input>
+        </Control>
+    </Field>
 
+    <hr>
+    
+    <Button @onclick="funDialog">Click</Button>
+
+    <Dialog @ref="dialog"></Dialog>
 </Container>
 
-
 @code{
-    private Calendar<DateTime?> cal;
+    Dialog dialog;
+    void funDialog()
+    {
+        dialog.Alert("Hello 信息");
+       
+    }
     
+    private Calendar<DateTime?> cal;
+    private Calendar<TimeSpan?> cal2;
+
     CalenderOptions _options = new()
     {
-        type = "date",
-        displayMode = "dialog",
-        disabledWeekDays = new List<int> {1,2},
+        type = "datetime",
+        disabledWeekDays = new List<int> {1, 2},
         disabledDates = new List<DateTime>() {DateTime.Now}
     };
 
-    DateTime? date;
+    CalenderOptions _options2 = new()
+    {
+        type = "time",
+        color = "danger",
+        closeOnSelect = false,
+    };
+
+    DateTime? date = DateTime.Now;
+    TimeSpan? ts;
+
     void fun()
     {
-        toast.Toast(new ToastOptions()
+        ToastService.Show("hello world");
+        ToastService.Show(new ToastOptions()
         {
             Message = "Hello world 你好世界",
             Color = Color.Primary,
