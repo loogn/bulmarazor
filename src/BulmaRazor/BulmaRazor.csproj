@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Version>0.0.7</Version>
+        <Version>0.0.9</Version>
         <Description>BulmaRazor</Description>
         <Copyright>loogn@2021</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -10,7 +10,7 @@
         <RepositoryUrl>https://gitee.com/loogn/bulmarazor</RepositoryUrl>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageId>BulmaRazor</PackageId>
-        <AssemblyVersion>0.0.7.0</AssemblyVersion>
+        <AssemblyVersion>0.0.9.0</AssemblyVersion>
         <PackageIcon>nuget-logo.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
@@ -25,25 +25,5 @@
         <PackagePath></PackagePath>
       </None>
     </ItemGroup>
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\datePicker\defaultOptions.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\datePicker\index.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\datePicker\templates\datepicker.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\datePicker\templates\days.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\datePicker\templates\months.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\datePicker\templates\weekdays.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\datePicker\templates\years.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\defaultOptions.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\index.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\templates\footer.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\templates\header.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\templates\index.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\templates\selection.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\timePicker\defaultOptions.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\timePicker\index.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\timePicker\templates\timepicker.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\utils\events.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\utils\index.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\calendar\utils\type.js" />
-    </ItemGroup>
+   
 </Project>

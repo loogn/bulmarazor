@@ -1,0 +1,30 @@
+@inject ToastService ToastService
+
+<Button @onclick="alert">alert</Button>
+<Button @onclick="confirm">confirm</Button>
+<Button @onclick="prompt">prompt</Button>
+<Dialog @ref="dialog" style="max-width: 400px;color: red;"></Dialog>
+
+@code{
+    Dialog dialog;
+
+    void alert()
+    {
+        dialog.Alert("Hello 信息", new DialogOptions() {OKColor = Color.Info});
+    }
+    void confirm()
+    {
+        dialog.Confirm("Hello 信息", new DialogOptions()
+        {
+            OK = () => ToastService.Show("点击了sure"),
+            Cancel = () => ToastService.Show("点击了取消")
+        });
+    }
+    void prompt()
+    {
+        dialog.Prompt("hello", "world", new DialogOptions()
+        {
+            Result = (res) => ToastService.Show("您输入了："+res)
+        });
+    }
+}

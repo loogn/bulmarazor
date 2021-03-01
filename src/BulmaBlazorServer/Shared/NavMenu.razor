@@ -1,7 +1,12 @@
 ﻿@inject NavigationManager nm
 @inject IJSRuntime js
 
-<Input @ref="kwInput" class="@B.MB2" placeholder="Enter for search" @bind-Value="kw" @onkeypress="inputHandle"/>
+<Control HasIconsRight>
+    <Input @ref="kwInput" class="@B.MB2" BindEvent="oninput" placeholder="Search Components" @bind-Value="kw" @onkeypress="inputHandle"/>
+    @if(kw.Length>0){
+        <Icon IsRight IconClass="fa fa-times" class="@B.Clickable" @onclick="clear"></Icon>
+    }
+</Control>
 <Menu OnItemClick="OnMenuClick">
     @foreach (var item in MenuData)
     {
@@ -34,6 +39,10 @@
         }
     }
 
+    void clear()
+    {
+        kw = "";
+    }
     void inputHandle(KeyboardEventArgs e)
     {
         if (e.Key == "Enter")
@@ -126,7 +135,7 @@
                 new MItem("下拉(Dropdown)", "/docs/components/dropdown", "dropdown,下拉"),
                 new MItem("菜单(Menu)", "/docs/components/menu", "menu,菜单"),
                 new MItem("消息(Message)", "/docs/components/message", "message,消息"),
-                new MItem("对话框(Modal)", "/docs/components/modal", "modal,对话框"),
+                new MItem("对话框(Dialog/Modal)", "/docs/components/modal", "modal,对话框,弹层,dialog,弹框,alert,confirm,prompt"),
                 new MItem("导航(Navbar)", "/docs/components/navbar", "navbar,导航"),
                 new MItem("分页(Pagination)", "/docs/components/pagination", "pagination,page,分页"),
                 new MItem("面板(Panel)", "/docs/components/panel", "panel,面板"),

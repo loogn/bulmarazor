@@ -2,16 +2,16 @@
 
 @inherits BulmaComponentBase
 
-<div @attributes="Attributes" class="@classes">
+<div class="@classes">
     <div class="modal-background"></div>
     @if (opts != null)
     {
-        <div class="modal-card">
+        <div class="modal-card" @attributes="Attributes">
             <header class="modal-card-head">
                 <p class="modal-card-title">@opts.Title</p>
-                @if (ShowClose)
+                @if (opts.ShowClose)
                 {
-                    <button class="delete" aria-label="close" @onclick="Cancle"></button>
+                    <button class="delete" aria-label="close" @onclick="Close"></button>
                 }
             </header>
 
@@ -25,7 +25,7 @@
                     <Field>
                         <Label>@opts.Message</Label>
                         <Control>
-                            <Input placeholder="Text input" @bind-Value="val" autofocus/>
+                            <Input placeholder="@opts.Placeholder" @bind-Value="val" autofocus/>
                         </Control>
                     </Field>
                 }
@@ -34,9 +34,9 @@
                 <Buttons IsRight style="width:100%">
                     @if (opts.Type == 2 || opts.Type == 3)
                     {
-                        <Button @onclick="Cancle">取消</Button>
+                        <Button @onclick="Cancel" Color="opts.CancelColor">@opts.CancelText</Button>
                     }
-                    <Button @onclick="Sure" Color="Color.Primary">确定</Button>
+                    <Button @onclick="Ok" Color="opts.OKColor">@opts.OKText</Button>
                 </Buttons>
             </footer>
         </div>
@@ -46,7 +46,6 @@
 @code{
 
     string classes => CssBuilder.Default("modal")
-        .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
 
@@ -63,7 +62,6 @@
     private void Show(DialogOptions options)
     {
         IsActive = true;
-        options.Title ??= "提示信息";
         opts = options;
         StateHasChanged();
     }
@@ -74,8 +72,15 @@
         {
             Type = 1,
             Message = msg,
-            Title = title
+            Title = title,
         });
+    }
+
+    public void Alert(string msg, DialogOptions options)
+    {
+        options.Type = 1;
+        options.Message = msg;
+        Show(options);
     }
 
     public void Confirm(string msg, string title = null)
@@ -114,20 +119,20 @@
         Show(options);
     }
 
-    private void Sure()
+    private void Ok()
     {
         IsActive = false;
-        if (opts.Type == 2)
-        {
-            opts.Sure?.Invoke();
-        }
-        if (opts.Type == 3)
-        {
-            opts.Result?.Invoke(val);
-        }
+        opts.OK?.Invoke();
+        opts.Result?.Invoke(val);
     }
 
-    private void Cancle()
+    private void Cancel()
+    {
+        IsActive = false;
+        opts.Cancel?.Invoke();
+    }
+
+    private void Close()
     {
         IsActive = false;
         if (opts.Type == 2)
