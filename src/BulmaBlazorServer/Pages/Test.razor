@@ -28,19 +28,38 @@
     </Field>
 
     <hr>
+    <Button @onclick="alert">alert</Button>
+    <Button @onclick="confirm">confirm</Button>
+    <Button @onclick="prompt">prompt</Button>
     
-    <Button @onclick="funDialog">Click</Button>
 
     <Dialog @ref="dialog"></Dialog>
 </Container>
 
 @code{
     Dialog dialog;
-    void funDialog()
+    
+    void alert()
     {
         dialog.Alert("Hello 信息");
-       
     }
+    void confirm()
+    {
+        dialog.Confirm("Hello 信息", new DialogOptions()
+        {
+            Sure = (() => ToastService.Show("点击了sure")),
+            Cancel = (() => ToastService.Show("点击了取消"))
+        });
+    }
+
+    void prompt()
+    {
+        dialog.Prompt("hello", "world", new DialogOptions()
+        {
+            Result = ((res) => ToastService.Show(res))
+        });
+    }
+    
     
     private Calendar<DateTime?> cal;
     private Calendar<TimeSpan?> cal2;

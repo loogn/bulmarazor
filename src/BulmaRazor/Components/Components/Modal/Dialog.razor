@@ -3,22 +3,44 @@
 @inherits BulmaComponentBase
 
 <div @attributes="Attributes" class="@classes">
-    <div class="modal-background" @onclick="backgroundClickHandle"></div>
-    <div class="modal-card">
-        <header class="modal-card-head">
-            <p class="modal-card-title">@HeaderText</p>
-            @if (ShowClose)
-            {
-                <button class="delete" aria-label="close" @onclick="Close"></button>
-            }
-        </header>
-        <section class="modal-card-body">
-            @BodySlot
-        </section>
-        <footer class="modal-card-foot">
-            @FootSlot
-        </footer>
-    </div>
+    <div class="modal-background"></div>
+    @if (opts != null)
+    {
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">@opts.Title</p>
+                @if (ShowClose)
+                {
+                    <button class="delete" aria-label="close" @onclick="Cancle"></button>
+                }
+            </header>
+
+            <section class="modal-card-body">
+                @if (opts.Type == 1 || opts.Type == 2)
+                {
+                    @:@opts.Message
+                }
+                else if (opts.Type == 3)
+                {
+                    <Field>
+                        <Label>@opts.Message</Label>
+                        <Control>
+                            <Input placeholder="Text input" @bind-Value="val" autofocus/>
+                        </Control>
+                    </Field>
+                }
+            </section>
+            <footer class="modal-card-foot">
+                <Buttons IsRight style="width:100%">
+                    @if (opts.Type == 2 || opts.Type == 3)
+                    {
+                        <Button @onclick="Cancle">取消</Button>
+                    }
+                    <Button @onclick="Sure" Color="Color.Primary">确定</Button>
+                </Buttons>
+            </footer>
+        </div>
+    }
 </div>
 
 @code{
@@ -27,66 +49,93 @@
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
-    
 
-    public void Alert(string msg)
+
+    private string HeaderText { get; set; }
+    private string val = "";
+
+    private bool IsActive { get; set; }
+
+    public bool ShowClose { get; set; } = true;
+
+    private DialogOptions opts;
+
+    private void Show(DialogOptions options)
     {
         IsActive = true;
-        BodySlot = builder =>
-        {
-            builder.AddContent(0, 
-                @<IconText>
-                    <Icon IconClass="fa fa-info-circle"></Icon>
-                    <span>@msg</span>
-                </IconText>
-                );
-            
-        };
+        options.Title ??= "提示信息";
+        opts = options;
         StateHasChanged();
     }
 
-
-    [Parameter]
-    public string HeaderText { get; set; }
-
-    [Parameter]
-    public bool IsActive { get; set; }
-
-
-    [Parameter]
-    public bool CloseOnClickBackground { get; set; } = false;
-
-    private void backgroundClickHandle()
+    public void Alert(string msg, string title = null)
     {
-        if (CloseOnClickBackground)
+        Show(new DialogOptions()
         {
-            Close();
+            Type = 1,
+            Message = msg,
+            Title = title
+        });
+    }
+
+    public void Confirm(string msg, string title = null)
+    {
+        Show(new DialogOptions()
+        {
+            Type = 2,
+            Message = msg,
+            Title = title
+        });
+    }
+
+    public void Confirm(string msg, DialogOptions options)
+    {
+        options.Type = 2;
+        options.Message = msg;
+        Show(options);
+    }
+
+    public void Prompt(string msg, string defaultValue = "", string title = null)
+    {
+        val = defaultValue;
+        Show(new DialogOptions()
+        {
+            Type = 3,
+            Message = msg,
+            Title = title
+        });
+    }
+
+    public void Prompt(string msg, string defaultValue, DialogOptions options)
+    {
+        val = defaultValue;
+        options.Type = 3;
+        options.Message = msg;
+        Show(options);
+    }
+
+    private void Sure()
+    {
+        IsActive = false;
+        if (opts.Type == 2)
+        {
+            opts.Sure?.Invoke();
+        }
+        if (opts.Type == 3)
+        {
+            opts.Result?.Invoke(val);
         }
     }
 
-    [Parameter]
-    public bool ShowClose { get; set; } = true;
-
-
-    [Parameter]
-    public EventCallback OnClose { get; set; }
-
-    public Task Close()
+    private void Cancle()
     {
         IsActive = false;
-        return OnClose.InvokeAsync();
+        if (opts.Type == 2)
+        {
+            opts.Cancel?.Invoke();
+        }
     }
 
-    public void Show()
-    {
-        IsActive = true;
-        StateHasChanged();
-    }
-
-    [Parameter]
-    public RenderFragment BodySlot { get; set; }
-
-    [Parameter]
-    public RenderFragment FootSlot { get; set; }
+    // private RenderFragment BodySlot { get; set; }
 
 }
