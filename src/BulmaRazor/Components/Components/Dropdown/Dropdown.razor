@@ -4,7 +4,7 @@
 
 <div @attributes="Attributes" class="@clesses">
     <CascadingValue Value="this" IsFixed="true">
-        <div class="dropdown-trigger" @onclick="clickHandle">
+        <div class="dropdown-trigger" @onclick="clickHandle" @onclick:stopPropagation>
             @TriggerSlot
         </div>
 
