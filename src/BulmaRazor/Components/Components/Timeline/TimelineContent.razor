@@ -1,0 +1,15 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@clesses">
+    @ChildContent
+</div>
+@code {
+    string clesses => CssBuilder.Default("timeline-content")
+        .AddClassFromAttributes(Attributes)
+       .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    
+}

@@ -1,0 +1,58 @@
+﻿@page "/docs/overview/start"
+@layout DocLayout
+
+
+
+<Title>开始使用BulmaRazor</Title>
+<Subtitle Size="Size.Size4">使用nuget引入即可使用</Subtitle>
+<hr>
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">1</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">通过nuget引入BulmaRazor包</Title>
+            <HighLight Language="powershell">Install-Package BulmaRazor</HighLight>
+        </MediaContent>
+    </Media>
+</Content>
+
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">2</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">在Startup类的ConfigureServices方法中添加服务</Title>
+            <HighLight Language="csharp">services.AddBulmaRazor();</HighLight>
+        </MediaContent>
+    </Media>
+</Content>
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">3</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">在_Host.cshtml或者index.html引入样式</Title>
+            <HighLight FilePath="Pages/docs/overview/start/Start1.html"></HighLight>
+        </MediaContent>
+    </Media>
+</Content>
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">4</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">在_Imports.razor中导入名称空间</Title>
+            <HighLight Language="csharp">@@using BulmaRazor.Components</HighLight>
+        </MediaContent>
+    </Media>
+</Content>
+
+
+@code {
+
+}

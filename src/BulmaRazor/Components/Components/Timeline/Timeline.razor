@@ -1,0 +1,25 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@clesses">
+    @ChildContent
+</div>
+
+@code {
+
+    string clesses => CssBuilder.Default("timeline")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("is-rtl", IsRTL)
+        .AddClass("is-centered", IsCentered)
+        .Build();
+
+    [Parameter]
+    public bool IsCentered { get; set; }
+
+    [Parameter]
+    public bool IsRTL { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

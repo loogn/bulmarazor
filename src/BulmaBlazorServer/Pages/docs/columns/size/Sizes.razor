@@ -1,0 +1,121 @@
+@page "/docs/columns/sizes"
+@layout DocLayout
+
+<Title>尺寸列(Column sizes)</Title>
+<Subtitle Size="Size.Size4">
+    分别定义每个列的 <strong>尺寸(size)</strong>
+</Subtitle>
+<hr>
+
+<Content>
+    <p>如果要更改单个列的大小，可以使用Size属性类:</p>
+    <ul>
+        <li>
+            <code>Size.ThreeQuarters</code>
+        </li>
+        <li>
+            <code>Size.TwoThirds</code>
+        </li>
+        <li>
+            <code>Size.Half</code>
+        </li>
+        <li>
+            <code>Size.OneThird</code>
+        </li>
+        <li>
+            <code>Size.OneQuarter</code>
+        </li>
+        <li>
+            <code>Size.Full</code>
+        </li>
+    </ul>
+    <p>其他列将自动填充剩余空间</p>
+</Content>
+
+<Content>
+    <p>可以使用<code>20%</code> 的倍数:</p>
+    <ul>
+        <li>
+            <code>Size.FourFifths</code>
+        </li>
+        <li>
+            <code>Size.ThreeFifths</code>
+        </li>
+        <li>
+            <code>Size.TwoFifths</code>
+        </li>
+        <li>
+            <code>Size.OneFifth</code>
+        </li>
+    </ul>
+</Content>
+
+
+<Sizes1 />
+
+<HighLight FilePath="Pages/docs/columns/size/Sizes1.razor" HasMore></HighLight>
+
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    12列栅格系统
+</Title>
+<Content>
+    <p>栅格由 12 列组成，每个栅格都有自己的尺寸:</p>
+    <ul>
+        @for (int i = 1; i < 13; i++)
+        {
+            <li><code>Size.Size@(i)</code></li>
+        }
+    </ul>
+</Content>
+<Sizes2 />
+
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    偏移(Offset)
+</Title>
+<Content>
+    <p>
+        你可以使用 <em>空列</em>来创建一个水平空间的 <code>Column</code> 元素，你还可以在其上使用 <code>Offset</code> 属性:
+    </p>
+</Content>
+<Sizes3 />
+<HighLight FilePath="Pages/docs/columns/size/Sizes3.razor" HasMore></HighLight>
+
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    窄列(Narrow column)
+</Title>
+<Content>
+    <p>
+        如果你需要一个指定空间的类，可以使用IsNarrow属性。其他类将填充剩余的空间。
+    </p>
+</Content>
+<Sizes4 />
+<HighLight FilePath="Pages/docs/columns/size/Sizes4.razor"></HighLight>
+
+
+<Content>
+    <p>对于尺寸属性，您可以为不同的断点设置窄列:</p>
+    <ul>
+        <li>
+            <code>IsNarrowMobile</code>
+        </li>
+        <li>
+            <code>IsNarrowTablet</code>
+        </li>
+        <li>
+            <code>IsNarrowTouch</code>
+        </li>
+        <li>
+            <code>IsNarrowDesktop</code>
+        </li>
+        <li>
+            <code>IsNarrowWidescreen</code>
+        </li>
+        <li>
+            <code>IsNarrowFullhd</code>
+        </li>
+    </ul>
+</Content>

@@ -1,0 +1,43 @@
+@page "/docs/elements/button"
+@layout DocLayout
+
+<Title>Button</Title>
+<Subtitle Size="Size.Size4">
+    经典的按钮，可以有不同的Color，Size,States等等
+</Subtitle>
+<hr>
+
+<Content>
+    <p>如果添加了,href属性，组件会表现为a标签，否则就是button</p>
+</Content>
+
+
+
+<Columns>
+    <Column>
+        <Button1 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/button/Button1.razor"></HighLight>
+    </Column>
+</Columns>
+
+
+
+<Title Size="Size.Size4" IsSpaced>
+    Buttons和插件
+</Title>
+<Content>
+    <p>
+        可以使用Field的HasAddons来实现，也可以使用Buttons来实现，下面是Buttons的例子
+    </p>
+</Content>
+
+<Columns>
+    <Column>
+        <Button2 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/button/Button2.razor"></HighLight>
+    </Column>
+</Columns>

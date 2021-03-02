@@ -1,0 +1,51 @@
+﻿@page "/docs/overview/commons"
+@layout DocLayout
+
+
+<Title>Helper Classes and Common Properties</Title>
+<Subtitle Size="Size.Size4">Bulma在Color、Spacing、Typography、Visibility、Flexbox等定义了许多方便的css样式类</Subtitle>
+<hr>
+
+
+<Content>
+    <p>为了在Blazor中方便使用,BulmaRazor中提供了一个名称叫<code class="@B.Size1 @B.TextWeightBold">B</code>的类，包括了Bulma中hepers类</p>
+    <p>比如：@@B.TextPrimary为has-text-primary，@@B.MX2为mx-2 </p>
+    <p>详细helpers请参考bulma官网 <a class="link" target="_blank" href="https://bulma.io/documentation/helpers/"> Go</a></p>
+</Content>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    颜色（Color）
+</Title>
+<Content>
+    <p>
+        很多组件可以使用Color属性控制主体色
+    </p>
+</Content>
+<Commons1/>
+<HighLight FilePath="Pages/docs/overview/commons/Commons1.razor" HasMore></HighLight>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    尺寸（Size）
+</Title>
+<Content>
+    <p>
+        很多组件可以使用Is{Size}，特殊尺寸使用Size属性控制尺寸，根据组件的不同，可以使用的值也不同，大概分为以下几个系列：
+        <ol>
+            <li>bool尺寸 IsSmall、IsNormal、IsMedium、IsLarge，比如Button、Tag、Input、Progress、Icon等等</li>
+            <li>数字尺寸 Size.Size1 ~ Size.Size12，比如Column</li>
+            <li>数字尺寸 Size.Size1 ~ Size.Size6，用于Title，SubTitle</li>
+            <li>平方尺寸 Size.Square16 ~ Size.Square128 比如Image</li>
+            <li>比列尺寸 Size.Half、Size.Full、Size.TwoThirds等等，比如Column</li>
+        </ol>
+    </p>
+</Content>
+<Commons2/>
+<HighLight FilePath="Pages/docs/overview/commons/Commons2.razor" HasMore></HighLight>
+
+
+@code {
+
+}

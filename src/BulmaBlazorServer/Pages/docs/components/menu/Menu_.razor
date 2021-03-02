@@ -1,0 +1,35 @@
+@page "/docs/components/menu"
+@layout DocLayout
+
+<Title>Menu菜单</Title>
+<Subtitle Size="Size.Size4">
+    一个简单的菜单，适用于任何类型的垂直导航
+</Subtitle>
+<hr>
+<div class="content">
+    <p>
+        <code>Menu</code> 是一个垂直的导航组件，包括：
+    </p>
+    <ul>
+        <li>
+            <code>MenuLabel</code> 标签
+        </li>
+        <li>
+            <code>MenuList</code> 列表，可以嵌套2级（多级好像也可）
+            <ul>
+                <li><code>MenuItem</code>项</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<Title Size="Size.Size4">例子</Title>
+<Content>直接看左侧菜单吧...</Content>
+<Columns>
+    <Column>
+        <Menu1/>
+    </Column>
+    <Column IsNarrow Size="Size.Size8" style="overflow-x:auto;">
+        <HighLight FilePath="Pages/docs/components/menu/Menu1.razor"/>
+    </Column>
+</Columns>

@@ -1,0 +1,43 @@
+@inherits BulmaComponentBase
+@namespace BulmaRazor.Components
+
+<div @attributes="Attributes" class='@classes'>
+  <header class="quickview-header">
+    <p class="title">
+      @if (HeaderSlot != null)
+      {
+        <text>@HeaderSlot</text>
+      }
+      else
+      {
+        <text>@HeaderText</text>
+      }
+    </p>
+    <span class="delete" data-dismiss="quickview"></span>
+  </header>
+
+  <div class="quickview-body">
+    <div class="quickview-block">
+      @BodySlot
+    </div>
+  </div>
+
+  <footer class="quickview-footer">
+    @FootSlot
+  </footer>
+</div>
+
+@code {
+  string classes => CssBuilder.Default("quickview")
+    .AddClassFromAttributes(Attributes)
+    .Build();
+  
+  [Parameter]
+  public string HeaderText { get; set; }
+  [Parameter]
+  public RenderFragment HeaderSlot { get; set; }
+  [Parameter]
+  public RenderFragment BodySlot { get; set; }
+  [Parameter]
+  public RenderFragment FootSlot { get; set; }
+}

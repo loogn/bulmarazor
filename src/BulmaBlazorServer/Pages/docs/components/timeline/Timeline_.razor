@@ -1,0 +1,51 @@
+@page "/docs/components/timeline"
+@layout DocLayout
+
+<Title>Timeline时间轴</Title>
+<Subtitle Size="Size.Size4">
+    以不同的颜色，大小和状态显示垂直时间轴 
+</Subtitle>
+<hr>
+
+<div class="content">
+    <p>时间轴结构</p>
+    <ul>
+        <li>
+            <code>Timeline</code>: 主容器,可以设置IsCentered或IsLTR改变布局
+            <ul>
+                <li>
+                    <code>TimelineHeader</code>:可以定义 start end，节点分割
+                </li>
+                <li>
+                    <code>TimelineItem</code>:内容项
+                    <ul>
+                        <li>
+                            <code>TimelineMarker</code>:内容的标记，可以使用color,icon，img
+                            <code>TimelineContent</code>:显示内容
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<Columns>
+    <Column>
+        <Timeline1/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/timeline/Timeline1.razor"/>
+    </Column>
+</Columns>
+<br>
+
+<Columns>
+    <Column>
+        <Timeline2/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/timeline/Timeline2.razor"/>
+    </Column>
+</Columns>
+<br>

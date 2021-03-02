@@ -1,22 +1,23 @@
 @page "/test"
+
 @using BulmaRazorServer.Pages.docs.elements
 @inject BulmaRazorJsInterop JsInterop
 @inject ToastService ToastService
 
-<Container>
+<Container style="overflow: scroll" class="@B.PY6">
     <Field>
         <Button @onclick="() => cal.Show()">Show</Button>
         <p>Date:<span>@date</span></p>
     </Field>
     <Field>
         <Control>
-            <Calendar @ref="cal" @bind-Value="date" type="date" Options="@_options"></Calendar>
+            <Calendar @ref="                                    cal" @bind-Value="date" type="date" Options="@_options"></Calendar>
         </Control>
     </Field>
     <Field>
         <Control>
             <Container>
-                <Calendar @ref="cal2" @bind-Value="ts" type="time" Options="@_options2"></Calendar>
+                <Calendar @ref="                                            cal2" @bind-Value="ts" type="time" Options="@_options2"></Calendar>
             </Container>
         </Control>
     </Field>
@@ -26,12 +27,49 @@
         </Control>
     </Field>
 
-   
+    <hr>
+    <Button @onclick="load">Load</Button>
+
+
+    <Collapse AllowMultiple>
+        <CollapseItem HeaderText="Question1" IsActive>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis
+            placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum
+            <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
+            sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et
+            sem eget, facilisis sodales sem.
+        </CollapseItem>
+        <CollapseItem HeaderText="Question2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis
+            placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum
+            <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
+            sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et
+            sem eget, facilisis sodales sem.
+        </CollapseItem>
+        <CollapseItem HeaderText="Question3">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis
+            placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum
+            <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
+            sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et
+            sem eget, facilisis sodales sem.
+        </CollapseItem>
+    </Collapse>
+
+
 </Container>
 
-@code{
-    
 
+@code{
+
+
+    Dialog dialog;
+
+    bool loading;
+
+    async Task load()
+    {
+        
+    }
 
     private Calendar<DateTime?> cal;
     private Calendar<TimeSpan?> cal2;

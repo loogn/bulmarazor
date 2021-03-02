@@ -1,0 +1,32 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@clesses">
+    @ChildContent
+</div>
+
+@code {
+
+    string clesses => CssBuilder.Default("timeline-marker")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-icon", IsIcon)
+        .AddClass("is-image", IsImage)
+        .Build();
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsIcon { get; set; }
+
+    [Parameter]
+    public bool IsImage { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

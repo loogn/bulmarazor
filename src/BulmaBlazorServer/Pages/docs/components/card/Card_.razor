@@ -1,0 +1,73 @@
+@page "/docs/components/card"
+@layout DocLayout
+
+<Title>Card卡片</Title>
+<Subtitle Size="Size.Size4">
+    全方位灵活弹性且可组合的组件
+</Subtitle>
+<hr>
+
+<div class="content">
+    <p>卡组件包含可以混合和匹配的几个元素:</p>
+    <ul>
+        <li>
+            <code>Card</code>: 主容器
+            <ul>
+                <li>
+                    <code>CardHeader</code>:一个带阴影的水平条
+                    <ul>
+                        <li>
+                            <code>CardHeaderTitle</code>:居左加粗的标题
+                        </li>
+                        <li>
+                            <code>CardHeaderIcon</code>:Icon占位符
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <code>CardImage</code>:全宽响应式图片
+                </li>
+                <li>
+                    <code>CardContent</code>: 多用途容器，用于包含其他元素
+                </li>
+                <li>
+                    <code>CardFooter</code>:水平控制器列表
+                    <ul>
+                        <li>
+                            <code>CardFooterItem</code>:可重复列表项
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <p>
+        你可以在CardHeaderTitle上添加IsCentered修饰符把标题居中
+    </p>
+</div>
+<Columns>
+    <Column>
+        <Card1/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/card/Card1.razor"/>
+    </Column>
+</Columns>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    例子
+</Title>
+<div class="content">
+    子组件可以灵活组合
+</div>
+<Columns>
+    <Column>
+        <Card2/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/components/card/Card2.razor"/>
+    </Column>
+</Columns>

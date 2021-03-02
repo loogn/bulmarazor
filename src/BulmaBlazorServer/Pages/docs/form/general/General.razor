@@ -1,0 +1,300 @@
+﻿@page "/docs/form/general"
+@layout DocLayout
+
+<Title>容器(Container)</Title>
+<Subtitle Size="Size.Size4">
+    一个可以内容水平居中的简单容器
+</Subtitle>
+<hr>
+
+<div class="content">
+    <p>
+        Bulma 支持如下 HTML内建表单元素: <code>&lt;form&gt;</code> <code>&lt;button&gt;</code> <code>&lt;input&gt;</code>
+        <code>&lt;textarea&gt;</code> and <code>&lt;label&gt;</code>.
+    </p>
+    <p>
+        支持一下 CSS <strong>类</strong>:
+    </p>
+    <ul>
+        <li><code>Label</code></li>
+        <li><code>Input</code></li>
+        <li><code>Textarea</code></li>
+        <li><code>Select</code></li>
+        <li><code>Checkbox</code></li>
+        <li><code>Radio</code></li>
+        <li><code>Button</code></li>
+        <li><code>Help</code></li>
+    </ul>
+</div>
+<div class="content">
+    <p>
+        为了保持设计均匀平衡，Bulma 提供了一个非常有用的<code>Control</code>容器，您可以在其中包装表单控件。<br>
+        当在表单中组合多个控件时，请使用<code>Field</code>类作为容器，以保持间距一致。
+    </p>
+</div>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    完整表单示例
+</Title>
+
+<Columns>
+    <Column>
+        <General1 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General1.razor" HasMore MaxHeight="500"></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>
+        为了使用Bulma获得最佳效果，建议尽可能多地使用<code>Control</code>组件
+    </p>
+</div>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    表单域(Form Field)
+</Title>
+
+<div class="content">
+    <p><code>Field</code> 容器是一个简单的容器:</p>
+    <ul>
+        <li>文本标签 <code>Label</code>
+        </li>
+        <li>表单控件 <code>Control</code>
+        </li>
+        <li>可选文本 <code>Help</code>
+        </li>
+    </ul>
+</div>
+
+<Columns>
+    <Column>
+        <General2 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General2.razor"></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>此容器允许表单字段有一致地间隔。</p>
+</div>
+<Columns>
+    <Column>
+        <General3 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General3.razor"></HighLight>
+    </Column>
+</Columns>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    表单控件(Form control)
+</Title>
+<div class="content">
+    <p>
+        Bulma <code>Control</code> 是一种通用的 <strong>块(block)</strong> 容器，用于增强表单功能. 因为它与 控件元素具有相同的高度，所以它 只能包含 以下元素：:
+    </p>
+    <ul>
+        <li><code>Input</code></li>
+        <li><code>Select</code></li>
+        <li><code>Button</code></li>
+        <li><code>Icon</code></li>
+    </ul>
+    <p>
+        该容器具有以下功能:
+    </p>
+    <ul>
+        <li>
+            保持间距一致
+        </li>
+        <li>
+            将表单控件组合到一个组中
+        </li>
+        <li>
+            将表单控件合并到列表中
+        </li>
+        <li>
+            将图标追加和添加到表单控件
+        </li>
+    </ul>
+</div>
+
+<Columns>
+    <Column>
+        <General4 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General4.razor"></HighLight>
+    </Column>
+</Columns>
+<Columns>
+    <Column>
+        <General5 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General5.razor"></HighLight>
+    </Column>
+</Columns>
+<Columns>
+    <Column>
+        <General6 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General6.razor"></HighLight>
+    </Column>
+</Columns>
+<hr>
+
+
+
+
+<Title Size="Size.Size4" IsSpaced>
+    使用图标(With icons)
+</Title>
+<div class="content">
+    <p>您可以在控件上附加如下2个修饰符之一:</p>
+    <ul>
+        <li>
+            <code>HasIconsLeft</code>
+        </li>
+        <li>
+            和/或 <code>HasIconsRight</code>
+        </li>
+    </ul>
+    <p>您还需要在图标上添加修饰符:</p>
+    <ul>
+        <li>
+            如果使用 <code>HasIconsLeft</code> Icon需要添加<code>IsLeft</code>
+        </li>
+        <li>
+            如果使用<code>has-icons-right</code> Icon需要添加<code>IsRight</code>
+        </li>
+    </ul>
+    <p>图标容器的大小将由 Input 容器定义。</p>
+</div>
+<Columns>
+    <Column>
+        <General7 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General7.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<div class="content">
+    <p>
+        您也可以在 下拉框 中添加图标。
+    </p>
+</div>
+<Columns>
+    <Column>
+        <General8 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General8.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<div class="content">
+    <p>
+        如果控件中包含图标，Bulma 将会确保图标保持 居中，不用担心 input 或 图标的大小。
+    </p>
+</div>
+
+<Columns>
+    <Column>
+        <General9 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General9.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<Columns>
+    <Column>
+        <General10 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General10.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    表单插件(Form addons)
+</Title>
+<div class="content">
+    <p>
+        如果您要同时使用 附件控件,请在 <code>Field</code> 容器上添加 <code>HasAddons</code> 修饰符:</p>
+</div>
+
+<Columns>
+    <Column>
+        <General11 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General11.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>您 只能 在 inputs, buttons, and dropdowns 中使用追加</p>
+</div>
+<div class="content">
+    <p>追加一个静态按钮将会很有用。</p>
+</div>
+
+<Columns>
+    <Column>
+        <General12 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General12.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>
+        使用 <code>IsExpanded</code> 修饰符填充剩余的空间 (本例中, 是 input 元素):
+    </p>
+</div>
+<Columns>
+    <Column>
+        <General13 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General13.razor" HasMore></HighLight>
+    </Column>
+</Columns>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    水平表单(Horizontal form)
+</Title>
+
+<div class="content">
+    <p>如果你想要一个 水平的 的表单控件，请在 <code>field</code> 容器上添加 <code>is-horizontal</code> 修饰符:
+    </p>
+    <ul>
+        <li>
+            <code>FieldLabel</code> for the side label
+        </li>
+        <li>
+            <code>FieldBody</code> for the input/select/textarea container
+        </li>
+    </ul>
+    <p>您可以在子元素上使用 <code>IsGrouped</code> 和 <code>HasAddons</code></p>
+</div>
+
+<Columns>
+    <Column>
+        <General14 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/general/General14.razor" HasMore MaxHeight="500"></HighLight>
+    </Column>
+</Columns>

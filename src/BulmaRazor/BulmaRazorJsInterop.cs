@@ -18,6 +18,7 @@ namespace BulmaRazor.Components
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
         private readonly Lazy<Task<IJSObjectReference>> calendarModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> toastModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> collapsibleModuleTask;
 
         public BulmaRazorJsInterop(IJSRuntime jsRuntime)
         {
@@ -28,20 +29,28 @@ namespace BulmaRazor.Components
             //calendar
             calendarModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/jsplugin/bulma-calendar.js").AsTask());
-            
+
             //toast
             toastModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/jsplugin/toast.js").AsTask());
+
+            collapsibleModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/jsplugin/bulma-collapsible.min.js").AsTask());
         }
 
         public async ValueTask<IJSObjectReference> CalendarAttach(string guid, CalenderOptions options)
         {
             var module = await calendarModuleTask.Value;
-            return await module.InvokeAsync<IJSObjectReference>("bulmaCalendar.attach", "#"+guid,
+            return await module.InvokeAsync<IJSObjectReference>("bulmaCalendar.attach", "#" + guid,
                 options ?? new CalenderOptions()
             );
         }
-
+        
+        public async ValueTask<IJSObjectReference> CollapsibleAttach(string selector)
+        {
+            var module = await collapsibleModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("bulmaCollapsible.attach", selector);
+        }
         #region toast
 
         public async ValueTask ToastShow(ToastOptions options)

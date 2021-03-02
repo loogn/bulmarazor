@@ -1,7 +1,6 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-
 <div @attributes="Attributes" class="@clesses">
     @ChildContent
 </div>
@@ -12,4 +11,5 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+    
 }

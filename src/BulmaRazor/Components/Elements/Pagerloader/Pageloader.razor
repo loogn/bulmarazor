@@ -1,0 +1,58 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@classes">
+    <span class="title">
+        @if (ChildContent == null)
+        {
+            <text>页面加载中...</text>
+        }
+        else
+        {
+            @:@ChildContent 
+        }
+    </span>
+</div>
+
+@code {
+    
+    string classes => CssBuilder.Default("pageloader")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-active", IsActive)
+        .AddClass("is-bottom-to-top", IsBottomToTop)
+        .AddClass("is-left-to-right", IsLeftToRight)
+        .AddClass("is-right-to-left", IsRightToLeft)
+        .Build();
+
+    public void Show()
+    {
+        IsActive = true;
+        StateHasChanged();
+    }
+
+    public void Hide()
+    {
+        IsActive = false;
+        StateHasChanged();
+    }
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsBottomToTop { get; set; }
+
+    [Parameter]
+    public bool IsLeftToRight { get; set; }
+
+    [Parameter]
+    public bool IsRightToLeft { get; set; }
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

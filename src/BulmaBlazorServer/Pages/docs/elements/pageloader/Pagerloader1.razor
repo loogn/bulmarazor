@@ -1,0 +1,27 @@
+<Buttons>
+    <Button @onclick="() => Show3SecThenHide(loader1)">Default</Button>
+    <Button @onclick="() => Show3SecThenHide(loader2)">Colors</Button>
+    <Button @onclick="() => Show3SecThenHide(loader3)">BtoT</Button>
+    <Button @onclick="() => Show3SecThenHide(loader4)">LtoR</Button>
+    <Button @onclick="() => Show3SecThenHide(loader5)">RtoL</Button>
+</Buttons>
+<Pageloader @ref="loader1"></Pageloader>
+<Pageloader @ref="loader2" Color="Color.Warning"></Pageloader>
+<Pageloader @ref="loader3" IsBottomToTop Color="Color.Dark"></Pageloader>
+<Pageloader @ref="loader4" IsLeftToRight Color="Color.Light">自定义内容</Pageloader>
+<Pageloader @ref="loader5" IsRightToLeft Color="Color.Info"></Pageloader>
+
+@code{
+    Pageloader loader1;
+    Pageloader loader2;
+    Pageloader loader3;
+    Pageloader loader4;
+    Pageloader loader5;
+
+    async Task Show3SecThenHide(Pageloader loader)
+    {
+        loader.Show();
+        await Task.Delay(TimeSpan.FromSeconds(3));
+        loader.Hide();
+    }
+}

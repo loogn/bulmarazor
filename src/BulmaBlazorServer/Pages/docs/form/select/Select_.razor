@@ -1,0 +1,42 @@
+@page "/docs/form/select"
+@layout DocLayout
+
+<Title>Select表单控件</Title>
+<Subtitle Size="Size.Size4">
+    下拉选择框
+</Subtitle>
+<hr>
+
+
+<div class="content">
+    <p>
+        用法请参考Input组件，有Color、Size、IsRounded等属性，也可以结合Icon使用，参考通用组件<br>
+        <Tag Color="Color.Warning">暂时不支持多选</Tag>
+    </p>
+</div>
+
+<Title Size="Size.Size4" IsSpaced>
+    数据绑定
+</Title>
+<Columns>
+    <Column>
+        <Select1 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/select/Select1.razor"></HighLight>
+    </Column>
+</Columns>
+
+<div class="content">
+    <p>
+        可空类型绑定例子
+    </p>
+</div>
+<Columns>
+    <Column>
+        <Select2 />
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/form/select/Select2.razor"></HighLight>
+    </Column>
+</Columns>

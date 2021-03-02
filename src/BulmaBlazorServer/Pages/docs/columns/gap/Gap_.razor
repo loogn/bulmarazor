@@ -1,0 +1,95 @@
+@page "/docs/columns/gap"
+@layout DocLayout
+
+<Title>列间隙(Columns gap)</Title>
+<Subtitle Size="Size.Size4">
+    自定义列间的间隙(gap)
+</Subtitle>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    默认间隙(Default gap)
+</Title>
+<Content>
+    <p>
+        每一个列都有<strong>间隙(gap)</strong> 值是 <strong>变量</strong> <code>$column-gap</code>的值, 默认值是 <code>0.75rem</code>.
+        <br>
+        由于列的两边都有间隙，因此相邻两列的间距是<code>$column-gap</code>的2倍, 默认值是 <code>1.5rem</code>.
+    </p>
+</Content>
+
+<Gap1 />
+<hr />
+
+<Title Size="Size.Size4" IsSpaced>
+    无间隙(Gapless)
+</Title>
+<Content>
+    <p>
+        如果想要删除列间距，请在<code>columns</code>容器添加<code>IsGaspless</code>修饰符:
+    </p>
+</Content>
+<Gap2 />
+<HighLight FilePath="Pages/docs/columns/gap/Gap2.razor"></HighLight>
+
+<Content>
+    <p>它可以和<code>IsMultiline</code>修饰符组合使用:</p>
+</Content>
+<Gap3 />
+<HighLight FilePath="Pages/docs/columns/gap/Gap3.razor" HasMore></HighLight>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    可变间隙(Variable gap)
+</Title>
+<Field IsGrouped IsGroupedMultiline>
+    <Control>
+        <Tag Color="Color.Warning">实验性的</Tag>
+    </Control>
+</Field>
+
+<Content>
+    <p>
+        你可以在 <code>Columns</code> 容器上添加这 9 种修饰符来自定义列间隙。
+    </p>
+    <ul>
+        <li>
+            <code>Gap.Gap0</code> 将移除所有间隙 (类似于 <code>IsGapless</code>)
+        </li>
+        <li>
+            <code>Gap.Gap3</code> 是 <strong>默认值</strong>, 等同于 <code>0.75rem</code>
+        </li>
+        <li>
+            <code>Gap.Gap8</code> 是间隙的最大值，等于 <code>2rem</code>
+        </li>
+    </ul>
+    <p>
+        此外, <code>.is-variable</code> 修饰符会自动添加到<code>Columns</code> 容器.
+    </p>
+</Content>
+
+<Gap4 />
+<HighLight FilePath="Pages/docs/columns/gap/Gap4.razor" HasMore></HighLight>
+
+
+
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    基于断点的列间隙
+</Title>
+<Content>
+    <p>
+        您可以为每个视口大小定义列间隙:
+    </p>
+</Content>
+
+<Gap5 />
+
+<Message Color="Color.Info">
+如果要查看差异，请调整浏览器的大小，然后查看列间隙如何变化。    
+</Message>
+
+
+<HighLight FilePath="Pages/docs/columns/gap/Gap5.razor" HasMore></HighLight>

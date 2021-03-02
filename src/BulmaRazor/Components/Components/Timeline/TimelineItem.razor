@@ -1,0 +1,21 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@clesses">
+    @ChildContent
+</div>
+
+@code {
+
+    string clesses => CssBuilder.Default("timeline-item")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

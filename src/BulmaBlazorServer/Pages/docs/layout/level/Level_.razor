@@ -1,0 +1,69 @@
+@page "/docs/layout/level"
+@layout DocLayout
+
+
+
+
+<Title>水平(Level)</Title>
+<Subtitle Size="Size.Size4">
+    多功能的 水平 level, 它可以包含几乎所有的元素
+</Subtitle>
+<hr>
+
+<Content>
+    <p>Level 的结构如下:</p>
+    <ul>
+        <li>
+            <code>Level</code>: 主容器
+            <ul>
+                <li>
+                    <code>LevelLeft</code> 左侧边
+                </li>
+                <li>
+                    <code>LevelRight</code> 右侧边
+                    <ul>
+                        <li>
+                            <code>LevelItem</code> 每个独立元素
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p>在<code>level-item</code>中, 你可以插入几乎任何东西: a title, a button, a text input, or just simple text.无论你在哪插入 Bulma <code>level</code>，它都将是垂直居中的。</p>
+
+</Content>
+
+
+<Level1 />
+<HighLight FilePath="Pages/docs/layout/level/Level1.razor" HasMore></HighLight>
+
+
+<hr />
+<Title Size="Size.Size4" IsSpaced>
+    居中
+</Title>
+<Content>
+    <p>
+        如果你需要 <strong>居中 Level</strong>, 您可以根据需要使用任意数量的 <code>LevelItem</code> , 只要他们是 <code>Level</code> 容器的 直接 子元素.
+    </p>
+</Content>
+<Level2 />
+<HighLight FilePath="Pages/docs/layout/level/Level2.razor" HasMore></HighLight>
+<Level3 />
+<HighLight FilePath="Pages/docs/layout/level/Level3.razor" HasMore></HighLight>
+
+
+<hr />
+<Title Size="Size.Size4" IsSpaced>
+    Mobile Level
+</Title>
+
+<Content>
+    <p>
+        默认的，出于空间考虑，<code>Level</code>在移动设备上是垂直的。如果您也希望<code>Level</code>在移动设备上为水平，请<code>IsMobile</code>修饰符。
+    </p>
+</Content>
+
+<Level4 />
+<HighLight FilePath="Pages/docs/layout/level/Level4.razor" HasMore></HighLight>

@@ -1,0 +1,47 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+<div id="@Id" @attributes="Attributes" class="@classes">
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code{
+
+    string classes => CssBuilder.Default()
+        .AddClassFromAttributes(Attributes)
+        .Build();
+
+    public readonly string Id = "collapse_" + Guid.NewGuid().ToString("N");
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool AllowMultiple { get; set; }
+
+    [Parameter]
+    public bool IsHeaderToggle { get; set; } = true;
+
+    //B.MB0 ~ B.MB6
+    [Parameter]
+    public string ItemGap { get; set; } = B.MB1;
+
+    private List<CollapseItem> items = new List<CollapseItem>();
+
+    public void AddItem(CollapseItem item)
+    {
+        items.Add(item);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await JsInterop.CollapsibleAttach($"#{Id} .is-collapsible");
+        }
+    }
+
+}
