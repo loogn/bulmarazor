@@ -3,8 +3,9 @@
 中文名字:布尔玛·瑞  
 官网地址: [http://bulmarazor.loogn.net/](http://bulmarazor.loogn.net/)  
 
-Bulma 是一个基于 Flexbox 构建的免费、开源的 CSS 框架，已经有超过200,000开发者在使用。而BulmaRazor是基于Bulma样式框架开发的一套适用于Blazor的组件库。
-
+Bulma 是一个基于 Flexbox 构建的免费、开源的 CSS
+框架，已经有超过200,000开发者在使用。而BulmaRazor是基于Bulma样式框架开发的一套适用于Blazor的组件库。
+qq交流群:995865650
 ![qq群:995865650](http://bulmarazor.loogn.net/images/qqqun.png)
 
 # 安装
