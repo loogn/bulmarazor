@@ -157,6 +157,9 @@
         @* var ele = await JSInterop.GetElementById("layoutContent"); *@
         @* await JSInterop.ScrollTo(ele, 0, 0); *@
         await js.InvokeVoidAsync("docScrollTop");
+        await MenuClick.InvokeAsync();
     }
+    [Parameter]
+    public EventCallback MenuClick { get; set; }
 
 }

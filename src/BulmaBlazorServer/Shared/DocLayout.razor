@@ -1,24 +1,33 @@
 ﻿@inherits LayoutComponentBase
 @layout MainLayout
 
-<div class="layoutMenu">
+<div class="layoutMenu @B.HiddenMobile">
     <div class="@B.PY4 @B.PX4 @B.PB6">
         <NavMenu/>
     </div>
 </div>
 <div class="layoutContent" id="layoutContent">
+    <Button Color="Color.Primary" @onclick="toggleShow" style="position: fixed" class="@B.Join(B.HiddenTablet)">
+        <Icon IconClass="fa fa-list-alt"></Icon><span>菜单</span>
+    </Button>
     <Section>
         @Body
     </Section>
 </div>
+<Quickview IsActive="isact" HeaderText="文档">
+    <div class="@B.PY4 @B.PX4 @B.PB6">
+        <NavMenu MenuClick="toggleShow"/>
+    </div>
+</Quickview>
 
-@* <Columns>
-    <Column IsNarrow Size="Size.Size2" style="overflow-y:auto;max-height:600px; " class="has-background-light">
-    <Section>
-    <NavMenu />
-    </Section>
-    </Column>
-    <Column>
-    @Body
-    </Column>
-    </Columns> *@
+@code{
+
+    bool isact;
+
+    void toggleShow()
+    {
+        isact = !isact;
+    }
+    
+
+}

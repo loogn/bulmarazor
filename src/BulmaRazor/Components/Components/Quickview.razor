@@ -1,43 +1,86 @@
 @inherits BulmaComponentBase
 @namespace BulmaRazor.Components
 
-<div @attributes="Attributes" class='@classes'>
-  <header class="quickview-header">
-    <p class="title">
-      @if (HeaderSlot != null)
-      {
-        <text>@HeaderSlot</text>
-      }
-      else
-      {
-        <text>@HeaderText</text>
-      }
-    </p>
-    <span class="delete" data-dismiss="quickview"></span>
-  </header>
+<div @attributes="Attributes" class="@classes">
+    <header class="quickview-header">
+        <p class="title">
+            @if (HeaderSlot != null)
+            {
+                <text>@HeaderSlot</text>
+            }
+            else
+            {
+                <text>@HeaderText</text>
+            }
+        </p>
+        <span class="delete" @onclick="Hide" data-dismiss="quickview"></span>
+    </header>
 
-  <div class="quickview-body">
-    <div class="quickview-block">
-      @BodySlot
+    <div class="quickview-body">
+        <div class="quickview-block">
+            @(BodySlot ?? ChildContent)
+        </div>
     </div>
-  </div>
 
-  <footer class="quickview-footer">
-    @FootSlot
-  </footer>
+    @if (FooterSlot != null)
+    {
+        <footer class="quickview-footer">
+            @FooterSlot
+        </footer>
+    }
 </div>
 
 @code {
-  string classes => CssBuilder.Default("quickview")
-    .AddClassFromAttributes(Attributes)
-    .Build();
-  
-  [Parameter]
-  public string HeaderText { get; set; }
-  [Parameter]
-  public RenderFragment HeaderSlot { get; set; }
-  [Parameter]
-  public RenderFragment BodySlot { get; set; }
-  [Parameter]
-  public RenderFragment FootSlot { get; set; }
+
+    string classes => CssBuilder.Default("quickview")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("is-active", IsActive)
+        .Build();
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    public void Show()
+    {
+        IsActive = true;
+        StateHasChanged();
+    }
+
+    public Task Hide()
+    {
+        if (IsActive)
+        {
+            IsActive = false;
+            StateHasChanged();
+        }
+        return Task.CompletedTask;
+    }
+    
+    [Parameter]
+    public string HeaderText { get; set; }
+
+    [Parameter]
+    public RenderFragment HeaderSlot { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment BodySlot { get; set; }
+
+    [Parameter]
+    public RenderFragment FooterSlot { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        // BulmaRazorNetInterop.DocumentClick += Hide;
+    }
+
+    protected override ValueTask DisposeAsync(bool disposing)
+    {
+        // BulmaRazorNetInterop.DocumentClick -= Hide;
+        return base.DisposeAsync(disposing);
+    }
+
 }

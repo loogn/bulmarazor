@@ -21,54 +21,33 @@
             </Container>
         </Control>
     </Field>
-    <Field>
-        <Control>
-            <Input @bind-Value="ts"></Input>
-        </Control>
-    </Field>
+  
 
     <hr>
     <Button @onclick="load">Load</Button>
 
-
-    <Collapse AllowMultiple>
-        <CollapseItem HeaderText="Question1" IsActive>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis
-            placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum
-            <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
-            sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et
-            sem eget, facilisis sodales sem.
-        </CollapseItem>
-        <CollapseItem HeaderText="Question2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis
-            placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum
-            <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
-            sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et
-            sem eget, facilisis sodales sem.
-        </CollapseItem>
-        <CollapseItem HeaderText="Question3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis
-            placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum
-            <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
-            sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et
-            sem eget, facilisis sodales sem.
-        </CollapseItem>
-    </Collapse>
-
-
+    <Quickview IsActive="act" HeaderText="菜单">
+        <Content>
+              <Field>
+                    <Control>
+                        <Input @bind-Value="ts"></Input>
+                    </Control>
+                </Field>
+        </Content>
+    </Quickview>
 </Container>
 
 
 @code{
 
-
+    bool act = false;
     Dialog dialog;
 
     bool loading;
 
     async Task load()
     {
-        
+        act = true;
     }
 
     private Calendar<DateTime?> cal;

@@ -35,7 +35,7 @@ Install-Package BulmaRazor
     ```
 # 包含的组件
 
-*☆代表稳定性,最高五颗星*  
+*☆代表稳定性,最高十颗星*
 
 - Columns
 	- Column :		☆☆☆☆☆
@@ -92,9 +92,26 @@ Install-Package BulmaRazor
 
 [MIT](https://gitee.com/loogn/bulmarazor/blob/master/LICENSE)  @ loogn
 
-# 感谢
+# 相关项目
 
 - [Bulma官网](https://bulma.io/)
+- [Blazor微软文档](https://blazor.net/docs/components/index.html)
 - [Bulma中文网](https://bulma.zcopy.site/)
+- [bulma-calendar](https://github.com/Wikiki/bulma-calendar)
+- [bulma-checkradio](https://github.com/Wikiki/bulma-checkradio)
+- [bulma-collapsible](https://github.com/CreativeBulma/bulma-collapsible)
+- [bulma-badge](https://github.com/CreativeBulma/bulma-badge)
+- [bulma-divider](https://github.com/CreativeBulma/bulma-divider)
+- [bulma-pageloader](https://github.com/Wikiki/bulma-pageloader)
+- [bulma-quickview](https://github.com/Wikiki/bulma-quickview)
+- [bulma-carousel](https://github.com/Wikiki/bulma-carousel)
+- [bulma-ribbon](https://github.com/Wikiki/bulma-ribbon)
+- [bulma-switch](https://github.com/Wikiki/bulma-switch)
+- [bulma-timeline](https://github.com/Wikiki/bulma-timeline)
+- [bulma-slider](https://github.com/Wikiki/bulma-slider)
+- [bulma-tooltip](https://github.com/CreativeBulma/bulma-tooltip)
+- [bulma-o-steps](https://github.com/octoshrimpy/bulma-o-steps)
+- [bulma-tagsinput](https://github.com/CreativeBulma/bulma-tagsinput)
+
 
 
