@@ -2,8 +2,35 @@
     {
         "outputFileName": "wwwroot/bulmarazor.min.css",
         "inputFiles": [
-            "wwwroot/bulma.css"
+            "wwwroot/css/bulma.css"
         ]
+    },
+    {
+        "outputFileName": "wwwroot/js/calendar.min.js",
+        "inputFiles": [
+            "wwwroot/jsplugin/calendar/bulma-calendar.js",
+            "wwwroot/jsplugin/calendar/bulma-calendar-export.js"
+        ]
+    },
+    {
+        "outputFileName": "wwwroot/js/collapsible.min.js",
+        "inputFiles": [
+            "wwwroot/jsplugin/collapsible/bulma-collapsible.min.js",
+            "wwwroot/jsplugin/collapsible/bulma-collapsible-export.js"
+        ],
+        "minify": {
+            "enabled": false
+        }
+    }
+,
+    {
+        "outputFileName": "wwwroot/js/toast.min.js",
+        "inputFiles": [
+            "wwwroot/jsplugin/toast/toast.js"
+        ],
+        "minify": {
+            "enabled": false
+        }
     }
 //    ,
 //    {

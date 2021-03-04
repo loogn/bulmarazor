@@ -411,5 +411,3 @@ var defaultOptions = {};
 /***/ })
 /******/ ])["default"];
 });
-var bulmaQuickview=window.bulmaQuickview;
-export {bulmaQuickview};

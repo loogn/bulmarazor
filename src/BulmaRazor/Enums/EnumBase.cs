@@ -5,7 +5,7 @@ namespace BulmaRazor.Components
     public abstract class EnumBase
     {
         protected EnumBase(string value) { Value = value; }
-        public string Value { get; set; }
+        public string Value { get;  }
 
 
 
@@ -26,6 +26,10 @@ namespace BulmaRazor.Components
             return Value.GetHashCode();
         }
 
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 
 }

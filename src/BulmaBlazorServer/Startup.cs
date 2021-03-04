@@ -32,10 +32,10 @@ namespace BulmaRazorServer
             services.AddJSWindow();
             services.AddBulmaRazor(options =>
             {
-                options.DefaultToastConfig.Duration = 1500;
-                options.DefaultToastConfig.Position = "top-center";
-                options.DefaultToastConfig.Color=Color.Primary;
-                options.DefaultToastConfig.Animate = new ToastAnimate("fadeIn", "fadeOut");
+                options.ToastOptions.Duration = 1500;
+                options.ToastOptions.Position = "top-center";
+                options.ToastOptions.Color=Color.Primary;
+                options.ToastOptions.Animate = new ToastAnimate("fadeIn", "fadeOut");
             });
         }
 

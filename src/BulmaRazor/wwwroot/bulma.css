@@ -19533,4 +19533,408 @@ span[data-tooltip].has-tooltip-danger {
 .divider.is-danger.is-light::after, .divider.is-danger.is-light::before {
   background-color: #feecf0;
 }
+
+.content ul.block-list {
+  list-style: none;
+  margin-left: 0;
+}
+
+.block-list {
+  list-style: none;
+}
+
+.block-list li {
+  padding: 16px;
+  background: whitesmoke;
+  margin-bottom: 0.25rem;
+}
+
+.block-list li.is-left,
+.block-list.is-left > li {
+  text-align: left;
+}
+
+.block-list li.is-centered,
+.block-list.is-centered > li {
+  text-align: center;
+}
+
+.block-list li.is-right,
+.block-list.is-right > li {
+  text-align: right;
+}
+
+.block-list li.is-small,
+.block-list.is-small > li {
+  font-size: 0.875em;
+  padding: 10.66667px;
+}
+
+.block-list li.is-normal,
+.block-list.is-normal > li {
+  font-size: 1em;
+}
+
+.block-list li.is-large,
+.block-list.is-large > li {
+  font-size: 1.5rem;
+}
+
+.block-list li.has-radius,
+.block-list.has-radius > li {
+  border-radius: 4px;
+}
+
+.block-list li.is-highlighted,
+.block-list.is-highlighted > li {
+  border-left: 5px #363636 solid;
+}
+
+.block-list li.is-outlined,
+.block-list.is-outlined > li {
+  background: transparent;
+  color: #dbdbdb;
+  border: 1px solid #dbdbdb;
+  color: #4a4a4a;
+}
+
+.block-list li.is-white,
+.block-list.is-white > li {
+  background: white;
+  color: #0a0a0a;
+}
+
+.block-list li.is-white.is-outlined {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.block-list li.is-white.is-highlighted {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  border-left: 5px white solid;
+}
+
+.block-list.is-white li.is-outlined,
+.block-list.is-white.is-outlined > li {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.block-list.is-white li.is-highlighted,
+.block-list.is-white.is-highlighted > li {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  border-left: 5px white solid;
+}
+
+.block-list li.is-black,
+.block-list.is-black > li {
+  background: #0a0a0a;
+  color: white;
+}
+
+.block-list li.is-black.is-outlined {
+  background: transparent;
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+}
+
+.block-list li.is-black.is-highlighted {
+  background: transparent;
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+  border-left: 5px #0a0a0a solid;
+}
+
+.block-list.is-black li.is-outlined,
+.block-list.is-black.is-outlined > li {
+  background: transparent;
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+}
+
+.block-list.is-black li.is-highlighted,
+.block-list.is-black.is-highlighted > li {
+  background: transparent;
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+  border-left: 5px #0a0a0a solid;
+}
+
+.block-list li.is-light,
+.block-list.is-light > li {
+  background: whitesmoke;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.block-list li.is-light.is-outlined {
+  background: transparent;
+  color: whitesmoke;
+  border: 1px solid whitesmoke;
+}
+
+.block-list li.is-light.is-highlighted {
+  background: transparent;
+  color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-left: 5px whitesmoke solid;
+}
+
+.block-list.is-light li.is-outlined,
+.block-list.is-light.is-outlined > li {
+  background: transparent;
+  color: whitesmoke;
+  border: 1px solid whitesmoke;
+}
+
+.block-list.is-light li.is-highlighted,
+.block-list.is-light.is-highlighted > li {
+  background: transparent;
+  color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-left: 5px whitesmoke solid;
+}
+
+.block-list li.is-dark,
+.block-list.is-dark > li {
+  background: #363636;
+  color: #fff;
+}
+
+.block-list li.is-dark.is-outlined {
+  background: transparent;
+  color: #363636;
+  border: 1px solid #363636;
+}
+
+.block-list li.is-dark.is-highlighted {
+  background: transparent;
+  color: #363636;
+  border: 1px solid #363636;
+  border-left: 5px #363636 solid;
+}
+
+.block-list.is-dark li.is-outlined,
+.block-list.is-dark.is-outlined > li {
+  background: transparent;
+  color: #363636;
+  border: 1px solid #363636;
+}
+
+.block-list.is-dark li.is-highlighted,
+.block-list.is-dark.is-highlighted > li {
+  background: transparent;
+  color: #363636;
+  border: 1px solid #363636;
+  border-left: 5px #363636 solid;
+}
+
+.block-list li.is-primary,
+.block-list.is-primary > li {
+  background: #00d1b2;
+  color: #fff;
+}
+
+.block-list li.is-primary.is-outlined {
+  background: transparent;
+  color: #00d1b2;
+  border: 1px solid #00d1b2;
+}
+
+.block-list li.is-primary.is-highlighted {
+  background: transparent;
+  color: #00d1b2;
+  border: 1px solid #00d1b2;
+  border-left: 5px #00d1b2 solid;
+}
+
+.block-list.is-primary li.is-outlined,
+.block-list.is-primary.is-outlined > li {
+  background: transparent;
+  color: #00d1b2;
+  border: 1px solid #00d1b2;
+}
+
+.block-list.is-primary li.is-highlighted,
+.block-list.is-primary.is-highlighted > li {
+  background: transparent;
+  color: #00d1b2;
+  border: 1px solid #00d1b2;
+  border-left: 5px #00d1b2 solid;
+}
+
+.block-list li.is-link,
+.block-list.is-link > li {
+  background: #485fc7;
+  color: #fff;
+}
+
+.block-list li.is-link.is-outlined {
+  background: transparent;
+  color: #485fc7;
+  border: 1px solid #485fc7;
+}
+
+.block-list li.is-link.is-highlighted {
+  background: transparent;
+  color: #485fc7;
+  border: 1px solid #485fc7;
+  border-left: 5px #485fc7 solid;
+}
+
+.block-list.is-link li.is-outlined,
+.block-list.is-link.is-outlined > li {
+  background: transparent;
+  color: #485fc7;
+  border: 1px solid #485fc7;
+}
+
+.block-list.is-link li.is-highlighted,
+.block-list.is-link.is-highlighted > li {
+  background: transparent;
+  color: #485fc7;
+  border: 1px solid #485fc7;
+  border-left: 5px #485fc7 solid;
+}
+
+.block-list li.is-info,
+.block-list.is-info > li {
+  background: #3e8ed0;
+  color: #fff;
+}
+
+.block-list li.is-info.is-outlined {
+  background: transparent;
+  color: #3e8ed0;
+  border: 1px solid #3e8ed0;
+}
+
+.block-list li.is-info.is-highlighted {
+  background: transparent;
+  color: #3e8ed0;
+  border: 1px solid #3e8ed0;
+  border-left: 5px #3e8ed0 solid;
+}
+
+.block-list.is-info li.is-outlined,
+.block-list.is-info.is-outlined > li {
+  background: transparent;
+  color: #3e8ed0;
+  border: 1px solid #3e8ed0;
+}
+
+.block-list.is-info li.is-highlighted,
+.block-list.is-info.is-highlighted > li {
+  background: transparent;
+  color: #3e8ed0;
+  border: 1px solid #3e8ed0;
+  border-left: 5px #3e8ed0 solid;
+}
+
+.block-list li.is-success,
+.block-list.is-success > li {
+  background: #48c78e;
+  color: #fff;
+}
+
+.block-list li.is-success.is-outlined {
+  background: transparent;
+  color: #48c78e;
+  border: 1px solid #48c78e;
+}
+
+.block-list li.is-success.is-highlighted {
+  background: transparent;
+  color: #48c78e;
+  border: 1px solid #48c78e;
+  border-left: 5px #48c78e solid;
+}
+
+.block-list.is-success li.is-outlined,
+.block-list.is-success.is-outlined > li {
+  background: transparent;
+  color: #48c78e;
+  border: 1px solid #48c78e;
+}
+
+.block-list.is-success li.is-highlighted,
+.block-list.is-success.is-highlighted > li {
+  background: transparent;
+  color: #48c78e;
+  border: 1px solid #48c78e;
+  border-left: 5px #48c78e solid;
+}
+
+.block-list li.is-warning,
+.block-list.is-warning > li {
+  background: #ffe08a;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.block-list li.is-warning.is-outlined {
+  background: transparent;
+  color: #ffe08a;
+  border: 1px solid #ffe08a;
+}
+
+.block-list li.is-warning.is-highlighted {
+  background: transparent;
+  color: #ffe08a;
+  border: 1px solid #ffe08a;
+  border-left: 5px #ffe08a solid;
+}
+
+.block-list.is-warning li.is-outlined,
+.block-list.is-warning.is-outlined > li {
+  background: transparent;
+  color: #ffe08a;
+  border: 1px solid #ffe08a;
+}
+
+.block-list.is-warning li.is-highlighted,
+.block-list.is-warning.is-highlighted > li {
+  background: transparent;
+  color: #ffe08a;
+  border: 1px solid #ffe08a;
+  border-left: 5px #ffe08a solid;
+}
+
+.block-list li.is-danger,
+.block-list.is-danger > li {
+  background: #f14668;
+  color: #fff;
+}
+
+.block-list li.is-danger.is-outlined {
+  background: transparent;
+  color: #f14668;
+  border: 1px solid #f14668;
+}
+
+.block-list li.is-danger.is-highlighted {
+  background: transparent;
+  color: #f14668;
+  border: 1px solid #f14668;
+  border-left: 5px #f14668 solid;
+}
+
+.block-list.is-danger li.is-outlined,
+.block-list.is-danger.is-outlined > li {
+  background: transparent;
+  color: #f14668;
+  border: 1px solid #f14668;
+}
+
+.block-list.is-danger li.is-highlighted,
+.block-list.is-danger.is-highlighted > li {
+  background: transparent;
+  color: #f14668;
+  border: 1px solid #f14668;
+  border-left: 5px #f14668 solid;
+}
 /*# sourceMappingURL=bulma.css.map */

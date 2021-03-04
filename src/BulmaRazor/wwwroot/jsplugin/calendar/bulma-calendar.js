@@ -13810,21 +13810,6 @@
                                     instances.push(element[_this3.constructor.name]);
                                 }
                             });
-                            if (instances.length === 1) {
-                                var instance=instances[0];
-                                instance.on('select', function (datepicker) {
-                                    console.log(datepicker);
-                                    console.log("select值："+datepicker.data.value());
-                                    DotNet.invokeMethodAsync("BulmaRazor","SetCalendarValue",datepicker.data.element.id, datepicker.data.value());
-                                });
-                                instance.on('hide', function (datepicker) {
-                                    console.log("hide值："+datepicker.data.value());
-                                    console.log(datepicker);
-                                    DotNet.invokeMethodAsync("BulmaRazor","SetCalendarValue",datepicker.data.element.id,datepicker.data.value());
-                                });
-                                
-                                return instances[0];
-                            }
                             return instances;
                         }
                     }]);
@@ -20565,15 +20550,3 @@
             })
             /******/])["default"];
 });
-
-
-var bulmaCalendar = window.bulmaCalendar;
-
-function bulmaCalendarRegist(instance, id) {
-    instance.on('select', function (datepicker) {
-        console.log(datepicker.data.value());
-        DotNet.invokeMethodAsync("BulmaRazor","JSSetSelect",datepicker.data.value())
-    });
-}
-
-export {bulmaCalendar, bulmaCalendarRegist};

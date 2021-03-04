@@ -216,8 +216,8 @@ class Toast {
 
 class Timer {
     constructor(callback, delay) {
-        this.timer
-        this.start
+        this.timer=null;
+        this.start=null;
         this.remaining = delay
         this.callback = callback
 

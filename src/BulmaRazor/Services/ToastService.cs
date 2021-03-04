@@ -28,15 +28,6 @@ namespace BulmaRazor.Components
         {
             return jsInterop.ToastShow(new ToastOptions() {Message = message});
         }
-
-        public ValueTask SetDefaults(ToastConfig config)
-        {
-            return jsInterop.ToastSetDefaults(config);
-        }
-
-        public ValueTask ResetDefaults()
-        {
-            return jsInterop.ToastResetDefaults();
-        }
+        
     }
 }

@@ -1,0 +1,34 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+
+<div id="@Id" @attributes="Attributes" class="@classes">
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+
+@code {
+
+    string classes => CssBuilder.Default()
+        .AddClassFromAttributes(Attributes)
+        .Build();
+
+    public readonly string Id = "collapsibleContainer_" + Guid.NewGuid().ToString("N");
+    
+    [Parameter]
+    public bool AllowMultiple { get; set; }
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await JsInterop.CollapsibleAttach($"#{Id} .is-collapsible");
+        }
+    }
+}

@@ -21,25 +21,50 @@
             </Container>
         </Control>
     </Field>
-  
+
 
     <hr>
     <Button @onclick="load">Load</Button>
 
     <Quickview IsActive="act" HeaderText="菜单">
         <Content>
-              <Field>
-                    <Control>
-                        <Input @bind-Value="ts"></Input>
-                    </Control>
-                </Field>
+            <Field>
+                <Control>
+                    <Input @bind-Value="ts"></Input>
+                </Control>
+            </Field>
         </Content>
     </Quickview>
+    <br>
+    <hr>
+    <CollapsibleContainer>
+        <CollapsibleToggle Target="ab">Hello</CollapsibleToggle>
+        <Collapsible Id="ab" BeforeExpand="bexpand">
+            <Notification>
+                <p>这里是内容</p>
+                <p>这里是内容</p>
+                <p>这里是内容</p>
+            </Notification>
+        </Collapsible>
+        <hr>
+        <CollapsibleToggle Target="abc">World</CollapsibleToggle>
+        <Collapsible Id="abc">
+            <Notification>
+                <p>这里是内容</p>
+                <p>这里是内容</p>
+                <p>这里是内容</p>
+            </Notification>
+        </Collapsible>
+    </CollapsibleContainer>
 </Container>
 
 
 @code{
 
+    void bexpand()
+    {
+        ToastService.Show("开始显示");
+    }
     bool act = false;
     Dialog dialog;
 

@@ -6,7 +6,7 @@
     @if (Parent != null && Parent.IsHeaderToggle)
     {
         <div class="message-header">
-            <a href="#@Id" style="text-decoration:none;" class="@B.Flex @B.JustifyContentSpaceBetween @B.FlexGrow1" data-action="collapse">
+            <a  data-target="@Id" style="text-decoration:none;" class="@B.Flex @B.JustifyContentSpaceBetween @B.FlexGrow1" data-action="collapse">
                 @if (HeaderSlot != null)
                 {
                     <p>@HeaderSlot</p>
@@ -110,10 +110,28 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    [Parameter]
+    public EventCallback<CollapseItem> BeforeExpand { get; set; }
+    [Parameter]
+    public EventCallback<CollapseItem> AfterExpand { get; set; }
+    [Parameter]
+    public EventCallback<CollapseItem> BeforeCollapse { get; set; }
+    [Parameter]
+    public EventCallback<CollapseItem> AfterCollapse { get; set; }
+    
     protected override void OnInitialized()
     {
         base.OnInitialized();
         Parent?.AddItem(this);
+        JSCallbackManager.AddEventHandler(Id,"before:expand",new Func<Task>(()=> BeforeExpand.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id,"after:expand",new Func<Task>(()=> AfterExpand.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id,"before:collapse",new Func<Task>(()=> BeforeCollapse.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id,"after:collapse",new Func<Task>(()=> AfterExpand.InvokeAsync(this)));
     }
 
+    protected override ValueTask DisposeAsync(bool disposing)
+    {
+        JSCallbackManager.DisposeObject(Id);
+        return base.DisposeAsync(disposing);
+    }
 }

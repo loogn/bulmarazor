@@ -26,5 +26,12 @@
         <PackagePath></PackagePath>
       </None>
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="wwwroot\css" />
+      <Folder Include="wwwroot\js" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Components\Layout\Divider\Divider.razor.css" />
+    </ItemGroup>
    
 </Project>

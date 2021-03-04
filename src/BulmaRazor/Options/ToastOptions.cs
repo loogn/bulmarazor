@@ -1,11 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using BulmaRazor.Utils;
 
 namespace BulmaRazor.Components
 {
-    public record ToastAnimate(string @in, string @out);
+    public class ToastAnimate
+    {
+        public ToastAnimate(string _in, string _out)
+        {
+            @in = _in;
+            @out = _out;
+
+        }
+        public string @in { get; set; }
+        public string @out { get; set; }
+    };
 
     public class ToastOptions
     {
@@ -18,6 +25,7 @@ namespace BulmaRazor.Components
         /// 颜色，对应type
         /// </summary>
         public Color Color { get; set; }
+
 
         /// <summary>
         /// 消息显示时间，默认2000毫秒
@@ -58,25 +66,24 @@ namespace BulmaRazor.Components
         public JsParams ToParams()
         {
             JsParams ps = new JsParams();
+            var def = BulmaRazorOptions.DefaultOptions.ToastOptions;
+            ps.AddNotNull("message", Message ?? def.Message);
 
-            ps.AddNotNull("message", Message);
+            ps.AddNotNull("type", Color?.Value ?? def.Color?.Value);
 
-            ps.AddNotNull("type", Color?.Value ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Color?.Value);
+            ps.AddNotNull("duration", Duration ?? def.Duration);
 
-            ps.AddNotNull("duration", Duration ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Duration);
+            ps.AddNotNull("position", Position ?? def.Position);
 
-            ps.AddNotNull("position", Position ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Position);
+            ps.AddNotNull("dismissible", Dismissible ?? def.Dismissible);
 
-            ps.AddNotNull("dismissible", Dismissible);
+            ps.AddNotNull("pauseOnHover", PauseOnHover ?? def.PauseOnHover);
 
-            ps.AddNotNull("pauseOnHover", PauseOnHover);
+            ps.AddNotNull("closeOnClick", CloseOnClick ?? def.CloseOnClick);
 
-            ps.AddNotNull("closeOnClick",
-                CloseOnClick ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.CloseOnClick);
+            ps.AddNotNull("opacity", Opacity ?? def.Opacity);
 
-            ps.AddNotNull("opacity", Opacity ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Opacity);
-
-            ps.AddNotNull("animate", Animate ?? BulmaRazorOptions.DefaultOptions.DefaultToastConfig.Animate);
+            ps.AddNotNull("animate", Animate ?? def.Animate);
 
             return ps;
         }

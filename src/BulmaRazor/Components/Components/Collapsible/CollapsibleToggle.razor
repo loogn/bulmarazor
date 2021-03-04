@@ -1,0 +1,19 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<a @attributes="Attributes" class="@classes" data-target="@Target" data-action="collapse">
+    @ChildContent
+</a>
+
+@code {
+
+    string classes => CssBuilder.Default()
+        .AddClassFromAttributes(Attributes)
+        .Build();
+
+    [Parameter]
+    public string Target { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
