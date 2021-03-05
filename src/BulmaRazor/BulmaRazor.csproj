@@ -27,11 +27,23 @@
       </None>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="wwwroot\css" />
       <Folder Include="wwwroot\js" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Components\Layout\Divider\Divider.razor.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\animated.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\bordered-pulled.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\core.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\fixed-width.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\font-awesome.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\icons.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\larger.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\list.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\mixins.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\path.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\rotated-flipped.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\screen-reader.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\stacked.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\font-awesome\less\variables.less" />
     </ItemGroup>
    
 </Project>

@@ -12,8 +12,3 @@ window.BulmaRazor = {
         element.selected = val;
     }
 }
-
-//
-// document.addEventListener('click', function(e) {
-//     DotNet.invokeMethodAsync('BulmaRazor', 'OnDocumentClick');
-// });

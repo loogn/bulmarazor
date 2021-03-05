@@ -80,16 +80,16 @@
 
     CalenderOptions _options = new()
     {
-        type = "datetime",
-        disabledWeekDays = new List<int> {1, 2},
-        disabledDates = new List<DateTime>() {DateTime.Now}
+        Type = "datetime",
+        // DisabledWeekDays = new List<int> {1, 2},
+        // DisabledDates = new List<DateTime>() {DateTime.Now}
     };
 
     CalenderOptions _options2 = new()
     {
-        type = "time",
-        color = "danger",
-        closeOnSelect = false,
+        Type = "time",
+        Color = Color.Danger,
+        CloseOnSelect = false,
     };
 
     DateTime? date = DateTime.Now;

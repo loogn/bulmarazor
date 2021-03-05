@@ -1,0 +1,41 @@
+@page "/docs/elements/blocklist"
+@layout DocLayout
+
+<Title>BlockList</Title>
+<Subtitle Size="Size.Size4">
+    以块状样式显示ul和li
+</Subtitle>
+<hr>
+
+<Content>
+    <p>BlockList内部是ul,BlockListItem内部是li</p>
+    <p>可以设置位置，大小，颜色等等样式</p>
+</Content>
+
+<Title Size="Size.Size4">位置</Title>
+<BlockList1/>
+<HighLight FilePath="Pages/docs/elements/blocklist/BlockList1.razor" HasMore></HighLight>
+
+<Title Size="Size.Size4">大小</Title>
+<BlockList2/>
+<HighLight FilePath="Pages/docs/elements/blocklist/BlockList2.razor" HasMore></HighLight>
+
+
+<Title Size="Size.Size4">颜色</Title>
+<BlockList3/>
+<HighLight FilePath="Pages/docs/elements/blocklist/BlockList3.razor" HasMore></HighLight>
+
+
+<Title Size="Size.Size4">其他样式</Title>
+<BlockList4/>
+<HighLight FilePath="Pages/docs/elements/blocklist/BlockList4.razor" HasMore></HighLight>
+
+<Title Size="Size.Size4">所有样式都可以在BlockListItem中应用，已覆盖BlockList中的样式</Title>
+<Columns>
+    <Column>
+        <BlockList5/>
+    </Column>
+    <Column>
+        <HighLight FilePath="Pages/docs/elements/blocklist/BlockList5.razor"></HighLight>
+    </Column>
+</Columns>

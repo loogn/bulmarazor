@@ -14,7 +14,10 @@
         <MenuList>
             @foreach (var sub in item.Children)
             {
-                var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) | item.Keywords.Contains(kw.ToLower())));
+                var flag = string.IsNullOrEmpty(kw)
+                           || kw.HasValue() 
+                           && (sub.Keywords.Any(x=>x.StartsWith(kw.ToLower())) 
+                               || item.Keywords.Any(x=>x.StartsWith(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
                 <MenuItem class="@cls" Href="@sub.Href">@sub.Label</MenuItem>
             }
@@ -122,6 +125,7 @@
                 new MItem("标签(Tag)", "/docs/elements/tag", "tag,标签,label"),
                 new MItem("徽章(Badge)", "/docs/elements/badge", "badge,徽章"),
                 new MItem("工具提示(Tooltip)", "/docs/elements/tooltip", "提示,工具,tool,tip,tips,tooltip,tooltips"),
+                new MItem("块状列表(BlockList)", "/docs/elements/blocklist", "ul,li,block,列表,块状"),
                 new MItem("页面加载(Pageloader)", "/docs/elements/pageloader", "提示,loader,load,加载"),
                 new MItem("标题(Title)", "/docs/elements/title", "title,标题,h1,h2,h3,h3,h4,h6"),
             }
@@ -142,7 +146,7 @@
                 new MItem("面板(Panel)", "/docs/components/panel", "panel,面板"),
                 new MItem("Tab切换(Tabs)", "/docs/components/tabs", "tabs,切换,tab"),
                 new MItem("时间轴(Timeline)", "/docs/components/timeline", "time,timeline,时间,时间轴"),
-                new MItem("折叠面板(Collapse)", "/docs/components/collapse", "collapse,折叠,手风琴,accordion"),
+                new MItem("折叠面板(Collapse)", "/docs/components/collapse", "collapsible,collapse,折叠,手风琴,accordion"),
             }
         },
     };
