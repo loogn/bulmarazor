@@ -1,0 +1,189 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+@typeparam TValue
+
+<input id="@id" value="@ShowValue" type="date" @attributes="Attributes"/>
+
+
+@code {
+    // https://bulma-calendar.onrender.com/
+    string classes => CssBuilder.Default()
+        .AddClassFromAttributes(Attributes)
+        .Build();
+
+    private string id = "datepicker_" + Guid.NewGuid().ToString("N");
+    private IJSObjectReference _obj;
+
+    [Parameter]
+    public TValue Value { get; set; }
+
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+
+    [Parameter]
+    public TValue StartDate { get; set; }
+
+    [Parameter]
+    public EventCallback<TValue> StartDateChanged { get; set; }
+
+    [Parameter]
+    public TValue EndDate { get; set; }
+
+    [Parameter]
+    public EventCallback<TValue> EndDateChanged { get; set; }
+
+
+    [Parameter]
+    public string Format { get; set; }
+
+    [Parameter]
+    public DatePickerOptions Options { get; set; }
+
+    private string ShowValue
+    {
+        get
+        {
+            if (Options?.IsRange == true)
+            {
+                return ExtendMethods.GetShowValue(StartDate, Format) + " - " + ExtendMethods.GetShowValue(EndDate, Format);
+            }
+            return ExtendMethods.GetShowValue(Value, Format);
+        }
+        set
+        {
+            if (Options?.IsRange == true)
+            {
+                var arr = value.Split(" - ");
+                if (arr[0].SetRealValue(out TValue start))
+                {
+                    StartDate = start;
+                    StartDateChanged.InvokeAsync(StartDate).GetAwaiter().GetResult();
+                }
+                if (arr[0].SetRealValue(out TValue end))
+                {
+                    EndDate = end;
+                    EndDateChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+                }
+            }
+            else
+            {
+                if (value.SetRealValue(out TValue val))
+                {
+                    Value = val;
+                    ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+                }
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<DatePicker<TValue>> OnSelect { get; set; }
+
+    [Parameter]
+    public EventCallback<DatePicker<TValue>> OnShow { get; set; }
+
+    [Parameter]
+    public EventCallback<DatePicker<TValue>> OnHide { get; set; }
+
+    [Parameter]
+    public EventCallback<DatePicker<TValue>> OnValidate { get; set; }
+
+    [Parameter]
+    public EventCallback<DatePicker<TValue>> OnClear { get; set; }
+
+
+    [Parameter]
+    public EventCallback<DatePicker<TValue>> OnSelectStart { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        JSCallbackManager.AddEventHandler(id, "select", new Func<string, Task>(s =>
+        {
+            ShowValue = s;
+            return OnSelect.InvokeAsync(this);
+        }));
+        JSCallbackManager.AddEventHandler(id, "clear", new Func<string, Task>(s =>
+        {
+            ShowValue = s;
+            return OnClear.InvokeAsync(this);
+        }));
+        JSCallbackManager.AddEventHandler(id, "show", new Func<string, Task>(s => OnShow.InvokeAsync(this)));
+
+        JSCallbackManager.AddEventHandler(id, "validate", new Func<string, Task>(s =>
+        {
+            ShowValue = s;
+            return OnValidate.InvokeAsync(this);
+        }));
+        JSCallbackManager.AddEventHandler(id, "hide", new Func<string, Task>(s => OnHide.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(id, "select:start", new Func<string, Task>(s => OnSelectStart.InvokeAsync(this)));
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        
+        // SetValue(ShowValue);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            _obj = await JsInterop.DatePickerAttach(id, Options);
+            SetValue(ShowValue);
+        }
+    }
+
+    #region Calendar Funs
+
+    public void Show()
+    {
+        _obj?.InvokeVoidAsync("show");
+    }
+
+    private void SetValue(string date)
+    {
+        _obj?.InvokeVoidAsync("value", date);
+    }
+    
+    public void Hide()
+    {
+        _obj?.InvokeVoidAsync("hide");
+    }
+
+    public ValueTask<bool> IsOpen()
+    {
+        return _obj?.InvokeAsync<bool>("isOpen") ?? new ValueTask<bool>(false);
+    }
+
+    public void Refresh()
+    {
+        _obj?.InvokeVoidAsync("refresh");
+    }
+
+    public void Save()
+    {
+        _obj?.InvokeVoidAsync("save");
+    }
+
+    public void Clear()
+    {
+        _obj?.InvokeVoidAsync("clear");
+    }
+
+    #endregion
+
+    protected override async ValueTask DisposeAsync(bool disposing)
+    {
+        JSCallbackManager.DisposeObject(id);
+        if (_obj != null)
+        {
+            await _obj.DisposeAsync();
+        }
+    }
+
+}

@@ -31,7 +31,7 @@ namespace BulmaRazor.Utils
         }
 
         [JSInvokable]
-        public static void JSCallback(string objId, string eventKey, params object[] args)
+        public static void JSCallback(string objId, string eventKey,params string[] args)
         {
             if (eventHandlerDict.TryGetValue(objId, out Dictionary<string, Delegate> handlers))
             {

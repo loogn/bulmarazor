@@ -6,13 +6,13 @@ using Microsoft.JSInterop;
 
 namespace BulmaRazor.Components
 {
-    
     public class BulmaRazorJsInterop : IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
         private readonly Lazy<Task<IJSObjectReference>> calendarModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> toastModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> collapsibleModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> tagsInputModuleTask;
 
         public BulmaRazorJsInterop(IJSRuntime jsRuntime)
         {
@@ -23,10 +23,13 @@ namespace BulmaRazor.Components
             //calendar
             calendarModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/calendar.min.js").AsTask());
-            
+
             //toast
             toastModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/toast.min.js").AsTask());
+
+            tagsInputModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/js/tagsinput.min.js").AsTask());
 
             //collapsible
             collapsibleModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
@@ -34,7 +37,7 @@ namespace BulmaRazor.Components
         }
 
         // 日历
-        public async ValueTask<IJSObjectReference> CalendarAttach(string id, CalenderOptions options=null)
+        public async ValueTask<IJSObjectReference> CalendarAttach(string id, CalenderOptions options = null)
         {
             options ??= new CalenderOptions();
             var module = await calendarModuleTask.Value;
@@ -42,12 +45,28 @@ namespace BulmaRazor.Components
                 options.ToParams()
             );
         }
-        
+
+        public async ValueTask<IJSObjectReference> DatePickerAttach(string id, DatePickerOptions options = null)
+        {
+            options ??= new DatePickerOptions();
+            var module = await calendarModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("attach", "#" + id,
+                options.ToParams()
+            );
+        }
+
         // 折叠面板
         public async ValueTask<IJSObjectReference> CollapsibleAttach(string selector)
         {
             var module = await collapsibleModuleTask.Value;
             return await module.InvokeAsync<IJSObjectReference>("attach", selector);
+        }
+        
+        // tagsinput
+        public async ValueTask<IJSObjectReference> TagsInputAttach(string selector)
+        {
+            var module = await tagsInputModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("attach", selector, null);
         }
 
         // 吐司
@@ -56,7 +75,6 @@ namespace BulmaRazor.Components
             var module = await toastModuleTask.Value;
             await module.InvokeVoidAsync("toast", options);
         }
-        
 
 
         #region 公共
@@ -87,7 +105,7 @@ namespace BulmaRazor.Components
 
         #endregion
 
-        
+
         public async ValueTask DisposeAsync()
         {
             if (moduleTask.IsValueCreated)

@@ -1,6 +1,6 @@
 /*! bulma.io v0.9.2 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
-.button, .input, .textarea, .select select, .file-cta,
+.button, .input, .textarea, .select select, .tags-input, .file-cta,
 .file-name, .pagination-previous,
 .pagination-next,
 .pagination-link,
@@ -24,19 +24,19 @@
   vertical-align: top;
 }
 
-.button:focus, .input:focus, .textarea:focus, .select select:focus, .file-cta:focus,
+.button:focus, .input:focus, .textarea:focus, .select select:focus, .tags-input:focus, .file-cta:focus,
 .file-name:focus, .pagination-previous:focus,
 .pagination-next:focus,
 .pagination-link:focus,
-.pagination-ellipsis:focus, .is-focused.button, .is-focused.input, .is-focused.textarea, .select select.is-focused, .is-focused.file-cta,
+.pagination-ellipsis:focus, .is-focused.button, .is-focused.input, .is-focused.textarea, .select select.is-focused, .is-focused.tags-input, .is-focused.file-cta,
 .is-focused.file-name, .is-focused.pagination-previous,
 .is-focused.pagination-next,
 .is-focused.pagination-link,
-.is-focused.pagination-ellipsis, .button:active, .input:active, .textarea:active, .select select:active, .file-cta:active,
+.is-focused.pagination-ellipsis, .button:active, .input:active, .textarea:active, .select select:active, .tags-input:active, .file-cta:active,
 .file-name:active, .pagination-previous:active,
 .pagination-next:active,
 .pagination-link:active,
-.pagination-ellipsis:active, .is-active.button, .is-active.input, .is-active.textarea, .select select.is-active, .is-active.file-cta,
+.pagination-ellipsis:active, .is-active.button, .is-active.input, .is-active.textarea, .select select.is-active, .is-active.tags-input, .is-active.file-cta,
 .is-active.file-name, .is-active.pagination-previous,
 .is-active.pagination-next,
 .is-active.pagination-link,
@@ -44,7 +44,7 @@
   outline: none;
 }
 
-.button[disabled], .input[disabled], .textarea[disabled], .select select[disabled], .file-cta[disabled],
+.button[disabled], .input[disabled], .textarea[disabled], .select select[disabled], .tags-input[disabled], .file-cta[disabled],
 .file-name[disabled], .pagination-previous[disabled],
 .pagination-next[disabled],
 .pagination-link[disabled],
@@ -54,6 +54,7 @@ fieldset[disabled] .input,
 fieldset[disabled] .textarea,
 fieldset[disabled] .select select,
 .select fieldset[disabled] select,
+fieldset[disabled] .tags-input,
 fieldset[disabled] .file-cta,
 fieldset[disabled] .file-name,
 fieldset[disabled] .pagination-previous,
@@ -180,7 +181,7 @@ fieldset[disabled] .pagination-ellipsis {
   width: 32px;
 }
 
-.button.is-loading::after, .loader, .select.is-loading::after, .control.is-loading::after {
+.button.is-loading::after, .loader, .select.is-loading::after, .control.is-loading::after, .tags-input .dropdown-menu .dropdown-content.is-loading::after {
   -webkit-animation: spinAround 500ms infinite linear;
           animation: spinAround 500ms infinite linear;
   border: 2px solid #dbdbdb;
@@ -3273,78 +3274,83 @@ a.tag:hover {
 }
 
 /* Bulma Form */
-.input, .textarea, .select select {
+.input, .textarea, .select select, .tags-input {
   background-color: white;
   border-color: #dbdbdb;
   border-radius: 4px;
   color: #363636;
 }
 
-.input::-moz-placeholder, .textarea::-moz-placeholder, .select select::-moz-placeholder {
+.input::-moz-placeholder, .textarea::-moz-placeholder, .select select::-moz-placeholder, .tags-input::-moz-placeholder {
   color: rgba(54, 54, 54, 0.3);
 }
 
-.input::-webkit-input-placeholder, .textarea::-webkit-input-placeholder, .select select::-webkit-input-placeholder {
+.input::-webkit-input-placeholder, .textarea::-webkit-input-placeholder, .select select::-webkit-input-placeholder, .tags-input::-webkit-input-placeholder {
   color: rgba(54, 54, 54, 0.3);
 }
 
-.input:-moz-placeholder, .textarea:-moz-placeholder, .select select:-moz-placeholder {
+.input:-moz-placeholder, .textarea:-moz-placeholder, .select select:-moz-placeholder, .tags-input:-moz-placeholder {
   color: rgba(54, 54, 54, 0.3);
 }
 
-.input:-ms-input-placeholder, .textarea:-ms-input-placeholder, .select select:-ms-input-placeholder {
+.input:-ms-input-placeholder, .textarea:-ms-input-placeholder, .select select:-ms-input-placeholder, .tags-input:-ms-input-placeholder {
   color: rgba(54, 54, 54, 0.3);
 }
 
-.input:hover, .textarea:hover, .select select:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered {
+.input:hover, .textarea:hover, .select select:hover, .tags-input:hover, .is-hovered.input, .is-hovered.textarea, .select select.is-hovered, .is-hovered.tags-input {
   border-color: #b5b5b5;
 }
 
-.input:focus, .textarea:focus, .select select:focus, .is-focused.input, .is-focused.textarea, .select select.is-focused, .input:active, .textarea:active, .select select:active, .is-active.input, .is-active.textarea, .select select.is-active {
+.input:focus, .textarea:focus, .select select:focus, .tags-input:focus, .is-focused.input, .is-focused.textarea, .select select.is-focused, .is-focused.tags-input, .input:active, .textarea:active, .select select:active, .tags-input:active, .is-active.input, .is-active.textarea, .select select.is-active, .is-active.tags-input {
   border-color: #485fc7;
   box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25);
 }
 
-.input[disabled], .textarea[disabled], .select select[disabled],
+.input[disabled], .textarea[disabled], .select select[disabled], .tags-input[disabled],
 fieldset[disabled] .input,
 fieldset[disabled] .textarea,
 fieldset[disabled] .select select,
-.select fieldset[disabled] select {
+.select fieldset[disabled] select,
+fieldset[disabled] .tags-input {
   background-color: whitesmoke;
   border-color: whitesmoke;
   box-shadow: none;
   color: #7a7a7a;
 }
 
-.input[disabled]::-moz-placeholder, .textarea[disabled]::-moz-placeholder, .select select[disabled]::-moz-placeholder,
+.input[disabled]::-moz-placeholder, .textarea[disabled]::-moz-placeholder, .select select[disabled]::-moz-placeholder, .tags-input[disabled]::-moz-placeholder,
 fieldset[disabled] .input::-moz-placeholder,
 fieldset[disabled] .textarea::-moz-placeholder,
 fieldset[disabled] .select select::-moz-placeholder,
-.select fieldset[disabled] select::-moz-placeholder {
+.select fieldset[disabled] select::-moz-placeholder,
+fieldset[disabled] .tags-input::-moz-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
-.input[disabled]::-webkit-input-placeholder, .textarea[disabled]::-webkit-input-placeholder, .select select[disabled]::-webkit-input-placeholder,
+.input[disabled]::-webkit-input-placeholder, .textarea[disabled]::-webkit-input-placeholder, .select select[disabled]::-webkit-input-placeholder, .tags-input[disabled]::-webkit-input-placeholder,
 fieldset[disabled] .input::-webkit-input-placeholder,
 fieldset[disabled] .textarea::-webkit-input-placeholder,
 fieldset[disabled] .select select::-webkit-input-placeholder,
-.select fieldset[disabled] select::-webkit-input-placeholder {
+.select fieldset[disabled] select::-webkit-input-placeholder,
+fieldset[disabled] .tags-input::-webkit-input-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
-.input[disabled]:-moz-placeholder, .textarea[disabled]:-moz-placeholder, .select select[disabled]:-moz-placeholder,
+.input[disabled]:-moz-placeholder, .textarea[disabled]:-moz-placeholder, .select select[disabled]:-moz-placeholder, .tags-input[disabled]:-moz-placeholder,
 fieldset[disabled] .input:-moz-placeholder,
 fieldset[disabled] .textarea:-moz-placeholder,
 fieldset[disabled] .select select:-moz-placeholder,
-.select fieldset[disabled] select:-moz-placeholder {
+.select fieldset[disabled] select:-moz-placeholder,
+fieldset[disabled] .tags-input:-moz-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
-.input[disabled]:-ms-input-placeholder, .textarea[disabled]:-ms-input-placeholder, .select select[disabled]:-ms-input-placeholder,
+.input[disabled]:-ms-input-placeholder, .textarea[disabled]:-ms-input-placeholder, .select select[disabled]:-ms-input-placeholder, .tags-input[disabled]:-ms-input-placeholder,
 fieldset[disabled] .input:-ms-input-placeholder,
 fieldset[disabled] .textarea:-ms-input-placeholder,
 fieldset[disabled] .select select:-ms-input-placeholder,
-.select fieldset[disabled] select:-ms-input-placeholder {
+.select fieldset[disabled] select:-ms-input-placeholder,
+fieldset[disabled] .tags-input:-ms-input-placeholder {
   color: rgba(122, 122, 122, 0.3);
 }
 
@@ -19936,5 +19942,238 @@ span[data-tooltip].has-tooltip-danger {
   color: #f14668;
   border: 1px solid #f14668;
   border-left: 5px #f14668 solid;
+}
+
+.tags-input {
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 2.5em;
+  padding: 0;
+  position: relative;
+}
+
+.tags-input .tag {
+  font-size: 1rem;
+  margin: .1rem;
+}
+
+.tags-input .tag:hover {
+  cursor: pointer;
+}
+
+.tags-input .tag.is-selected {
+  background-color: #00d1b2;
+  color: #fff;
+}
+
+.tags-input .tag.is-duplicate {
+  -webkit-animation: blinker 0.75s linear infinite;
+          animation: blinker 0.75s linear infinite;
+}
+
+.tags-input .input {
+  border-color: transparent;
+  box-shadow: none;
+  display: inline-block;
+  flex: 1 0 auto;
+  height: 2.3rem;
+  margin: .1rem;
+  width: auto;
+}
+
+.tags-input.is-filter input {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.tags-input.is-filter input::-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.tags-input.is-filter input::-webkit-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.tags-input.is-filter input:-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.tags-input.is-filter input:-ms-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+}
+
+.tags-input.no-input input {
+  color: transparent;
+  text-shadow: 0 0 0 rgba(54, 54, 54, 0.3);
+}
+
+.tags-input.no-input input::-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  text-shadow: none;
+}
+
+.tags-input.no-input input::-webkit-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  text-shadow: none;
+}
+
+.tags-input.no-input input:-moz-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  text-shadow: none;
+}
+
+.tags-input.no-input input:-ms-input-placeholder {
+  color: rgba(54, 54, 54, 0.3);
+  text-shadow: none;
+}
+
+.tags-input .dropdown-menu {
+  width: 100%;
+}
+
+.tags-input .dropdown-menu .dropdown-content {
+  max-height: 250px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.tags-input .dropdown-menu .dropdown-content.is-loading::after {
+  left: 50%;
+  position: absolute !important;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+.tags-input .dropdown-menu .dropdown-content.is-loading::before {
+  background-color: rgba(245, 245, 245, 0.5);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+.tags-input .dropdown-menu .dropdown-item:not(.empty-title):hover {
+  cursor: pointer;
+}
+
+.tags-input .dropdown-menu .dropdown-item.empty-title {
+  color: #7a7a7a;
+  text-align: center;
+}
+
+.tags-input .dropdown-menu .dropdown-item.empty-title:hover {
+  background: inherit;
+  color: #7a7a7a;
+}
+
+.tags-input .dropdown-menu .dropdown-item mark.is-highlighted {
+  background-color: #ffe08a;
+}
+
+.tags-input.is-small .tag {
+  font-size: 0.75rem;
+}
+
+.tags-input.is-small .input {
+  border-radius: 2px;
+  font-size: 0.75rem;
+}
+
+.tags-input.is-medium .tag {
+  font-size: 1.25rem;
+}
+
+.tags-input.is-medium .input {
+  font-size: 1.25rem;
+}
+
+.tags-input.is-large .tag {
+  font-size: 1.5rem;
+}
+
+.tags-input.is-large .input {
+  font-size: 1.5rem;
+}
+
+.tags-input.is-disabled, .tags-input[disabled] {
+  background-color: whitesmoke;
+  border-color: whitesmoke;
+  box-shadow: none;
+  color: #7a7a7a;
+  cursor: not-allowed;
+}
+
+.tags-input.is-disabled .tag, .tags-input[disabled] .tag {
+  background-color: ligthen(whitesmoke, 5%);
+  color: #7a7a7a;
+  cursor: not-allowed;
+}
+
+.tags-input.is-disabled .tag .delete, .tags-input[disabled] .tag .delete {
+  background-color: #e8e8e8;
+  border-color: #e8e8e8;
+  box-shadow: none;
+  color: #7a7a7a;
+  cursor: not-allowed;
+}
+
+.tags-input.is-disabled .input, .tags-input[disabled] .input {
+  background-color: whitesmoke;
+  border-color: whitesmoke;
+  box-shadow: none;
+  color: #7a7a7a;
+}
+
+.tags-input.is-disabled .input::-moz-placeholder, .tags-input[disabled] .input::-moz-placeholder {
+  color: rgba(122, 122, 122, 0.3);
+}
+
+.tags-input.is-disabled .input::-webkit-input-placeholder, .tags-input[disabled] .input::-webkit-input-placeholder {
+  color: rgba(122, 122, 122, 0.3);
+}
+
+.tags-input.is-disabled .input:-moz-placeholder, .tags-input[disabled] .input:-moz-placeholder {
+  color: rgba(122, 122, 122, 0.3);
+}
+
+.tags-input.is-disabled .input:-ms-input-placeholder, .tags-input[disabled] .input:-ms-input-placeholder {
+  color: rgba(122, 122, 122, 0.3);
+}
+
+.tags-input[readonly] .input {
+  box-shadow: none;
+}
+
+.tags-input.is-active .dropdown-menu {
+  display: block;
+}
+
+@-webkit-keyframes blinker {
+  0% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
 }
 /*# sourceMappingURL=bulma.css.map */

@@ -4,12 +4,8 @@ using BulmaRazor.Utils;
 
 namespace BulmaRazor.Components
 {
-    public class CalenderOptions
+    public class DatePickerOptions
     {
-        /// <summary>
-        /// type Component type: date|time|datetime datetime
-        /// </summary>
-        internal string Type { get; set; }
 
         /// <summary>
         /// color	Picker dominant color	primary
@@ -36,11 +32,6 @@ namespace BulmaRazor.Components
         /// dateFormat	Date format pattern	MM/DD/YYYY
         /// </summary>
         public string DateFormat { get; set; } = "YYYY-MM-DD";
-
-        /// <summary>
-        /// timeFormat	Time format pattern	HH:mm
-        /// </summary>
-        public string TimeFormat { get; set; }
 
         /// <summary>
         /// displayMode	Display mode: default|dialog|inline	default
@@ -151,21 +142,7 @@ namespace BulmaRazor.Components
         /// weekStart	Default weekstart day number (sunday by default)	0
         /// </summary>
         public int? WeekStart { get; set; }
-
-        /// <summary>
-        /// startTime	Pre-selected start time	undefined
-        /// </summary>
-        public TimeSpan? StartTime { get; set; }
-
-        /// <summary>
-        /// endTime	Pre-selected end time	undefined
-        /// </summary>
-        public TimeSpan? EndTime { get; set; }
-
-        /// <summary>
-        /// minuteSteps	Steps for minutes selector	5
-        /// </summary>
-        public int? MinuteSteps { get; set; }
+        
 
         /// <summary>
         /// labelFrom	From label placeholder 开始时间
@@ -199,13 +176,12 @@ namespace BulmaRazor.Components
         {
             JsParams ps = new JsParams();
             var def = BulmaRazorOptions.DefaultOptions.CalenderOptions;
-            ps.AddNotNull("type", Type ?? def.Type);
+            ps.AddNotNull("type","date");
             ps.AddNotNull("color", (Color ?? def.Color)?.Value?.Replace("is-",""));
             ps.AddNotNull("isRange", IsRange ?? def.IsRange);
             ps.AddNotNull("allowSameDayRange", AllowSameDayRange ?? def.AllowSameDayRange);
             ps.AddNotNull("lang", Lang ?? def.Lang);
             ps.AddNotNull("dateFormat", DateFormat ?? def.DateFormat);
-            ps.AddNotNull("timeFormat", TimeFormat ?? def.TimeFormat);
             ps.AddNotNull("displayMode", DisplayMode ?? def.DisplayMode);
             ps.AddNotNull("position", Position ?? def.Position);
             ps.AddNotNull("showHeader", ShowHeader ?? def.ShowHeader);
@@ -228,9 +204,6 @@ namespace BulmaRazor.Components
             ps.AddNotNull("disabledDates", DisabledDates ?? def.DisabledDates);
             ps.AddNotNull("disabledWeekDays", DisabledWeekDays ?? def.DisabledWeekDays);
             ps.AddNotNull("weekStart", WeekStart ?? def.WeekStart);
-            ps.AddNotNull("startTime", StartTime ?? def.StartTime);
-            ps.AddNotNull("endTime", EndTime ?? def.EndTime);
-            ps.AddNotNull("minuteSteps", MinuteSteps ?? def.MinuteSteps);
             ps.AddNotNull("labelFrom", LabelFrom ?? def.LabelFrom);
             ps.AddNotNull("labelTo", LabelTo ?? def.LabelTo);
             ps.AddNotNull("closeOnOverlayClick", CloseOnOverlayClick ?? def.CloseOnOverlayClick);

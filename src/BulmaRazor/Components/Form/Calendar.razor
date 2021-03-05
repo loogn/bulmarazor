@@ -4,10 +4,12 @@
 @using System.Diagnostics.Contracts
 @typeparam TValue
 
-<input id="@id" @attributes="Attributes"/>
+
+<input id="@id" value="@ShowValue" @attributes="Attributes"/>
+
 
 @code {
-
+    // https://bulma-calendar.onrender.com/
     string classes => CssBuilder.Default()
         .AddClassFromAttributes(Attributes)
         .Build();
@@ -58,7 +60,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        Attributes.Add("value", ShowValue);
+        // Attributes.Add("value", ShowValue);
         JSCallbackManager.AddEventHandler(id, "select", new Func<string,Task>(s =>
         {
             ShowValue = s;
@@ -66,6 +68,12 @@
         }));
         JSCallbackManager.AddEventHandler(id, "ready", new Func<string,Task>(s => OnReady.InvokeAsync(this)));
         JSCallbackManager.AddEventHandler(id, "show", new Func<string,Task>(s => OnShow.InvokeAsync(this)));
+        
+        JSCallbackManager.AddEventHandler(id, "validate", new Func<string,Task>(s =>
+        {
+            ShowValue = s;
+            return OnShow.InvokeAsync(this);
+        }));
         JSCallbackManager.AddEventHandler(id, "hide", new Func<string,Task>(s => OnHide.InvokeAsync(this)));
     }
 
@@ -85,6 +93,8 @@
         if (firstRender)
         {
             _obj = await JsInterop.CalendarAttach(id, Options);
+            SetValue(ShowValue);
+            Save();
         }
     }
 
@@ -93,6 +103,11 @@
     public void Show()
     {
         _obj?.InvokeVoidAsync("show");
+    }
+
+    public void SetValue(string date)
+    {
+        _obj?.InvokeVoidAsync("value", date);
     }
 
     public void Hide()

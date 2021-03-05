@@ -10,20 +10,36 @@ export function attach(selector,options){
     }
     let instance=instances[0];
     instance.on('select', function (datepicker) {
-        // console.log("select值："+datepicker.data.value());
+        console.log('select');
         DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"select",[datepicker.data.value()]);
     });
     instance.on('hide', function (datepicker) {
+        console.log('hide');
         DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"hide",[datepicker.data.value()]);
     });
-    instance.on('ready', function (datepicker) {
-        DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"ready",[datepicker.data.value()]);
-    });
+    
     instance.on('show', function (datepicker) {
+        console.log('show');
         DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"show",[datepicker.data.value()]);
     });
-    // instance.on('select:start', function (datepicker) {
-    //     DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"select:start",[datepicker.data.value()]);
-    // });
+    instance.on('validate', function (datepicker) {
+        console.log('validate');
+        DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"validate",[datepicker.data.value()]);
+    });
+    instance.on('clear', function (datepicker) {
+        console.log('clear');
+        DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"clear",[datepicker.data.value()]);
+    });
+    
+    instance.on('select:start', function (datepicker) {
+        DotNet.invokeMethodAsync("BulmaRazor","JSCallback",datepicker.data.element.id,"select:start",[datepicker.data.value()]);
+    });
+    
+    
     return instance;
 }
+
+
+// date	Set date
+// startDate	Se start date
+// endDate	Set end date

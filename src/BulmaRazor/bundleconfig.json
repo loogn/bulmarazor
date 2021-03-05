@@ -24,6 +24,16 @@
     }
   },
   {
+    "outputFileName": "wwwroot/js/tagsinput.min.js",
+    "inputFiles": [
+      "wwwroot/jsplugin/tagsinput/bulma-tagsinput.js",
+      "wwwroot/jsplugin/tagsinput/bulma-tagsinput-export.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
     "outputFileName": "wwwroot/js/toast.min.js",
     "inputFiles": [
       "wwwroot/jsplugin/toast/toast.js"

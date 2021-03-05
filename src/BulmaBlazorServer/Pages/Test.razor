@@ -1,70 +1,49 @@
 @page "/test"
 
-@using BulmaRazorServer.Pages.docs.elements
 @inject BulmaRazorJsInterop JsInterop
 @inject ToastService ToastService
 
 <Container style="overflow: scroll" class="@B.PY6">
     <Field>
-        <Button @onclick="() => cal.Show()">Show</Button>
-        <p>Date:<span>@date</span></p>
+        <Button @onclick="load">Show</Button>
+        <p>Date:<span>@dt1?.ToString("yyyy-MM-dd")</span></p>
     </Field>
     <Field>
         <Control>
-            <Calendar @ref="                                    cal" @bind-Value="date" type="date" Options="@_options"></Calendar>
+            <DatePicker @bind-Value="dt1"></DatePicker>
         </Control>
     </Field>
     <Field>
         <Control>
-            <Container>
-                <Calendar @ref="                                            cal2" @bind-Value="ts" type="time" Options="@_options2"></Calendar>
-            </Container>
+            <DatePicker @bind-StartDate="dt1" @bind-EndDate="dt2" Options="datePickOption1"></DatePicker>
         </Control>
     </Field>
-
-
+    
+    
+    <TagsInput @bind-Value="str"></TagsInput>
+    <br>
+    str:<span>@str</span>
     <hr>
     <Button @onclick="load">Load</Button>
 
-    <Quickview IsActive="act" HeaderText="菜单">
-        <Content>
-            <Field>
-                <Control>
-                    <Input @bind-Value="ts"></Input>
-                </Control>
-            </Field>
-        </Content>
-    </Quickview>
-    <br>
-    <hr>
-    <CollapsibleContainer>
-        <CollapsibleToggle Target="ab">Hello</CollapsibleToggle>
-        <Collapsible Id="ab" BeforeExpand="bexpand">
-            <Notification>
-                <p>这里是内容</p>
-                <p>这里是内容</p>
-                <p>这里是内容</p>
-            </Notification>
-        </Collapsible>
-        <hr>
-        <CollapsibleToggle Target="abc">World</CollapsibleToggle>
-        <Collapsible Id="abc">
-            <Notification>
-                <p>这里是内容</p>
-                <p>这里是内容</p>
-                <p>这里是内容</p>
-            </Notification>
-        </Collapsible>
-    </CollapsibleContainer>
 </Container>
 
-
 @code{
+    private string str = "";
+    
+    DateTime? dt1 = DateTime.Parse("2020-01-01");
+    DateTime? dt2 = DateTime.Parse("2020-03-03");
+
+    DatePickerOptions datePickOption1 = new DatePickerOptions()
+    {
+        IsRange = true,
+    };
 
     void bexpand()
     {
         ToastService.Show("开始显示");
     }
+
     bool act = false;
     Dialog dialog;
 
@@ -72,25 +51,7 @@
 
     async Task load()
     {
-        act = true;
     }
-
-    private Calendar<DateTime?> cal;
-    private Calendar<TimeSpan?> cal2;
-
-    CalenderOptions _options = new()
-    {
-        Type = "datetime",
-        // DisabledWeekDays = new List<int> {1, 2},
-        // DisabledDates = new List<DateTime>() {DateTime.Now}
-    };
-
-    CalenderOptions _options2 = new()
-    {
-        Type = "time",
-        Color = Color.Danger,
-        CloseOnSelect = false,
-    };
 
     DateTime? date = DateTime.Now;
     TimeSpan? ts;

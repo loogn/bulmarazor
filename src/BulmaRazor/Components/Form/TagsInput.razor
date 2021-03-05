@@ -1,0 +1,108 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+
+<input id="@Id" @attributes="Attributes" value="@ShowValue"
+       class="@classes"/>
+
+@code {
+
+    private string Id = "tagsInput_" + Guid.NewGuid().ToString("N");
+
+    string classes => CssBuilder.Default("")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-hovered", IsHovered)
+        .AddClass("is-focused", IsFocused)
+        .AddClass("is-static", IsStatic)
+        .Build();
+
+    //属性应该传给options
+    
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsNormal { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+    [Parameter]
+    public bool IsHovered { get; set; }
+
+    [Parameter]
+    public bool IsFocused { get; set; }
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+    [Parameter]
+    public bool IsStatic { get; set; }
+
+    [Parameter]
+    public string BindEvent { get; set; } = "onchange";
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public string Format { get; set; }
+
+    private string ShowValue
+    {
+        get { return Value; }
+        set
+        {
+            Value = value;
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<TagsInput> AfterAdd { get; set; }
+
+    protected override void OnInitialized()
+    {
+        JSCallbackManager.AddEventHandler(Id, "after.add", new Func<string, Task>(s =>
+        {
+            ShowValue = s;
+            return AfterAdd.InvokeAsync(this);
+        }));
+        base.OnInitialized();
+    }
+
+    protected override ValueTask DisposeAsync(bool disposing)
+    {
+        JSCallbackManager.DisposeObject(Id);
+        return base.DisposeAsync(disposing);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await JsInterop.TagsInputAttach("#" + Id);
+        }
+    }
+
+}
