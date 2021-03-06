@@ -61,7 +61,7 @@ namespace BulmaRazor.Components
             var module = await collapsibleModuleTask.Value;
             return await module.InvokeAsync<IJSObjectReference>("attach", selector);
         }
-        
+
         // tagsinput
         public async ValueTask<IJSObjectReference> TagsInputAttach(string selector, TagsInputOptions options = null)
         {
@@ -73,7 +73,7 @@ namespace BulmaRazor.Components
         public async ValueTask ToastShow(ToastOptions options)
         {
             var module = await toastModuleTask.Value;
-            await module.InvokeVoidAsync("toast", options);
+            await module.InvokeVoidAsync("toast", options.ToParams());
         }
 
 
