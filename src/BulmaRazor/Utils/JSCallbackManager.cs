@@ -31,19 +31,32 @@ namespace BulmaRazor.Utils
         }
 
         [JSInvokable]
-        public static void JSCallback(string objId, string eventKey,params string[] args)
+        public static object JSCallbackWithParams(string objId, string eventKey, Dictionary<string, object> ps)
         {
             if (eventHandlerDict.TryGetValue(objId, out Dictionary<string, Delegate> handlers))
             {
                 if (handlers.TryGetValue(eventKey, out Delegate d))
                 {
-                    var obj= d.DynamicInvoke(args);
-                    if (obj is Task task)
-                    {
-                        task.GetAwaiter().GetResult();
-                    }
+                    var obj = d.DynamicInvoke(ps);
+                    return obj;
                 }
             }
+
+            return null;
+        }
+
+        [JSInvokable]
+        public static object JSCallback(string objId, string eventKey)
+        {
+            if (eventHandlerDict.TryGetValue(objId, out Dictionary<string, Delegate> handlers))
+            {
+                if (handlers.TryGetValue(eventKey, out Delegate d))
+                {
+                    var obj = d.DynamicInvoke();
+                    return obj;
+                }
+            }
+            return null;
         }
     }
 }

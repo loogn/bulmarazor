@@ -63,10 +63,10 @@ namespace BulmaRazor.Components
         }
         
         // tagsinput
-        public async ValueTask<IJSObjectReference> TagsInputAttach(string selector)
+        public async ValueTask<IJSObjectReference> TagsInputAttach(string selector, TagsInputOptions options = null)
         {
             var module = await tagsInputModuleTask.Value;
-            return await module.InvokeAsync<IJSObjectReference>("attach", selector, null);
+            return await module.InvokeAsync<IJSObjectReference>("attach", selector, options?.ToParams());
         }
 
         // 吐司

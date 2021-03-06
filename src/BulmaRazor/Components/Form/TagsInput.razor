@@ -1,4 +1,5 @@
 ﻿@namespace BulmaRazor.Components
+@using System.Text.RegularExpressions
 @inherits BulmaComponentBase
 @inject BulmaRazorJsInterop JsInterop
 
@@ -9,7 +10,7 @@
 
     private string Id = "tagsInput_" + Guid.NewGuid().ToString("N");
 
-    string classes => CssBuilder.Default("")
+    string classes => CssBuilder.Default("input")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-small", IsSmall)
@@ -22,11 +23,8 @@
         .AddClass("is-static", IsStatic)
         .Build();
 
-    //属性应该传给options
-    
     [Parameter]
     public Color Color { get; set; } = Color.Default;
-
 
     [Parameter]
     public bool IsSmall { get; set; }
@@ -53,16 +51,13 @@
     public bool IsStatic { get; set; }
 
     [Parameter]
-    public string BindEvent { get; set; } = "onchange";
-
-    [Parameter]
     public string Value { get; set; }
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
 
     [Parameter]
-    public string Format { get; set; }
+    public TagsInputOptions Options { get; set; }
 
     private string ShowValue
     {
@@ -80,12 +75,26 @@
     [Parameter]
     public EventCallback<TagsInput> AfterAdd { get; set; }
 
+    [Parameter]
+    public EventCallback<TagsInput> AfterRemove { get; set; }
+
+
     protected override void OnInitialized()
     {
-        JSCallbackManager.AddEventHandler(Id, "after.add", new Func<string, Task>(s =>
+        JSCallbackManager.AddEventHandler(Id, "after.add", new Func<Dictionary<string, object>, Task>((dict) =>
         {
-            ShowValue = s;
+            ShowValue = dict["value"].ToString();
             return AfterAdd.InvokeAsync(this);
+        }));
+        JSCallbackManager.AddEventHandler(Id, "after.remove", new Func<Dictionary<string, object>, Task>((dict) =>
+        {
+            ShowValue = dict["value"].ToString();
+            return AfterRemove.InvokeAsync(this);
+        }));
+        JSCallbackManager.AddEventHandler(Id, "after.flush", new Func<Dictionary<string, object>, Task>((dict) =>
+        {
+            ShowValue = "";
+            return AfterRemove.InvokeAsync(this);
         }));
         base.OnInitialized();
     }
@@ -96,13 +105,86 @@
         return base.DisposeAsync(disposing);
     }
 
+    private IJSObjectReference jsObj;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
-            await JsInterop.TagsInputAttach("#" + Id);
+            jsObj = await JsInterop.TagsInputAttach("#" + Id, Options);
         }
     }
+
+    #region js funs
+
+    //Item to add
+    public void Add(params string[] items)
+    {
+        jsObj?.InvokeVoidAsync("add", new object[] {items});
+    }
+
+    //Unselect the current selected tag
+    public void ClearSelection()
+    {
+        jsObj?.InvokeVoidAsync("clearSelection");
+    }
+
+    //Shortcut to removeAll method
+    public void Flush()
+    {
+        jsObj?.InvokeVoidAsync("flush");
+    }
+
+    //Sets focus on the input
+    public void focus()
+    {
+        jsObj?.InvokeVoidAsync("focus");
+    }
+
+    //Check if given item is present
+    public ValueTask<bool>? Has(string item)
+    {
+        return jsObj?.InvokeAsync<bool>("has", item);
+    }
+
+    //Get index of given item
+    public ValueTask<int>? IndexOf(string item)
+    {
+        return jsObj?.InvokeAsync<int>("indexOf", item);
+    }
+
+    public ValueTask<string[]>? Items()
+    {
+        return jsObj?.InvokeAsync<string[]>("items");
+    }
+
+    public void Remove(string item)
+    {
+        jsObj?.InvokeVoidAsync("remove", item);
+    }
+
+    public void RemoveAll()
+    {
+        jsObj?.InvokeVoidAsync("removeAll");
+    }
+
+    public void RemoveAtIndex(int index, bool clearSelection = true)
+    {
+        jsObj?.InvokeVoidAsync("removeAtIndex", index, clearSelection);
+    }
+
+    //Select given item
+    public void Select(params string[] items)
+    {
+        jsObj?.InvokeVoidAsync("select", new object[] {items});
+    }
+
+    public void SelectAtIndex(int index)
+    {
+        jsObj?.InvokeVoidAsync("selectAtIndex", index);
+    }
+
+    #endregion
 
 }

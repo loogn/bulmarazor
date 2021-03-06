@@ -5,7 +5,6 @@
 
 <input id="@id" value="@ShowValue" type="date" @attributes="Attributes"/>
 
-
 @code {
     // https://bulma-calendar.onrender.com/
     string classes => CssBuilder.Default()
@@ -93,39 +92,38 @@
     [Parameter]
     public EventCallback<DatePicker<TValue>> OnClear { get; set; }
 
-
     [Parameter]
     public EventCallback<DatePicker<TValue>> OnSelectStart { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        JSCallbackManager.AddEventHandler(id, "select", new Func<string, Task>(s =>
+        JSCallbackManager.AddEventHandler(id, "select", new Func<Dictionary<string, object>, Task>(dict =>
         {
-            ShowValue = s;
+            ShowValue = dict["value"].ToString();
             return OnSelect.InvokeAsync(this);
         }));
-        JSCallbackManager.AddEventHandler(id, "clear", new Func<string, Task>(s =>
+        JSCallbackManager.AddEventHandler(id, "clear", new Func<Task>(() =>
         {
-            ShowValue = s;
+            ShowValue = "";
             return OnClear.InvokeAsync(this);
         }));
-        JSCallbackManager.AddEventHandler(id, "show", new Func<string, Task>(s => OnShow.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(id, "show", new Func<Task>(() => OnShow.InvokeAsync(this)));
 
-        JSCallbackManager.AddEventHandler(id, "validate", new Func<string, Task>(s =>
+        JSCallbackManager.AddEventHandler(id, "validate", new Func<Dictionary<string, object>, Task>(dict =>
         {
-            ShowValue = s;
+            ShowValue = dict["value"].ToString();
             return OnValidate.InvokeAsync(this);
         }));
-        JSCallbackManager.AddEventHandler(id, "hide", new Func<string, Task>(s => OnHide.InvokeAsync(this)));
-        JSCallbackManager.AddEventHandler(id, "select:start", new Func<string, Task>(s => OnSelectStart.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(id, "hide", new Func<Task>(() => OnHide.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(id, "select:start", new Func<Dictionary<string, object>, Task>(dict => OnSelectStart.InvokeAsync(this)));
     }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
-        
-        // SetValue(ShowValue);
+
+    // SetValue(ShowValue);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -149,7 +147,7 @@
     {
         _obj?.InvokeVoidAsync("value", date);
     }
-    
+
     public void Hide()
     {
         _obj?.InvokeVoidAsync("hide");

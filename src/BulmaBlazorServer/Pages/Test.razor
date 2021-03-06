@@ -19,8 +19,7 @@
         </Control>
     </Field>
     
-    
-    <TagsInput @bind-Value="str"></TagsInput>
+    <TagsInput @ref="tagsi" Color="Color.Danger" IsLarge @bind-Value="str"></TagsInput>
     <br>
     str:<span>@str</span>
     <hr>
@@ -33,10 +32,10 @@
     
     DateTime? dt1 = DateTime.Parse("2020-01-01");
     DateTime? dt2 = DateTime.Parse("2020-03-03");
-
+    TagsInput tagsi;
     DatePickerOptions datePickOption1 = new DatePickerOptions()
     {
-        IsRange = true,
+        
     };
 
     void bexpand()
@@ -51,6 +50,7 @@
 
     async Task load()
     {
+        tagsi.Flush();
     }
 
     DateTime? date = DateTime.Now;

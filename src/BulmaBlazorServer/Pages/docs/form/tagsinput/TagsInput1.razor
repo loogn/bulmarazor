@@ -1,0 +1,16 @@
+str:<span>@str</span><br>
+
+<TagsInput @ref="tinput" @bind-Value="str" Options="opts"></TagsInput>
+<Button Color="Color.Primary" @onclick="clear">Clear</Button>
+
+@code{
+
+    string str = "aa,bb";
+    TagsInput tinput;
+    TagsInputOptions opts = new() {MaxTags = 5};
+
+    void clear()
+    {
+        tinput.Flush(); //or tinput.RemoveAll();
+    }
+}

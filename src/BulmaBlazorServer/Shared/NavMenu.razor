@@ -2,8 +2,9 @@
 @inject IJSRuntime js
 
 <Control HasIconsRight>
-    <Input @ref="kwInput" class="@B.MB2" BindEvent="oninput" placeholder="Search Components" @bind-Value="kw" @onkeypress="inputHandle"/>
-    @if(kw.Length>0){
+    <Input @ref="                    kwInput" class="@B.MB2" BindEvent="oninput" placeholder="Search Components" @bind-Value="kw" @onkeypress="inputHandle"/>
+    @if (kw.Length > 0)
+    {
         <Icon IsRight IconClass="fa fa-times" class="@B.Clickable" @onclick="clear"></Icon>
     }
 </Control>
@@ -15,9 +16,9 @@
             @foreach (var sub in item.Children)
             {
                 var flag = string.IsNullOrEmpty(kw)
-                           || kw.HasValue() 
-                           && (sub.Keywords.Any(x=>x.StartsWith(kw.ToLower())) 
-                               || item.Keywords.Any(x=>x.StartsWith(kw.ToLower())));
+                           || kw.HasValue()
+                           && (sub.Keywords.Any(x => x.StartsWith(kw.ToLower()))
+                               || item.Keywords.Any(x => x.StartsWith(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
                 <MenuItem class="@cls" Href="@sub.Href">@sub.Label</MenuItem>
             }
@@ -46,6 +47,7 @@
     {
         kw = "";
     }
+
     void inputHandle(KeyboardEventArgs e)
     {
         if (e.Key == "Enter")
@@ -91,7 +93,7 @@
                 new MItem("节(Section)", "/docs/layout/section", "section,节,部分"),
                 new MItem("页脚(Footer)", "/docs/layout/footer", "脚,页脚,foot,footer"),
                 new MItem("块(Tile)", "/docs/layout/tiles", "块,Tile"),
-                new ("分割线(Divider)","/docs/layout/divider","divider,分割,分割线")
+                new("分割线(Divider)", "/docs/layout/divider", "divider,分割,分割线")
             }
         },
         new MItem("表单(Form)", "", "表单,form")
@@ -106,6 +108,8 @@
                 new MItem("单选框(Radio)", "/docs/form/radio", "单选,radio"),
                 new MItem("开关(Switch)", "/docs/form/switch", "开关,switch"),
                 new MItem("文件(File)", "/docs/form/file", "file,上传,文件"),
+                new MItem("标签输入框(TagsInput)", "/docs/form/tagsinput", "input,tag,标签"),
+                new MItem("日期选择(DatePicker)", "/docs/form/datepicker", "date,datepicker,picker,日期,日期选择"),
             }
         },
         new MItem("元素(Elements)", "", "元素,element")
@@ -163,6 +167,7 @@
         await js.InvokeVoidAsync("docScrollTop");
         await MenuClick.InvokeAsync();
     }
+
     [Parameter]
     public EventCallback MenuClick { get; set; }
 

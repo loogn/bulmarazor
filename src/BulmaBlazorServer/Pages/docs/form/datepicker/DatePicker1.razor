@@ -1,0 +1,7 @@
+dt:<span>@(dt?.ToString("yyyy-MM-dd"))</span><br>
+<DatePicker @bind-Value="dt" Options="opt"></DatePicker>
+
+@code {
+    DateTime? dt;
+    DatePickerOptions opt = new() {Color = Color.Danger};
+}
