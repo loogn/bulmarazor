@@ -35,6 +35,7 @@ export function attach(selector, options) {
         DotNet.invokeMethodAsync("BulmaRazor", "JSCallbackWithParams", datepicker.data.element.id, "select:start", {"value": datepicker.data.value()});
     });
 
+    window.dp=instance;
 
     return instance;
 }

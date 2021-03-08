@@ -33,14 +33,14 @@ namespace BulmaRazor.Components
         public string Lang { get; set; } = "zh_cn";
 
         /// <summary>
-        /// dateFormat	Date format pattern	MM/DD/YYYY
+        /// dateFormat	Date format pattern	yyyy-MM-dd
         /// </summary>
-        public string DateFormat { get; set; } = "YYYY-MM-DD";
+        public string DateFormat { get; set; } = "yyyy-MM-dd";
 
         /// <summary>
         /// timeFormat	Time format pattern	HH:mm
         /// </summary>
-        public string TimeFormat { get; set; }
+        public string TimeFormat { get; set; } = "HH:mm";
 
         /// <summary>
         /// displayMode	Display mode: default|dialog|inline	default
@@ -140,12 +140,12 @@ namespace BulmaRazor.Components
         /// <summary>
         /// disabledDates	List of disabled dates	
         /// </summary>
-        public List<DateTime> DisabledDates { get; set; }
+        public IEnumerable<DateTime> DisabledDates { get; set; }
 
         /// <summary>
         /// disabledWeekDays	List of disabled week days	undefined
         /// </summary>
-        public List<int> DisabledWeekDays { get; set; }
+        public IEnumerable<int> DisabledWeekDays { get; set; }
 
         /// <summary>
         /// weekStart	Default weekstart day number (sunday by default)	0
@@ -200,11 +200,18 @@ namespace BulmaRazor.Components
             JsParams ps = new JsParams();
             var def = BulmaRazorOptions.DefaultOptions.CalenderOptions;
             ps.AddNotNull("type", Type ?? def.Type);
-            ps.AddNotNull("color", (Color ?? def.Color)?.Value?.Replace("is-",""));
+            ps.AddNotNull("color", (Color ?? def.Color)?.Value?.Replace("is-", ""));
             ps.AddNotNull("isRange", IsRange ?? def.IsRange);
             ps.AddNotNull("allowSameDayRange", AllowSameDayRange ?? def.AllowSameDayRange);
             ps.AddNotNull("lang", Lang ?? def.Lang);
-            ps.AddNotNull("dateFormat", DateFormat ?? def.DateFormat);
+
+            var dateFormat = DateFormat ?? def.DateFormat;
+            if (!string.IsNullOrEmpty(dateFormat))
+            {
+                dateFormat = dateFormat.ToUpper();
+                ps.AddNotNull("dateFormat", dateFormat);
+            }
+
             ps.AddNotNull("timeFormat", TimeFormat ?? def.TimeFormat);
             ps.AddNotNull("displayMode", DisplayMode ?? def.DisplayMode);
             ps.AddNotNull("position", Position ?? def.Position);

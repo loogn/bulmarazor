@@ -54,7 +54,7 @@ namespace BulmaRazor.Components
         [CascadingParameter] public DataTable<TItem> DataGrid { get; set; }
 
         [Parameter] public RenderFragment<TItem> ChildContent { get; set; }
-        [Parameter] public RenderFragment<DataTableColumn<TItem>> ThSlot { get; set; }
+        [Parameter] public RenderFragment ThSlot { get; set; }
         [Parameter] public RenderFragment<TItem> TdSlot { get; set; }
 
         [Parameter] public RenderFragment<TItem> ExpandSlot { get; set; }

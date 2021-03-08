@@ -6,36 +6,47 @@
 <Container style="overflow: scroll" class="@B.PY6">
     <Field>
         <Button @onclick="load">Show</Button>
-        <p>Date:<span>@dt1?.ToString("yyyy-MM-dd")</span></p>
+        <p>Date:<span>@dt1.ToString("yyyy-MM-dd HH:mm")</span></p>
     </Field>
     <Field>
         <Control>
-            <DatePicker @bind-Value="dt1"></DatePicker>
+            <DateTimePicker Options="new CalenderOptions(){StartTime = TimeSpan.FromMinutes(10)}" @bind-Value="dt1"></DateTimePicker>
         </Control>
     </Field>
     <Field>
+        <p>Date:<span>@dt2.ToString("yyyy-MM-dd") ~ @dt3.ToString("yyyy-MM-dd")</span></p>
+    </Field>
+    <Field>
         <Control>
-            <DatePicker @bind-StartDate="dt1" @bind-EndDate="dt2" Options="datePickOption1"></DatePicker>
+            <DatePicker @bind-StartDate="dt2" @bind-EndDate="dt3" Options="datePickOption1"></DatePicker>
         </Control>
     </Field>
-    
-    <TagsInput @ref="tagsi" Color="Color.Danger" IsLarge @bind-Value="str"></TagsInput>
+
     <br>
     str:<span>@str</span>
     <hr>
     <Button @onclick="load">Load</Button>
 
+    <CheckBox TValue="string" indeterminate></CheckBox>
+    
 </Container>
 
 @code{
     private string str = "";
-    
-    DateTime? dt1 = DateTime.Parse("2020-01-01");
-    DateTime? dt2 = DateTime.Parse("2020-03-03");
+
+    DateTime dt1 = DateTime.Parse("2021-03-02");
+    DateTime dt2 = DateTime.Parse("2021-03-05 10:04");
+    DateTime dt3 = DateTime.Parse("2021-03-08 02:22");
     TagsInput tagsi;
-    DatePickerOptions datePickOption1 = new DatePickerOptions()
+
+    CalenderOptions datePickOption1 = new()
     {
-        
+        IsRange = true,
+        WeekStart = 1,
+    // CloseOnOverlayClick=false,
+    // CloseOnSelect=false,
+    // MaxDate = DateTime.Now.AddDays(10),
+    // MinDate = DateTime.Now.AddDays(-1)
     };
 
     void bexpand()
@@ -50,7 +61,7 @@
 
     async Task load()
     {
-        ToastService.Show("Hello");
+        ToastService.Show(dt1.ToString("yyyy-MM-dd"));
     }
 
     DateTime? date = DateTime.Now;

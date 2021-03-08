@@ -10,7 +10,7 @@
 
     private string Id = "tagsInput_" + Guid.NewGuid().ToString("N");
 
-    string classes => CssBuilder.Default("input")
+    string classes => CssBuilder.Default(B.Hidden)
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-small", IsSmall)
@@ -97,6 +97,7 @@
             return AfterRemove.InvokeAsync(this);
         }));
         base.OnInitialized();
+        
     }
 
     protected override ValueTask DisposeAsync(bool disposing)
@@ -113,6 +114,7 @@
         if (firstRender)
         {
             jsObj = await JsInterop.TagsInputAttach("#" + Id, Options);
+            
         }
     }
 

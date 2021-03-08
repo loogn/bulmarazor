@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="_content/BulmaRazor/bulmarazor.min.css?v=1" rel="stylesheet" />s
+    <script src="_content/BulmaRazor/jsplugin/calendar/bulma-calendar.js"></script>
+</head>
+<body>
+
+<input id="dt" value="2020-01-02">
+
+<input id="dt1" value="2020-01-02 - 2020-01-05">
+
+<script>
+    bulmaCalendar.attach('#dt');
+    bulmaCalendar.attach('#dt1',{isRange:true});
+</script>
+</body>
+</html>

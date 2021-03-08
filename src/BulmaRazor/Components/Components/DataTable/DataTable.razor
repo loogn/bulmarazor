@@ -35,7 +35,7 @@ else
                                     <span>
                                         @if (col.ThSlot != null)
                                         {
-                                            @:@col.ThSlot(col)
+                                            @:@col.ThSlot
                                         }
                                         else
                                         {
@@ -50,7 +50,7 @@ else
                                 <CheckBox TValue="string" OnCheckedChanged="checkAll" @bind-Checked="@col.checkedAll">
                                     @if (col.ThSlot != null)
                                     {
-                                        @:@col.ThSlot(col)
+                                        @:@col.ThSlot
                                     }
                                     else
                                     {
@@ -63,7 +63,7 @@ else
                                 <span>
                                     @if (col.ThSlot != null)
                                     {
-                                        @:@col.ThSlot(col)
+                                        @:@col.ThSlot
                                     }
                                     else
                                     {

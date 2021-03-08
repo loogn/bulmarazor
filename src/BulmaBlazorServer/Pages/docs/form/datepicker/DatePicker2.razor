@@ -1,0 +1,9 @@
+dt:<span>@(dt1?.ToString("yyyy-MM-dd")) 
+    ~ @(dt2?.ToString("yyyy-MM-dd"))</span><br>
+<DatePicker @bind-StartDate="dt1" @bind-EndDate="dt2" Options="opt"></DatePicker>
+
+@code {
+    DateTime? dt1;
+    DateTime? dt2;
+    CalenderOptions opt = new() { IsRange = true, WeekStart = 1};
+}

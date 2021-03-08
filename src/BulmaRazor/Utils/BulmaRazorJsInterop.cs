@@ -46,15 +46,6 @@ namespace BulmaRazor.Components
             );
         }
 
-        public async ValueTask<IJSObjectReference> DatePickerAttach(string id, DatePickerOptions options = null)
-        {
-            options ??= new DatePickerOptions();
-            var module = await calendarModuleTask.Value;
-            return await module.InvokeAsync<IJSObjectReference>("attach", "#" + id,
-                options.ToParams()
-            );
-        }
-
         // 折叠面板
         public async ValueTask<IJSObjectReference> CollapsibleAttach(string selector)
         {

@@ -11,7 +11,7 @@
         .AddClassFromAttributes(Attributes)
         .Build();
 
-    private string id = "datepicker_" + Guid.NewGuid().ToString("N");
+    private string id = "datetimepicker_" + Guid.NewGuid().ToString("N");
     private IJSObjectReference _obj;
 
     [Parameter]
@@ -40,11 +40,12 @@
     {
         get
         {
+            var format = Options.DateFormat + " " + Options.TimeFormat;
             if (Options.IsRange == true)
             {
-                return ExtendMethods.GetShowValue(StartDate, Options.DateFormat) + " - " + ExtendMethods.GetShowValue(EndDate, Options.DateFormat);
+                return ExtendMethods.GetShowValue(StartDate, format) + " - " + ExtendMethods.GetShowValue(EndDate, format);
             }
-            return ExtendMethods.GetShowValue(Value, Options.DateFormat);
+            return ExtendMethods.GetShowValue(Value, format);
         }
         set
         {
@@ -85,28 +86,27 @@
 
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnSelect { get; set; }
+    public EventCallback<DateTimePicker<TValue>> OnSelect { get; set; }
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnShow { get; set; }
+    public EventCallback<DateTimePicker<TValue>> OnShow { get; set; }
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnHide { get; set; }
+    public EventCallback<DateTimePicker<TValue>> OnHide { get; set; }
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnValidate { get; set; }
+    public EventCallback<DateTimePicker<TValue>> OnValidate { get; set; }
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnClear { get; set; }
+    public EventCallback<DateTimePicker<TValue>> OnClear { get; set; }
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnSelectStart { get; set; }
+    public EventCallback<DateTimePicker<TValue>> OnSelectStart { get; set; }
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
         Options ??= new CalenderOptions();
-        Options.Type = "date";
     }
 
     protected override void OnInitialized()
@@ -139,6 +139,7 @@
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)
         {
+            Options.Type = "datetime";
             _obj = await JsInterop.CalendarAttach(id, Options);
         }
     }
