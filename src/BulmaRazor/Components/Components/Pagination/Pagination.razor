@@ -1,70 +1,75 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
-<nav @attributes="Attributes" class="@clesses" role="navigation" aria-label="pagination">
 
-    @if (PrevText.HasValue() || PrevSlot != null)
-    {
-        <a class="pagination-previous" disabled="@DisablePrev" @onclick="e=>PrevPage()">
-            @if (PrevSlot != null)
-            {
-                @:@PrevSlot
-            }
-            else
-            {
-                @:@PrevText
-            }
-        </a>
-    }
-    @if (NextText.HasValue() || NextSlot != null)
-    {
-        <a class="pagination-next" disabled="@DisableNext" @onclick="e=>NextPage()">
-            @if (NextSlot != null)
-            {
-                @:@NextSlot
+@if (HideOnSinglePage && PageCount < 2)
+{
+    <!-- <div>HideOnSinglePage </div> -->
+}
+else
+{
+    <nav @attributes="Attributes" class="@clesses" role="navigation" aria-label="pagination">
 
-            }
-            else
-            {
-                @:@NextText
-
-            }
-        </a>
-    }
-
-
-    <ul class="pagination-list">
-
-        @itemReader(1)
-        @if (PageIndex >= ItemSize)
+        @if (PrevText.HasValue() || PrevSlot != null)
         {
-            <li>
-                <span class="pagination-ellipsis">&hellip;</span>
-            </li>
+            <a class="pagination-previous" disabled="@DisablePrev" @onclick="e => PrevPage()">
+                @if (PrevSlot != null)
+                {
+                    @:@PrevSlot
+                }
+                else
+                {
+                    @:@PrevText
+                }
+            </a>
         }
-        @if (PageCount > 3)
+        @if (NextText.HasValue() || NextSlot != null)
         {
-            for (var i = StartIndex; i <= EndIndex; i++)
-            {
-                @:@itemReader(i)
-
-            }
+            <a class="pagination-next" disabled="@DisableNext" @onclick="e => NextPage()">
+                @if (NextSlot != null)
+                {
+                    @:@NextSlot
+                }
+                else
+                {
+                    @:@NextText
+                }
+            </a>
         }
 
-        @if (StartIndex + ItemSize < PageCount)
-        {
-            <li>
-                <span class="pagination-ellipsis">&hellip;</span>
-            </li>
-        }
-        @if (PageCount > 1)
-        {
-            @:@itemReader(PageCount)
 
-        }
-    </ul>
-</nav>
+        <ul class="pagination-list">
+
+            @itemReader(1)
+            @if (PageIndex >= ItemSize)
+            {
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+            }
+            @if (PageCount >2)
+            {
+                for (var i = StartIndex; i <= EndIndex; i++)
+                {
+                    @:@itemReader(i)
+                }
+            }
+
+            @if (StartIndex + ItemSize < PageCount)
+            {
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+            }
+            @if (PageCount > 1)
+            {
+                @:@itemReader(PageCount)
+            }
+        </ul>
+    </nav>
+}
 
 @code {
+
     string clesses => CssBuilder.Default("pagination")
         .AddClass("is-small", IsSmall)
         .AddClass("is-medium", IsMedium)
@@ -75,15 +80,18 @@
         .Build();
 
     RenderFragment<int> itemReader => pageIndex =>
-    @<li>
-        <a class="pagination-link @CssBuilder.Css("is-current",pageIndex==PageIndex)" @onclick="e=>ChangePage(pageIndex)"
-        aria-label="Page @pageIndex" aria-current="page">@pageIndex</a>
-    </li>
-    ;
+        @<li>
+            <a class="pagination-link @CssBuilder.Css("is-current", pageIndex == PageIndex)" @onclick="e => ChangePage(pageIndex)"
+               aria-label="Page @pageIndex" aria-current="page">
+                @pageIndex
+            </a>
+        </li>
+        ;
 
 
     [Parameter]
     public bool IsCentered { get; set; }
+
     [Parameter]
     public bool IsRight { get; set; }
 
@@ -92,23 +100,23 @@
 
     [Parameter]
     public bool IsSmall { get; set; }
+
     [Parameter]
     public bool IsMedium { get; set; }
+
     [Parameter]
     public bool IsLarge { get; set; }
 
     [Parameter]
     public int PageIndex { get; set; } = 1;
+
     [Parameter]
     public int PageSize { get; set; } = 10;
+
     [Parameter]
     public int TotalCount { get; set; }
-    
-    public int PageCount
-    {
-        get;
-        private set;
-    }
+
+    public int PageCount { get; private set; }
     private int StartIndex => Math.Max(2, Math.Min(PageIndex - (ItemSize / 2), PageCount - ItemSize));
 
     private int EndIndex => Math.Min(PageCount - 1, Math.Max(StartIndex + ItemSize - 1, ItemSize + 1));
@@ -121,23 +129,26 @@
     public int ItemSize { get; set; } = 5;
 
     [Parameter]
-    public bool HideOnSinglePage { get; set; }
-    
+    public bool HideOnSinglePage { get; set; } = true;
+
     [Parameter]
     public EventCallback<int> OnPageChange { get; set; }
-    
+
     [Parameter]
     public EventCallback<int> OnPrevClick { get; set; }
+
     [Parameter]
     public EventCallback<int> OnNextClick { get; set; }
-    
+
     [Parameter]
     public RenderFragment PrevSlot { get; set; }
 
     [Parameter]
     public RenderFragment NextSlot { get; set; }
+
     [Parameter]
     public string PrevText { get; set; }
+
     [Parameter]
     public string NextText { get; set; }
 
@@ -146,9 +157,10 @@
 
     private async Task ChangePage(int currentIndex)
     {
-        await OnPageChange.InvokeAsync(currentIndex);   
+        await OnPageChange.InvokeAsync(currentIndex);
         PageIndex = currentIndex;
     }
+
     private async Task PrevPage()
     {
         if (!DisablePrev)
@@ -158,6 +170,7 @@
             await ChangePage(currentIndex);
         }
     }
+
     private async Task NextPage()
     {
         if (!DisableNext)
@@ -185,5 +198,10 @@
                 PageCount++;
             }
         }
+        else
+        {
+            PageCount = 0;
+        }
     }
+
 }

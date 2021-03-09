@@ -67,6 +67,11 @@ namespace BulmaRazor.Components
             await module.InvokeVoidAsync("toast", options.ToParams());
         }
 
+        public ValueTask ToastShow(string message)
+        {
+            return ToastShow(new ToastOptions() {Message = message});
+        }
+
 
         #region 公共
 
@@ -92,6 +97,18 @@ namespace BulmaRazor.Components
         {
             var module = await moduleTask.Value;
             await module.InvokeVoidAsync("Log", args);
+        }
+
+        public async ValueTask SetIndeterminate(ElementReference ele,bool flag)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("SetIndeterminate", ele,flag);
+        }
+
+        public async ValueTask<bool> GetIndeterminate(ElementReference ele)
+        {
+            var module = await moduleTask.Value;
+            return await module.InvokeAsync<bool>("GetIndeterminate", ele);
         }
 
         #endregion

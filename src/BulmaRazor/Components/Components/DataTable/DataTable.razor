@@ -47,7 +47,7 @@ else
                             }
                             else if (col.IsCheckBox)
                             {
-                                <CheckBox TValue="string" OnCheckedChanged="checkAll" @bind-Checked="@col.checkedAll">
+                                <CheckBox @ref="cball" TValue="string" OnCheckedChanged="checkAll" Checked="col.checkedAll">
                                     @if (col.ThSlot != null)
                                     {
                                         @:@col.ThSlot
@@ -77,7 +77,7 @@ else
                 </thead>
             }
             <tbody>
-            @foreach (var row in View)
+            @foreach (var row in dataView)
             {
                 DataTableColumn<TItem> expandColumn = null;
                 <tr class="@CssBuilder.Css(B.Selected, row.IsSelected)" @onclick="() => TrClick(row)">
@@ -90,8 +90,8 @@ else
                             }
                             else if (col.IsCheckBox)
                             {
-                                <span @onclick="() => CheckBoxClick(row)">
-                                    <CheckBox TValue="string" @bind-Checked="@row.IsChecked">@col.ChildContent?.Invoke(row.Item)</CheckBox>
+                                <span>
+                                    <CheckBox TValue="string" OnCheckedChanged="b =>CheckBoxClick(row,b)" @bind-Checked="@row.IsChecked">@col.ChildContent?.Invoke(row.Item)</CheckBox>
                                 </span>
                             }
                             else if (col.IsExpand)
@@ -99,11 +99,11 @@ else
                                 expandColumn = col;
                                 if (row.IsExpanded)
                                 {
-                                    <Icon @onclick="() => TaggleExpand(row)" IconClass="fa fa-chevron-down"></Icon>
+                                    <Icon class="@B.Clickable" @onclick="() => TaggleExpand(row)" IconClass="fa fa-angle-down"></Icon>
                                 }
                                 else
                                 {
-                                    <Icon @onclick="() => TaggleExpand(row)" IconClass="fa fa-chevron-right"></Icon>
+                                    <Icon class="@B.Clickable" @onclick="() => TaggleExpand(row)" IconClass="fa fa-angle-right"></Icon>
                                 }
                             }
                             else

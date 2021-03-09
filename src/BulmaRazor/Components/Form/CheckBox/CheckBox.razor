@@ -2,9 +2,10 @@
 
 @inherits BulmaComponentBase
 @typeparam TValue
+@inject BulmaRazorJsInterop JsInterop
 
 
-<input id="@id" @attributes="Attributes" class="@classes" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle"/>
+<input @ref="            ck" id="@id" @attributes="Attributes" class="@classes" type="checkbox" value="@Value" checked="@Checked" @onchange="ChangeHandle"/>
 <label for="@id">@ChildContent</label>
 
 @code {
@@ -25,6 +26,7 @@
         .Build();
 
     string id = "check_" + Guid.NewGuid().ToString("N");
+    ElementReference ck;
 
     [Parameter]
     public bool IsRTL { get; set; }
@@ -81,6 +83,12 @@
     {
         Checked = ck;
     }
+
+    public ValueTask SetIndeterminate(bool flag=true)
+    {
+        return JsInterop.SetIndeterminate(ck,flag);
+    }
+
 
     [Parameter]
     public TValue Value { get; set; }

@@ -75,36 +75,6 @@ namespace BulmaRazor.Components
 
         private List<DataTableRow<TItem>> dataView { get; set; }
 
-        private IEnumerable<DataTableRow<TItem>> View
-        {
-            get
-            {
-                if (sortColumn != null && sortColumn.Prop.HasValue())
-                {
-                    if (sortColumn.SortFunc == null)
-                    {
-                        return sortAsc
-                            ? dataView.OrderBy(x => x.Fields[sortColumn.Prop].Value)
-                            : dataView.OrderByDescending(x => x.Fields[sortColumn.Prop].Value);
-                    }
-                    else
-                    {
-                        return sortAsc
-                            ? dataView.OrderBy(x => sortColumn.SortFunc(x.Item))
-                            : dataView.OrderByDescending(x => sortColumn.SortFunc(x.Item));
-                    }
-                }
-
-                //这里处理checked?
-                if (checkColumn != null)
-                {
-                    dataView.ForEach(x => x.IsChecked = checkColumn.CheckItemSet.Contains(x.Item));
-                }
-
-                return dataView;
-            }
-        }
-
         private List<DataTableColumn<TItem>> columns { get; set; } = new();
 
         private int colIndex = 0;
@@ -143,6 +113,7 @@ namespace BulmaRazor.Components
         private DataTableColumn<TItem> sortColumn;
         private bool sortAsc;
 
+        private CheckBox<string> cball;
 
         #region Sort
 
@@ -163,7 +134,6 @@ namespace BulmaRazor.Components
             return "fa fa-sort";
         }
 
-
         private void Sort(DataTableColumn<TItem> column)
         {
             if (sortColumn == column)
@@ -176,6 +146,7 @@ namespace BulmaRazor.Components
                 sortAsc = true;
             }
 
+            DealView();
             OnSortChange?.Invoke(column, sortAsc);
         }
 
@@ -183,36 +154,54 @@ namespace BulmaRazor.Components
 
         [Parameter] public bool IsSelectable { get; set; }
 
-        [Parameter] public Action<DataTableRow<TItem>, DataTableRow<TItem>> OnSelected { get; set; }
+        /// <summary>
+        /// 单击选中
+        /// </summary>
+        [Parameter]
+        public EventCallback<DataTableRow<TItem>> OnSelected { get; set; }
+
+        /// <summary>
+        /// 选中复选框
+        /// </summary>
+        [Parameter]
+        public EventCallback<DataTableRow<TItem>> OnChecked { get; set; }
+        
+        // [Parameter]
+        // public  EventCallback<DataTableRow<TItem>> OnExpandChanged { get; set; }
 
         private void TaggleExpand(DataTableRow<TItem> row)
         {
             row.IsExpanded = !row.IsExpanded;
+            // OnExpandChanged.InvokeAsync(row);
         }
+
+        private TItem selectedItem;
 
         private void TrClick(DataTableRow<TItem> row)
         {
             if (IsSelectable)
             {
-                DataTableRow<TItem> oldRow = dataView.FirstOrDefault(x => x.IsSelected);
-                if (oldRow != null)
-                {
-                    oldRow.IsSelected = false;
-                }
-
-                row.IsSelected = true;
-                OnSelected?.Invoke(row, oldRow);
+                selectedItem = row.Item;
+                OnSelected.InvokeAsync(row);
             }
         }
 
-        [Parameter] public Action<List<DataTableRow<TItem>>, DataTableRow<TItem>> OnChecked { get; set; }
 
         private List<DataTableRow<TItem>> checkedRows = new List<DataTableRow<TItem>>();
 
-        private void CheckBoxClick(DataTableRow<TItem> row)
+        private void CheckBoxClick(DataTableRow<TItem> row, bool isck)
         {
-            checkColumn.CheckItemSet.Add(row.Item);
-            OnChecked?.Invoke(GetCheckedRows(), row);
+            if (isck)
+            {
+                checkColumn.CheckItemSet.Add(row.Item);
+            }
+            else
+            {
+                checkColumn.CheckItemSet.Remove(row.Item);
+            }
+
+            DealView();
+            OnChecked.InvokeAsync(row);
         }
 
         public List<DataTableRow<TItem>> GetCheckedRows()
@@ -223,25 +212,26 @@ namespace BulmaRazor.Components
         public void ClearCheckedRows()
         {
             checkColumn?.CheckItemSet.Clear();
+            DealView();
         }
 
         public void ToggleCheckedRows()
         {
             if (checkColumn != null)
             {
-                checkColumn.CheckItemSet.Clear();
                 foreach (var dv in dataView)
                 {
-                    if (!dv.IsChecked)
+                    if (checkColumn.CheckItemSet.Contains(dv.Item))
                     {
-                        checkColumn.CheckItemSet.Add(dv.Item);
-                        dv.IsChecked = true;
+                        checkColumn.CheckItemSet.Remove(dv.Item);
                     }
                     else
                     {
-                        dv.IsChecked = false;
+                        checkColumn.CheckItemSet.Add(dv.Item);
                     }
                 }
+
+                DealView();
             }
         }
 
@@ -249,18 +239,67 @@ namespace BulmaRazor.Components
         {
             foreach (var dv in dataView)
             {
-                if (cked && !dv.IsChecked)
+                if (cked)
                 {
                     checkColumn.CheckItemSet.Add(dv.Item);
-                    dv.IsChecked = true;
                 }
-
-                if (!cked && dv.IsChecked)
+                else
                 {
                     checkColumn.CheckItemSet.Remove(dv.Item);
-                    dv.IsChecked = false;
+                }
+
+                DealView();
+            }
+        }
+
+        private void DealCheckAll()
+        {
+            int ckCount =
+                dataView.Count(x =>
+                    x.IsChecked); //dataView.Count(x => checkColumn?.CheckItemSet.Contains(x.Item) ?? false);
+            if (ckCount == dataView.Count)
+            {
+                cball?.SetIndeterminate(false);
+                checkColumn.checkedAll = true;
+            }
+            else if (ckCount == 0)
+            {
+                checkColumn.checkedAll = false;
+                cball?.SetIndeterminate(false);
+            }
+            else
+            {
+                checkColumn.checkedAll = false;
+                cball?.SetIndeterminate();
+            }
+        }
+
+        private void DealView()
+        {
+            if (sortColumn != null && sortColumn.Prop.HasValue())
+            {
+                if (sortColumn.SortFunc == null)
+                {
+                    dataView = sortAsc
+                        ? dataView.OrderBy(x => x.Fields[sortColumn.Prop].Value).ToList()
+                        : dataView.OrderByDescending(x => x.Fields[sortColumn.Prop].Value).ToList();
+                }
+                else
+                {
+                    dataView = sortAsc
+                        ? dataView.OrderBy(x => sortColumn.SortFunc(x.Item)).ToList()
+                        : dataView.OrderByDescending(x => sortColumn.SortFunc(x.Item)).ToList();
                 }
             }
+
+            //这里处理checked?
+            if (checkColumn != null)
+            {
+                dataView.ForEach(x => x.IsChecked = checkColumn.CheckItemSet.Contains(x.Item));
+                DealCheckAll();
+            }
+
+            StateHasChanged();
         }
 
         public override async Task SetParametersAsync(ParameterView parameters)
@@ -275,6 +314,7 @@ namespace BulmaRazor.Components
                 {
                     var dv = new DataTableRow<TItem>()
                     {
+                        IsSelected = ReferenceEquals(item,selectedItem),
                         Index = index++,
                         Item = item,
                         Fields = new Dictionary<string, DataTableRowField>()
@@ -298,6 +338,8 @@ namespace BulmaRazor.Components
                     dataView.Add(dv);
                 }
             }
+
+            DealView();
         }
     }
 }

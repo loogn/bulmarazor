@@ -12,9 +12,15 @@
 
 <input id="dt1" value="2020-01-02 - 2020-01-05">
 
+<input id="dt2" value="">
+
+<input id="dt3" value="">
 <script>
     bulmaCalendar.attach('#dt');
     bulmaCalendar.attach('#dt1',{isRange:true});
+    bulmaCalendar.attach('#dt2',{type:'time',closeOnSelect:false});
+
+    bulmaCalendar.attach('#dt3',{isRange:true, type:'time',closeOnSelect:false});
 </script>
 </body>
 </html>

@@ -2,9 +2,6 @@
 // functions, and may import other JavaScript modules if required.
 
 
-
-
-
 export function Prompt(message, defaultValue) {
     return prompt(message, defaultValue);
 }
@@ -20,6 +17,15 @@ export function Confirm(message) {
 export function Log() {
     console.log(Array.from(arguments));
 }
+
+export function SetIndeterminate(ele,flag) {
+    ele.indeterminate = flag;
+}
+
+export function GetIndeterminate(ele) {
+    return ele.indeterminate ?? false;
+}
+
 
 // export function getOptionSelected(element) {
 //   return element.selected;
