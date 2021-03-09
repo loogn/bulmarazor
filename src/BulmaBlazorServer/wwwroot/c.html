@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="_content/BulmaRazor/bulmarazor.min.css?v=1" rel="stylesheet" />s
+    <link href="_content/BulmaRazor/bulmarazor.min.css?v=1" rel="stylesheet"/>
+    s
     <script src="_content/BulmaRazor/jsplugin/calendar/bulma-calendar.js"></script>
+
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"
+    />
+    <!-- Editor's Style -->
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
 </head>
 <body>
+
 
 <input id="dt" value="2020-01-02">
 
@@ -15,12 +24,23 @@
 <input id="dt2" value="">
 
 <input id="dt3" value="">
+
+<div id="editor"></div>
+
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script>
     bulmaCalendar.attach('#dt');
-    bulmaCalendar.attach('#dt1',{isRange:true});
-    bulmaCalendar.attach('#dt2',{type:'time',closeOnSelect:false});
+    bulmaCalendar.attach('#dt1', {isRange: true});
+    bulmaCalendar.attach('#dt2', {type: 'time', closeOnSelect: false});
 
-    bulmaCalendar.attach('#dt3',{isRange:true, type:'time',closeOnSelect:false});
+    bulmaCalendar.attach('#dt3', {isRange: true, type: 'time', closeOnSelect: false});
+
+    const editor = new toastui.Editor({
+        el: document.querySelector('#editor'),
+        initialValue:"# abc"
+    });
+
+    // editor.getHtml();
 </script>
 </body>
 </html>

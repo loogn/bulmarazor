@@ -13,4 +13,7 @@
   <ItemGroup>
     <PackageReference Include="JSRuntimeWindow" Version="1.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\docs\components\tuieditor\TuiEditor_.razor" />
+  </ItemGroup>
 </Project>

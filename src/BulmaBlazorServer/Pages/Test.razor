@@ -4,28 +4,39 @@
 @inject ToastService ToastService
 
 <Container style="overflow: scroll" class="@B.PY6">
-    
-    
-    
-    <Button @onclick="load">Load</Button>
 
-    <CheckBox @ref="cb" TValue="string"></CheckBox>
-    
+    <TuiEditor @ref="editor" @bind-Value="markdown" Options="options" style="background-color: #f03a5f"></TuiEditor>
+
+    <div>
+        @markdown
+    </div>
+    <Button @onclick="load">Load</Button>
+    <Button @onclick="showMarkdown">ShowMarkdown</Button>
+
 </Container>
 
 @code{
-    private string str = "";
-    CheckBox<string> cb;
-  
+
+    TuiEditor editor;
+    private string markdown = "# Init Title";
+    TuiEditorOptions options = new()
+    {
+        PreviewStyle = "vertical"
+    };
+
     async Task load()
     {
-        cb.SetIndeterminate();
+        editor.InsertText(" ## " + new Random().Next());
     }
 
-    
+    async Task showMarkdown()
+    {
+        ToastService.Show(markdown);
+    }
+
+
     void fun()
     {
-       
     }
 
 }

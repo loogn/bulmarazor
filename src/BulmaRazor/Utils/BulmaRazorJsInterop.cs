@@ -13,6 +13,7 @@ namespace BulmaRazor.Components
         private readonly Lazy<Task<IJSObjectReference>> toastModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> collapsibleModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> tagsInputModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> tuiEditorModuleTask;
 
         public BulmaRazorJsInterop(IJSRuntime jsRuntime)
         {
@@ -34,6 +35,10 @@ namespace BulmaRazor.Components
             //collapsible
             collapsibleModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/collapsible.min.js").AsTask());
+
+            //collapsible
+            tuiEditorModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/js/tuieditor.min.js").AsTask());
         }
 
         // 日历
@@ -71,7 +76,12 @@ namespace BulmaRazor.Components
         {
             return ToastShow(new ToastOptions() {Message = message});
         }
-
+        //editor
+        public async ValueTask<IJSObjectReference> TuiEditorInit(TuiEditorOptions options)
+        {
+            var module = await tuiEditorModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("initEditor", options.ToParams());
+        }
 
         #region 公共
 
@@ -99,10 +109,10 @@ namespace BulmaRazor.Components
             await module.InvokeVoidAsync("Log", args);
         }
 
-        public async ValueTask SetIndeterminate(ElementReference ele,bool flag)
+        public async ValueTask SetIndeterminate(ElementReference ele, bool flag)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("SetIndeterminate", ele,flag);
+            await module.InvokeVoidAsync("SetIndeterminate", ele, flag);
         }
 
         public async ValueTask<bool> GetIndeterminate(ElementReference ele)
@@ -131,6 +141,12 @@ namespace BulmaRazor.Components
             if (toastModuleTask.IsValueCreated)
             {
                 var module = await moduleTask.Value;
+                await module.DisposeAsync();
+            }
+
+            if (tuiEditorModuleTask.IsValueCreated)
+            {
+                var module = await tuiEditorModuleTask.Value;
                 await module.DisposeAsync();
             }
         }

@@ -42,6 +42,17 @@
       "enabled": false
     }
   }
+,
+  {
+    "outputFileName": "wwwroot/js/tuieditor.min.js",
+    "inputFiles": [
+      "wwwroot/jsplugin/tuieditor/toastui-editor-all.min.js",
+      "wwwroot/jsplugin/tuieditor/toastui-editor-export.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  }
   //    ,
   //    {
   //        "outputFileName": "wwwroot/js/site.min.js",

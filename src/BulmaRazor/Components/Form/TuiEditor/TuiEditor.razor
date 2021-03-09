@@ -1,0 +1,198 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+
+<link href="_content/BulmaRazor/css/tuieditor/codemirror.min.css" rel="stylesheet"/>
+<link href="_content/BulmaRazor/css/tuieditor/toastui-editor.min.css" rel="stylesheet"/>
+
+<div id="@Id" @attributes="Attributes" class="@classes"></div>
+
+
+@code {
+
+    // https://nhn.github.io/tui.editor/latest/ToastUIEditor 
+    string classes => CssBuilder.Default()
+        .AddClassFromAttributes(Attributes)
+        .Build();
+
+    string Id = "tuiEditor_" + Guid.NewGuid().ToString("N");
+    ElementReference ele;
+    IJSObjectReference editor;
+
+    [Parameter]
+    public TuiEditorOptions Options { get; set; }
+
+    [Parameter]
+    public EventCallback<TuiEditor> OnLoad { get; set; }
+
+    [Parameter]
+    public EventCallback<TuiEditor> OnChange { get; set; }
+
+    [Parameter]
+    public EventCallback<TuiEditor> OnStateChange { get; set; }
+
+    [Parameter]
+    public EventCallback<TuiEditor> OnFocus { get; set; }
+
+    [Parameter]
+    public EventCallback<TuiEditor> OnBlur { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Options == null)
+            Options = new TuiEditorOptions();
+        Options.InitialValue = _value;
+        Options.elid = Id;
+
+        JSCallbackManager.AddEventHandler(Id, "load", new Func<Task>(() => OnLoad.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id, "change", new Func<Task>(() => OnChange.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id, "focus", new Func<Task>(() => OnFocus.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id, "blur", new Func<Task>(async () =>
+        {
+            await setValue();
+            await OnBlur.InvokeAsync(this);
+        }));
+        JSCallbackManager.AddEventHandler(Id, "stateChange", new Func<Task>(() => OnStateChange.InvokeAsync(this)));
+
+        base.OnInitialized();
+    }
+
+    private string _value;
+
+    [Parameter]
+    public string Value
+    {
+        get { return _value; }
+        set
+        {
+            _value = value;
+            SetMarkdown(value, true);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task setValue()
+    {
+        _value = await GetMarkdown();
+        await ValueChanged.InvokeAsync(_value);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        editor = await JsInterop.TuiEditorInit(Options);
+    }
+
+    #region  funs
+
+    public void Blur()
+    {
+        editor?.InvokeVoidAsync("blur");
+    }
+
+    public void ChangeMode(string mode, bool isWithoutFocus)
+    {
+        editor?.InvokeVoidAsync("changeMode", mode, isWithoutFocus);
+    }
+
+    public void ChangePreviewStyle(string style)
+    {
+        editor?.InvokeVoidAsync("changePreviewStyle", style);
+    }
+
+    public void Focus()
+    {
+        editor?.InvokeVoidAsync("focus");
+    }
+
+    public ValueTask<string> GetHtml()
+    {
+        return editor?.InvokeAsync<string>("getHtml") ?? new ValueTask<string>("");
+    }
+
+    public ValueTask<string> GetMarkdown()
+    {
+        return editor?.InvokeAsync<string>("getMarkdown") ?? new ValueTask<string>("");
+    }
+
+    public ValueTask<string> GetSelectedText()
+    {
+        return editor?.InvokeAsync<string>("getSelectedText") ?? new ValueTask<string>("");
+    }
+
+    // public ValueTask<string> Height(string height)
+    // {
+    //     return editor?.InvokeAsync<string>("height", height)?? new ValueTask<string>("");
+    // }
+
+    public void Hide()
+    {
+        editor?.InvokeVoidAsync("hide");
+    }
+
+    public void InsertText(string text)
+    {
+        editor?.InvokeVoidAsync("insertText", text);
+    }
+
+    public ValueTask<bool> IsMarkdownMode()
+    {
+        return editor?.InvokeAsync<bool>("isMarkdownMode") ?? new ValueTask<bool>(false);
+    }
+
+    public ValueTask<bool> IsViewer()
+    {
+        return editor?.InvokeAsync<bool>("isViewer") ?? new ValueTask<bool>(false);
+    }
+
+    public ValueTask<bool> IsWysiwygMode()
+    {
+        return editor?.InvokeAsync<bool>("isWysiwygMode") ?? new ValueTask<bool>(false);
+    }
+
+    public void MoveCursorToEnd()
+    {
+        editor?.InvokeVoidAsync("moveCursorToEnd");
+    }
+
+    public void MoveCursorToStart()
+    {
+        editor?.InvokeVoidAsync("moveCursorToStart");
+    }
+
+    public void Reset()
+    {
+        editor?.InvokeVoidAsync("reset");
+    }
+
+
+    public void SetHtml(string html, bool cursorToEnd = true)
+    {
+        editor?.InvokeVoidAsync("setHtml", html, cursorToEnd);
+    }
+
+    public void SetMarkdown(string markdown, bool cursorToEnd = true)
+    {
+        editor?.InvokeVoidAsync("setMarkdown", markdown, cursorToEnd);
+    }
+
+    public void SetPlaceholder(string placeholder)
+    {
+        editor?.InvokeVoidAsync("setPlaceholder", placeholder);
+    }
+
+    public void Show()
+    {
+        editor?.InvokeVoidAsync("show");
+    }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+
+    #endregion
+
+}
