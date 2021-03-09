@@ -61,6 +61,7 @@ namespace BulmaRazor.Components
 
         /// <summary>
         /// toolbar items.
+        /// heading,bold,italic,strike,divider,hr,quote,divider,ul,ol,task,indent,outdent,divider,table,image,link,divider,code,codeblock
         /// </summary>
         public IEnumerable<string> ToolbarItems { get; set; }
 
