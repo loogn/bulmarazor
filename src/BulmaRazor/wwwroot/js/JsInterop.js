@@ -1,14 +1,15 @@
 // This is a JavaScript module that is loaded on demand. It can export any number of
 // functions, and may import other JavaScript modules if required.
 
-export function BindDocumentClick(id) {
-    // $(document).one("click",function (e) {
-    //     if (!$(e.target).is("#" + id)) {
-    //         console.log('document clicked');
-    //         DotNet.invokeMethodAsync("BulmaRazor", "JSCallback", id, "document:click");
-    //     }
-    // })
+
+export function BindClickWithoutSelf(id) {
+    $(document).click(function (e) {
+        if (e.target.id == id || $(e.target).parents("#" + id).length > 0)
+            return;
+        DotNet.invokeMethodAsync("BulmaRazor", "JSCallback", id, "clickWithoutSelf");
+    })
 }
+
 
 export function Prompt(message, defaultValue) {
     return prompt(message, defaultValue);

@@ -15,3 +15,46 @@
         <HighLight FilePath="Pages/docs/form/tagsinput/TagsInput1.razor"></HighLight>
     </Column>
 </Columns>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    Options参数
+</Title>
+
+<DataTable TItem="ParamsInfo" Data="data" WithContainer IsBordered IsHoverable>
+    <DataTableColumn TItem="ParamsInfo" Label="参数名" Prop="Name"></DataTableColumn>
+    <DataTableColumn TItem="ParamsInfo" Label="类型" Prop="Type"></DataTableColumn>
+    <DataTableColumn TItem="ParamsInfo" Label="描述" Prop="Desc"></DataTableColumn>
+    <DataTableColumn TItem="ParamsInfo" Width="200px" Label="默认值" TdStyle="word-break: break-all;" Prop="Default"></DataTableColumn>
+</DataTable>
+
+@code{
+
+    private List<ParamsInfo> data = new()
+    {
+        new() {Name = "AllowDuplicates", Type = "bool?", Default = "false", Desc = "When true, the same tag can be added multiple times."},
+        new() {Name = "CaseSensitive", Type = "bool?", Default = "true", Desc = "When true, duplicate tags value check is case sensitive."},
+        new() {Name = "ClearSelectionOnTyping", Type = "bool?", Default = "false", Desc = "When true, tags will be unselected when new tag is entered."},
+        new() {Name = "CloseDropdownOnItemSelect", Type = "bool?", Default = "true", Desc = "When true, datalist will close automatically after an item have been selected."},
+        new() {Name = "Delimiter", Type = "string", Default = ",", Desc = "Multiple tags can be added at once. Delimiter is used to separate all tags"},
+        new() {Name = "FreeInput", Type = "bool?", Default = "true", Desc = "When true, tags can be entered manually. This option is useful with select Tags inputs. Set to false automatically when using on select element."},
+        new() {Name = "HighlightDuplicate", Type = "bool?", Default = "true", Desc = "When true, if allowDuplicates option if false then the already existing tag will be temporarly and visually identified as duplicate"},
+        new() {Name = "HighlightMatchesString", Type = "bool?", Default = "true", Desc = "When true, identified matches strings when searching is highlighted."},
+    //new() {Name = "ItemText", Type = "string", Default = "", Desc = "When adding objects as tags, you can set itemText to the name of the property of item to use for a its tag’s text. When this options is not set, the value of itemValue will be used."},
+    // new() {Name = "ItemValue", Type = "string", Default = "", Desc = "When adding objects as tags, itemValue must be set to the name of the property containing the item’s value."},
+        new() {Name = "MaxTags", Type = "int?", Default = "null", Desc = "When set, no more than the given number of tags are allowed to add."},
+        new() {Name = "MaxChars", Type = "int?", Default = "null", Desc = "Defines the maximum length of a single tag."},
+        new() {Name = "MinChars", Type = "int?", Default = "1", Desc = "Defines the minimum length of a single tag."},
+        new() {Name = "NoResultsLabel", Type = "string", Default = "No results found", Desc = "Empty dropdown label."},
+        new() {Name = "Placeholder", Type = "string", Default = "", Desc = "TagsInput placeholder text if original input doesn’t have one."},
+        new() {Name = "Removable", Type = "bool?", Default = "true", Desc = "When true, tags are removable either using the associted delete button or backspace and delete keys."},
+        new() {Name = "SearchMinChars", Type = "int?", Default = "1", Desc = "searchMinChars	Defines the minimum length of input value before loading auto-complete."},
+
+    // new() {Name = "SearchOn", Type = "string", Default = "text", Desc = "Defines on what dropdown item data do we search the entered value. Possible value: ‘value’ or ‘text’."},
+        new() {Name = "Selectable", Type = "bool?", Default = "true", Desc = "When true, tags can be selected either by mouse click or using left or right arrow keys."},
+        new() {Name = "Source", Type = "IEnumerable<string>", Default = "", Desc = "source	Source of data proposed in dropdown (used for auto-complete)."},
+        new() {Name = "TagClass", Type = "string", Default = "is-rounded", Desc = "Classname applied to each tag."},
+        new() {Name = "Trim", Type = "bool?", Default = "true", Desc = "When true, automatically removes all whitespace around tags."},
+    };
+
+}

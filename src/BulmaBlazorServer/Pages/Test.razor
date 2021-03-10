@@ -5,14 +5,16 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-    <TuiEditor @ref="editor" @bind-Value="markdown" Options="options"></TuiEditor>
-
-    <div>
-        @markdown
+    
+    <div @onclick="divFun">
+    sfafafsaf
+        <button @onclick="load" @onclick:stopPropagation="false">Load</button>
     </div>
-    <Button @onclick="load">Load</Button>
+    
     <Button @onclick="showMarkdown">ShowMarkdown</Button>
 
+    
+    
 </Container>
 
 @code{
@@ -26,9 +28,14 @@
         ToolbarItems = new[] {"heading", "bold", "italic"}
     };
 
+    void divFun()
+    {
+        ToastService.Show("Div.click");
+    }
+
     async Task load()
     {
-        editor.InsertText(" ## " + new Random().Next());
+        ToastService.Show("load.click");
     }
 
     async Task showMarkdown()

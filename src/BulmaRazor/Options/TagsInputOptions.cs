@@ -51,13 +51,13 @@ namespace BulmaRazor.Components
         /// When adding objects as tags, you can set itemText to the name of the property of item to use for a its tag’s text. When this options is not set, the value of itemValue will be used.
         /// String	undefined
         /// </summary>
-        public string ItemText { get; set; }
+        internal string ItemText { get; set; }
 
         /// <summary>
         /// When adding objects as tags, itemValue must be set to the name of the property containing the item’s value.
         /// String	undefined
         /// </summary>
-        public string ItemValue { get; set; }
+        internal string ItemValue { get; set; }
 
         /// <summary>
         /// When set, no more than the given number of tags are allowed to add.
@@ -79,7 +79,7 @@ namespace BulmaRazor.Components
         /// <summary>
         /// Empty dropdown label.	String	No results found
         /// </summary>
-        public string NoResultsLabel { get; set; } = "没有找到";
+        public string NoResultsLabel { get; set; }
 
         /// <summary>
         /// TagsInput placeholder text if original input doesn’t have one.
@@ -102,7 +102,7 @@ namespace BulmaRazor.Components
         /// <summary>
         /// Defines on what dropdown item data do we search the entered value. Possible value: ‘value’ or ‘text’.	String	text
         /// </summary>
-        public string SearchOn { get; set; }
+        internal string SearchOn { get; set; }
 
         /// <summary>
         /// When true, tags can be selected either by mouse click or using left or right arrow keys.

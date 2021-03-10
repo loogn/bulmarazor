@@ -1,3 +1,9 @@
+// $(function () {
+//     $(document).click(function (e) {
+//         DotNet.invokeMethodAsync("BulmaRazor", "JSCallbackWithParams", "document", "click",{targetId:e.target.id});
+//     })
+// });
+
 window.BulmaRazor = {
     Log: function (args) {
         console.log(args);

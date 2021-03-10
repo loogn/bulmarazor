@@ -10,7 +10,7 @@
 
     private string Id = "tagsInput_" + Guid.NewGuid().ToString("N");
 
-    string classes => CssBuilder.Default(B.Hidden)
+    string classes => CssBuilder.Default("input")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-small", IsSmall)

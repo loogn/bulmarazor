@@ -85,10 +85,10 @@ namespace BulmaRazor.Components
 
         #region 公共
 
-        public async ValueTask BindDocumentClick(string id)
+        public async ValueTask BindClickWithoutSelf(string id)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("BindDocumentClick", id);
+            await module.InvokeVoidAsync("BindClickWithoutSelf", id);
         }
         public async ValueTask<string> Prompt(string message, string defValue)
         {

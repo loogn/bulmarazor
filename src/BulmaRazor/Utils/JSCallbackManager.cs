@@ -13,13 +13,30 @@ namespace BulmaRazor.Utils
         public static void AddEventHandler(string objId, string eventKey, Delegate @delegate)
         {
             var eventHandlerList = eventHandlerDict.GetOrAdd(objId, (key) => new Dictionary<string, Delegate>());
-            eventHandlerList.Add(eventKey, @delegate);
+
+            if (eventHandlerList.TryGetValue(eventKey, out Delegate oldDel))
+            {
+                eventHandlerList[eventKey] = Delegate.Combine(oldDel, @delegate);
+            }
+            else
+            {
+                eventHandlerList.Add(eventKey, @delegate);
+            }
         }
 
         public static void RemoveEventHandler(string objId, string eventKey)
         {
             var eventHandlerList = eventHandlerDict.GetOrAdd(objId, (key) => new Dictionary<string, Delegate>());
             eventHandlerList.Remove(eventKey);
+        }
+        public static void RemoveEventHandler(string objId, string eventKey,Delegate @delegate)
+        {
+            var eventHandlerList = eventHandlerDict.GetOrAdd(objId, (key) => new Dictionary<string, Delegate>());
+            
+            if (eventHandlerList.TryGetValue(eventKey, out Delegate oldDel))
+            {
+                eventHandlerList[eventKey] = Delegate.Remove(oldDel, @delegate);
+            }
         }
 
         public static void DisposeObject(string objId)
@@ -56,6 +73,7 @@ namespace BulmaRazor.Utils
                     return obj;
                 }
             }
+
             return null;
         }
     }
