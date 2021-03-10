@@ -3,30 +3,46 @@
 
 <Title>TuiEditor编辑器</Title>
 <Subtitle Size="Size.Size4">
-    移植于https://ui.toast.com/tui-editor 
+    移植于https://ui.toast.com/tui-editor
 </Subtitle>
 <hr>
 
-<div class="content">
-    
-</div>
-@* *@
-@* <Columns> *@
-@*     <Column> *@
-@*         <Timeline1/> *@
-@*     </Column> *@
-@*     <Column> *@
-@*         <HighLight FilePath="Pages/docs/components/timeline/Timeline1.razor"/> *@
-@*     </Column> *@
-@* </Columns> *@
-@* <br> *@
-@* *@
-@* <Columns> *@
-@*     <Column> *@
-@*         <Timeline2/> *@
-@*     </Column> *@
-@*     <Column> *@
-@*         <HighLight FilePath="Pages/docs/components/timeline/Timeline2.razor"/> *@
-@*     </Column> *@
-@* </Columns> *@
-@* <br> *@
+
+<TuiEditor1/>
+
+<HighLight FilePath="Pages/docs/form/tuieditor/TuiEditor1.razor"/>
+
+<Title Size="Size.Size4" IsSpaced>
+    Options参数
+</Title>
+
+<DataTable TItem="ParamsInfo" Data="data" WithContainer IsBordered IsHoverable>
+    <DataTableColumn TItem="ParamsInfo" Label="参数名" Prop="Name"></DataTableColumn>
+    <DataTableColumn TItem="ParamsInfo" Label="类型" Prop="Type"></DataTableColumn>
+    <DataTableColumn TItem="ParamsInfo" Label="描述" Prop="Desc"></DataTableColumn>
+    <DataTableColumn TItem="ParamsInfo" Width="200px" Label="默认值" TdStyle="word-break: break-all;" Prop="Default"></DataTableColumn>
+</DataTable>
+
+@code{
+
+    private List<ParamsInfo> data = new()
+    {
+        new() {Name = "Height", Type = "string", Default = "", Desc = "Editor's height style value. Height is applied as border-box ex) '300px', '100%', 'auto'"},
+        new() {Name = "MinHeight", Type = "string", Default = "", Desc = "Editor's min-height style value in pixel ex) '300px'"},
+        new() {Name = "PreviewStyle", Type = "string", Default = "tab", Desc = "Markdown editor's preview style (tab, vertical)"},
+        new() {Name = "InitialEditType", Type = "string", Default = "markdown", Desc = "Initial editor type (markdown, wysiwyg)"},
+        new() {Name = "Language", Type = "string", Default = "zh-CN", Desc = "language"},
+        new() {Name = "PreviewHighlight", Type = "bool?", Default = "true", Desc = "Highlight a preview element corresponds to the cursor position in the markdwon editor"},
+        new() {Name = "UseCommandShortcut", Type = "bool?", Default = "true", Desc = "whether use keyboard shortcuts to perform commands"},
+        new() {Name = "UseDefaultHTMLSanitizer", Type = "bool?", Default = "true", Desc = "use default htmlSanitizer"},
+        new() {Name = "UsageStatistics", Type = "bool?", Default = "false", Desc = "send hostname to google analytics"},
+        new() {Name = "ToolbarItems", Type = "IEnumerable<string>", Default = "[heading,bold,italic,strike,divider,hr,quote,divider,ul,ol,task,indent," +
+                                                                              "outdent,divider,table,image,link,divider,code,codeblock]", Desc = "toolbar items."},
+        new() {Name = "Height", Type = "bool", Default = "", Desc = ""},
+        new() {Name = "HideModeSwitch", Type = "bool?", Default = "true", Desc = "hide mode switch tab bar"},
+        new() {Name = "Placeholder", Type = "string", Default = "", Desc = "The placeholder text of the editable element."},
+        new() {Name = "FrontMatter", Type = "bool?", Default = "true", Desc = "whether use the front matter"},
+        new() {Name = "Viewer", Type = "bool?", Default = "false", Desc = "是否是预览器"},
+    };
+
+}

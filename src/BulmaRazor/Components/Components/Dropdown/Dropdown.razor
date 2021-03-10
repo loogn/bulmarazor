@@ -1,41 +1,49 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
-
+@inject BulmaRazorJsInterop JsInterop
 
 <div @attributes="Attributes" class="@clesses">
     <CascadingValue Value="this" IsFixed="true">
-        <div class="dropdown-trigger" @onclick="clickHandle" @onclick:stopPropagation>
+        <div class="dropdown-trigger" id="@Id" @onclick="clickHandle" @onclick:stopPropagation="true">
             @TriggerSlot
         </div>
 
         <div class="dropdown-menu" role="menu">
-            <div class="dropdown-content">
+            <div class="dropdown-content" style="@ContentStyle">
                 @MenuSlot
             </div>
         </div>
     </CascadingValue>
 </div>
+
 @code {
+    readonly string Id = "ddl_" + Guid.NewGuid().ToString("N");
+
     string clesses => CssBuilder.Default("dropdown")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
-        .AddClass("is-up",IsUp)
-        .AddClass("is-right",IsRight)
+        .AddClass("is-up", IsUp)
+        .AddClass("is-right", IsRight)
         .AddClass("is-hoverable", !IsClickTrigger)
-       .Build();
+        .Build();
 
     [Parameter]
+    public string ContentStyle { get; set; }
+    [Parameter]
     public bool IsActive { get; set; }
+    
+    [Parameter]
+    public EventCallback<bool> IsActiveChanged { get; set; }
 
 
     [Parameter]
     public bool IsClickTrigger { get; set; }
 
     [Parameter]
-    public  bool IsUp { get; set; }
-    
+    public bool IsUp { get; set; }
+
     [Parameter]
-    public  bool IsRight { get; set; }
+    public bool IsRight { get; set; }
 
     public void Trigger(bool? isActive = null)
     {
@@ -47,7 +55,7 @@
         {
             IsActive = !IsActive;
         }
-
+        IsActiveChanged.InvokeAsync(IsActive);
         StateHasChanged();
     }
 
@@ -60,10 +68,37 @@
     }
 
 
-
     [Parameter]
     public RenderFragment TriggerSlot { get; set; }
 
     [Parameter]
     public RenderFragment MenuSlot { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // if (IsClickTrigger)
+        // {
+        //     await JsInterop.BindDocumentClick(Id);
+        // }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    protected override void OnInitialized()
+    {
+        // if (IsClickTrigger)
+        // {
+        //     JSCallbackManager.AddEventHandler(Id, "document:click", new Action(() => { Trigger(false); }));
+        // }
+        base.OnInitialized();
+    }
+
+    protected override ValueTask DisposeAsync(bool disposing)
+    {
+        // if (IsClickTrigger)
+        // {
+        //     JSCallbackManager.DisposeObject(Id);
+        // }
+        return base.DisposeAsync(disposing);
+    }
+
 }

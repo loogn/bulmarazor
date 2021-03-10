@@ -15,8 +15,7 @@
         .AddClassFromAttributes(Attributes)
         .Build();
 
-    string Id = "tuiEditor_" + Guid.NewGuid().ToString("N");
-    ElementReference ele;
+    readonly string Id = "tuiEditor_" + Guid.NewGuid().ToString("N");
     IJSObjectReference editor;
 
     [Parameter]

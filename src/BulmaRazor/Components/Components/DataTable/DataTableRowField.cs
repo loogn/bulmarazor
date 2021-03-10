@@ -8,5 +8,7 @@ namespace BulmaRazor.Components
         
         public  object Value { get; set; }
         public Type Type { get; set; }
+        
+        public string ShowValue { get; set; }
     }
 }

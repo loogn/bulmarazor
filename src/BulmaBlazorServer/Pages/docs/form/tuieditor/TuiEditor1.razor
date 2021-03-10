@@ -1,0 +1,14 @@
+<TuiEditor @bind-Value="markdown" Options="options1"></TuiEditor>
+<TuiEditor @bind-Value="markdown" Options="options2"></TuiEditor>
+@code{
+    private string markdown = "# Init Title";
+    TuiEditorOptions options1 = new()
+    {
+        // PreviewStyle = "vertical",
+        // ToolbarItems = new[] {"heading", "bold", "italic"}
+    };
+    TuiEditorOptions options2 = new()
+    {
+        Viewer = true
+    };
+}

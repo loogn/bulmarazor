@@ -53,6 +53,17 @@
       "enabled": false
     }
   }
+,
+  {
+    "outputFileName": "wwwroot/bulmarazor.min.js",
+    "inputFiles": [
+      "wwwroot/js/jquery-3.6.0.min.js",
+      "wwwroot/js/project.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  }
   //    ,
   //    {
   //        "outputFileName": "wwwroot/js/site.min.js",

@@ -1,6 +1,14 @@
 // This is a JavaScript module that is loaded on demand. It can export any number of
 // functions, and may import other JavaScript modules if required.
 
+export function BindDocumentClick(id) {
+    // $(document).one("click",function (e) {
+    //     if (!$(e.target).is("#" + id)) {
+    //         console.log('document clicked');
+    //         DotNet.invokeMethodAsync("BulmaRazor", "JSCallback", id, "document:click");
+    //     }
+    // })
+}
 
 export function Prompt(message, defaultValue) {
     return prompt(message, defaultValue);
@@ -18,7 +26,7 @@ export function Log() {
     console.log(Array.from(arguments));
 }
 
-export function SetIndeterminate(ele,flag) {
+export function SetIndeterminate(ele, flag) {
     ele.indeterminate = flag;
 }
 

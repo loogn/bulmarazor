@@ -36,14 +36,14 @@ Install-Package BulmaRazor
     ```
 # 包含的组件
 
-*☆代表稳定性,最高十颗星*
+*☆代表稳定性,最高五颗星*
 
 - Columns
 	- Column :		☆☆☆☆☆
 - Layout
 	- Container :		☆☆☆☆☆
 	- Footer :		☆☆☆☆☆
-	- Hero :			☆☆☆☆☆
+	- Hero :			☆☆☆☆
 	- Level :			☆☆☆☆☆
 	- Media :			☆☆☆☆☆
 	- Section :		☆☆☆☆☆
@@ -54,18 +54,21 @@ Install-Package BulmaRazor
 	- CheckBox:		☆☆☆☆☆
 	- Switch:		☆☆☆☆
 	- Radio:			☆☆☆☆☆
-	- Select:			☆☆☆ 不支持多选
+	- Select:			☆☆☆☆ 不支持多选
 	- Textarea:		☆☆☆☆☆
 	- Field:			☆☆☆☆☆
 	- Help:			☆☆☆☆☆
 	- Label:			☆☆☆☆☆
 	- Control:		☆☆☆☆☆
 	- File:			☆☆☆☆☆
+    - TagsInput:	☆☆☆
+    - DatePicker:   ☆☆☆
+    - TuiEditor:    ☆☆☆
 - Components 
-  -   DataTable     ☆
+  -   DataTable     ☆☆☆
 	- Breadcrumb :	☆☆☆☆
 	- Card :			☆☆☆☆☆
-	- Dropdown ：		☆☆☆☆☆
+	- Dropdown ：		☆☆☆☆
 	- Menu ：			☆☆☆
 	- Message ：		☆☆☆☆☆
 	- Modal ：		☆☆☆☆☆
@@ -73,6 +76,8 @@ Install-Package BulmaRazor
 	- Pagination ：	☆☆☆☆
 	- Panel :			☆☆☆☆☆
     - Tabs :	☆☆☆☆	
+    - Timeline :	☆☆☆☆
+    - Collapse:     ☆☆☆☆
 - Elements
 	- Block :			☆☆☆☆☆
 	- Box :			☆☆☆☆☆
@@ -87,6 +92,9 @@ Install-Package BulmaRazor
 	- Tag ：			☆☆☆☆☆
 	- Badge ：		☆☆☆
 	- Title ：		☆☆☆☆☆
+    - Tooltip ：	☆☆☆☆
+    - BlockList ：	☆☆☆☆
+    - Pageloader:   ☆☆☆☆
 	
 
 # 许可

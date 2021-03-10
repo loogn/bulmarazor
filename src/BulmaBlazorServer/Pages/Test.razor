@@ -5,7 +5,7 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-    <TuiEditor @ref="editor" @bind-Value="markdown" Options="options" style="background-color: #f03a5f"></TuiEditor>
+    <TuiEditor @ref="editor" @bind-Value="markdown" Options="options"></TuiEditor>
 
     <div>
         @markdown
@@ -19,9 +19,11 @@
 
     TuiEditor editor;
     private string markdown = "# Init Title";
+
     TuiEditorOptions options = new()
     {
-        PreviewStyle = "vertical"
+        PreviewStyle = "vertical",
+        ToolbarItems = new[] {"heading", "bold", "italic"}
     };
 
     async Task load()

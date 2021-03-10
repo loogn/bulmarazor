@@ -14,6 +14,10 @@ namespace BulmaRazor.Components
         {
             return string.Join(' ', cls);
         }
+        public static string JoinStyle(params string[] styles)
+        {
+            return string.Join(';', styles);
+        }
 
 
         #region Color

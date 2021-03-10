@@ -1,6 +1,7 @@
 @namespace BulmaRazor.Components
 @typeparam TItem
 @using BulmaRazor.Utils
+@using System.Diagnostics
 @inherits BulmaComponentBase
 
 @if (WithContainer)
@@ -28,24 +29,9 @@ else
                 <tr>
                     @foreach (var col in columns)
                     {
-                        <th class="@(col.ThClass ?? ThClass)" style="@col.ThStyle">
-                            @if (col.Sortable)
-                            {
-                                <IconText class="@B.Clickable" @onclick="() => Sort(col)">
-                                    <span>
-                                        @if (col.ThSlot != null)
-                                        {
-                                            @:@col.ThSlot
-                                        }
-                                        else
-                                        {
-                                            @:@col.Label 
-                                        }
-                                    </span>
-                                    <Icon class="@getSortIconClass(col)" IconClass="@getSortIconClassName(col)"></Icon>
-                                </IconText>
-                            }
-                            else if (col.IsCheckBox)
+                        <th class="@B.Join(col.ThClass, ThClass)" style="@B.JoinStyle(col.thStyle,ThStyle)">
+
+                            @if (col.IsCheckBox)
                             {
                                 <CheckBox @ref="cball" TValue="string" OnCheckedChanged="checkAll" Checked="col.checkedAll">
                                     @if (col.ThSlot != null)
@@ -60,16 +46,62 @@ else
                             }
                             else
                             {
-                                <span>
-                                    @if (col.ThSlot != null)
-                                    {
-                                        @:@col.ThSlot
-                                    }
-                                    else
-                                    {
-                                        @:@col.Label 
-                                    }
-                                </span>
+                                if (col.Sortable)
+                                {
+                                    <IconText class="@B.Clickable" @onclick="() => Sort(col)">
+                                        <span>
+                                            @if (col.ThSlot != null)
+                                            {
+                                                @:@col.ThSlot
+                                            }
+                                            else
+                                            {
+                                                @:@col.Label 
+                                            }
+                                        </span>
+                                        <Icon class="@getSortIconClass(col)" IconClass="@getSortIconClassName(col)"></Icon>
+                                    </IconText>
+                                }
+                                else
+                                {
+                                    <span>
+                                        @if (col.ThSlot != null)
+                                        {
+                                            @:@col.ThSlot
+                                        }
+                                        else
+                                        {
+                                            @:@col.Label 
+                                        }
+                                    </span>
+                                }
+                                if (col.Filterable)
+                                {
+                                    <Dropdown @bind-IsActive="col.FilterShow" IsRight IsClickTrigger
+                                               class="@B.PulledRight"
+                                               ContentStyle="max-height: 300px;overflow-y: auto; font-weight:lighter">
+                                        <TriggerSlot>
+                                            &nbsp;<Icon class="@getFilterIconClass(col)" IconClass="fa fa-filter"></Icon>&nbsp;
+                                        </TriggerSlot>
+                                        <MenuSlot>
+                                            <CheckBoxes @bind-Values="col.Filters">
+                                                @foreach (var filterItem in col.AllFilters)
+                                                {
+                                                    <DropdownItem>
+                                                        <CheckBox Value="filterItem" TValue="string">@filterItem</CheckBox>
+                                                    </DropdownItem>
+                                                }
+                                            </CheckBoxes>
+                                            <DropdownDivider/>
+                                            <DropdownItem>
+                                                <Buttons>
+                                                    <Button IsSmall Color="Color.Link" @onclick="() => DoFilter(col)">筛选</Button>
+                                                    <Button IsSmall @onclick="()=> ResetFilter(col)">重置</Button>
+                                                </Buttons>
+                                            </DropdownItem>
+                                        </MenuSlot>
+                                    </Dropdown>
+                                }
                             }
                         </th>
                     }
@@ -79,11 +111,12 @@ else
             <tbody>
             @foreach (var row in dataView)
             {
+                if (row.IsHidden) continue;
                 DataTableColumn<TItem> expandColumn = null;
                 <tr class="@CssBuilder.Css(B.Selected, row.IsSelected)" @onclick="() => TrClick(row)">
                     @foreach (var col in columns)
                     {
-                        <td class="@(col.TdClass ?? TdClass)">
+                        <td class="@B.Join(col.TdClass,TdClass)" style="@B.JoinStyle(col.TdStyle,TdStyle)">
                             @if (col.IsIndex)
                             {
                                 @:@(row.Index + 1)
@@ -91,7 +124,7 @@ else
                             else if (col.IsCheckBox)
                             {
                                 <span>
-                                    <CheckBox TValue="string" OnCheckedChanged="b =>CheckBoxClick(row,b)" @bind-Checked="@row.IsChecked">@col.ChildContent?.Invoke(row.Item)</CheckBox>
+                                    <CheckBox TValue="string" OnCheckedChanged="b => CheckBoxClick(row, b)" @bind-Checked="@row.IsChecked">@col.ChildContent?.Invoke(row.Item)</CheckBox>
                                 </span>
                             }
                             else if (col.IsExpand)
@@ -119,7 +152,7 @@ else
                                 else
                                 {
                                     var field = row.Fields[col.Prop];
-                                    @:@ExtendMethods.GetShowValue(field.Type, field.Value, col.Format)
+                                    @:@field.ShowValue
                                 }
                             }
                         </td>

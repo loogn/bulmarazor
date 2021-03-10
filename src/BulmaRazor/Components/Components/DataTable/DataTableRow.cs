@@ -23,6 +23,11 @@ namespace BulmaRazor.Components
         /// </summary>
         public bool IsSelected { get; set; }
         
+        /// <summary>
+        /// Filter之后是否隐藏
+        /// </summary>
+        internal bool IsHidden { get; set; }
+        
         public Dictionary<string,DataTableRowField> Fields { get; set; }
       
     }

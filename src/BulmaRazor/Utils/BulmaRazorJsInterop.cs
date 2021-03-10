@@ -19,7 +19,7 @@ namespace BulmaRazor.Components
         {
             //公共js
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/BulmaRazor/JsInterop.js").AsTask());
+                "import", "./_content/BulmaRazor/js/JsInterop.js").AsTask());
 
             //calendar
             calendarModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
@@ -85,6 +85,11 @@ namespace BulmaRazor.Components
 
         #region 公共
 
+        public async ValueTask BindDocumentClick(string id)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("BindDocumentClick", id);
+        }
         public async ValueTask<string> Prompt(string message, string defValue)
         {
             var module = await moduleTask.Value;

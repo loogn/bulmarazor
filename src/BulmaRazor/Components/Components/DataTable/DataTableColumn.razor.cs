@@ -9,12 +9,15 @@ namespace BulmaRazor.Components
 {
     public partial class DataTableColumn<TItem> : BulmaComponentBase where TItem : new()
     {
+        public HashSet<string> AllFilters { get; set; } = new HashSet<string>();
+        public HashSet<string> Filters { get; set; } = new HashSet<string>();
         public int Index { get; set; }
 
         [Parameter] public string Width { get; set; }
 
-        internal string ThStyle => CssBuilder.Default()
+        internal string thStyle => CssBuilder.Default()
             .AddClass("width:" + Width, Width)
+            .AddClass(ThStyle)
             .Build();
 
         internal HashSet<TItem> CheckItemSet { get; set; }
@@ -46,8 +49,14 @@ namespace BulmaRazor.Components
         [Parameter] public string ThClass { get; set; }
 
         [Parameter] public string TdClass { get; set; }
+        [Parameter] public string ThStyle { get; set; }
+
+        [Parameter] public string TdStyle { get; set; }
 
         [Parameter] public bool Sortable { get; set; }
+        [Parameter] public bool Filterable { get; set; }
+        
+        internal bool FilterShow { get; set; }
 
         [Parameter] public Func<TItem, object> SortFunc { get; set; }
 

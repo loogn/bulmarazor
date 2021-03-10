@@ -39,6 +39,9 @@ namespace BulmaRazor.Components
         [Parameter] public string ThClass { get; set; }
 
         [Parameter] public string TdClass { get; set; }
+        [Parameter] public string ThStyle { get; set; }
+
+        [Parameter] public string TdStyle { get; set; }
         [Parameter] public bool NoHeader { get; set; }
 
         /// <summary>
@@ -100,6 +103,8 @@ namespace BulmaRazor.Components
                     TypeCachedInfo<TItem>.Accessor accessor = typeCachedInfo.GetAccessor(column.Prop);
                     field.Value = accessor.Get(dv.Item);
                     field.Type = accessor.prop.PropertyType;
+                    field.ShowValue = ExtendMethods.GetShowValue(field.Type, field.Value, column.Format);
+                    column.AllFilters.Add(field.ShowValue);
                 }
 
                 dv.Fields.Add(column.Prop ?? "index_" + column.Index, field);
@@ -123,6 +128,7 @@ namespace BulmaRazor.Components
         {
             return column == sortColumn ? "icon has-text-link" : "has-text-grey-lighter";
         }
+
 
         string getSortIconClassName(DataTableColumn<TItem> column)
         {
@@ -165,7 +171,7 @@ namespace BulmaRazor.Components
         /// </summary>
         [Parameter]
         public EventCallback<DataTableRow<TItem>> OnChecked { get; set; }
-        
+
         // [Parameter]
         // public  EventCallback<DataTableRow<TItem>> OnExpandChanged { get; set; }
 
@@ -252,28 +258,6 @@ namespace BulmaRazor.Components
             }
         }
 
-        private void DealCheckAll()
-        {
-            int ckCount =
-                dataView.Count(x =>
-                    x.IsChecked); //dataView.Count(x => checkColumn?.CheckItemSet.Contains(x.Item) ?? false);
-            if (ckCount == dataView.Count)
-            {
-                cball?.SetIndeterminate(false);
-                checkColumn.checkedAll = true;
-            }
-            else if (ckCount == 0)
-            {
-                checkColumn.checkedAll = false;
-                cball?.SetIndeterminate(false);
-            }
-            else
-            {
-                checkColumn.checkedAll = false;
-                cball?.SetIndeterminate();
-            }
-        }
-
         private void DealView()
         {
             if (sortColumn != null && sortColumn.Prop.HasValue())
@@ -292,11 +276,50 @@ namespace BulmaRazor.Components
                 }
             }
 
+            int ckCount = 0;
+            foreach (var dv in dataView)
+            {
+                if (checkColumn != null)
+                {
+                    dv.IsChecked = checkColumn.CheckItemSet.Contains(dv.Item);
+                    if (dv.IsChecked) ckCount++;
+                }
+
+                //处理Filter
+                dv.IsHidden = false;
+                foreach (var column in columns)
+                {
+                    if (column.AllFilters.Any() && column.Filters.Any() &&
+                        column.AllFilters.Count != column.Filters.Count)
+                    {
+                        var field = dv.Fields[column.Prop];
+                        if (!column.Filters.Contains(field.ShowValue))
+                        {
+                            dv.IsHidden = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
             //这里处理checked?
             if (checkColumn != null)
             {
-                dataView.ForEach(x => x.IsChecked = checkColumn.CheckItemSet.Contains(x.Item));
-                DealCheckAll();
+                if (ckCount == dataView.Count)
+                {
+                    cball?.SetIndeterminate(false);
+                    checkColumn.checkedAll = true;
+                }
+                else if (ckCount == 0)
+                {
+                    checkColumn.checkedAll = false;
+                    cball?.SetIndeterminate(false);
+                }
+                else
+                {
+                    checkColumn.checkedAll = false;
+                    cball?.SetIndeterminate();
+                }
             }
 
             StateHasChanged();
@@ -307,6 +330,14 @@ namespace BulmaRazor.Components
             await base.SetParametersAsync(parameters);
 
             dataView = new List<DataTableRow<TItem>>();
+
+            //清空 columns Filter
+            foreach (var column in columns)
+            {
+                column.AllFilters.Clear();
+                column.Filters.Clear();
+            }
+
             var index = 0;
             if (Data != null)
             {
@@ -314,7 +345,7 @@ namespace BulmaRazor.Components
                 {
                     var dv = new DataTableRow<TItem>()
                     {
-                        IsSelected = ReferenceEquals(item,selectedItem),
+                        IsSelected = ReferenceEquals(item, selectedItem),
                         Index = index++,
                         Item = item,
                         Fields = new Dictionary<string, DataTableRowField>()
@@ -330,6 +361,8 @@ namespace BulmaRazor.Components
                             TypeCachedInfo<TItem>.Accessor accessor = typeCachedInfo.GetAccessor(column.Prop);
                             field.Value = accessor.Get(dv.Item);
                             field.Type = accessor.prop.PropertyType;
+                            field.ShowValue = ExtendMethods.GetShowValue(field.Type, field.Value, column.Format);
+                            column.AllFilters.Add(field.ShowValue);
                         }
 
                         dv.Fields.Add(column.Prop ?? "field_" + column.Index, field);
@@ -341,5 +374,27 @@ namespace BulmaRazor.Components
 
             DealView();
         }
+
+        #region Filter
+
+        string getFilterIconClass(DataTableColumn<TItem> column)
+        {
+            return B.Join(B.Clickable, column.Filters.Any() ? "has-text-link" : "has-text-grey-lighter");
+        }
+
+        private void DoFilter(DataTableColumn<TItem> column)
+        {
+            column.FilterShow = false;
+            DealView();
+        }
+
+        private void ResetFilter(DataTableColumn<TItem> column)
+        {
+            column.Filters = new HashSet<string>();
+            column.FilterShow = false;
+            DealView();
+        }
+
+        #endregion
     }
 }
