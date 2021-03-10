@@ -131,7 +131,7 @@ namespace BulmaRazor.Components
         /// </summary>
         public bool? Trim { get; set; }
 
-        public JsParams ToParams()
+        internal JsParams ToParams()
         {
             JsParams ps = new JsParams();
             

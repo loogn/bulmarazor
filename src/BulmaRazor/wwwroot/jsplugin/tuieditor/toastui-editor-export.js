@@ -1,7 +1,5 @@
 export function initEditor(options) {
     options.el = document.getElementById(options.elid);
-    console.log(options);
-    //options.el.id
     options.events = {
         load: function () {
             DotNet.invokeMethodAsync("BulmaRazor", "JSCallback", options.elid, "load");

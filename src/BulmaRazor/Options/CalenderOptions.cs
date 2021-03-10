@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using BulmaRazor.Utils;
+
 
 namespace BulmaRazor.Components
 {
@@ -195,7 +195,7 @@ namespace BulmaRazor.Components
         public bool? ToggleOnInputClick { get; set; }
 
 
-        public JsParams ToParams()
+        internal JsParams ToParams()
         {
             JsParams ps = new JsParams();
             var def = BulmaRazorOptions.DefaultOptions.CalenderOptions;

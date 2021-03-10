@@ -9,6 +9,3 @@ https://bulma-carousel.onrender.com/
 
 ribbon
 https://github.com/Wikiki/bulma-ribbon
-
-
-https://github.com/CreativeBulma/bulma-tagsinput/

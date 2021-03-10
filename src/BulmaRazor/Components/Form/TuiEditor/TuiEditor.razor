@@ -2,8 +2,8 @@
 @inherits BulmaComponentBase
 @inject BulmaRazorJsInterop JsInterop
 
-<link href="_content/BulmaRazor/css/tuieditor/codemirror.min.css" rel="stylesheet"/>
-<link href="_content/BulmaRazor/css/tuieditor/toastui-editor.min.css" rel="stylesheet"/>
+@* <link href="_content/BulmaRazor/css/tuieditor/codemirror.min.css" rel="stylesheet"/> *@
+@* <link href="_content/BulmaRazor/css/tuieditor/toastui-editor.min.css" rel="stylesheet"/> *@
 
 <div id="@Id" @attributes="Attributes" class="@classes"></div>
 
@@ -187,11 +187,17 @@
         editor?.InvokeVoidAsync("show");
     }
 
+    #endregion
+
     protected override bool ShouldRender()
     {
         return false;
     }
 
-    #endregion
+    protected override ValueTask DisposeAsync(bool disposing)
+    {
+        JSCallbackManager.DisposeObject(Id);
+        return base.DisposeAsync(disposing);
+    }
 
 }

@@ -81,7 +81,7 @@ namespace BulmaRazor.Components
         public bool? FrontMatter { get; set; } 
         public bool? Viewer { get; set; }
 
-        public JsParams ToParams()
+        internal JsParams ToParams()
         {
             JsParams ps = new JsParams();
             var def = BulmaRazorOptions.DefaultOptions.TuiEditorOptions;

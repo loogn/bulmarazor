@@ -63,7 +63,7 @@ namespace BulmaRazor.Components
         /// </summary>
         public ToastAnimate Animate { get; set; }
 
-        public JsParams ToParams()
+        internal JsParams ToParams()
         {
             JsParams ps = new JsParams();
             var def = BulmaRazorOptions.DefaultOptions.ToastOptions;

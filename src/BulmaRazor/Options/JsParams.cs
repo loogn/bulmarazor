@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace BulmaRazor.Utils
+namespace BulmaRazor.Components
 {
-    public class JsParams:Dictionary<string,object>
+    internal class JsParams:Dictionary<string,object>
     {
 
         public void AddNotNull(string key, object value)
@@ -11,11 +11,6 @@ namespace BulmaRazor.Utils
             {
                 base.Add(key,value);
             }
-        }
-
-        private new void Add(string key, object value)
-        {
-            ;
         }
     }
 }
