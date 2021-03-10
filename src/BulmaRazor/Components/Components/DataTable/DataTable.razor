@@ -20,6 +20,17 @@ else
 
 @code{
 
+    RenderFragment<DataTableColumn<TItem>> RenderHeaderContent => col =>
+        @<span>
+            @if (col.ThSlot != null)
+            {
+                @:@col.ThSlot
+            }
+            else
+            {
+                @:@col.Label 
+            }
+        </span>;
 
     RenderFragment RenderTable =>
         @<table @attributes="Attributes" class="@classes">
@@ -29,19 +40,12 @@ else
                 <tr>
                     @foreach (var col in columns)
                     {
-                        <th class="@B.Join(col.ThClass, ThClass)" style="@B.JoinStyle(col.thStyle,ThStyle)">
+                        <th class="@B.Join(col.ThClass, ThClass)" style="@B.JoinStyle(col.thStyle, ThStyle)">
 
                             @if (col.IsCheckBox)
                             {
                                 <CheckBox @ref="cball" TValue="string" OnCheckedChanged="checkAll" Checked="col.checkedAll">
-                                    @if (col.ThSlot != null)
-                                    {
-                                        @:@col.ThSlot
-                                    }
-                                    else
-                                    {
-                                        @:@col.Label 
-                                    }
+                                   @RenderHeaderContent(col)
                                 </CheckBox>
                             }
                             else
@@ -49,31 +53,13 @@ else
                                 if (col.Sortable)
                                 {
                                     <IconText class="@B.Clickable" @onclick="() => Sort(col)">
-                                        <span>
-                                            @if (col.ThSlot != null)
-                                            {
-                                                @:@col.ThSlot
-                                            }
-                                            else
-                                            {
-                                                @:@col.Label 
-                                            }
-                                        </span>
+                                        @RenderHeaderContent(col)
                                         <Icon class="@getSortIconClass(col)" IconClass="@getSortIconClassName(col)"></Icon>
                                     </IconText>
                                 }
                                 else
                                 {
-                                    <span>
-                                        @if (col.ThSlot != null)
-                                        {
-                                            @:@col.ThSlot
-                                        }
-                                        else
-                                        {
-                                            @:@col.Label 
-                                        }
-                                    </span>
+                                    @:@RenderHeaderContent(col)
                                 }
                                 if (col.Filterable)
                                 {
@@ -88,15 +74,15 @@ else
                                                 @foreach (var filterItem in col.AllFilters)
                                                 {
                                                     <DropdownItem>
-                                                        <CheckBox Value="filterItem" TValue="string">@filterItem</CheckBox>
+                                                        <CheckBox IsSmall="IsNarrow" Color="Color" Value="filterItem" TValue="string">@filterItem</CheckBox>
                                                     </DropdownItem>
                                                 }
                                             </CheckBoxes>
-                                            <DropdownDivider/>
+                                            <DropdownDivider class="@B.MY1"/>
                                             <DropdownItem>
                                                 <Buttons>
-                                                    <Button IsSmall Color="Color.Link" @onclick="() => DoFilter(col)">筛选</Button>
-                                                    <Button IsSmall @onclick="()=> ResetFilter(col)">重置</Button>
+                                                    <Button IsSmall="IsNarrow" Color="Color" @onclick="() => DoFilter(col)">筛选</Button>
+                                                    <Button IsSmall="IsNarrow" @onclick="() => ResetFilter(col)">重置</Button>
                                                 </Buttons>
                                             </DropdownItem>
                                         </MenuSlot>
@@ -116,7 +102,7 @@ else
                 <tr class="@CssBuilder.Css(B.Selected, row.IsSelected)" @onclick="() => TrClick(row)">
                     @foreach (var col in columns)
                     {
-                        <td class="@B.Join(col.TdClass,TdClass)" style="@B.JoinStyle(col.TdStyle,TdStyle)">
+                        <td class="@B.Join(col.TdClass, TdClass)" style="@B.JoinStyle(col.TdStyle, TdStyle)">
                             @if (col.IsIndex)
                             {
                                 @:@(row.Index + 1)

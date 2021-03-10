@@ -62,6 +62,12 @@ namespace BulmaRazor.Components
         [Parameter]
         public bool IsFullwidth { get; set; }
 
+        /// <summary>
+        /// 修饰的颜色，如排序和过滤
+        /// </summary>
+        [Parameter]
+        public Color Color { get; set; } = Color.Link;
+
         [Parameter] public bool WithContainer { get; set; }
 
         [Parameter] public RenderFragment ChildContent { get; set; }
@@ -126,7 +132,7 @@ namespace BulmaRazor.Components
 
         string getSortIconClass(DataTableColumn<TItem> column)
         {
-            return column == sortColumn ? "icon has-text-link" : "has-text-grey-lighter";
+            return column == sortColumn ? Color.ToTextColor() : "has-text-grey-lighter";
         }
 
 
@@ -377,9 +383,36 @@ namespace BulmaRazor.Components
 
         #region Filter
 
+        /// <summary>
+        /// 清空过滤条件
+        /// </summary>
+        /// <param name="prop"></param>
+        public void ClearFilter(string prop = null)
+        {
+            if (string.IsNullOrEmpty(prop))
+            {
+                columns.ForEach(column =>
+                {
+                    column.Filters = new HashSet<string>();
+                    column.FilterShow = false;
+                });
+                DealView();
+            }
+            else
+            {
+                var column = columns.FirstOrDefault(x => prop.Equals(x.Prop, StringComparison.OrdinalIgnoreCase));
+                if (column != null)
+                {
+                    column.Filters = new HashSet<string>();
+                    column.FilterShow = false;
+                    DealView();
+                }
+            }
+        }
+
         string getFilterIconClass(DataTableColumn<TItem> column)
         {
-            return B.Join(B.Clickable, column.Filters.Any() ? "has-text-link" : "has-text-grey-lighter");
+            return B.Join(B.Clickable, column.Filters.Any() ? Color.ToTextColor() : "has-text-grey-lighter");
         }
 
         private void DoFilter(DataTableColumn<TItem> column)
