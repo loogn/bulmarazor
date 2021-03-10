@@ -20,7 +20,7 @@ Install-Package BulmaRazor
     ```csharp
     services.AddBulmaRazor();
     ```
-- _Host.cshtml或者index.html中引入样式
+- _Host.cshtml或者index.html中引入样式和脚本
     ```xml
     <link href="_content/BulmaRazor/bulmarazor.min.css" rel="stylesheet" />
     <script src="_content/BulmaRazor/bulmarazor.min.js"></script>
