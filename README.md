@@ -21,10 +21,9 @@ Install-Package BulmaRazor
     services.AddBulmaRazor();
     ```
 - _Host.cshtml或者index.html中引入样式
-    ```css
-    <link href="_content/BulmaRazor/bulma.css" rel="stylesheet" />
-    如果使用图标,可以添加如下引用
-    <link href="_content/BulmaRazor/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    ```xml
+    <link href="_content/BulmaRazor/bulmarazor.min.css" rel="stylesheet" />
+    <script src="_content/BulmaRazor/bulmarazor.min.js"></script>
     ```
 - 在_Imports.razor中导入名称空间
     ```xml
