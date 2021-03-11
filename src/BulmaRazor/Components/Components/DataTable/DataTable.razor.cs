@@ -9,12 +9,8 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
-    public partial class DataTable<TItem> : BulmaComponentBase where TItem : new()
+    public partial class DataTable<TItem> where TItem : new()
     {
-        public DataTable()
-        {
-        }
-
         string classes => CssBuilder.Default("table")
             .AddClassFromAttributes(Attributes)
             .AddClass("is-bordered", IsBordered)
@@ -24,40 +20,55 @@ namespace BulmaRazor.Components
             .AddClass("is-fullwidth", IsFullwidth)
             .Build();
 
-        /// <summary>
-        /// 边框
-        /// </summary>
-        [Parameter]
-        public bool IsBordered { get; set; }
+        #region 组件参数
 
         /// <summary>
-        /// 条纹
+        /// 是否显示边框
         /// </summary>
-        [Parameter]
-        public bool IsStriped { get; set; }
+        [Parameter] public bool IsBordered { get; set; }
 
+        /// <summary>
+        /// 是否显示条纹
+        /// </summary>
+        [Parameter] public bool IsStriped { get; set; }
+
+        /// <summary>
+        /// Th样式类
+        /// </summary>
         [Parameter] public string ThClass { get; set; }
 
+        /// <summary>
+        /// Td样式类
+        /// </summary>
         [Parameter] public string TdClass { get; set; }
+
+        /// <summary>
+        /// Th样式
+        /// </summary>
         [Parameter] public string ThStyle { get; set; }
 
+        /// <summary>
+        /// Td样式
+        /// </summary>
         [Parameter] public string TdStyle { get; set; }
+
+        /// <summary>
+        /// 是否隐藏表头
+        /// </summary>
         [Parameter] public bool NoHeader { get; set; }
 
         /// <summary>
-        /// 狭窄
+        /// 是否显示狭窄
         /// </summary>
-        [Parameter]
-        public bool IsNarrow { get; set; }
+        [Parameter] public bool IsNarrow { get; set; }
 
         /// <summary>
-        /// hover
+        /// 是否可鼠标悬浮
         /// </summary>
-        [Parameter]
-        public bool IsHoverable { get; set; }
+        [Parameter] public bool IsHoverable { get; set; }
 
         /// <summary>
-        /// 全宽
+        /// 是否全宽
         /// </summary>
         [Parameter]
         public bool IsFullwidth { get; set; }
@@ -65,31 +76,38 @@ namespace BulmaRazor.Components
         /// <summary>
         /// 修饰的颜色，如排序和过滤
         /// </summary>
-        [Parameter]
-        public Color Color { get; set; } = Color.Link;
+        [Parameter] public Color Color { get; set; } = Color.Link;
 
+        /// <summary>
+        /// 是否有容器包裹
+        /// </summary>
         [Parameter] public bool WithContainer { get; set; }
 
+        /// <summary>
+        /// 子内容
+        /// </summary>
         [Parameter] public RenderFragment ChildContent { get; set; }
 
+        /// <summary>
+        /// 数据源
+        /// </summary>
 
-        private IEnumerable<TItem> _data;
-
-        [Parameter]
-        public IEnumerable<TItem> Data
-        {
-            get { return _data; }
-            set { _data = value; }
-        }
+        [Parameter] public IEnumerable<TItem> Data { get; set; }
+        
+        /// <summary>
+        /// 排序事件回调
+        /// </summary>
+        [Parameter] public Action<DataTableColumn<TItem>, bool> OnSortChange { get; set; }
+        #endregion
 
         private List<DataTableRow<TItem>> dataView { get; set; }
 
         private List<DataTableColumn<TItem>> columns { get; set; } = new();
 
         private int colIndex = 0;
-        private DataTableColumn<TItem> checkColumn = null;
 
-        public void AddColumns(DataTableColumn<TItem> column)
+
+        internal void AddColumns(DataTableColumn<TItem> column)
         {
             column.Index = colIndex++;
             columns.Add(column);
@@ -121,14 +139,18 @@ namespace BulmaRazor.Components
 
         private TypeCachedInfo<TItem> typeCachedInfo = TypeCachedDict.GetTypeCachedInfo<TItem>();
 
-        private DataTableColumn<TItem> sortColumn;
-        private bool sortAsc;
+        private DataTableColumn<TItem> checkColumn = null;
 
+        /// <summary>
+        /// 全选复选框
+        /// </summary>
         private CheckBox<string> cball;
 
         #region Sort
 
-        [Parameter] public Action<DataTableColumn<TItem>, bool> OnSortChange { get; set; }
+        private DataTableColumn<TItem> sortColumn;
+        private bool sortAsc;
+        
 
         string getSortIconClass(DataTableColumn<TItem> column)
         {
