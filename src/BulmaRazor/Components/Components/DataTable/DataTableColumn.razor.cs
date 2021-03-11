@@ -9,8 +9,8 @@ namespace BulmaRazor.Components
 {
     public partial class DataTableColumn<TItem> : BulmaComponentBase where TItem : new()
     {
-        public HashSet<string> AllFilters { get; set; } = new HashSet<string>();
-        public HashSet<string> Filters { get; set; } = new HashSet<string>();
+        public HashSet<string> AllFilters { get; set; } = new();
+        public HashSet<string> Filters { get; set; } = new();
         public int Index { get; set; }
 
         [Parameter] public string Width { get; set; }
@@ -54,6 +54,7 @@ namespace BulmaRazor.Components
         [Parameter] public string TdStyle { get; set; }
 
         [Parameter] public bool Sortable { get; set; }
+        internal  bool SortAsc { get; set; }
         [Parameter] public bool Filterable { get; set; }
         
         internal bool FilterShow { get; set; }
@@ -67,11 +68,6 @@ namespace BulmaRazor.Components
         [Parameter] public RenderFragment<TItem> TdSlot { get; set; }
 
         [Parameter] public RenderFragment<TItem> ExpandSlot { get; set; }
-
-        public override async Task SetParametersAsync(ParameterView parameters)
-        {
-            await base.SetParametersAsync(parameters);
-        }
 
         protected override void OnInitialized()
         {

@@ -2,10 +2,24 @@
 // functions, and may import other JavaScript modules if required.
 
 
-export function BindClickWithoutSelf(id) {
+export function BindClickWithoutSelf(id, selector) {
     $(document).click(function (e) {
         if (e.target.id == id || $(e.target).parents("#" + id).length > 0)
             return;
+
+        if (selector) {
+            let self = false;
+            $(selector).each(function (index, ele) {
+                if (ele === e.target) {
+                    self = true;
+                }
+            });
+            if (self) return;
+
+            if ($(e.target).parents(selector).length > 0)
+                return;
+        }
+
         DotNet.invokeMethodAsync("BulmaRazor", "JSCallback", id, "clickWithoutSelf");
     })
 }

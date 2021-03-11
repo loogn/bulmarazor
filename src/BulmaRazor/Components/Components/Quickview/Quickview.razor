@@ -1,7 +1,8 @@
 @inherits BulmaComponentBase
 @namespace BulmaRazor.Components
+@inject BulmaRazorJsInterop JsInterop
 
-<div @attributes="Attributes" class="@classes">
+<div id="@Id" @attributes="Attributes" class="@classes">
     <header class="quickview-header">
         <p class="title">
             @if (HeaderSlot != null)
@@ -32,6 +33,8 @@
 
 @code {
 
+    readonly string Id = "quickview_" + Guid.NewGuid().ToString("N");
+
     string classes => CssBuilder.Default("quickview")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
@@ -46,16 +49,23 @@
         StateHasChanged();
     }
 
-    public Task Hide()
+    public void Hide()
     {
         if (IsActive)
         {
             IsActive = false;
             StateHasChanged();
         }
-        return Task.CompletedTask;
     }
-    
+
+    public void Toggle()
+    {
+        IsActive = !IsActive;
+        StateHasChanged();
+    }
+
+    [Parameter]
+    public string TriggerSelector { get; set; }
     [Parameter]
     public string HeaderText { get; set; }
 
@@ -71,15 +81,22 @@
     [Parameter]
     public RenderFragment FooterSlot { get; set; }
 
-    protected override void OnInitialized()
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        base.OnInitialized();
-        // BulmaRazorNetInterop.DocumentClick += Hide;
+        await base.OnAfterRenderAsync(firstRender);
+        await JsInterop.BindClickWithoutSelf(Id,TriggerSelector);
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        JSCallbackManager.AddEventHandler(Id, "clickWithoutSelf", new Action(() => { Hide(); }));
+        return base.OnInitializedAsync();
     }
 
     protected override ValueTask DisposeAsync(bool disposing)
     {
-        // BulmaRazorNetInterop.DocumentClick -= Hide;
+        JSCallbackManager.DisposeObject(Id);
         return base.DisposeAsync(disposing);
     }
 

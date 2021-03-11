@@ -11,6 +11,7 @@ namespace BulmaRazor.Components
 {
     public partial class DataTable<TItem> where TItem : new()
     {
+        #region 私有变量
         string classes => CssBuilder.Default("table")
             .AddClassFromAttributes(Attributes)
             .AddClass("is-bordered", IsBordered)
@@ -19,53 +20,78 @@ namespace BulmaRazor.Components
             .AddClass("is-hoverable", IsHoverable)
             .AddClass("is-fullwidth", IsFullwidth)
             .Build();
+        
+        private List<DataTableRow<TItem>> dataView; //数据视图
+
+        private List<DataTableColumn<TItem>> columns = new(); //列集合
+
+        private int colIndex = 0; //列索引
+
+        private TItem selectedItem; //选中的当前项
+        private DataTableColumn<TItem> sortColumn; //当前排序列
+        private TypeCachedInfo<TItem> typeCachedInfo = TypeCachedDict.GetTypeCachedInfo<TItem>();
+        private DataTableColumn<TItem> checkColumn = null; //复选列
+        private CheckBox<string> cball; //全选复选框
+        private List<DataTableRow<TItem>> checkedRows = new(); //复选中的行
+        
+        #endregion
+
 
         #region 组件参数
 
         /// <summary>
         /// 是否显示边框
         /// </summary>
-        [Parameter] public bool IsBordered { get; set; }
+        [Parameter]
+        public bool IsBordered { get; set; }
 
         /// <summary>
         /// 是否显示条纹
         /// </summary>
-        [Parameter] public bool IsStriped { get; set; }
+        [Parameter]
+        public bool IsStriped { get; set; }
 
         /// <summary>
         /// Th样式类
         /// </summary>
-        [Parameter] public string ThClass { get; set; }
+        [Parameter]
+        public string ThClass { get; set; }
 
         /// <summary>
         /// Td样式类
         /// </summary>
-        [Parameter] public string TdClass { get; set; }
+        [Parameter]
+        public string TdClass { get; set; }
 
         /// <summary>
         /// Th样式
         /// </summary>
-        [Parameter] public string ThStyle { get; set; }
+        [Parameter]
+        public string ThStyle { get; set; }
 
         /// <summary>
         /// Td样式
         /// </summary>
-        [Parameter] public string TdStyle { get; set; }
+        [Parameter]
+        public string TdStyle { get; set; }
 
         /// <summary>
         /// 是否隐藏表头
         /// </summary>
-        [Parameter] public bool NoHeader { get; set; }
+        [Parameter]
+        public bool NoHeader { get; set; }
 
         /// <summary>
         /// 是否显示狭窄
         /// </summary>
-        [Parameter] public bool IsNarrow { get; set; }
+        [Parameter]
+        public bool IsNarrow { get; set; }
 
         /// <summary>
         /// 是否可鼠标悬浮
         /// </summary>
-        [Parameter] public bool IsHoverable { get; set; }
+        [Parameter]
+        public bool IsHoverable { get; set; }
 
         /// <summary>
         /// 是否全宽
@@ -76,37 +102,56 @@ namespace BulmaRazor.Components
         /// <summary>
         /// 修饰的颜色，如排序和过滤
         /// </summary>
-        [Parameter] public Color Color { get; set; } = Color.Link;
+        [Parameter]
+        public Color Color { get; set; } = Color.Link;
 
         /// <summary>
         /// 是否有容器包裹
         /// </summary>
-        [Parameter] public bool WithContainer { get; set; }
+        [Parameter]
+        public bool WithContainer { get; set; }
 
         /// <summary>
         /// 子内容
         /// </summary>
-        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
 
         /// <summary>
         /// 数据源
         /// </summary>
 
-        [Parameter] public IEnumerable<TItem> Data { get; set; }
-        
+        [Parameter]
+        public IEnumerable<TItem> Data { get; set; }
+
         /// <summary>
         /// 排序事件回调
         /// </summary>
-        [Parameter] public Action<DataTableColumn<TItem>, bool> OnSortChange { get; set; }
+        [Parameter]
+        public EventCallback<DataTableColumn<TItem>> OnSortChange { get; set; }
+
+        /// <summary>
+        /// 是否可选中
+        /// </summary>
+        [Parameter]
+        public bool IsSelectable { get; set; }
+
+        /// <summary>
+        /// 单击选中
+        /// </summary>
+        [Parameter]
+        public EventCallback<DataTableRow<TItem>> OnSelected { get; set; }
+
+        /// <summary>
+        /// 选中复选框
+        /// </summary>
+        [Parameter]
+        public EventCallback<DataTableRow<TItem>> OnChecked { get; set; }
+
         #endregion
 
-        private List<DataTableRow<TItem>> dataView { get; set; }
 
-        private List<DataTableColumn<TItem>> columns { get; set; } = new();
-
-        private int colIndex = 0;
-
-
+        #region 私有方法
         internal void AddColumns(DataTableColumn<TItem> column)
         {
             column.Index = colIndex++;
@@ -137,79 +182,47 @@ namespace BulmaRazor.Components
             StateHasChanged();
         }
 
-        private TypeCachedInfo<TItem> typeCachedInfo = TypeCachedDict.GetTypeCachedInfo<TItem>();
-
-        private DataTableColumn<TItem> checkColumn = null;
-
-        /// <summary>
-        /// 全选复选框
-        /// </summary>
-        private CheckBox<string> cball;
-
-        #region Sort
-
-        private DataTableColumn<TItem> sortColumn;
-        private bool sortAsc;
-        
-
         string getSortIconClass(DataTableColumn<TItem> column)
         {
             return column == sortColumn ? Color.ToTextColor() : "has-text-grey-lighter";
         }
 
-
         string getSortIconClassName(DataTableColumn<TItem> column)
         {
             if (column == sortColumn)
             {
-                return sortAsc ? "fa fa-sort-asc" : "fa fa-sort-desc";
+                return sortColumn.SortAsc ? "fa fa-sort-asc" : "fa fa-sort-desc";
             }
 
             return "fa fa-sort";
         }
 
+        /// <summary>
+        /// 排序方法
+        /// </summary>
+        /// <param name="column"></param>
         private void Sort(DataTableColumn<TItem> column)
         {
             if (sortColumn == column)
             {
-                sortAsc = !sortAsc;
+                sortColumn.SortAsc = !sortColumn.SortAsc;
             }
             else
             {
                 sortColumn = column;
-                sortAsc = true;
+                sortColumn.SortAsc = true;
             }
 
             DealView();
-            OnSortChange?.Invoke(column, sortAsc);
+            OnSortChange.InvokeAsync(column);
         }
 
-        #endregion
-
-        [Parameter] public bool IsSelectable { get; set; }
-
-        /// <summary>
-        /// 单击选中
-        /// </summary>
-        [Parameter]
-        public EventCallback<DataTableRow<TItem>> OnSelected { get; set; }
-
-        /// <summary>
-        /// 选中复选框
-        /// </summary>
-        [Parameter]
-        public EventCallback<DataTableRow<TItem>> OnChecked { get; set; }
-
-        // [Parameter]
-        // public  EventCallback<DataTableRow<TItem>> OnExpandChanged { get; set; }
 
         private void TaggleExpand(DataTableRow<TItem> row)
         {
             row.IsExpanded = !row.IsExpanded;
-            // OnExpandChanged.InvokeAsync(row);
         }
 
-        private TItem selectedItem;
 
         private void TrClick(DataTableRow<TItem> row)
         {
@@ -220,8 +233,6 @@ namespace BulmaRazor.Components
             }
         }
 
-
-        private List<DataTableRow<TItem>> checkedRows = new List<DataTableRow<TItem>>();
 
         private void CheckBoxClick(DataTableRow<TItem> row, bool isck)
         {
@@ -237,68 +248,43 @@ namespace BulmaRazor.Components
             DealView();
             OnChecked.InvokeAsync(row);
         }
-
-        public List<DataTableRow<TItem>> GetCheckedRows()
+        
+        string getFilterIconClass(DataTableColumn<TItem> column)
         {
-            return dataView.Where(x => x.IsChecked).ToList();
+            return B.Join(B.Clickable, column.Filters.Any() ? Color.ToTextColor() : "has-text-grey-lighter");
         }
 
-        public void ClearCheckedRows()
+        /// <summary>
+        /// 过滤方法
+        /// </summary>
+        /// <param name="column"></param>
+        private void Filter(DataTableColumn<TItem> column)
         {
-            checkColumn?.CheckItemSet.Clear();
+            column.FilterShow = false;
             DealView();
         }
 
-        public void ToggleCheckedRows()
+        private void ResetFilter(DataTableColumn<TItem> column)
         {
-            if (checkColumn != null)
-            {
-                foreach (var dv in dataView)
-                {
-                    if (checkColumn.CheckItemSet.Contains(dv.Item))
-                    {
-                        checkColumn.CheckItemSet.Remove(dv.Item);
-                    }
-                    else
-                    {
-                        checkColumn.CheckItemSet.Add(dv.Item);
-                    }
-                }
-
-                DealView();
-            }
+            column.Filters = new HashSet<string>();
+            column.FilterShow = false;
+            DealView();
         }
-
-        private void checkAll(bool cked)
-        {
-            foreach (var dv in dataView)
-            {
-                if (cked)
-                {
-                    checkColumn.CheckItemSet.Add(dv.Item);
-                }
-                else
-                {
-                    checkColumn.CheckItemSet.Remove(dv.Item);
-                }
-
-                DealView();
-            }
-        }
-
+        
         private void DealView()
         {
+            //处理排序
             if (sortColumn != null && sortColumn.Prop.HasValue())
             {
                 if (sortColumn.SortFunc == null)
                 {
-                    dataView = sortAsc
+                    dataView = sortColumn.SortAsc
                         ? dataView.OrderBy(x => x.Fields[sortColumn.Prop].Value).ToList()
                         : dataView.OrderByDescending(x => x.Fields[sortColumn.Prop].Value).ToList();
                 }
                 else
                 {
-                    dataView = sortAsc
+                    dataView = sortColumn.SortAsc
                         ? dataView.OrderBy(x => sortColumn.SortFunc(x.Item)).ToList()
                         : dataView.OrderByDescending(x => sortColumn.SortFunc(x.Item)).ToList();
                 }
@@ -307,6 +293,7 @@ namespace BulmaRazor.Components
             int ckCount = 0;
             foreach (var dv in dataView)
             {
+                //处理选中
                 if (checkColumn != null)
                 {
                     dv.IsChecked = checkColumn.CheckItemSet.Contains(dv.Item);
@@ -330,7 +317,7 @@ namespace BulmaRazor.Components
                 }
             }
 
-            //这里处理checked?
+            //这里处理checked状态
             if (checkColumn != null)
             {
                 if (ckCount == dataView.Count)
@@ -352,6 +339,8 @@ namespace BulmaRazor.Components
 
             StateHasChanged();
         }
+
+        #endregion
 
         public override async Task SetParametersAsync(ParameterView parameters)
         {
@@ -403,7 +392,100 @@ namespace BulmaRazor.Components
             DealView();
         }
 
-        #region Filter
+        #region 公开方法
+
+        /// <summary>
+        /// 反选行
+        /// </summary>
+        public void ToggleCheckedRows()
+        {
+            if (checkColumn != null)
+            {
+                foreach (var dv in dataView)
+                {
+                    if (checkColumn.CheckItemSet.Contains(dv.Item))
+                    {
+                        checkColumn.CheckItemSet.Remove(dv.Item);
+                    }
+                    else
+                    {
+                        checkColumn.CheckItemSet.Add(dv.Item);
+                    }
+                }
+
+                DealView();
+            }
+        }
+
+        /// <summary>
+        /// 清空所有选中行
+        /// </summary>
+        /// <param name="allData">是否所有数据，用于分页记忆</param>
+        public void ClearCheckedRows(bool allData = false)
+        {
+            if (checkColumn != null)
+            {
+                if (allData)
+                {
+                    checkColumn.CheckItemSet.Clear();
+                }
+                else
+                {
+                    foreach (var dv in dataView)
+                    {
+                        checkColumn.CheckItemSet.Remove(dv.Item);
+                    }
+                }
+            }
+
+            DealView();
+        }
+
+        /// <summary>
+        /// 选中所有行
+        /// </summary>
+        /// <param name="cked">是否选中，false是全部取消</param>
+        public void CheckAllRows(bool cked)
+        {
+            foreach (var dv in dataView)
+            {
+                if (cked)
+                {
+                    checkColumn.CheckItemSet.Add(dv.Item);
+                }
+                else
+                {
+                    checkColumn.CheckItemSet.Remove(dv.Item);
+                }
+
+                DealView();
+            }
+        }
+
+        /// <summary>
+        /// 获取所有选中行
+        /// </summary>
+        /// <returns></returns>
+        public List<DataTableRow<TItem>> GetCheckedRows()
+        {
+            return dataView.Where(x => x.IsChecked).ToList();
+        }
+
+        /// <summary>
+        /// 获取所有选中数据项
+        /// </summary>
+        /// <returns></returns>
+        public List<TItem> GetCheckedItems(bool allData = false)
+        {
+            if (allData)
+            {
+                return checkColumn?.CheckItemSet.ToList();
+            }
+            else
+            {
+                return dataView.Where(x => x.IsChecked).Select(x => x.Item).ToList();
+            }
+        }
 
         /// <summary>
         /// 清空过滤条件
@@ -430,24 +512,6 @@ namespace BulmaRazor.Components
                     DealView();
                 }
             }
-        }
-
-        string getFilterIconClass(DataTableColumn<TItem> column)
-        {
-            return B.Join(B.Clickable, column.Filters.Any() ? Color.ToTextColor() : "has-text-grey-lighter");
-        }
-
-        private void DoFilter(DataTableColumn<TItem> column)
-        {
-            column.FilterShow = false;
-            DealView();
-        }
-
-        private void ResetFilter(DataTableColumn<TItem> column)
-        {
-            column.Filters = new HashSet<string>();
-            column.FilterShow = false;
-            DealView();
         }
 
         #endregion

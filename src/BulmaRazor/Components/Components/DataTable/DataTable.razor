@@ -44,7 +44,7 @@ else
 
                             @if (col.IsCheckBox)
                             {
-                                <CheckBox @ref="cball" TValue="string" OnCheckedChanged="checkAll" Checked="col.checkedAll">
+                                <CheckBox @ref="cball" TValue="string" OnCheckedChanged="CheckAllRows" Checked="col.checkedAll">
                                    @RenderHeaderContent(col)
                                 </CheckBox>
                             }
@@ -81,7 +81,7 @@ else
                                             <DropdownDivider class="@B.MY1"/>
                                             <DropdownItem>
                                                 <Buttons>
-                                                    <Button IsSmall="IsNarrow" Color="Color" @onclick="() => DoFilter(col)">筛选</Button>
+                                                    <Button IsSmall="IsNarrow" Color="Color" @onclick="() => Filter(col)">筛选</Button>
                                                     <Button IsSmall="IsNarrow" @onclick="() => ResetFilter(col)">重置</Button>
                                                 </Buttons>
                                             </DropdownItem>
