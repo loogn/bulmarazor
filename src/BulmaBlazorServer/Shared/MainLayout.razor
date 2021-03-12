@@ -1,10 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 
-<div class="layoutPage">
-    <div class="layoutPage1">
-
-        <Navbar Color="Color.Black">
+<Navbar Color="Color.Black" IsFixedTop style="z-index: 31">
             <BrandSlot>
 
                 <NavbarItem>
@@ -40,11 +37,7 @@
             </EndSlot>
         </Navbar>
 
-    </div>
-    <div class="layoutPage2">
-        @Body
-    </div>
-</div>
+@Body
 
 
 @* 

@@ -6,25 +6,19 @@ html, body {
     display: flex; 
     height:100%;
     overflow:hidden;
-    flex-direction: column;
 }
-.layoutPage1{
-    flex-shrink: 0;
-}
-.layoutPage2{
-    flex-grow: 1;
-    display: flex;
-    overflow: hidden;
-}
+
 .layoutMenu{
     flex-shrink: 0;
     width:260px;
+    max-height: 100%;
     overflow: auto;
     background-color: #fafafa;
 }
 .layoutContent{
     flex-grow: 1;
     overflow: auto;
+    max-height: 100%;
 }
 
 

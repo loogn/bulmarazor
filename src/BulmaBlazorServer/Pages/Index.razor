@@ -1,10 +1,9 @@
 ﻿@page "/"
-@using Microsoft.AspNetCore.Components.Rendering
 @inject JSWindow win
 @inject BulmaRazorJsInterop jsInterop
 @inject IJSRuntime jsruntime
 
-<Hero IsMedium Color="Color.Info" IsBold IsFullheightWithNavbar style="width:100%;">
+<Hero IsMedium Color="Color.Info" IsBold IsFullheightWithNavbar>
     <HeroBody>
         <Container>
             <Title Size="Size.Size1">
@@ -28,6 +27,37 @@
     </HeroBody>
 </Hero>
 
+<Footer class="@B.Join("friendlink",B.BackgroundLight)">
+    <Container>
+        <Columns>
+            <Column>
+                <Title Size="Size.Size5">相关资源</Title>
+                <ul class="@B.PL4">
+                    <li class="@B.MB1"> <a target="_blank" href="https://bulma.io">bulma.io</a></li>
+                    <li class="@B.MB1"> <a target="_blank" href="https://wikiki.github.io">bulma-extensions</a></li>
+                    <li class="@B.MB1"> <a target="_blank" href="http://www.fontawesome.com.cn">fontawesome</a></li>
+                </ul>
+            </Column>
+            <Column>
+                 <Title Size="Size.Size5">友情链接</Title>
+                <ul class="@B.PL4">
+                    <li class="@B.MB1"> <a target="_blank" href="https://www.blazor.zone">Bootstrap Blazor</a></li>
+                    <li class="@B.MB1"> <a target="_blank" href="https://gitee.com/loogn/Loogn.OrmLite">Loogn.OrmLite</a></li>
+                    @* <li class="@B.MB1"> <a target="_blank" href="https://gitee.com/loogn/httpquartz">httpquartz</a></li> *@
+                    @* <li class="@B.MB1"> <a target="_blank" href="https://gitee.com/loogn/Autowired.Core">Autowired</a></li> *@
+                </ul>
+            </Column>
+            <Column>
+                 <Title Size="Size.Size5">加入我们</Title>
+                <ul class="@B.PL4">
+                    <li> <a target="_blank" href="###">QQ群号：995865650</a></li>
+                </ul>
+            </Column>
+            
+        </Columns>
+        
+    </Container>
+</Footer>
 @code{
 
 }

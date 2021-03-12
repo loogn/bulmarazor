@@ -2,7 +2,7 @@
 @inject IJSRuntime js
 
 <Control HasIconsRight>
-    <Input @ref="                    kwInput" class="@B.MB2" BindEvent="oninput" placeholder="Search Components" @bind-Value="kw" @onkeypress="inputHandle"/>
+    <Input @ref="kwInput" class="@B.MB2" BindEvent="oninput" placeholder="Search Components" @bind-Value="kw" @onkeypress="inputHandle"/>
     @if (kw.Length > 0)
     {
         <Icon IsRight IconClass="fa fa-times" class="@B.Clickable" @onclick="clear"></Icon>

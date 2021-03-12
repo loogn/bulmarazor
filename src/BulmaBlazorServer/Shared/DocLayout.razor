@@ -2,24 +2,30 @@
 @inherits LayoutComponentBase
 @layout MainLayout
 
-<div class="layoutMenu @B.HiddenMobile">
-    <div class="@B.PY4 @B.PX4 @B.PB6">
-        <NavMenu/>
+
+<div class="layoutPage">
+    
+    <div class="layoutMenu @B.HiddenMobile">
+        <div class="@B.PY4 @B.PX4 @B.PB6">
+            <NavMenu/>
+        </div>
     </div>
-</div>
-<div class="layoutContent" id="layoutContent">
-    <Button id="triggerQV" Color="Color.Primary" @onclick="toggleShow" style="position: fixed;z-index:9999" class="@B.Join(B.HiddenTablet)">
-        <Icon IconClass="fa fa-list-alt"></Icon><span>菜单</span>
-    </Button>
-    <Section>
-        @Body
-    </Section>
-</div>
-<Quickview @ref="qv"  TriggerSelector="#triggerQV" HeaderText="文档">
-    <div class="@B.PY4 @B.PX4 @B.PB6">
-        <NavMenu MenuClick="toggleShow"/>
+    <div class="layoutContent" id="layoutContent">
+        <Button id="triggerQV" Color="Color.Primary" @onclick="toggleShow" style="position: fixed;z-index:9999" class="@B.Join(B.HiddenTablet)">
+            <Icon IconClass="fa fa-list-alt"></Icon><span>菜单</span>
+        </Button>
+        <Section>
+            @Body
+        </Section>
     </div>
-</Quickview>
+    <Quickview @ref="qv" TriggerSelector="#triggerQV" HeaderText="文档">
+        <div class="@B.PY4 @B.PX4 @B.PB6">
+            <NavMenu MenuClick="toggleShow"/>
+        </div>
+    </Quickview>
+
+</div>
+
 
 @code{
 
@@ -29,6 +35,6 @@
     {
         qv.Toggle();
     }
-    
+
 
 }
