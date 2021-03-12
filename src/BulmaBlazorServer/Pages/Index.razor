@@ -3,7 +3,7 @@
 @inject BulmaRazorJsInterop jsInterop
 @inject IJSRuntime jsruntime
 
-<Hero IsMedium Color="Color.Info" IsBold IsFullheightWithNavbar>
+<Hero IsLarge Color="Color.Info" IsBold>
     <HeroBody>
         <Container>
             <Title Size="Size.Size1">
@@ -27,7 +27,7 @@
     </HeroBody>
 </Hero>
 
-<Footer class="@B.Join("friendlink",B.BackgroundLight)">
+<Footer>
     <Container>
         <Columns>
             <Column>
@@ -42,6 +42,7 @@
                  <Title Size="Size.Size5">友情链接</Title>
                 <ul class="@B.PL4">
                     <li class="@B.MB1"> <a target="_blank" href="https://www.blazor.zone">Bootstrap Blazor</a></li>
+                    <li class="@B.MB1"> <a target="_blank" href="https://antblazor.com">Ant Design Blazor</a></li>
                     <li class="@B.MB1"> <a target="_blank" href="https://gitee.com/loogn/Loogn.OrmLite">Loogn.OrmLite</a></li>
                     @* <li class="@B.MB1"> <a target="_blank" href="https://gitee.com/loogn/httpquartz">httpquartz</a></li> *@
                     @* <li class="@B.MB1"> <a target="_blank" href="https://gitee.com/loogn/Autowired.Core">Autowired</a></li> *@
