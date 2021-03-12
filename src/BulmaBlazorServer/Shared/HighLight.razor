@@ -45,14 +45,14 @@
     public bool HasMore { get; set; }
 
     private bool showMore;
-    private string GetStyle => "background-color: unset;padding:unset;" + ((showMore || !HasMore) ? "" : "max-height: "+MaxHeight+"px; overflow-y:auto");
+    private string GetStyle => "margin-bottom:0;background-color: unset;padding:unset;" + ((showMore || !HasMore) ? "" : "max-height: "+MaxHeight+"px; overflow-y:auto");
 
     private void ShowMore()
     {
         showMore = !showMore;
     }
 
-    protected async override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
         if (firstRender)

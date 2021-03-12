@@ -2,7 +2,6 @@
   {
     "outputFileName": "wwwroot/bulmarazor.min.css",
     "inputFiles": [
-      "wwwroot/css/bulma.css",
       "wwwroot/css/font-awesome.css",
       "wwwroot/css/tuieditor/codemirror.min.css",
       "wwwroot/css/tuieditor/toastui-editor.min.css"
