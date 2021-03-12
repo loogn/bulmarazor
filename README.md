@@ -22,6 +22,8 @@ Install-Package BulmaRazor
     ```
 - _Host.cshtml或者index.html中引入样式和脚本
     ```xml
+    <!--bulma.min.css可以使用自定义皮肤替换-->
+    <link href="_content/BulmaRazor/bulma.min.css" rel="stylesheet"/>
     <link href="_content/BulmaRazor/bulmarazor.min.css" rel="stylesheet" />
     <script src="_content/BulmaRazor/bulmarazor.min.js"></script>
     ```

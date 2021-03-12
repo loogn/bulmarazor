@@ -1,0 +1,121 @@
+﻿@page "/docs/overview/theme"
+@layout DocLayout
+
+<Title>自定义主题</Title>
+<Subtitle Size="Size.Size4">高度可定制样式</Subtitle>
+<hr>
+<Content>
+    <p>Bulma 是高度可定制的，这主要归功于分布在28个文件的419个Sass变量。BulmaRazor显然继承了这一优点</p>
+    <p>由于BulmaRazor中引用了其他的组件样式,所以这里单独维护了一个仓库，BulmaRazor-Theme仓库：</p>
+    <ul>
+        <li>
+            <a href="https://gitee.com/loogn/bulmarazor-theme" target="_blank">Gitee仓库</a>
+        </li>
+        <li>
+            <a href="https://github.com/loogn/bulmarazor-theme" target="_blank">Gighub仓库</a>
+        </li>
+    </ul>
+</Content>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>自定义步骤</Title>
+
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">1</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">clone样式仓库</Title>
+            <HighLight Language="powershell">git clone git@gitee.com:loogn/bulmarazor-theme.git</HighLight>
+        </MediaContent>
+    </Media>
+</Content>
+
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">2</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">安装打包依赖</Title>
+            <HighLight Language="powershell">npm install</HighLight>
+        </MediaContent>
+    </Media>
+</Content>
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">3</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">修改mybulma.sass</Title>
+            <Content>
+                具体变量参考 <a href="https://bulma.io/documentation/customize/variables/" target="_blank">官网文档</a>
+                或 <a href="https://bulma.zcopy.site/documentation/customize/variables/" target="_blank"></a> 中文网
+                <HighLight Language="css" HasMore>
+@@charset "utf-8";
+
+// 自定义开始
+// Set your brand colors
+$purple: #8A4D76;
+$pink: #FA7C91;
+$brown: #757763;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$family-sans-serif: sans-serif;
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $purple;
+$link: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$body-background-color: $beige-lighter;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+// 自定义结束
+
+@@import "bulma";
+                </HighLight>
+            </Content>
+
+        </MediaContent>
+    </Media>
+</Content>
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">4</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">构建自定义样式</Title>
+            <HighLight Language="powershell" >npm run buildmy</HighLight>
+        </MediaContent>
+    </Media>
+</Content>
+
+<Content>
+    <Media>
+        <MediaLeft>
+            <Title Size="Size.Size5">5</Title>
+        </MediaLeft>
+        <MediaContent>
+            <Title Size="Size.Size5">替换样式</Title>
+            <Content>
+                把构建的css/mybulma.min.css复制到自己的项目，替换引用bulma.min.css
+            </Content>
+        </MediaContent>
+    </Media>
+</Content>
+<hr>
+
+<Title Size="Size.Size4">效果预览</Title>
+<Image>
+    <img src="images/theme.png" alt="自定义主题"/>
+</Image>
