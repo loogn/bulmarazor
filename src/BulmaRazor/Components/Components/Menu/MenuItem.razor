@@ -1,77 +1,48 @@
 @namespace BulmaRazor.Components
 @inherits BulmaComponentBase
-
-
-<li @attributes="Attributes">
-    <a @attributes="AddAtts" class="@classes" @onclick="e=>HandleClick()">
+@inject BulmaRazorJsInterop JsInterop
+<li id="@Id" @attributes="Attributes" class="@classes">
+    <CascadingValue Value="this">
         @ChildContent
-    </a>
-
-    @if (SubMenuSlot != null)
-    {
-        <text>@SubMenuSlot</text>
-    }
+    </CascadingValue>
 </li>
 
 @code{
+    internal readonly string Id = "menuitem_" + Guid.NewGuid().ToString("N");
+
     string classes => CssBuilder.Default("")
         .AddClassFromAttributes(Attributes)
-        .AddClass("is-active", IsActive)
         .Build();
 
-    [Parameter]
-    public bool IsActive { get; set; }
+    internal MenuLink Title { get; set; }
 
-    private Dictionary<string, object> AddAtts = new();
-
-    [Parameter]
-    public string Href { get; set; }
-    [Parameter]
-    public string Target { get; set; }
-
-    public void Active(bool isActive)
-    {
-        if (isActive != IsActive)
-        {
-            IsActive = isActive;
-            StateHasChanged();
-        }
-    }
-
-    private Task HandleClick()
-    {
-        if (Parent != null)
-        {
-            return Parent.ClickItem(this);
-        }
-        return Task.CompletedTask;
-    }
+    internal MenuList SubList { get; set; }
 
     public int Index { get; set; }
 
     [CascadingParameter]
-    public Menu Parent { get; set; }
+    public MenuList ListParent { get; set; }
 
+    [CascadingParameter]
+    public Menu MenuParent { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public RenderFragment SubMenuSlot { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        Parent?.AddItem(this);
+        MenuParent?.AddItem(this);
+    }
 
-        if (Href.HasValue())
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender && ListParent != null)
         {
-            AddAtts.Add("href", Href);
-        }
-        if (Target.HasValue())
-        {
-            AddAtts.Add("target", Target);
+    // await JsInterop.CollapsibleAttach($"#{ListParent.Id}");
         }
     }
+
 }

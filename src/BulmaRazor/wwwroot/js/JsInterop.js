@@ -24,6 +24,21 @@ export function BindClickWithoutSelf(id, selector) {
     })
 }
 
+export function Toggle(id, speed) {
+    $("#" + id).toggle(speed);
+}
+
+export function SlideToggle(id, speed) {
+    $("#" + id).slideToggle(speed);
+}
+
+export function SlideDown(id, speed) {
+    $("#" + id).slideDown(speed);
+}
+
+export function SlideUp(id, speed) {
+    $("#" + id).slideUp(speed);
+}
 
 export function Prompt(message, defaultValue) {
     return prompt(message, defaultValue);

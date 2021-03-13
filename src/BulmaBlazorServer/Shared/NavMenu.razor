@@ -20,7 +20,9 @@
                            && (sub.Keywords.Any(x => x.StartsWith(kw.ToLower()))
                                || item.Keywords.Any(x => x.StartsWith(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
-                <MenuItem class="@cls" Href="@sub.Href">@sub.Label</MenuItem>
+                <MenuItem class="@cls" >
+                    <MenuLink href="@sub.Href">@sub.Label</MenuLink>
+                </MenuItem>
             }
         </MenuList>
     }

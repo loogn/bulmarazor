@@ -5,40 +5,56 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-    <Steps IsNarrow IsMedium IsCentered HasContentCentered>
-        <StepsSegment>
-            <StepsMarker>
-                <Icon IconClass="fa fa-shopping-cart"></Icon>
-            </StepsMarker>
-            <StepsContent>
-                <p class="heading">Shopping Cart</p>
-            </StepsContent>
-        </StepsSegment>
-        <StepsSegment>
-            <StepsMarker>
-                <Icon IconClass="fa fa-user"></Icon>
-            </StepsMarker>
-            <StepsContent>
-                <p class="heading">User Information</p>
-            </StepsContent>
-        </StepsSegment >
-        <StepsSegment IsActive HasGaps>
-            <StepsMarker>
-                <Icon IconClass="fa fa-usd"></Icon>
-            </StepsMarker>
-            <StepsContent>
-                <p class="heading">Payment</p>
-            </StepsContent>
-        </StepsSegment>
-        <StepsSegment>
-            <StepsMarker IsHollo>
-                <Icon IconClass="fa fa-check"></Icon>
-            </StepsMarker>
-            <StepsContent>
-                <p class="heading">Confirmation</p>
-            </StepsContent>
-        </StepsSegment>
-    </Steps>
+
+    <div style="width:200px">
+        <Menu>
+            <MenuList>
+                <MenuItem>
+                    <MenuTitle>第一级1</MenuTitle>
+                    <MenuList>
+                        <MenuItem>
+                            <MenuTitle>23323233</MenuTitle>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuTitle>
+                                23323233
+
+                            </MenuTitle>
+                            <MenuList>
+                                <MenuItem>
+                                    <MenuTitle>23323233</MenuTitle>
+                                </MenuItem>
+                                <MenuItem>
+                                    <MenuTitle>23323233</MenuTitle>
+                                </MenuItem>
+                                <MenuItem>
+                                    <MenuTitle>23323233</MenuTitle>
+                                </MenuItem>
+                            </MenuList>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuTitle>23323233</MenuTitle>
+                        </MenuItem>
+                    </MenuList>
+                </MenuItem>
+                <MenuItem>
+                    <MenuTitle>第一级2</MenuTitle>
+                    <MenuList>
+                        <MenuItem>
+                            <MenuTitle>aaa</MenuTitle>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuTitle>bbb</MenuTitle>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuTitle>ccc</MenuTitle>
+                        </MenuItem>
+                    </MenuList>
+                </MenuItem>
+            </MenuList>
+        </Menu>
+    </div>
+
 
     <div @onclick="divFun">
         sfafafsaf

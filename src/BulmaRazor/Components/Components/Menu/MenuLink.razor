@@ -1,0 +1,103 @@
+@namespace BulmaRazor.Components
+@using System.ComponentModel
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+@inject NavigationManager nm
+
+<a id="@Id" @attributes="Attributes" class="@classes" @onclick="e => HandleClick()">
+    @ChildContent
+
+    @if (ItemParent.SubList != null)
+    {
+        if (IsClose)
+        {
+            <Icon IconClass="fa fa-angle-right" class="@B.PulledRight"></Icon>
+        }
+        else
+        {
+            <Icon IconClass="fa fa-angle-down" class="@B.PulledRight"></Icon>
+        }
+    }
+</a>
+
+@code{
+
+    internal readonly string Id = "menutitle" + Guid.NewGuid().ToString("N");
+
+    string classes => CssBuilder.Default("")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("is-active", IsActive)
+        .Build();
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    [Parameter]
+    public bool IsClose { get; set; }
+
+    internal string Href { get; set; }
+
+    public void Active(bool isActive)
+    {
+        if (isActive != IsActive)
+        {
+            IsActive = isActive;
+            StateHasChanged();
+        }
+    }
+
+    private Task HandleClick()
+    {
+        if (ItemParent?.SubList != null)
+        {
+            if (IsClose)
+            {
+                JsInterop.SlideDown(ItemParent.SubList.Id, "normal");
+                IsClose = false;
+            }
+            else
+            {
+                JsInterop.SlideUp(ItemParent.SubList.Id, "normal");
+                IsClose = true;
+            }
+        }
+        else
+        {
+            if (MenuParent != null)
+            {
+                return MenuParent.ClickItem(ItemParent);
+            }
+        }
+        return Task.CompletedTask;
+    }
+
+    public int Index { get; set; }
+
+    [CascadingParameter]
+    public Menu MenuParent { get; set; }
+
+    [CascadingParameter]
+    public MenuItem ItemParent { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (ItemParent != null)
+        {
+            ItemParent.Title = this;
+        }
+        base.OnInitialized();
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (Attributes.TryGetValue("href", out object value))
+        {
+            Href = value.ToString();
+        }
+    }
+
+}

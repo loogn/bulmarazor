@@ -15,21 +15,37 @@
             <code>MenuLabel</code> 标签
         </li>
         <li>
-            <code>MenuList</code> 列表，可以嵌套2级（多级好像也可）
+            <code>MenuList</code> 列表，可以嵌套在MenuItem中，放在MenuLink下面
             <ul>
-                <li><code>MenuItem</code>项</li>
+                <li>
+                    <code>MenuItem</code>项
+                    <ul>
+                        <li><code>MenuLink</code>项</li>
+                    </ul>
+                </li>
             </ul>
         </li>
     </ul>
 </div>
 
-<Title Size="Size.Size4">例子</Title>
-<Content>直接看左侧菜单吧...</Content>
+
+<Title Size="Size.Size4">后台菜单</Title>
 <Columns>
-    <Column>
+    <Column class="@B.BackgroundLight">
+        <Menu2/>
+    </Column>
+    <Column IsNarrow Size="Size.Size8" style="overflow-x:auto;">
+        <HighLight FilePath="Pages/docs/components/menu/Menu2.razor" />
+    </Column>
+</Columns>
+
+<Title Size="Size.Size4">前台菜单</Title>
+<Columns>
+    <Column class="@B.BackgroundLight">
         <Menu1/>
     </Column>
     <Column IsNarrow Size="Size.Size8" style="overflow-x:auto;">
-        <HighLight FilePath="Pages/docs/components/menu/Menu1.razor"/>
+        <HighLight FilePath="Pages/docs/components/menu/Menu1.razor" />
     </Column>
 </Columns>
+<hr>

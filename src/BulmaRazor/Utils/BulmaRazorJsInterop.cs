@@ -85,6 +85,28 @@ namespace BulmaRazor.Components
 
         #region 公共
 
+        public async ValueTask Toggle(string id,object speed)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("Toggle", id,speed);
+        }
+        public async ValueTask SlideToggle(string id,object speed)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("SlideToggle", id,speed);
+        }
+        public async ValueTask SlideUp(string id,object speed)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("SlideUp", id,speed);
+        }
+        public async ValueTask SlideDown(string id,object speed)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("SlideDown", id,speed);
+        }
+        
+        
         public async ValueTask BindClickWithoutSelf(string id,string selector=null)
         {
             var module = await moduleTask.Value;

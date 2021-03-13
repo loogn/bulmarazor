@@ -2,7 +2,7 @@
 @inherits BulmaComponentBase
 @inject NavigationManager nm
 
-<aside @attributes="Attributes" class="@classes">
+<aside id="@Id" @attributes="Attributes" class="@classes">
     <CascadingValue Value="this" IsFixed="true">
         @ChildContent
     </CascadingValue>
@@ -10,9 +10,11 @@
 
 @code{
 
+    internal readonly string Id = "menu_" + Guid.NewGuid().ToString("N");
+
     string classes => CssBuilder.Default("menu")
-    .AddClassFromAttributes(Attributes)
-    .Build();
+        .AddClassFromAttributes(Attributes)
+        .Build();
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -21,6 +23,7 @@
 
 
     private int index = 0;
+
     public void AddItem(MenuItem item)
     {
         item.Index = index++;
@@ -30,15 +33,15 @@
     [Parameter]
     public EventCallback<MenuItem> OnItemClick { get; set; }
 
-    public async Task ClickItem(MenuItem currItem)
+    public async Task ClickItem(MenuItem menuItem)
     {
         foreach (var item in items)
         {
-            item.Active(item == currItem);
+            item.Title.Active(item == menuItem);
         }
         if (OnItemClick.HasDelegate)
         {
-            await OnItemClick.InvokeAsync(currItem);
+            await OnItemClick.InvokeAsync(menuItem);
         }
     }
 
@@ -46,10 +49,13 @@
     {
         foreach (var item in items)
         {
-            if (nm.Uri.EndsWith(item.Href, StringComparison.OrdinalIgnoreCase))
+            if (item?.Title?.Href != null)
             {
-                item.Active(true);
-                break;
+                if (nm.Uri.EndsWith(item.Title.Href ?? string.Empty, StringComparison.OrdinalIgnoreCase))
+                {
+                    item.Title.Active(true);
+                    break;
+                }
             }
         }
         base.OnAfterRender(firstRender);
