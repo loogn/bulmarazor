@@ -1,0 +1,86 @@
+@inherits BulmaComponentBase
+@namespace BulmaRazor.Components
+@* @inject BulmaRazorJsInterop JsInterop *@
+
+<ul id="@Id" @attributes="Attributes" class="@classes">
+    @ChildContent
+</ul>
+
+@code {
+
+    readonly string Id = "steps_" + Guid.NewGuid().ToString("N");
+
+    string classes => CssBuilder.Default("steps")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-thin", IsThin)
+        .AddClass("is-narrow", IsNarrow)
+        .AddClass("is-centered", IsCentered)
+        .AddClass("is-right", IsRight)
+        .AddClass("is-vertical", IsVertical)
+        .AddClass("is-horizontal", IsHorizontal)
+        .AddClass("is-short", IsShort)
+        .AddClass("is-hollow", IsHollow)
+        .AddClass("is-dashed", IsDashed)
+        .AddClass("has-gaps", HasGaps)
+        .AddClass("is-balanced", IsBalanced && !HasContentCentered)
+        .AddClass("has-content-centered", HasContentCentered)
+        .AddClass("has-content-above", HasContentAbove)
+        .Build();
+
+
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+    [Parameter]
+    public bool IsThin { get; set; }
+
+    [Parameter]
+    public bool IsNarrow { get; set; }
+
+    [Parameter]
+    public bool IsCentered { get; set; }
+
+    [Parameter]
+    public bool IsRight { get; set; }
+
+    [Parameter]
+    public bool IsVertical { get; set; }
+
+    [Parameter]
+    public bool IsHorizontal { get; set; }
+
+    [Parameter]
+    public bool IsShort { get; set; }
+
+    //是否空心
+    [Parameter]
+    public bool IsHollow { get; set; }
+
+    [Parameter]
+    public bool IsDashed { get; set; }
+
+    [Parameter]
+    public bool HasGaps { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool IsBalanced { get; set; }
+
+    [Parameter]
+    public bool HasContentCentered { get; set; }
+
+    [Parameter]
+    public bool HasContentAbove { get; set; }
+
+}

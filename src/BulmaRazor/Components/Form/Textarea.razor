@@ -1,5 +1,4 @@
 ﻿@namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 
@@ -70,7 +69,7 @@
     public EventCallback<string> ValueChanged { get; set; }
 
 
-    public async override Task SetParametersAsync(ParameterView parameters)
+    public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
     }

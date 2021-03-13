@@ -1,0 +1,30 @@
+@inherits BulmaComponentBase
+@namespace BulmaRazor.Components
+
+<li @attributes="Attributes" class="@classes">
+    @ChildContent
+</li>
+
+@code {
+
+
+    string classes => CssBuilder.Default("steps-segment")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("is-active", IsActive)
+        .AddClass("is-dashed", IsDashed)
+        .AddClass("has-gaps", HasGaps)
+        .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    [Parameter]
+    public bool IsDashed { get; set; }
+
+    [Parameter]
+    public bool HasGaps { get; set; }
+
+}

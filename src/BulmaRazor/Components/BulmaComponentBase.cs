@@ -15,7 +15,7 @@ namespace BulmaRazor.Components
             await base.SetParametersAsync(parameters);
             if (Attributes == null)
             {
-                Attributes = new Dictionary<string, object>();
+                Attributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             }
         }
 

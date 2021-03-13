@@ -1,0 +1,27 @@
+@inherits BulmaComponentBase
+@namespace BulmaRazor.Components
+
+<div @attributes="Attributes" class="@classes">
+    @ChildContent
+</div>
+
+
+@code {
+
+
+    string classes => CssBuilder.Default("extra-data")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("has-overflow-left", HasOverflowLeft)
+        .AddClass("has-overflow-right", HasOverflowRight)
+        .Build();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool HasOverflowLeft { get; set; }
+
+    [Parameter]
+    public bool HasOverflowRight { get; set; }
+
+}

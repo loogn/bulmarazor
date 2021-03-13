@@ -1,0 +1,26 @@
+@inherits BulmaComponentBase
+@namespace BulmaRazor.Components
+
+<div @attributes="Attributes" class="@classes">
+    @ChildContent
+</div>
+
+@code {
+
+
+    string classes => CssBuilder.Default("steps-content")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-divider-content", IsDividerContent)
+        .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool IsDividerContent { get; set; }
+
+}

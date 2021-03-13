@@ -32,13 +32,7 @@
         .AddClass("is-large", IsLarge)
         .Build();
 
-    string deleteClass => CssBuilder.Default("delete")
-        .AddClass("is-small", IsSmall)
-        .AddClass("is-medium", IsMedium)
-        .AddClass("is-large", IsLarge)
-        .Build();
-
-
+    
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 

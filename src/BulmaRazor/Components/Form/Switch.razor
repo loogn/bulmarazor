@@ -6,15 +6,38 @@
 <label for="@id">
     @if (Checked)
     {
-        @:@(OnSlot ?? ChildContent)
+        if (ChildContent != null)
+        {
+            @:@ChildContent 
+        }
+        else if (OnSlot != null)
+        {
+            @:@OnSlot 
+        }
+        else
+        {
+            @:@(OnLabel??Label)
+        }
     }
     else
     {
-        @:@(OffSlot ?? ChildContent) 
+        if (ChildContent != null)
+        {
+            @:@ChildContent 
+        }
+        else if (OffSlot != null)
+        {
+            @:@OffSlot 
+        }
+        else
+        {
+            @:@(OffLabel??Label)
+        } 
     }
 </label>
 
 @code {
+
 
     string classes => CssBuilder.Default("switch")
         .AddClassFromAttributes(Attributes)
@@ -77,6 +100,15 @@
 
     [Parameter]
     public bool Disabled { get; set; }
+
+    [Parameter]
+    public string OnLabel { get; set; }
+
+    [Parameter]
+    public string OffLabel { get; set; }
+
+    [Parameter]
+    public string Label { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
