@@ -15,12 +15,12 @@ else
     @:@RenderTable
 }
 <CascadingValue Value="this" IsFixed="true">
-    @ChildContent
+    @(ChildContent ?? ColumnsSlot)
 </CascadingValue>
 
 @code{
 
-    RenderFragment<DataTableColumn<TItem>> RenderHeaderContent => col =>
+    RenderFragment<DataTableColumn> RenderHeaderContent => col =>
         @<span>
             @if (col.ThSlot != null)
             {
@@ -40,12 +40,12 @@ else
                 <tr>
                     @foreach (var col in columns)
                     {
-                        <th class="@B.Join(col.ThClass, ThClass)" style="@B.JoinStyle(col.thStyle, ThStyle)">
+                        <th class="@B.Join(col.ThClass, ThClass)" style="@B.JoinStyle(col.ThStyle, ThStyle)">
 
                             @if (col.IsCheckBox)
                             {
-                                <CheckBox @ref="cball" TValue="string" OnCheckedChanged="CheckAllRows" Checked="col.checkedAll">
-                                   @RenderHeaderContent(col)
+                                <CheckBox @ref="                                        cball" TValue="string" OnCheckedChanged="CheckAllRows" Checked="col.CheckedAll">
+                                    @RenderHeaderContent(col)
                                 </CheckBox>
                             }
                             else
@@ -98,10 +98,11 @@ else
             @foreach (var row in dataView)
             {
                 if (row.IsHidden) continue;
-                DataTableColumn<TItem> expandColumn = null;
+                DataTableColumn expandColumn = null;
                 <tr class="@CssBuilder.Css(B.Selected, row.IsSelected)" @onclick="() => TrClick(row)">
                     @foreach (var col in columns)
                     {
+                        var tdContent = col.ChildContent ?? col.TdSlot;
                         <td class="@B.Join(col.TdClass, TdClass)" style="@B.JoinStyle(col.TdStyle, TdStyle)">
                             @if (col.IsIndex)
                             {
@@ -110,7 +111,7 @@ else
                             else if (col.IsCheckBox)
                             {
                                 <span>
-                                    <CheckBox TValue="string" OnCheckedChanged="b => CheckBoxClick(row, b)" @bind-Checked="@row.IsChecked">@col.ChildContent?.Invoke(row.Item)</CheckBox>
+                                    <CheckBox TValue="string" OnCheckedChanged="b => CheckBoxClick(row, b)" @bind-Checked="@row.IsChecked">@tdContent?.Invoke(row.Item)</CheckBox>
                                 </span>
                             }
                             else if (col.IsExpand)
@@ -127,18 +128,13 @@ else
                             }
                             else
                             {
-                                if (col.ChildContent != null)
+                                if (tdContent != null)
                                 {
-                                    @:@col.ChildContent(row.Item) 
-                                }
-                                else if (col.TdSlot != null)
-                                {
-                                    @:@col.TdSlot(row.Item)
+                                    @:@tdContent(row.Item)
                                 }
                                 else
                                 {
-                                    var field = row.Fields[col.Prop];
-                                    @:@field.ShowValue
+                                    @:@row.GetShowValue(col.Prop)
                                 }
                             }
                         </td>
@@ -148,10 +144,18 @@ else
                 {
                     <tr>
                         <td colspan="@columns.Count">
-                            @expandColumn.ExpandSlot(row.Item)
+                            @ExpandSlot(row.Item)
                         </td>
                     </tr>
                 }
+            }
+            @if (dataView.Count == 0 && EmptySlot != null)
+            {
+                <tr>
+                    <td class="@B.TextCentered"  colspan="@columns.Count">
+                        @EmptySlot
+                    </td>
+                </tr>
             }
             </tbody>
         </table>;

@@ -7,11 +7,11 @@
 <DataTable @ref="t1" Data="data" TdClass="@B.TextCentered" ThClass="@B.TextCentered" TItem="Person"
             IsNarrow IsHoverable IsBordered IsStriped IsFullwidth>
     <DataTableColumn Width="100px" TItem="Person" IsCheckBox/>
-    <DataTableColumn TItem="Person" Label="Id" Prop="Id"/>
-    <DataTableColumn TItem="Person" Label="名称" Prop="Name"/>
-    <DataTableColumn TItem="Person" Label="年龄" Prop="Age"/>
-    <DataTableColumn TItem="Person" Label="性别" Prop="Gender"/>
-    <DataTableColumn TItem="Person" Label="生日" Format="yyyy-MM-dd" Prop="Birthday"/>
+    <DataTableColumn Label="Id" Prop="Id"/>
+    <DataTableColumn Label="名称" Prop="Name"/>
+    <DataTableColumn Label="年龄" Prop="Age"/>
+    <DataTableColumn Label="性别" Prop="Gender"/>
+    <DataTableColumn Label="生日" Format="yyyy-MM-dd" Prop="Birthday"/>
 </DataTable>
 <Pagination TotalCount="@totalCount" PageIndex="pageIndex" PageSize="pageSize" OnPageChange="onPage"
             NextText="下一页" PrevText="上一页" IsCentered IsSmall/>

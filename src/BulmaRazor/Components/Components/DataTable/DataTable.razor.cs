@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
-    public partial class DataTable<TItem> where TItem : new()
+    public partial class DataTable<TItem> : IDataTable where TItem : new()
     {
         #region 私有变量
+
         string classes => CssBuilder.Default("table")
             .AddClassFromAttributes(Attributes)
             .AddClass("is-bordered", IsBordered)
@@ -20,20 +21,21 @@ namespace BulmaRazor.Components
             .AddClass("is-hoverable", IsHoverable)
             .AddClass("is-fullwidth", IsFullwidth)
             .Build();
-        
+
         private List<DataTableRow<TItem>> dataView; //数据视图
 
-        private List<DataTableColumn<TItem>> columns = new(); //列集合
+        private List<DataTableColumn> columns = new(); //列集合
 
         private int colIndex = 0; //列索引
 
         private TItem selectedItem; //选中的当前项
-        private DataTableColumn<TItem> sortColumn; //当前排序列
+        internal HashSet<TItem> CheckItemSet { get; set; }
+        private DataTableColumn sortColumn; //当前排序列
         private TypeCachedInfo<TItem> typeCachedInfo = TypeCachedDict.GetTypeCachedInfo<TItem>();
-        private DataTableColumn<TItem> checkColumn = null; //复选列
+        private DataTableColumn checkColumn = null; //复选列
         private CheckBox<string> cball; //全选复选框
         private List<DataTableRow<TItem>> checkedRows = new(); //复选中的行
-        
+
         #endregion
 
 
@@ -118,6 +120,24 @@ namespace BulmaRazor.Components
         public RenderFragment ChildContent { get; set; }
 
         /// <summary>
+        /// 子内容
+        /// </summary>
+        [Parameter]
+        public RenderFragment ColumnsSlot { get; set; }
+
+        /// <summary>
+        /// 详细行
+        /// </summary>
+        [Parameter]
+        public RenderFragment<TItem> ExpandSlot { get; set; }
+        
+        /// <summary>
+        /// 空数据显示
+        /// </summary>
+        [Parameter]
+        public RenderFragment EmptySlot { get; set; }
+
+        /// <summary>
         /// 数据源
         /// </summary>
 
@@ -128,7 +148,7 @@ namespace BulmaRazor.Components
         /// 排序事件回调
         /// </summary>
         [Parameter]
-        public EventCallback<DataTableColumn<TItem>> OnSortChange { get; set; }
+        public EventCallback<DataTableColumn> OnSortChange { get; set; }
 
         /// <summary>
         /// 是否可选中
@@ -152,42 +172,47 @@ namespace BulmaRazor.Components
 
 
         #region 私有方法
-        internal void AddColumns(DataTableColumn<TItem> column)
+
+        public void AddColumns(DataTableColumn column)
         {
             column.Index = colIndex++;
             columns.Add(column);
             if (column.IsCheckBox)
             {
                 checkColumn = column;
+                CheckItemSet = new HashSet<TItem>();
             }
 
-            foreach (var dv in dataView)
+            foreach (var row in dataView)
             {
-                var field = new DataTableRowField()
-                {
-                    Prop = column.Prop,
-                };
-                if (column.Prop.HasValue())
-                {
-                    TypeCachedInfo<TItem>.Accessor accessor = typeCachedInfo.GetAccessor(column.Prop);
-                    field.Value = accessor.Get(dv.Item);
-                    field.Type = accessor.prop.PropertyType;
-                    field.ShowValue = ExtendMethods.GetShowValue(field.Type, field.Value, column.Format);
-                    column.AllFilters.Add(field.ShowValue);
-                }
-
-                dv.Fields.Add(column.Prop ?? "index_" + column.Index, field);
+                AddRowFields(row, column);
             }
 
             StateHasChanged();
         }
 
-        string getSortIconClass(DataTableColumn<TItem> column)
+        private void AddRowFields(DataTableRow<TItem> row, DataTableColumn column)
+        {
+            if (column.Prop.HasValue())
+            {
+                var field = new DataTableRowField();
+                TypeCachedInfo<TItem>.Accessor accessor = typeCachedInfo.GetAccessor(column.Prop);
+                field.Value = accessor.Get(row.Item);
+                field.Type = accessor.prop.PropertyType;
+                field.ShowValue = ExtendMethods.GetShowValue(field.Type, field.Value, column.Format);
+                column.AllFilters.Add(field.ShowValue);
+
+                row.Fields.Add(column.Prop, field);
+            }
+        }
+
+
+        string getSortIconClass(DataTableColumn column)
         {
             return column == sortColumn ? Color.ToTextColor() : "has-text-grey-lighter";
         }
 
-        string getSortIconClassName(DataTableColumn<TItem> column)
+        string getSortIconClassName(DataTableColumn column)
         {
             if (column == sortColumn)
             {
@@ -201,7 +226,7 @@ namespace BulmaRazor.Components
         /// 排序方法
         /// </summary>
         /// <param name="column"></param>
-        private void Sort(DataTableColumn<TItem> column)
+        private void Sort(DataTableColumn column)
         {
             if (sortColumn == column)
             {
@@ -238,18 +263,18 @@ namespace BulmaRazor.Components
         {
             if (isck)
             {
-                checkColumn.CheckItemSet.Add(row.Item);
+                CheckItemSet.Add(row.Item);
             }
             else
             {
-                checkColumn.CheckItemSet.Remove(row.Item);
+                CheckItemSet.Remove(row.Item);
             }
 
             DealView();
             OnChecked.InvokeAsync(row);
         }
-        
-        string getFilterIconClass(DataTableColumn<TItem> column)
+
+        string getFilterIconClass(DataTableColumn column)
         {
             return B.Join(B.Clickable, column.Filters.Any() ? Color.ToTextColor() : "has-text-grey-lighter");
         }
@@ -258,19 +283,19 @@ namespace BulmaRazor.Components
         /// 过滤方法
         /// </summary>
         /// <param name="column"></param>
-        private void Filter(DataTableColumn<TItem> column)
+        private void Filter(DataTableColumn column)
         {
             column.FilterShow = false;
             DealView();
         }
 
-        private void ResetFilter(DataTableColumn<TItem> column)
+        private void ResetFilter(DataTableColumn column)
         {
             column.Filters = new HashSet<string>();
             column.FilterShow = false;
             DealView();
         }
-        
+
         private void DealView()
         {
             //处理排序
@@ -296,7 +321,7 @@ namespace BulmaRazor.Components
                 //处理选中
                 if (checkColumn != null)
                 {
-                    dv.IsChecked = checkColumn.CheckItemSet.Contains(dv.Item);
+                    dv.IsChecked = CheckItemSet.Contains(dv.Item);
                     if (dv.IsChecked) ckCount++;
                 }
 
@@ -323,16 +348,16 @@ namespace BulmaRazor.Components
                 if (ckCount == dataView.Count)
                 {
                     cball?.SetIndeterminate(false);
-                    checkColumn.checkedAll = true;
+                    checkColumn.CheckedAll = true;
                 }
                 else if (ckCount == 0)
                 {
-                    checkColumn.checkedAll = false;
+                    checkColumn.CheckedAll = false;
                     cball?.SetIndeterminate(false);
                 }
                 else
                 {
-                    checkColumn.checkedAll = false;
+                    checkColumn.CheckedAll = false;
                     cball?.SetIndeterminate();
                 }
             }
@@ -360,32 +385,18 @@ namespace BulmaRazor.Components
             {
                 foreach (var item in Data)
                 {
-                    var dv = new DataTableRow<TItem>()
+                    var row = new DataTableRow<TItem>()
                     {
                         IsSelected = ReferenceEquals(item, selectedItem),
                         Index = index++,
-                        Item = item,
-                        Fields = new Dictionary<string, DataTableRowField>()
+                        Item = item
                     };
                     foreach (var column in columns)
                     {
-                        var field = new DataTableRowField()
-                        {
-                            Prop = column.Prop,
-                        };
-                        if (column.Prop.HasValue())
-                        {
-                            TypeCachedInfo<TItem>.Accessor accessor = typeCachedInfo.GetAccessor(column.Prop);
-                            field.Value = accessor.Get(dv.Item);
-                            field.Type = accessor.prop.PropertyType;
-                            field.ShowValue = ExtendMethods.GetShowValue(field.Type, field.Value, column.Format);
-                            column.AllFilters.Add(field.ShowValue);
-                        }
-
-                        dv.Fields.Add(column.Prop ?? "field_" + column.Index, field);
+                        AddRowFields(row, column);
                     }
 
-                    dataView.Add(dv);
+                    dataView.Add(row);
                 }
             }
 
@@ -403,13 +414,13 @@ namespace BulmaRazor.Components
             {
                 foreach (var dv in dataView)
                 {
-                    if (checkColumn.CheckItemSet.Contains(dv.Item))
+                    if (CheckItemSet.Contains(dv.Item))
                     {
-                        checkColumn.CheckItemSet.Remove(dv.Item);
+                        CheckItemSet.Remove(dv.Item);
                     }
                     else
                     {
-                        checkColumn.CheckItemSet.Add(dv.Item);
+                        CheckItemSet.Add(dv.Item);
                     }
                 }
 
@@ -427,13 +438,13 @@ namespace BulmaRazor.Components
             {
                 if (allData)
                 {
-                    checkColumn.CheckItemSet.Clear();
+                    CheckItemSet.Clear();
                 }
                 else
                 {
                     foreach (var dv in dataView)
                     {
-                        checkColumn.CheckItemSet.Remove(dv.Item);
+                        CheckItemSet.Remove(dv.Item);
                     }
                 }
             }
@@ -451,11 +462,11 @@ namespace BulmaRazor.Components
             {
                 if (cked)
                 {
-                    checkColumn.CheckItemSet.Add(dv.Item);
+                    CheckItemSet.Add(dv.Item);
                 }
                 else
                 {
-                    checkColumn.CheckItemSet.Remove(dv.Item);
+                    CheckItemSet.Remove(dv.Item);
                 }
 
                 DealView();
@@ -479,7 +490,7 @@ namespace BulmaRazor.Components
         {
             if (allData)
             {
-                return checkColumn?.CheckItemSet.ToList();
+                return CheckItemSet.ToList();
             }
             else
             {

@@ -1,20 +1,22 @@
 <DataTable Data="data" TItem="Person" IsNarrow IsHoverable
            IsBordered IsStriped IsFullwidth>
-    <DataTableColumn TItem="Person" IsExpand>
-        <ExpandSlot>
-            <Box>
-                <Title>详细行：</Title>
-                <p>名称：@context.Name </p>
-                <p>年龄：@context.Age </p>
-                <p>生日：@context.Birthday.ToString("yyyy-MMMM-dd") </p>
-            </Box>
-        </ExpandSlot>
-    </DataTableColumn>
-    <DataTableColumn TItem="Person" Label="Id" Prop="Id"/>
-    <DataTableColumn TItem="Person" Label="名称" Prop="Name"/>
-    <DataTableColumn TItem="Person" Label="年龄" Prop="Age"/>
-    <DataTableColumn TItem="Person" Label="性别" Prop="Gender"/>
-    <DataTableColumn TItem="Person" Label="生日" Format="yyyy-MM-dd HH:mm" Prop="Birthday"/>
+    <ColumnsSlot>
+        <DataTableColumn  IsExpand/>
+        <DataTableColumn Label="Id" Prop="Id"/>
+        <DataTableColumn Label="名称" Prop="Name"/>
+        <DataTableColumn Label="年龄" Prop="Age"/>
+        <DataTableColumn Label="性别" Prop="Gender"/>
+        <DataTableColumn Label="生日" Format="yyyy-MM-dd HH:mm" Prop="Birthday"/>
+    </ColumnsSlot>
+
+    <ExpandSlot>
+        <Box>
+            <Title>详细行：</Title>
+            <p>名称：@context.Name </p>
+            <p>年龄：@context.Age </p>
+            <p>生日：@context.Birthday.ToString("yyyy-MMMM-dd") </p>
+        </Box>
+    </ExpandSlot>
 </DataTable>
 <Pagination TotalCount="@totalCount" PageIndex="pageIndex" PageSize="pageSize" OnPageChange="onPage"
             NextText="下一页" PrevText="上一页" IsCentered IsSmall/>
