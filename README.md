@@ -78,6 +78,7 @@ Install-Package BulmaRazor
 	- Panel :			☆☆☆☆☆
     - Tabs :	☆☆☆☆	
     - Timeline :	☆☆☆☆
+    - Steps :	☆☆☆☆
     - Collapse:     ☆☆☆☆
 - Elements
 	- Block :			☆☆☆☆☆

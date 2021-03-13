@@ -10,12 +10,9 @@
 
     string classes => CssBuilder.Default("steps-content")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
         .AddClass("is-divider-content", IsDividerContent)
         .Build();
 
-    [Parameter]
-    public Color Color { get; set; } = Color.Default;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

@@ -13,16 +13,21 @@ else
         @ChildContent
     </span>
 }
+
 @code {
 
 
     string classes => CssBuilder.Default("steps-marker")
         .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
         .AddClass("is-hollow", IsHollow)
         .Build();
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+    
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
 
     [Parameter]
     public bool IsHollow { get; set; }
@@ -34,4 +39,5 @@ else
         await base.SetParametersAsync(parameters);
         hasHref = Attributes.ContainsKey("href");
     }
+
 }
