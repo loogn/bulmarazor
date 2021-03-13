@@ -7,9 +7,9 @@
         @ChildContent
     </a>
 
-    @if (NestedSlot != null)
+    @if (SubMenuSlot != null)
     {
-        <text>@NestedSlot</text>
+        <text>@SubMenuSlot</text>
     }
 </li>
 
@@ -36,7 +36,6 @@
             IsActive = isActive;
             StateHasChanged();
         }
-
     }
 
     private Task HandleClick()
@@ -58,7 +57,7 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public RenderFragment NestedSlot { get; set; }
+    public RenderFragment SubMenuSlot { get; set; }
 
     protected override void OnInitialized()
     {
