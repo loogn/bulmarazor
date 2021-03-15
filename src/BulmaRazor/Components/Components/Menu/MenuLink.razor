@@ -52,12 +52,12 @@
         {
             if (IsClose)
             {
-                JsInterop.SlideDown(ItemParent.SubList.Id, "normal");
+                JsInterop.SlideDown(ItemParent.SubList.Id, "fast");
                 IsClose = false;
             }
             else
             {
-                JsInterop.SlideUp(ItemParent.SubList.Id, "normal");
+                JsInterop.SlideUp(ItemParent.SubList.Id, "fast");
                 IsClose = true;
             }
         }
