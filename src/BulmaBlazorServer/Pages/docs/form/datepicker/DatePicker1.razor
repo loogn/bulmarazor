@@ -1,7 +1,14 @@
 dt:<span>@(dt?.ToString("yyyy-MM-dd"))</span><br>
-<DatePicker @bind-Value="dt" Options="opt"></DatePicker>
+<DatePicker Color="Color.Danger" @bind-Value="dt" Options="opt"></DatePicker>
 
 @code {
     DateTime? dt;
-    CalenderOptions opt = new() {Color = Color.Danger};
+
+    DatePickerOptions opt = new()
+    {
+        StartDate = DateTime.Now.AddDays(-2),
+        EndDate = DateTime.Now.AddDays(30),
+        DatesDisabled = new[] {DateTime.Now.AddDays(1), DateTime.Now.AddDays(2)}
+    };
+
 }

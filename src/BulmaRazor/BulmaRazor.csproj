@@ -26,4 +26,8 @@
             <PackagePath></PackagePath>
         </None>
     </ItemGroup>
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\calendar\bulma-calendar-export.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\calendar\bulma-calendar.js" />
+    </ItemGroup>
 </Project>

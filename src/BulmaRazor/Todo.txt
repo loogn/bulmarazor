@@ -1,11 +1,13 @@
+日期选择：
+http://foundation-datepicker.peterbeno.com/
 
-calendar 文档，参数整理
 toast 文档，参数
+
+colorpicker
+https://www.jq22.com/jquery-info22179
 
 carousel
 https://bulma-carousel.onrender.com/
-
-
 
 ribbon
 https://github.com/Wikiki/bulma-ribbon

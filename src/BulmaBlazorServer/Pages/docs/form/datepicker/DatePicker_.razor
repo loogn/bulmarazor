@@ -10,8 +10,7 @@
 
 <div class="content">
     <p>
-        该控件是使用bulma-calendar插件，https://github.com/Wikiki/bulma-calendar,
-        该插件有bug，目前只能支持日期选择
+        移植于http://foundation-datepicker.peterbeno.com
     </p>
 </div>
 
@@ -25,7 +24,7 @@
 </Columns>
 
 <Title Size="Size.Size4" IsSpaced>
-    日期范围
+    时间选择
 </Title>
 <Columns>
     <Column>
@@ -40,52 +39,93 @@
     Options参数
 </Title>
 
-<DataTable TItem="ParamsInfo" Data="data" IsBordered IsHoverable>
-    <DataTableColumn TItem="ParamsInfo" Label="参数名" Prop="Name"></DataTableColumn>
-    <DataTableColumn TItem="ParamsInfo" Label="类型" Prop="Type"></DataTableColumn>
-    <DataTableColumn TItem="ParamsInfo" Label="描述" Prop="Desc"></DataTableColumn>
-    <DataTableColumn TItem="ParamsInfo" Label="默认值" Prop="Default"></DataTableColumn>
-</DataTable>
+<Table IsBordered IsStriped IsHoverable>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Format</td>
+        <td>string</td>
+        <td>'yyyy-MM-dd'</td>
+        <td>the date format, combination of yyyy-MM-dd HH:mm</td>
+    </tr>
+    <tr>
+        <td>Language</td>
+        <td>string</td>
+        <td>'zh-CN'</td>
+        <td>en | zh-CN</td>
+    </tr>
+    <tr>
+        <td>WeekStart</td>
+        <td>integer</td>
+        <td>0</td>
+        <td>day of the week start. 0 for Sunday - 6 for Saturday</td>
+    </tr>
+    <tr>
+        <td>StartView</td>
+        <td>integer</td>
+        <td>month</td>
+        <td>set the start view mode. Accepts: 'decade' = 4, 'year' = 3, 'month' = 2, 'day' = 1, 'hour' = 0</td>
+    </tr>
+    <tr>
+        <td>MinView|MaxView</td>
+        <td>integer</td>
+        <td></td>
+        <td>set a limit for view mode. Accepts: 'decade' = 4, 'year' = 3, 'month' = 2, 'day' = 1, 'hour' = 0</td>
+    </tr>
+    <tr>
+        <td>PickTime</td>
+        <td>boolean</td>
+        <td>false</td>
+        <td>enables hour and minute selection views, equivalent of minView = 0, else minView = 2</td>
+    </tr>
+    <tr>
+        <td>InitialDate</td>
+        <td>date string</td>
+        <td>null</td>
+        <td>sets initial date. The same effect can be achieved with value attribute on input element.</td>
+    </tr>
+    <tr>
+        <td>StartDate</td>
+        <td>date</td>
+        <td>-Infinity</td>
+        <td>disables all dates before given date</td>
+    </tr>
+    <tr>
+        <td>EndDate</td>
+        <td>date</td>
+        <td>Infinity</td>
+        <td>disables all dates after given date</td>
+    </tr>
+    <tr>
+        <td>KeyboardNavigation</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>with input fields, allows to navigate the datepicker with arrows. However, it disables navigation inside the input itself, too</td>
+    </tr>
+    <tr>
+        <td>DaysOfWeekDisabled</td>
+        <td>Array of integers</td>
+        <td>[]</td>
+        <td>disables all dates matching the given days of week (0 = Sunday, 6 = Saturday)</td>
+    </tr>
+    <tr>
+        <td>DatesDisabled</td>
+        <td>Array of date </td>
+        <td>[]</td>
+        <td>disables the specified dates</td>
+    </tr>
+    </tbody>
+</Table>
 
 @code{
 
-    private List<ParamsInfo> data = new()
-    {
-        new() {Name = "Color", Type = "Color", Default = "Color.Primary", Desc = "Picker dominant color"},
-        new() {Name = "IsRange", Type = "bool", Default = "false", Desc = "Range capability"},
-        new() {Name = "AllowSameDayRange", Type = "bool", Default = "true", Desc = "Possibility to select same date as start and end date in range mode"},
-        new() {Name = "Lang", Type = "string", Default = "zh_cn", Desc = "Display lang (from language supported by date-fns),https://date-fns.org/v1.29.0/docs/I18n#supported-languages"},
-        new() {Name = "DateFormat", Type = "string", Default = "yyyy-MM-dd", Desc = "Date format pattern"},
-        new() {Name = "TimeFormat", Type = "string", Default = "HH:mm", Desc = "Time format pattern"},
-        new() {Name = "DisplayMode", Type = "string", Default = "default", Desc = "Display mode: default|dialog|inline	default"},
-        new() {Name = "Position", Type = "string", Default = "auto", Desc = "position"},
-        new() {Name = "ShowHeader", Type = "bool", Default = "true", Desc = "Show/Hide header block (with current selection)"},
-        new() {Name = "HeaderPosition", Type = "string", Default = "top", Desc = "Header block position: top|bottom"},
-        new() {Name = "ShowFooter", Type = "bool", Default = "true", Desc = "Show/Hide footer block"},
-        new() {Name = "ShowButtons", Type = "bool", Default = "true", Desc = "Show/Hide buttons"},
-        new() {Name = "ShowTodayButton", Type = "bool", Default = "true", Desc = "Show/Hide Today Button"},
-        new() {Name = "ShowClearButton", Type = "bool", Default = "true", Desc = "Show/Hide Clear Button"},
-        new() {Name = "CancelLabel", Type = "string", Default = "取消", Desc = "Cancel button label"},
-        new() {Name = "TodayLabel", Type = "string", Default = "今天", Desc = "Today button label"},
-        new() {Name = "NowLabel", Type = "string", Default = "现在", Desc = "Now button label"},
-        new() {Name = "ValidateLabel", Type = "string", Default = "确认", Desc = "Validate button label"},
-        new() {Name = "EnableMonthSwitch", Type = "bool", Default = "true", Desc = "Enable/disable month switch"},
-        new() {Name = "EnableYearSwitch", Type = "bool", Default = "true", Desc = "Enable/disable year switch"},
-        new() {Name = "StartDate", Type = "DateTime?", Default = "null", Desc = "Pre-selected start date"},
-        new() {Name = "EndDate", Type = "DateTime?", Default = "null", Desc = "Pre-selected end date"},
-        new() {Name = "MinDate", Type = "DateTime?", Default = "null", Desc = "Minimum date allowed"},
-        new() {Name = "MaxDate", Type = "DateTime?", Default = "null", Desc = "Maximum date allowed"},
-        new() {Name = "DisabledDates", Type = "IEnumerable<DateTime>", Default = "null", Desc = "List of disabled dates"},
-        new() {Name = "DisabledWeekDays", Type = "IEnumerable<DateTime>", Default = "null", Desc = "List of disabled week days"},
-        new() {Name = "WeekStart", Type = "IEnumerable<DateTime>", Default = "0", Desc = "Default weekstart day number (sunday by default)"},
-        // new() {Name = "StartTime", Type = "TimeSpan?", Default = "0", Desc = "Pre-selected start time"},
-        // new() {Name = "EndTime", Type = "TimeSpan?", Default = "0", Desc = "Pre-selected end time"},
-        new() {Name = "MinuteSteps", Type = "int", Default = "5", Desc = "Steps for minutes selector"},
-        new() {Name = "LabelFrom", Type = "string", Default = "", Desc = "From label placeholder "},
-        new() {Name = "LabelTo", Type = "string", Default = "", Desc = "To label placeholder "},
-        new() {Name = "CloseOnOverlayClick", Type = "bool", Default = "true", Desc = "Close picker on overlay click (only for dialog display style)"},
-        new() {Name = "CloseOnSelect", Type = "bool", Default = "true", Desc = "Automatically close the datePicker when date selected (or range date selected)"},
-        new() {Name = "ToggleOnInputClick", Type = "bool", Default = "true", Desc = "Automatically open datepicker when click into input element"},
-    };
+
 
 }

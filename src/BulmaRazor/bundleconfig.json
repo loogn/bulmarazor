@@ -8,13 +8,6 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/calendar.min.js",
-    "inputFiles": [
-      "wwwroot/jsplugin/calendar/bulma-calendar.js",
-      "wwwroot/jsplugin/calendar/bulma-calendar-export.js"
-    ]
-  },
-  {
     "outputFileName": "wwwroot/js/collapsible.min.js",
     "inputFiles": [
       "wwwroot/jsplugin/collapsible/bulma-collapsible.min.js",
@@ -42,8 +35,7 @@
     "minify": {
       "enabled": false
     }
-  }
-,
+  },
   {
     "outputFileName": "wwwroot/js/tuieditor.min.js",
     "inputFiles": [
@@ -54,12 +46,21 @@
       "enabled": false
     }
   },
-
   {
     "outputFileName": "wwwroot/bulmarazor.min.js",
     "inputFiles": [
       "wwwroot/js/jquery-3.6.0.min.js",
       "wwwroot/js/project.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/fdatepicker.min.js",
+    "inputFiles": [
+      "wwwroot/jsplugin/fdatepicker/foundation-datepicker.js",
+      "wwwroot/jsplugin/fdatepicker/foundation-datepicker-export.js"
     ],
     "minify": {
       "enabled": false

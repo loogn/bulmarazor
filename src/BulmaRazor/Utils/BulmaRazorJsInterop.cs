@@ -9,21 +9,18 @@ namespace BulmaRazor.Components
     public class BulmaRazorJsInterop : IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
-        private readonly Lazy<Task<IJSObjectReference>> calendarModuleTask;
+
         private readonly Lazy<Task<IJSObjectReference>> toastModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> collapsibleModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> tagsInputModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> tuiEditorModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> fdatepickerModuleTask;
 
         public BulmaRazorJsInterop(IJSRuntime jsRuntime)
         {
             //公共js
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/JsInterop.js").AsTask());
-
-            //calendar
-            calendarModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
-                "import", "./_content/BulmaRazor/js/calendar.min.js").AsTask());
 
             //toast
             toastModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
@@ -39,16 +36,19 @@ namespace BulmaRazor.Components
             //collapsible
             tuiEditorModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/tuieditor.min.js").AsTask());
+
+
+            //fdatepickerModuleTask
+            fdatepickerModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/js/fdatepicker.min.js").AsTask());
         }
 
-        // 日历
-        public async ValueTask<IJSObjectReference> CalendarAttach(string id, CalenderOptions options = null)
+        //fdatepicker
+        public async ValueTask<IJSObjectReference> DatePickerInit(string id, DatePickerOptions options)
         {
-            options ??= new CalenderOptions();
-            var module = await calendarModuleTask.Value;
-            return await module.InvokeAsync<IJSObjectReference>("attach", "#" + id,
-                options.ToParams()
-            );
+            options ??= new DatePickerOptions();
+            var module = await fdatepickerModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("init", "#" + id, options.ToParams());
         }
 
         // 折叠面板
@@ -76,6 +76,7 @@ namespace BulmaRazor.Components
         {
             return ToastShow(new ToastOptions() {Message = message});
         }
+
         //editor
         public async ValueTask<IJSObjectReference> TuiEditorInit(TuiEditorOptions options)
         {
@@ -85,33 +86,37 @@ namespace BulmaRazor.Components
 
         #region 公共
 
-        public async ValueTask Toggle(string id,object speed)
+        public async ValueTask Toggle(string id, object speed)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("Toggle", id,speed);
+            await module.InvokeVoidAsync("Toggle", id, speed);
         }
-        public async ValueTask SlideToggle(string id,object speed)
+
+        public async ValueTask SlideToggle(string id, object speed)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("SlideToggle", id,speed);
+            await module.InvokeVoidAsync("SlideToggle", id, speed);
         }
-        public async ValueTask SlideUp(string id,object speed)
+
+        public async ValueTask SlideUp(string id, object speed)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("SlideUp", id,speed);
+            await module.InvokeVoidAsync("SlideUp", id, speed);
         }
-        public async ValueTask SlideDown(string id,object speed)
+
+        public async ValueTask SlideDown(string id, object speed)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("SlideDown", id,speed);
+            await module.InvokeVoidAsync("SlideDown", id, speed);
         }
-        
-        
-        public async ValueTask BindClickWithoutSelf(string id,string selector=null)
+
+
+        public async ValueTask BindClickWithoutSelf(string id, string selector = null)
         {
             var module = await moduleTask.Value;
-            await module.InvokeVoidAsync("BindClickWithoutSelf", id,selector);
+            await module.InvokeVoidAsync("BindClickWithoutSelf", id, selector);
         }
+
         public async ValueTask<string> Prompt(string message, string defValue)
         {
             var module = await moduleTask.Value;
@@ -159,11 +164,6 @@ namespace BulmaRazor.Components
                 await module.DisposeAsync();
             }
 
-            if (calendarModuleTask.IsValueCreated)
-            {
-                var module = await calendarModuleTask.Value;
-                await module.DisposeAsync();
-            }
 
             if (toastModuleTask.IsValueCreated)
             {

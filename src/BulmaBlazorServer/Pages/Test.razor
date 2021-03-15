@@ -5,78 +5,25 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-
-    <div style="width:200px">
-        <Menu>
-            <MenuList>
-                <MenuItem>
-                    <MenuTitle>第一级1</MenuTitle>
-                    <MenuList>
-                        <MenuItem>
-                            <MenuTitle>23323233</MenuTitle>
-                        </MenuItem>
-                        <MenuItem>
-                            <MenuTitle>
-                                23323233
-
-                            </MenuTitle>
-                            <MenuList>
-                                <MenuItem>
-                                    <MenuTitle>23323233</MenuTitle>
-                                </MenuItem>
-                                <MenuItem>
-                                    <MenuTitle>23323233</MenuTitle>
-                                </MenuItem>
-                                <MenuItem>
-                                    <MenuTitle>23323233</MenuTitle>
-                                </MenuItem>
-                            </MenuList>
-                        </MenuItem>
-                        <MenuItem>
-                            <MenuTitle>23323233</MenuTitle>
-                        </MenuItem>
-                    </MenuList>
-                </MenuItem>
-                <MenuItem>
-                    <MenuTitle>第一级2</MenuTitle>
-                    <MenuList>
-                        <MenuItem>
-                            <MenuTitle>aaa</MenuTitle>
-                        </MenuItem>
-                        <MenuItem>
-                            <MenuTitle>bbb</MenuTitle>
-                        </MenuItem>
-                        <MenuItem>
-                            <MenuTitle>ccc</MenuTitle>
-                        </MenuItem>
-                    </MenuList>
-                </MenuItem>
-            </MenuList>
-        </Menu>
-    </div>
-
+    <DatePicker @bind-Value="dt" Options="options"></DatePicker>
 
     <div @onclick="divFun">
         sfafafsaf
         <button @onclick="load" @onclick:stopPropagation="false">Load</button>
     </div>
 
-    <Button @onclick="showMarkdown">ShowMarkdown</Button>
-
-
 </Container>
 
 @code{
+    DateTime? dt;
 
-    TuiEditor editor;
-    private string markdown = "# Init Title";
-
-    TuiEditorOptions options = new()
+    DatePickerOptions options = new DatePickerOptions()
     {
-        PreviewStyle = "vertical",
-        ToolbarItems = new[] {"heading", "bold", "italic"}
+        Format = "HH:mm",
+        StartView = 0,
+        PickTime = true
     };
-
+    
     void divFun()
     {
         ToastService.Show("Div.click");
@@ -87,10 +34,6 @@
         ToastService.Show("load.click");
     }
 
-    async Task showMarkdown()
-    {
-        ToastService.Show(markdown);
-    }
 
 
     void fun()

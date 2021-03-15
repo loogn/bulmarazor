@@ -7,12 +7,12 @@ namespace BulmaRazor
         internal static BulmaRazorOptions DefaultOptions { get; } = new()
         {
             ToastOptions = new ToastOptions(),
-            CalenderOptions = new CalenderOptions(),
+            DatePickerOptions = new DatePickerOptions(),
             TuiEditorOptions = new TuiEditorOptions()
         };
         
         public  TuiEditorOptions TuiEditorOptions { get; set; }
         public ToastOptions ToastOptions { get; private init; }
-        public CalenderOptions CalenderOptions { get; private init; }
+        public DatePickerOptions DatePickerOptions { get; private init; }
     }
 }

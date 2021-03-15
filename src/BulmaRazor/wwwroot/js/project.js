@@ -4,7 +4,7 @@
 //     })
 // });
 
-window.BulmaRazor = {
+;window.BulmaRazor = {
     Log: function (args) {
         console.log(args);
     },
@@ -17,4 +17,4 @@ window.BulmaRazor = {
     SetOptionSelected: function (element, val) {
         element.selected = val;
     }
-}
+};
