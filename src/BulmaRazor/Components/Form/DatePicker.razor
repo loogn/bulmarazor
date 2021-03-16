@@ -52,7 +52,7 @@
     public string BindEvent { get; set; } = "onchange";
 
     [Parameter]
-    public string Format { get; set; } = "yyyy-MM-dd";
+    public string Format { get; set; }
 
     private string Id = "datepicker_" + Guid.NewGuid().ToString("N");
     private IJSObjectReference _obj;
@@ -82,13 +82,13 @@
 
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnShow { get; set; }
+    public EventCallback OnShow { get; set; }
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnHide { get; set; }
+    public EventCallback OnHide { get; set; }
 
     [Parameter]
-    public EventCallback<DatePicker<TValue>> OnChangeDate { get; set; }
+    public EventCallback OnChangeDate { get; set; }
 
 
     public override async Task SetParametersAsync(ParameterView parameters)
@@ -103,9 +103,9 @@
 
     protected override void OnInitialized()
     {
-        JSCallbackManager.AddEventHandler(Id, "show", new Func<Task>(() => OnShow.InvokeAsync(this)));
-        JSCallbackManager.AddEventHandler(Id, "hide", new Func<Task>(() => OnHide.InvokeAsync(this)));
-        JSCallbackManager.AddEventHandler(Id, "changeDate", new Func<Task>(() => OnChangeDate.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id, "show", new Func<Task>(() => OnShow.InvokeAsync()));
+        JSCallbackManager.AddEventHandler(Id, "hide", new Func<Task>(() => OnHide.InvokeAsync()));
+        JSCallbackManager.AddEventHandler(Id, "changeDate", new Func<Task>(() => OnChangeDate.InvokeAsync()));
         base.OnInitialized();
     }
 
@@ -125,6 +125,16 @@
         {
             await _obj.DisposeAsync();
         }
+    }
+
+    public ValueTask Show()
+    {
+        return JsInterop.DatePickerShow(Id);
+    }
+
+    public ValueTask Hide()
+    {
+        return JsInterop.DatePickerHide(Id);
     }
 
 }

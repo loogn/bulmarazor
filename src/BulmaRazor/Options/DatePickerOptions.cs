@@ -72,6 +72,10 @@ namespace BulmaRazor.Components
         /// </summary>
         public IEnumerable<DateTime> DatesDisabled { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool? CloseButton { get; set; }
 
         internal JsParams ToParams()
         {
@@ -113,6 +117,7 @@ namespace BulmaRazor.Components
             {
                 ps.AddNotNull("datesDisabled", datesDisabled.Select(x => x.ToString("yyyy-MM-dd")));
             }
+            ps.AddNotNull("closeButton",CloseButton);
 
             return ps;
         }

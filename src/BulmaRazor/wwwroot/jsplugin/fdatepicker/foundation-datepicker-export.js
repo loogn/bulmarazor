@@ -2,7 +2,6 @@
  * js文件修改了setDatesDisabled方法，
  * css文件 dropdown-menu 重命名 fdropdown-menu
  */
-/
 
 /**
  * Simplified Chinese translation for foundation-datepicker
@@ -21,6 +20,21 @@
 
 
 export function init(selector, options) {
-    console.log(options);
-    return $(selector).fdatepicker(options);
+    
+    let obj= $(selector).fdatepicker(options);
+    obj.on('show',function(){
+        DotNet.invokeMethodAsync("BulmaRazor","JSCallback",selector,"show");
+    }).on('hide',function(){
+        DotNet.invokeMethodAsync("BulmaRazor","JSCallback",selector,"hide");
+    }).on('changeDate',function(){
+        DotNet.invokeMethodAsync("BulmaRazor","JSCallback",selector,"changeDate");
+    });
+    return obj;
+}
+
+export function show(selector) {
+    $(selector).fdatepicker('show');
+}
+export function hide(selector) {
+    $(selector).fdatepicker('hide');
 }

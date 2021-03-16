@@ -51,6 +51,18 @@ namespace BulmaRazor.Components
             return await module.InvokeAsync<IJSObjectReference>("init", "#" + id, options.ToParams());
         }
 
+        public async ValueTask DatePickerShow(string id)
+        {
+            var module = await fdatepickerModuleTask.Value;
+            await module.InvokeVoidAsync("show", "#" + id);
+        }
+
+        public async ValueTask DatePickerHide(string id)
+        {
+            var module = await fdatepickerModuleTask.Value;
+            await module.InvokeVoidAsync("hide", "#" + id);
+        }
+
         // 折叠面板
         public async ValueTask<IJSObjectReference> CollapsibleAttach(string selector)
         {

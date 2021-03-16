@@ -5,33 +5,33 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-    <DatePicker @bind-Value="dt" Options="options"></DatePicker>
+    <DatePicker @ref="dp" @bind-Value="dt" OnShow="show" Options="options"></DatePicker>
 
-    <div @onclick="divFun">
-        sfafafsaf
-        <button @onclick="load" @onclick:stopPropagation="false">Load</button>
-    </div>
+    
+        <button @onclick="divFun" @onclick:stopPropagation="false">Load</button>
+    
 
 </Container>
 
 @code{
     DateTime? dt;
-
+    DatePicker<DateTime?> dp;
     DatePickerOptions options = new DatePickerOptions()
     {
         Format = "HH:mm",
         StartView = 0,
-        PickTime = true
+        PickTime = true,
+        CloseButton = true
     };
     
     void divFun()
     {
-        ToastService.Show("Div.click");
+        dp.Show();
     }
 
-    async Task load()
+    void show()
     {
-        ToastService.Show("load.click");
+        ToastService.Show("show.click");
     }
 
 
