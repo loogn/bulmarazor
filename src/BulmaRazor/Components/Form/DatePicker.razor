@@ -3,7 +3,7 @@
 @inject BulmaRazorJsInterop JsInterop
 @typeparam TValue
 
-<input id="@Id" value="@ShowValue" class="@classes" @attributes="Attributes"/>
+<input id="@Id" @bind="@ShowValue" class="@classes" @attributes="Attributes"/>
 
 @code {
 

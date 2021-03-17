@@ -16,5 +16,9 @@
     },
     SetOptionSelected: function (element, val) {
         element.selected = val;
+    },
+    NewJsColor(selector,options){
+        return new JSColor(selector,options);
     }
+    
 };

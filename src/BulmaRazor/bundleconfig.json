@@ -50,6 +50,7 @@
     "outputFileName": "wwwroot/bulmarazor.min.js",
     "inputFiles": [
       "wwwroot/js/jquery-3.6.0.min.js",
+      "wwwroot/jsplugin/jscolor/jscolor.js",
       "wwwroot/js/project.js"
     ],
     "minify": {
@@ -61,6 +62,17 @@
     "inputFiles": [
       "wwwroot/jsplugin/fdatepicker/foundation-datepicker.js",
       "wwwroot/jsplugin/fdatepicker/foundation-datepicker-export.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  }
+,
+  {
+    "outputFileName": "wwwroot/js/jscolor.min.js",
+    "inputFiles": [
+      "wwwroot/jsplugin/jscolor/jscolor.js",
+      "wwwroot/jsplugin/jscolor/jscolor-export.js"
     ],
     "minify": {
       "enabled": false

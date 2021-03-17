@@ -1,0 +1,130 @@
+﻿@namespace BulmaRazor.Components
+@using System.Text.RegularExpressions
+@inherits BulmaComponentBase
+@* @inject BulmaRazorJsInterop JsInterop *@
+@inject IJSRuntime JsRuntime
+<input id="@Id" @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent"
+       class="@classes"/>
+
+@code {
+
+    private string Id = "jscolor_" + Guid.NewGuid().ToString("N");
+
+    string classes => CssBuilder.Default("input")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-hovered", IsHovered)
+        .AddClass("is-focused", IsFocused)
+        .AddClass("is-static", IsStatic)
+        .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsNormal { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+    [Parameter]
+    public bool IsHovered { get; set; }
+
+    [Parameter]
+    public bool IsFocused { get; set; }
+
+    [Parameter]
+    public bool IsRounded { get; set; }
+
+    [Parameter]
+    public bool IsStatic { get; set; }
+    [Parameter]
+    public string BindEvent { get; set; } = "onchange";
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public ColorPickerOptions Options { get; set; }
+
+    private string ShowValue
+    {
+        get { return Value; }
+        set
+        {
+            Value = value;
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+            }
+        }
+    }
+
+    // [Parameter]
+    // public EventCallback<TagsInput> AfterAdd { get; set; }
+    //
+    // [Parameter]
+    // public EventCallback<TagsInput> AfterRemove { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        Options ??= new ColorPickerOptions();
+    // JSCallbackManager.AddEventHandler(Id, "after.add", new Func<Dictionary<string, object>, Task>((dict) =>
+    // {
+    //     ShowValue = dict["value"].ToString();
+    //     return AfterAdd.InvokeAsync(this);
+    // }));
+    // JSCallbackManager.AddEventHandler(Id, "after.remove", new Func<Dictionary<string, object>, Task>((dict) =>
+    // {
+    //     ShowValue = dict["value"].ToString();
+    //     return AfterRemove.InvokeAsync(this);
+    // }));
+    // JSCallbackManager.AddEventHandler(Id, "after.flush", new Func<Dictionary<string, object>, Task>((dict) =>
+    // {
+    //     ShowValue = "";
+    //     return AfterRemove.InvokeAsync(this);
+    // }));
+        base.OnInitialized();
+    }
+
+    protected override ValueTask DisposeAsync(bool disposing)
+    {
+        JSCallbackManager.DisposeObject(Id);
+        return base.DisposeAsync(disposing);
+    }
+
+    private IJSObjectReference jsObj;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            jsObj = await JsRuntime.InvokeAsync<IJSObjectReference>("BulmaRazor.NewJsColor", "#" + Id, Options.ToParams());
+    // jsObj = await JsInterop.JSColorInit(Id, Options);
+        }
+    }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+
+
+
+}

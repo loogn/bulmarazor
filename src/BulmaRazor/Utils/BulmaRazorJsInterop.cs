@@ -15,6 +15,8 @@ namespace BulmaRazor.Components
         private readonly Lazy<Task<IJSObjectReference>> tagsInputModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> tuiEditorModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> fdatepickerModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> jsColorModuleTask;
+
 
         public BulmaRazorJsInterop(IJSRuntime jsRuntime)
         {
@@ -41,6 +43,10 @@ namespace BulmaRazor.Components
             //fdatepickerModuleTask
             fdatepickerModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/fdatepicker.min.js").AsTask());
+
+            //jscolor
+            jsColorModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/js/jscolor.min.js").AsTask());
         }
 
         //fdatepicker
@@ -94,6 +100,14 @@ namespace BulmaRazor.Components
         {
             var module = await tuiEditorModuleTask.Value;
             return await module.InvokeAsync<IJSObjectReference>("initEditor", options.ToParams());
+        }
+
+        // js color
+        public async ValueTask<IJSObjectReference> JSColorInit(string id, ColorPickerOptions options)
+        {
+            options ??= new ColorPickerOptions();
+            var module = await jsColorModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("init", "#" + id, options.ToParams());
         }
 
         #region 公共

@@ -4,7 +4,8 @@ http://foundation-datepicker.peterbeno.com/
 toast 文档，参数
 
 colorpicker
-https://www.jq22.com/jquery-info22179
+https://jscolor.com/
+
 
 carousel
 https://bulma-carousel.onrender.com/
