@@ -1,0 +1,42 @@
+﻿@namespace BulmaRazor.Components
+
+@inherits InputBase<TValue>
+@typeparam TValue
+
+
+<input id="@Id" @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent"
+    class="@classes" />
+
+@code {
+    
+    [Parameter]
+    public string Format { get; set; }
+
+    private string ShowValue
+    {
+        get
+        {
+            return ExtendMethods.GetShowValue(Value,Format);
+        }
+        set
+        {
+            if (value.SetRealValue(out TValue val))
+            {
+                Value = val;
+                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+            }
+        }
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (typeof(TValue).IsNumber())
+        {
+            if (!Attributes.ContainsKey("type"))
+            {
+                Attributes.Add("type", "number");
+            }
+        }
+    }
+}

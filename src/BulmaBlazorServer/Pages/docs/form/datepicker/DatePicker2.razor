@@ -1,14 +1,13 @@
-dt:<span>@(dt1?.ToString("yyyy-MM-dd")) </span><br>
-<DatePicker @bind-Value="dt1" Options="opt"></DatePicker>
+dt:<span>@(timeSpan) </span><br>
+<DatePicker @bind-Value="timeSpan" Options="opt"></DatePicker>
 
 @code {
-    DateTime? dt1;
-
+    // DateTime? dt1;
+    TimeSpan? timeSpan;
     DatePickerOptions opt = new()
     {
         Format = "HH:mm",
         StartView = 0,
         PickTime = true
     };
-
 }

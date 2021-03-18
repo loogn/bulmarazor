@@ -1,60 +1,11 @@
 ﻿@namespace BulmaRazor.Components
-@using System.Text.RegularExpressions
-@inherits BulmaComponentBase
+@inherits InputBase<string>
 @inject BulmaRazorJsInterop JsInterop
 
-<input id="@Id" @attributes="Attributes" value="@ShowValue"
+<input id="@Id" @attributes="Attributes" @bind-value="ShowValue"
        class="@classes"/>
 
 @code {
-
-    private string Id = "tagsInput_" + Guid.NewGuid().ToString("N");
-
-    string classes => CssBuilder.Default("input")
-        .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
-        .AddClass("is-small", IsSmall)
-        .AddClass("is-normal", IsNormal)
-        .AddClass("is-medium", IsMedium)
-        .AddClass("is-large", IsLarge)
-        .AddClass("is-rounded", IsRounded)
-        .AddClass("is-hovered", IsHovered)
-        .AddClass("is-focused", IsFocused)
-        .AddClass("is-static", IsStatic)
-        .Build();
-
-    [Parameter]
-    public Color Color { get; set; } = Color.Default;
-
-    [Parameter]
-    public bool IsSmall { get; set; }
-
-    [Parameter]
-    public bool IsNormal { get; set; }
-
-    [Parameter]
-    public bool IsMedium { get; set; }
-
-    [Parameter]
-    public bool IsLarge { get; set; }
-
-    [Parameter]
-    public bool IsHovered { get; set; }
-
-    [Parameter]
-    public bool IsFocused { get; set; }
-
-    [Parameter]
-    public bool IsRounded { get; set; }
-
-    [Parameter]
-    public bool IsStatic { get; set; }
-
-    [Parameter]
-    public string Value { get; set; }
-
-    [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
 
     [Parameter]
     public TagsInputOptions Options { get; set; }
@@ -65,10 +16,7 @@
         set
         {
             Value = value;
-            if (ValueChanged.HasDelegate)
-            {
-                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
-            }
+            ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
         }
     }
 
@@ -81,23 +29,18 @@
 
     protected override void OnInitialized()
     {
-        JSCallbackManager.AddEventHandler(Id, "after.add", new Func<Dictionary<string, object>, Task>((dict) =>
-        {
-            ShowValue = dict["value"].ToString();
-            return AfterAdd.InvokeAsync(this);
-        }));
+        JSCallbackManager.AddEventHandler(Id, "after.add", new Func<Dictionary<string, object>, Task>((dict) => { return AfterAdd.InvokeAsync(this); }));
         JSCallbackManager.AddEventHandler(Id, "after.remove", new Func<Dictionary<string, object>, Task>((dict) =>
         {
-            ShowValue = dict["value"].ToString();
+    //ShowValue = dict["value"].ToString();
             return AfterRemove.InvokeAsync(this);
         }));
         JSCallbackManager.AddEventHandler(Id, "after.flush", new Func<Dictionary<string, object>, Task>((dict) =>
         {
-            ShowValue = "";
+    //ShowValue = "";
             return AfterRemove.InvokeAsync(this);
         }));
         base.OnInitialized();
-        
     }
 
     protected override ValueTask DisposeAsync(bool disposing)
@@ -114,7 +57,6 @@
         if (firstRender)
         {
             jsObj = await JsInterop.TagsInputAttach("#" + Id, Options);
-            
         }
     }
 

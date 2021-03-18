@@ -6,11 +6,11 @@
 <Container style="overflow: scroll" class="@B.PY6">
 
     <div style="background-color: @color;width: 100px;height: 100px;">@color</div>
-    <ColorPicker @bind-Value="color" BindEvent="oninput"></ColorPicker>
+    <ColorPicker @bind-Value="color"></ColorPicker>
     
     <hr>
     <span>date: <i>@dt</i></span>
-    <DatePicker @ref="dp" @bind-Value="dt" OnShow="show" Options="options"></DatePicker>
+    <DatePicker @bind-Value="dt"></DatePicker>
     <button @onclick="divFun" @onclick:stopPropagation="false">Load</button>
     
 </Container>
@@ -23,7 +23,7 @@
     {
         //Format = "HH:mm",
         //StartView = 0,
-        PickTime = true,
+        // PickTime = true,
         //CloseButton = true
     };
     
