@@ -1,14 +1,13 @@
 @inject IJSRuntime JSRuntime
-
+@typeparam ComType
 <Tabs>
     <TabItem Label="视图">
         <LabelSlot>
             <Icon IconClass="fa fa-cube"></Icon> 视图
         </LabelSlot>
         <ContentSlot>
-            @ChildContent
+            @ComRenderFragment
         </ContentSlot>
-
     </TabItem>
     <TabItem Label="代码">
         <LabelSlot>
@@ -18,7 +17,7 @@
             <div style="margin-bottom: 1.5rem;">
                 <pre style="@GetStyle">
             <code id="@Id" class="@Language">
-                      @System.IO.File.ReadAllText(FilePath)
+                      @System.IO.File.ReadAllText(Path)
               </code>
         </pre>
                 @if (HasMore && !showMore)
@@ -38,9 +37,15 @@
 
 
 @code{
+    
+    private RenderFragment ComRenderFragment => builder =>
+    {
+        builder.OpenComponent<ComType>(0);
+        builder.CloseComponent();
+    };
 
-    [Parameter]
-    public string FilePath { get; set; }
+    private string Path => typeof(ComType).FullName.Replace("BulmaRazorServer.", "")
+        .Replace(".", "/") + ".razor";
 
     [Parameter]
     public string Language { get; set; } = "xml";
@@ -48,13 +53,10 @@
     private string Id = "hl" + Guid.NewGuid().ToString("N");
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public int MaxHeight { get; set; } = 300;
 
     [Parameter]
-    public int MaxHeight { get; set; } = 100;
-
-    [Parameter]
-    public bool HasMore { get; set; }
+    public bool HasMore { get; set; } = true;
 
     private bool showMore;
     private string GetStyle => "margin-bottom:0;background-color: unset;padding:unset;" + ((showMore || !HasMore) ? "" : "max-height: " + MaxHeight + "px; overflow-y:auto");
