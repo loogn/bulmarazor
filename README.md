@@ -64,6 +64,7 @@ Install-Package BulmaRazor
 	- File:			☆☆☆☆☆
     - TagsInput:	☆☆☆
     - DatePicker:   ☆☆☆
+    - ColorPicker: ☆☆☆
     - TuiEditor:    ☆☆☆
 - Components 
   -   DataTable     ☆☆☆
@@ -108,7 +109,8 @@ Install-Package BulmaRazor
 - [Bulma官网](https://bulma.io/)
 - [Blazor微软文档](https://blazor.net/docs/components/index.html)
 - [Bulma中文网](https://bulma.zcopy.site/)
-- [bulma-calendar](https://github.com/Wikiki/bulma-calendar)
+- [foundation-datepicker](http://foundation-datepicker.peterbeno.com/)
+- [jscolor](https://jscolor.com/)
 - [bulma-checkradio](https://github.com/Wikiki/bulma-checkradio)
 - [bulma-collapsible](https://github.com/CreativeBulma/bulma-collapsible)
 - [bulma-badge](https://github.com/CreativeBulma/bulma-badge)
