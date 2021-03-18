@@ -1,0 +1,76 @@
+@inject IJSRuntime JSRuntime
+
+<Tabs>
+    <TabItem Label="视图">
+        <LabelSlot>
+            <Icon IconClass="fa fa-cube"></Icon> 视图
+        </LabelSlot>
+        <ContentSlot>
+            @ChildContent
+        </ContentSlot>
+
+    </TabItem>
+    <TabItem Label="代码">
+        <LabelSlot>
+            <Icon IconClass="fa fa-code"></Icon> 代码
+        </LabelSlot>
+        <ContentSlot>
+            <div style="margin-bottom: 1.5rem;">
+                <pre style="@GetStyle">
+            <code id="@Id" class="@Language">
+                      @System.IO.File.ReadAllText(FilePath)
+              </code>
+        </pre>
+                @if (HasMore && !showMore)
+                {
+                    <div class="has-text-centered has-background-grey-lighter is-clickable" @onclick="ShowMore">
+                        <IconText >
+                            <Icon IconClass="fa fa-code"></Icon>
+                            <span>Show Code</span>
+                        </IconText>
+                    </div>
+                }
+            </div>
+        </ContentSlot>
+    </TabItem>
+
+</Tabs>
+
+
+@code{
+
+    [Parameter]
+    public string FilePath { get; set; }
+
+    [Parameter]
+    public string Language { get; set; } = "xml";
+
+    private string Id = "hl" + Guid.NewGuid().ToString("N");
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public int MaxHeight { get; set; } = 100;
+
+    [Parameter]
+    public bool HasMore { get; set; }
+
+    private bool showMore;
+    private string GetStyle => "margin-bottom:0;background-color: unset;padding:unset;" + ((showMore || !HasMore) ? "" : "max-height: " + MaxHeight + "px; overflow-y:auto");
+
+    private void ShowMore()
+    {
+        showMore = !showMore;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            await JSRuntime.InvokeAsync<object>("hlb", Id);
+        }
+    }
+
+}
