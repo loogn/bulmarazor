@@ -63,8 +63,87 @@
         if (firstRender)
         {
             jsObj = await JsRuntime.InvokeAsync<IJSObjectReference>("BulmaRazor.NewJsColor", "#" + Id, Options.ToParams());
-    // jsObj = await JsInterop.JSColorInit(Id, Options);
         }
+    }
+
+    public ValueTask<double> Channel(string name)
+    {
+        return jsObj.InvokeAsync<double>("channel", name);
+    }
+
+    public ValueTask<bool> Channel(string name, double value)
+    {
+        return jsObj.InvokeAsync<bool>("channel", name, value);
+    }
+
+    public ValueTask<bool> FromHSVA(double? h, double? s, double? v, double? a)
+    {
+        return jsObj.InvokeAsync<bool>("fromHSVA", h, s, v, a);
+    }
+
+    public ValueTask<bool> FromRGBA(double? r, double? g, double? b, double? a)
+    {
+        return jsObj.InvokeAsync<bool>("fromRGBA", r, g, b, a);
+    }
+
+    public ValueTask<bool> FromString(string str)
+    {
+        return jsObj.InvokeAsync<bool>("fromString", str);
+    }
+
+    public ValueTask<string> GetFormat()
+    {
+        return jsObj.InvokeAsync<string>("getFormat");
+    }
+
+    public ValueTask<bool> IsLight()
+    {
+        return jsObj.InvokeAsync<bool>("isLight");
+    }
+
+    public ValueTask Hide()
+    {
+        return jsObj.InvokeVoidAsync("hide");
+    }
+
+    public ValueTask Show()
+    {
+        return jsObj.InvokeVoidAsync("show");
+    }
+
+    public ValueTask<string> ToBackground()
+    {
+        return jsObj.InvokeAsync<string>("toBackground");
+    }
+
+    public ValueTask<double> ToGrayscale()
+    {
+        return jsObj.InvokeAsync<double>("toGrayscale");
+    }
+
+    public ValueTask<string> ToHEXAString()
+    {
+        return jsObj.InvokeAsync<string>("toHEXAString");
+    }
+
+    public ValueTask<string> ToHEXString()
+    {
+        return jsObj.InvokeAsync<string>("toHEXString");
+    }
+
+    public ValueTask<string> ToRGBAString()
+    {
+        return jsObj.InvokeAsync<string>("toRGBAString");
+    }
+
+    public ValueTask<string> ToRGBString()
+    {
+        return jsObj.InvokeAsync<string>("toRGBString");
+    }
+
+    public ValueTask<string> ToString(string format)
+    {
+        return jsObj.InvokeAsync<string>("toString", format);
     }
 
 }
