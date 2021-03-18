@@ -10,14 +10,9 @@
     <p>Dropdown有两Slot：TriggerSlot和MenuSlot, MenuSlot可以使用子组件DropdownItem和DropdownDivider填充</p>
 </Content>
 
-<Columns>
-    <Column>
-        <Dropdown1/>
-    </Column>
-    <Column>
-        <HighLight FilePath="Pages/docs/components/dropdown/Dropdown1.razor"/>
-    </Column>
-</Columns>
+<div style="min-height:350px">
+<DocView ComType="Dropdown1"/>
+</div>
 
 <Title Size="Size.Size4" IsSpaced>
     Dropdown content
@@ -26,15 +21,9 @@
 <Content>
     DropdownItem可以添加Href属性表现为a标签，也可以不加，里面包含其他内容
 </Content>
-
-<Columns>
-    <Column>
-        <Dropdown2/>
-    </Column>
-    <Column>
-        <HighLight FilePath="Pages/docs/components/dropdown/Dropdown2.razor"/>
-    </Column>
-</Columns>
+<div style="min-height:350px">
+    <DocView ComType="Dropdown2"/>
+</div>
 <hr>
 
 <Title Size="Size.Size4" IsSpaced>
@@ -45,14 +34,8 @@
     默认清空下是Hoverable，可以加IsClickTrigger改变
 </Content>
 
-<Columns>
-    <Column>
-        <Dropdown3/>
-    </Column>
-    <Column>
-        <HighLight FilePath="Pages/docs/components/dropdown/Dropdown3.razor"/>
-    </Column>
-</Columns>
+<DocView ComType="Dropdown3"/>
+
 <hr>
 
 <Title Size="Size.Size4" IsSpaced>
@@ -62,11 +45,4 @@
 <Content>
     使用IsRight改变Item的对齐方向，使用IsUp改变现实方向
 </Content>
-<Columns>
-    <Column>
-        <Dropdown4/>
-    </Column>
-    <Column>
-        <HighLight FilePath="Pages/docs/components/dropdown/Dropdown4.razor"/>
-    </Column>
-</Columns>
+<DocView ComType="Dropdown4"/>

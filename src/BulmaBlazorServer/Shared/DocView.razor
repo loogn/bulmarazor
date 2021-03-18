@@ -56,7 +56,7 @@
     public int MaxHeight { get; set; } = 300;
 
     [Parameter]
-    public bool HasMore { get; set; } = true;
+    public bool HasMore { get; set; }
 
     private bool showMore;
     private string GetStyle => "margin-bottom:0;background-color: unset;padding:unset;" + ((showMore || !HasMore) ? "" : "max-height: " + MaxHeight + "px; overflow-y:auto");
