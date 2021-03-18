@@ -1,14 +1,18 @@
-日期选择：
-http://foundation-datepicker.peterbeno.com/
 
-toast 文档，参数
+编辑器
+https://summernote.org/
+评分
 
-colorpicker
-https://jscolor.com/
+tagsinput多选select?
 
+Slider 滑块
+
+Transfer 穿梭框
 
 carousel
 https://bulma-carousel.onrender.com/
+
+树形控件
 
 ribbon
 https://github.com/Wikiki/bulma-ribbon
