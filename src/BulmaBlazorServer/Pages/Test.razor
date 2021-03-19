@@ -1,41 +1,22 @@
 @page "/test"
+@using BulmaRazorServer.Pages.docs.components.datatable
 
 @inject BulmaRazorJsInterop JsInterop
 @inject ToastService ToastService
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-    <div style="background-color: @color;width: 100px;height: 100px;">@color</div>
-    <ColorPicker @ref="cp" @bind-Value="color"></ColorPicker>
-    <Button @onclick="divFun">Load</Button>
-        
-    
-    <hr>
-    <span>date: <i>@dt</i></span>
-    <DatePicker @bind-Value="dt"></DatePicker>
-    
-    
+    <div style="width:580px;">
+        <Transfer Data="list" Prop="name"></Transfer>
+    </div>
 </Container>
 
 @code{
-    ColorPicker cp;
-    string color;
-    DateTime? dt;
-    DatePicker<DateTime?> dp;
-    DatePickerOptions options = new DatePickerOptions()
-    {
-        //Format = "HH:mm",
-        //StartView = 0,
-        // PickTime = true,
-        //CloseButton = true
-    };
+    List<Person> list = Person.GetPageData("", 1, 20, out int _).ToList();
     
     async Task divFun()
     {
-        Console.WriteLine("divFun1");
-        
-        await ToastService.Show(await cp.ToRGBString());
-        Console.WriteLine("divFun1");
+      
     }
 
     void show()
