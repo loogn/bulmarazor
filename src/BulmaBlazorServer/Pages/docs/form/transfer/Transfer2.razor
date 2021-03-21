@@ -1,0 +1,11 @@
+@using BulmaRazorServer.Pages.docs.components.datatable
+
+<Column Size="Size.Half">
+    <Transfer LeftData="leftData" RightData="rightData" Filterable ShowProp="name">
+    </Transfer>
+</Column>
+@code{
+    List<Person> listAll = Person.GetPageData("", 1, 20, out int _).ToList();
+    List<Person> leftData => listAll.Where(x => x.Id < 17).ToList();
+    List<Person> rightData => listAll.Where(x => x.Id >= 17).ToList();
+}

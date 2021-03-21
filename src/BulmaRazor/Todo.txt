@@ -7,8 +7,6 @@ tagsinput多选select?
 
 Slider 滑块
 
-Transfer 穿梭框
-
 carousel
 https://bulma-carousel.onrender.com/
 

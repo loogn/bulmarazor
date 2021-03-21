@@ -1,0 +1,10 @@
+@using BulmaRazorServer.Pages.docs.components.datatable
+<Columns>
+    <Column Size="Size.Half">
+        <Transfer LeftData="leftData" ShowProp="Name"/>
+    </Column>
+</Columns>
+
+@code{
+    List<Person> leftData = Person.GetPageData("", 1, 10, out int _).ToList();
+}

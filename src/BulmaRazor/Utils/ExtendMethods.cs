@@ -6,11 +6,21 @@ namespace BulmaRazor.Components
 {
     public static class ExtendMethods
     {
+        public static bool IsSimpleType(this Type type)
+        {
+            return type.IsPrimitive || type == typeof(string);
+        }
+
         public static bool HasValue(this string value)
         {
             return !string.IsNullOrEmpty(value);
         }
+        public static bool NoValue(this string value)
+        {
+            return string.IsNullOrEmpty(value);
+        }
 
+        
         public static bool IsNumber(this Type type)
         {
             type = Nullable.GetUnderlyingType(type) ?? type;

@@ -46,29 +46,25 @@
         }
     }
 
-    private Task HandleClick()
+    private async Task HandleClick()
     {
         if (ItemParent?.SubList != null)
         {
             if (IsClose)
             {
-                JsInterop.SlideDown(ItemParent.SubList.Id, "fast");
+                await JsInterop.SlideDown(ItemParent.SubList.Id, "fast");
                 IsClose = false;
             }
             else
             {
-                JsInterop.SlideUp(ItemParent.SubList.Id, "fast");
+                await JsInterop.SlideUp(ItemParent.SubList.Id, "fast");
                 IsClose = true;
             }
         }
         else
         {
-            if (MenuParent != null)
-            {
-                return MenuParent.ClickItem(ItemParent);
-            }
+            await MenuParent?.ClickItem(ItemParent);
         }
-        return Task.CompletedTask;
     }
 
     public int Index { get; set; }

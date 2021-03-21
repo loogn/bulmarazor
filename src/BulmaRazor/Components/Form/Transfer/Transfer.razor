@@ -2,119 +2,110 @@
 @inherits BulmaComponentBase
 @inject BulmaRazorJsInterop JsInterop
 @typeparam TItem
-@typeparam TValue
-<div class="columns p-1 is-gapless">
-    <div class="column is-flex">
-        <nav class="panel">
-            <p class="panel-heading" style="font-size: unset;">
-                <label>
-                    <input id="a" checked type="checkbox"/>
-                    左侧选择
+<div class="columns m-4 is-gapless">
+    <div class="column is-flex is-flex-direction-column">
+        <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
+            <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
+                <label class="is-flex-grow-1" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
+                    <input type="checkbox" class="mr-1" checked="@leftAll" @ref="leftCk" @onchange="() => CheckAll(1, !leftAll)"/>
+                    @LeftTitle
                 </label>
+                <span class="is-flex-shrink-0 has-text-grey">
+                    @leftCount/@leftView.Count
+                </span>
             </p>
-            <div class="panel-block">
-                <div class="control has-icons-left">
-                    <input type="text" class="input"/>
-                    <span class="icon is-left">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </span>
-                </div>
-            </div>
-            <div class="panel-block">
-                <ul style="min-height: @(MinHeight)px; max-height: @(MaxHeight)px; width:100%; overflow: hidden;overflow-y: auto">
-                    @foreach (var item in dataView)
-                    {
-                        <li class="mb-2">
-                            <label>
-                                <input checked type="checkbox"/>@item.ShowValue
-                            </label>
+           @if (Filterable)
+           {
+               <div class="panel-block">
+                   <div class="control has-icons-left">
+                       <input type="text" @bind="leftWord" @bind:event="oninput" @onkeyup="() => leftWordChange()" placeholder="@FilterPlaceholder" class="input"/>
+                       <span class="icon is-left">
+                           <i class="fa fa-search" aria-hidden="true"></i>
+                       </span>
+                   </div>
+               </div>
+           }
+           <div class="panel-block is-flex-grow-1 is-align-items-flex-start">
+               <ul style="@ulStyle">
+                   @foreach (var item in leftView)
+                   {
+                       <li class="@B.Join(B.MB2, item.IsHidden? B.Hidden:"")">
+                       <label>
+                           <input type="checkbox" class="mr-1" checked="@item.IsChecked" @onchange="() => ItemCheckChange(item)"/>
+                           @item.ShowValue
+                       </label>
                         </li>
-                    }
-                </ul>
-            </div>
-            <!--<div class="panel-block"></div>-->
+                   }
+               </ul>
+           </div>
+           @if (LeftFooterSlot != null)
+           {
+               <div class="panel-block">@LeftFooterSlot</div>
+           }
+            
         </nav>
 
     </div>
     <div class="column is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
         <div class="buttons is-flex">
-            <button class="button is-link">
+            <button class="button is-link" disabled="@(rightCount == 0)" @onclick="() => Trans(rightView, leftView)">
                 <span class="icon">
                     <i class="fa fa-angle-left"></i>
                 </span>
+                @if(LeftButtonText.HasValue()){
+                    <span>@LeftButtonText</span>
+                }
             </button>
-            <button class="button is-link" disabled>
+            <button class="button is-link" disabled="@(leftCount == 0)" @onclick="() => Trans(leftView, rightView)">
+                @if(RightButtonText.HasValue()){
+                    <span>@RightButtonText</span>
+                }
                 <span class="icon">
                     <i class="fa fa-angle-right"></i>
                 </span>
             </button>
         </div>
     </div>
-    <div class="column is-flex">
-        <nav class="panel">
-            <p class="panel-heading" style="font-size: unset;">
-                <label>
-                    <input id="ab" checked type="checkbox"/>
-                    左侧选择
+    <div class="column is-flex is-flex-direction-column">
+        <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
+            <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
+
+                <label class="is-flex-grow-1" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
+                    <input type="checkbox" class="mr-1" checked="@rightAll" @ref="rightCk" @onchange="() => CheckAll(2, !rightAll)"/>
+                    @RightTitle
                 </label>
+                <span class="is-flex-shrink-0 has-text-grey">
+                    @rightCount/@rightView.Count
+                </span>
             </p>
-            <div class="panel-block">
-                <div class="control has-icons-left">
-                    <input type="text" class="input"/>
-                    <span class="icon is-left">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </span>
+            @if (Filterable)
+            {
+                <div class="panel-block">
+                    <div class="control has-icons-left">
+                        <input type="text" @bind="rightWord" @bind:event="oninput" @onkeyup="() => rightWordChange()" placeholder="@FilterPlaceholder" class="input"/>
+                        <span class="icon is-left">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="panel-block">
-                <ul style="min-height: @(MinHeight)px; max-height: @(MaxHeight)px; width:100%; overflow: hidden;overflow-y: auto">
-                    <li class="mb-2">
-                        <label for="a1">
-                            <input id="a1" checked type="checkbox"/>左侧选择
-                        </label>
-                    </li>
-                    <li class="mb-2">
-                        <label for="a2">
-                            <input id="a2" checked type="checkbox"/>左侧选择
-                        </label>
-                    </li>
-                    <li class="mb-2">
+            }
+            <div class="panel-block is-flex-grow-1  is-align-items-flex-start">
+                <ul style="@ulStyle">
+                    @foreach (var item in rightView)
+                    {
+                        <li class="@B.Join(B.MB2, item.IsHidden? B.Hidden:"")">
                         <label>
-                            <input id="a3" checked type="checkbox"/>左侧选择
+                            <input class="mr-1" type="checkbox" checked="@item.IsChecked" @onchange="() => ItemCheckChange(item)"/>
+                            @item.ShowValue
                         </label>
-                    </li>
-                    <li class="mb-2">
-                        <label>
-                            <input id="a4" checked type="checkbox"/>
-                            左侧选择
-                        </label>
-                    </li>
-                    <li class="mb-2">
-                        <label>
-                            <input id="a5" checked type="checkbox"/>
-                            左侧选择
-                        </label>
-                    </li>
-                    <li class="mb-2">
-                        <label>
-                            <input id="a6" type="checkbox"/>
-                            左侧选择
-                        </label>
-                    </li>
-                    <li class="mb-2">
-                        <label>
-                            <input id="a7" type="checkbox"/>
-                            左侧选择
-                        </label>
-                    </li>
+                        </li>
+                    }
                 </ul>
             </div>
-            <!--                <div class="panel-block"></div>-->
+            @if (RightFooterSlot != null)
+           {
+               <div class="panel-block">@RightFooterSlot</div>
+           }
         </nav>
     </div>
 </div>
-
-
-@code {
-
-}

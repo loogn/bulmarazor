@@ -1,0 +1,39 @@
+@using BulmaRazorServer.Pages.docs.components.datatable
+@inject ToastService ToastService
+<Column Size="Size.Half">
+    <Transfer LeftData="leftData" RightData="rightData"
+              ShowFunc="showFunc" OnChange="change"
+              Filterable FilterFunc="filterFunc"
+              LeftTitle="左边列表" RightTitle="右边列表"
+              MinHeight="100" MaxHeight="300"
+              LeftButtonText="左移" RightButtonText="右移">
+        <LeftFooterSlot>
+            <Button IsSmall>自定义</Button>
+        </LeftFooterSlot>
+        <RightFooterSlot>
+            <Button IsSmall Color="Color.Danger">自定义</Button>
+        </RightFooterSlot>
+    </Transfer>
+</Column>
+
+@code{
+    List<Person> listAll = Person.GetPageData("", 1, 20, out int _).ToList();
+    List<Person> leftData => listAll.Where(x => x.Id < 17).ToList();
+    List<Person> rightData => listAll.Where(x => x.Id >= 17).ToList();
+
+    string showFunc(Person p)
+    {
+        return p.Id + "-" + p.Name;
+    }
+
+    bool filterFunc(Person p, string kw)
+    {
+        return p.Name.Contains(kw) || p.Id.ToString().Contains(kw);
+    }
+
+    void change(Transfer<Person> sender)
+    {
+        var rightList = sender.GetRightData();
+        ToastService.Show("右边有：" + rightList.Count + "条数据");
+    }
+}

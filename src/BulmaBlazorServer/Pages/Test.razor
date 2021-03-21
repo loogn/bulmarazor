@@ -6,25 +6,42 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-    <div style="width:580px;">
-        <Transfer Data="list" Prop="name"></Transfer>
+    <div style="width:670px;">
+        <Transfer LeftData="leftData" RightData="rightData" Filterable ShowProp="name"
+                  FilterFunc="filterFunc"
+                  ShowFunc="person => (person.Id + person.Name)">
+            <LeftFooterSlot>
+                <Button IsSmall>自定义</Button>
+            </LeftFooterSlot>
+        </Transfer>
     </div>
 </Container>
 
 @code{
-    List<Person> list = Person.GetPageData("", 1, 20, out int _).ToList();
-    
+    List<Person> listAll = Person.GetPageData("", 1, 20, out int _).ToList();
+    List<Person> leftData => listAll.Where(x => x.Id < 17).ToList();
+    List<Person> rightData => listAll.Where(x => x.Id >= 17).ToList();
+
     async Task divFun()
     {
-      
+    }
+
+    bool filterFunc(Person p, string kw)
+    {
+        if (p.Id == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     void show()
     {
         ToastService.Show("show.click");
     }
-
-
 
     void fun()
     {

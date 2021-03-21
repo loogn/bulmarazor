@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Version>0.1.8</Version>
+        <Version>0.1.9</Version>
         <Description>BulmaRazor</Description>
         <Copyright>loogn@2021</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -10,7 +10,7 @@
         <RepositoryUrl>https://gitee.com/loogn/bulmarazor</RepositoryUrl>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageId>BulmaRazor</PackageId>
-        <AssemblyVersion>0.1.8.0</AssemblyVersion>
+        <AssemblyVersion>0.1.9.0</AssemblyVersion>
         <PackageIcon>nuget-logo.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
