@@ -6,24 +6,27 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
+    
     <div style="width:670px;">
-        <Transfer LeftData="leftData" RightData="rightData" Filterable ShowProp="name"
-                  FilterFunc="filterFunc"
-                  ShowFunc="person => (person.Id + person.Name)">
-            <LeftFooterSlot>
-                <Button IsSmall>自定义</Button>
-            </LeftFooterSlot>
-        </Transfer>
+        score:<span>@score</span>
+        <Rate @bind-Value="score"
+               LowColor="#99A9BF"
+               MiddleColor="#F7BA2A"
+               HighColor="#FF0000"
+               LowIconClass="fa-frown-o"
+               MiddleIconClass="fa-meh-o"
+               HighIconClass="fa-smile-o"
+               VoidIconClass="fa-meh-o"
+               TextColor="#ff9900" ShowScore OnChanged="divFun">
+        </Rate>
     </div>
 </Container>
 
 @code{
-    List<Person> listAll = Person.GetPageData("", 1, 20, out int _).ToList();
-    List<Person> leftData => listAll.Where(x => x.Id < 17).ToList();
-    List<Person> rightData => listAll.Where(x => x.Id >= 17).ToList();
-
-    async Task divFun()
+    double score = 4.8;
+    void divFun(double score)
     {
+        ToastService.Show(score.ToString());
     }
 
     bool filterFunc(Person p, string kw)

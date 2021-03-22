@@ -1,0 +1,143 @@
+@page "/docs/form/rate"
+@layout DocLayout
+
+<Title>Rate评分</Title>
+<Subtitle Size="Size.Size4">
+    评分组件，用法和ElementUI的Rate基本一致
+</Subtitle>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    基本用法
+</Title>
+<Content>
+    <p>
+        评分默认被分为三个等级，可以利用颜色数组对分数及情感倾向进行分级（默认情况下不区分颜色）。
+        三个等级所对应的颜色用LowColor、MiddleColor、HighColor属性设置，
+        而它们对应的两个阈值则通过 LowThreshold 和 HighThreshold 设定。
+    </p>
+</Content>
+<DocView ComType="Rate1"/>
+
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    辅助文字
+</Title>
+
+<Content>
+    <p>
+        用辅助文字直接地表达对应分数，为组件设置 ShowText 属性会在右侧显示辅助文字。
+        通过设置 Texts 可以为每一个分值指定对应的辅助文字。Texts 为一个字符串数组，长度应等于最大值 Max。
+    </p>
+</Content>
+<DocView ComType="Rate2"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    其它 icon
+</Title>
+<Content>
+    <p>
+        当有多层评价时，可以用不同类型的 icon 区分评分层级。
+        设置 LowIconClass、MiddleIconClass、VoidIconClass 属性可以自定义不同分段的图标。
+        。本例还使用 VoidIconClass 指定了未选中时的图标类名。
+    </p>
+</Content>
+<DocView ComType="Rate3"/>
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    只读
+</Title>
+<Content>
+    <p>
+        只读的评分用来展示分数，允许出现半星。
+        为组件设置 Disabled 属性表示组件为只读，支持小数分值。此时若设置 ShowScore，则会在右侧显示目前的分值。
+        可以提供 ScoreSlot 作为显示模板，模板的 context 是 Value 的值。
+    </p>
+</Content>
+<DocView ComType="Rate4"/>
+
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    Attributes
+</Title>
+
+<Table>
+    <thead>
+    <tr>
+        <th>参数</th><th>说明</th><th>类型</th><th>可选值</th><th>默认值</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Value / @@bind-Value</td><td>绑定值</td><td>double</td><td>—</td><td>0</td>
+    </tr>
+    <tr>
+        <td>Max</td><td>最大分值</td><td>int</td><td>—</td><td>5</td>
+    </tr>
+    <tr>
+        <td>Disabled</td><td>是否为只读</td><td>Bool</td><td>—</td><td>false</td>
+    </tr>
+
+    <tr>
+        <td>LowThreshold</td><td>低分和中等分数的界限值，值本身被划分在低分中</td><td>int</td><td>—</td><td>2</td>
+    </tr>
+    <tr>
+        <td>HighThreshold</td><td>高分和中等分数的界限值，值本身被划分在高分中</td><td>int</td><td>—</td><td>4</td>
+    </tr>
+    <tr>
+
+        <td>LowColor、MiddleColor、HighColor</td><td>icon 的颜色。</td><td>string</td><td>—</td><td>#F7BA2A</td>
+    </tr>
+    <tr>
+        <td>VoidColor</td><td>未选中 icon 的颜色</td><td>string</td><td>—</td><td>#C6D1DE</td>
+    </tr>
+    <tr>
+        <td>DisabledVoidColor</td><td>只读时未选中 icon 的颜色</td><td>string</td><td>—</td><td>#EFF2F7</td>
+    </tr>
+    <tr>
+
+        <td>LowIconClass、MiddleIconClass、HighIconClass</td><td>icon 的类名</td><td>string</td><td>—</td><td>fa-star</td>
+    </tr>
+    <tr>
+        <td>VoidIconClass</td><td>未选中 icon 的类名</td><td>string</td><td>—</td><td>fa-star-o</td>
+    </tr>
+    <tr>
+        <td>DisabledVoidIconClass</td><td>只读时未选中 icon 的类名</td><td>string</td><td>—</td><td>fa-star</td>
+    </tr>
+    <tr>
+        <td>ShowText</td><td>是否显示辅助文字，若为真，则会从 Texts 数组中选取当前分数对应的文字内容</td><td>bool</td><td>—</td><td>false</td>
+    </tr>
+    <tr>
+        <td>ShowScore</td><td>是否显示当前分数，ShowScore 和 ShowText 不能同时为真</td><td>bool</td><td>—</td><td>false</td>
+    </tr>
+    <tr>
+        <td>TextColor</td><td>辅助文字的颜色</td><td>string</td><td>—</td><td></td>
+    </tr>
+    <tr>
+        <td>Texts</td><td>辅助文字数组</td><td>string[]</td><td>—</td><td>['极差', '失望', '一般', '满意', '惊喜']</td>
+    </tr>
+    <tr>
+        <td>ScoreSlot</td><td>分数显示模板</td><td>RenderFragment&lt;double&gt; </td><td>—</td><td>Value</td>
+    </tr>
+    </tbody>
+</Table>
+
+<Title Size="Size.Size4" IsSpaced>
+    Event
+</Title>
+<Table>
+    <thead>
+    <tr>
+        <th>事件名称</th><th>类型</th><th>说明</th><th>回调参数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>OnChange</td><td>EventCallback&lt;double&gt;</td><td>分值改变时触发</td><td>改变后的分值</td>
+    </tr>
+    </tbody>
+</Table>

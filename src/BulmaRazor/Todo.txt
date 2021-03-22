@@ -1,16 +1,15 @@
 
-编辑器
-https://summernote.org/
-评分
 
-tagsinput多选select?
+[]编辑器 https://summernote.org/
 
-Slider 滑块
+[]tagsinput多选select?
 
-carousel
-https://bulma-carousel.onrender.com/
+[]Slider 滑块
 
-树形控件
+[]carouselhttps://bulma-carousel.onrender.com/
 
-ribbon
-https://github.com/Wikiki/bulma-ribbon
+[]树形控件
+
+[]ribbonhttps://github.com/Wikiki/bulma-ribbon
+
+[]级联选择

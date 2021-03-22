@@ -1,0 +1,34 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+
+<span @attributes="Attributes" @onmouseleave="MouseOutHandle" class="@classes">
+    @for (var i = 0; i < Max; i++)
+    {
+        var localI = i;
+        <i class="@GetIconClass(localI)"
+           style="@GetIconStyles(localI)"
+           @onclick="args => ClickHandle(localI)"
+           @onmouseover="args => MouseOverHandle(localI)">
+            @if (NeedSubIcon(localI))
+            {
+                <i class="@GetSubClass()" style="@GetSubStyle()"></i>
+            }
+        </i>
+    }
+    @if (ShowText || ShowScore)
+    {
+        <span style="@CssBuilder.Default().AddClass("color:" + TextColor, TextColor).Build()">
+            @if (ShowText)
+            {
+                @:@GetText() 
+            }
+            else
+            {
+                @:@ScoreSlot(hoverValue ?? Value)
+            }
+        </span>
+    }
+</span>
+
+       

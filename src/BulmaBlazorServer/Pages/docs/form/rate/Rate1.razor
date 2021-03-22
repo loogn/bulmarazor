@@ -1,0 +1,20 @@
+<Columns>
+    <Column class="@B.TextCentered">
+        <p>默认不区分颜色</p>
+        <p>
+            <Rate Value="val1"></Rate>
+        </p>
+    </Column>
+    <Divider IsVertical>分割线</Divider>
+    <Column class="@B.TextCentered">
+        <p>区分颜色</p>
+        <p>
+            <Rate @bind-Value="val2" LowColor="#99A9BF" MiddleColor="#F7BA2A" HighColor="#FF0000"></Rate>
+        </p>
+    </Column>
+</Columns>
+
+@code {
+    double val1 = 4;
+    double val2 = 2;
+}

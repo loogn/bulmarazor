@@ -5,109 +5,47 @@
     <title>Title</title>
     <link href="_content/BulmaRazor/bulma.min.css" rel="stylesheet"/>
     <link href="_content/BulmaRazor/bulmarazor.min.css?v=1" rel="stylesheet"/>
+    <style>
+       
+        .rate {
+            /*white-space: pre;*/
+        }
 
+        /*.rate i:before {*/
+        /*    display: block;*/
+        /*    z-index: 1;*/
+        /*    position: absolute;*/
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*    width: 30%;*/
+        /*    content: 'S'; !* 伪元素的动态获取内容 *!*/
+        /*    overflow: hidden;*/
+        /*    color: #f00;*/
+        /*}*/
+        .rates{
+            position: relative;
+            color:lightgray;
+        }
+        .rates i{
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+        } 
+    </style>
 
 </head>
 
 
 <body>
 
-<div style="width:680px;">
-    <div class="columns">
-        <div class="column">
-            <nav class="panel">
-                <p class="panel-heading" style="font-size: unset;">
-                    <label>
-                        <input id="a" checked type="checkbox"/>
-                        左侧选择
-                    </label></p>
-                <div class="panel-block">
-                    <div class="control has-icons-left">
-                        <input type="text" class="input"/>
-                        <span class="icon is-left">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="panel-block">
-                    <ul style="min-height: 150px; max-height: 150px; width:100%; overflow: hidden;overflow-y: auto">
-                        <li class="mb-2">
-                            <label for="a1">
-                                <input id="a1" checked type="checkbox"/>左侧选择
-                            </label>
-                        </li>
-                        <li class="mb-2">
-                            <label for="a2">
-                                <input id="a2" checked type="checkbox"/>左侧选择
-                            </label>
-                        </li>
-                        <li class="mb-2">
-                            <label>
-                                <input id="a3" checked type="checkbox"/>左侧选择
-                            </label>
-                        </li>
-                        <li class="mb-2">
-                            <label>
-                                <input id="a4" checked type="checkbox"/>
-                                左侧选择
-                            </label>
-                        </li>
-                        <li class="mb-2">
-                            <label>
-                                <input id="a5" checked type="checkbox"/>
-                                左侧选择
-                            </label>
-                        </li>
-                        <li class="mb-2">
-                            <label>
-                                <input id="a6" type="checkbox"/>
-                                左侧选择
-                            </label>
-                        </li>
-                        <li class="mb-2">
-                            <label>
-                                <input id="a7" type="checkbox"/>
-                                左侧选择
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-<!--                <div class="panel-block"></div>-->
-            </nav>
+<div class="container">
 
-
-        </div>
-        <div class="column is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
-            <div class="buttons">
-                <button class="button is-link">
-                    <span class="icon">
-                        <i class="fa fa-angle-left"></i>
-                    </span>
-                </button>
-                <button class="button is-link" disabled>
-                     <span class="icon">
-                        <i class="fa fa-angle-right"></i>
-                    </span>
-                </button>
-            </div>
-        </div>
-        <div class="column">
-            <article class="message is-light">
-
-                <div class="message-header" style="position: relative">
-                    <p>
-                        <input id="b" class="is-checkradio" checked type="checkbox"/>
-                        <label for="b">
-                            左侧选择
-                        </label>
-                    </p>
-                </div>
-                <div class="message-body">
-                    sdf
-                </div>
-            </article>
-        </div>
-    </div>
+  <span class="icon rate">
+      <i class="fa fa-star rates">
+          <i class="fa fa-star" style="color: rgb(247, 186, 42); width: 70%;"></i>
+      </i>
+  </span>
 
 </div>
 
