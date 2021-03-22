@@ -20298,4 +20298,172 @@ span[data-tooltip].has-tooltip-danger {
   background-color: transparent;
 }
 
+.has-ribbon {
+  position: relative;
+}
+
+.has-ribbon-left {
+  position: relative;
+}
+
+.has-ribbon-left .ribbon {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 0.1rem solid #dbdbdb;
+}
+
+.has-ribbon-bottom {
+  position: relative;
+}
+
+.has-ribbon-bottom .ribbon {
+  top: auto;
+  bottom: .5em;
+}
+
+.ribbon {
+  background-color: white;
+  border: 0.1rem solid #dbdbdb;
+  border-right: none;
+  color: #363636;
+  font-size: 1rem;
+  justify-content: center;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  text-align: center;
+  white-space: nowrap;
+  position: absolute;
+  top: .5em;
+  right: 0;
+  font-weight: 400;
+  z-index: 2;
+}
+
+.ribbon.is-white:not(.is-outlined) {
+  background-color: white;
+  border-color: transparent;
+  color: #0a0a0a !important;
+}
+
+.ribbon.is-white.is-outlined {
+  background-color: transparent;
+  border-color: white;
+}
+
+.ribbon.is-black:not(.is-outlined) {
+  background-color: #0a0a0a;
+  border-color: transparent;
+  color: white !important;
+}
+
+.ribbon.is-black.is-outlined {
+  background-color: transparent;
+  border-color: #0a0a0a;
+}
+
+.ribbon.is-light:not(.is-outlined) {
+  background-color: whitesmoke;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.ribbon.is-light.is-outlined {
+  background-color: transparent;
+  border-color: whitesmoke;
+}
+
+.ribbon.is-dark:not(.is-outlined) {
+  background-color: #363636;
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.ribbon.is-dark.is-outlined {
+  background-color: transparent;
+  border-color: #363636;
+}
+
+.ribbon.is-primary:not(.is-outlined) {
+  background-color: #00d1b2;
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.ribbon.is-primary.is-outlined {
+  background-color: transparent;
+  border-color: #00d1b2;
+}
+
+.ribbon.is-link:not(.is-outlined) {
+  background-color: #485fc7;
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.ribbon.is-link.is-outlined {
+  background-color: transparent;
+  border-color: #485fc7;
+}
+
+.ribbon.is-info:not(.is-outlined) {
+  background-color: #3e8ed0;
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.ribbon.is-info.is-outlined {
+  background-color: transparent;
+  border-color: #3e8ed0;
+}
+
+.ribbon.is-success:not(.is-outlined) {
+  background-color: #48c78e;
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.ribbon.is-success.is-outlined {
+  background-color: transparent;
+  border-color: #48c78e;
+}
+
+.ribbon.is-warning:not(.is-outlined) {
+  background-color: #ffe08a;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.ribbon.is-warning.is-outlined {
+  background-color: transparent;
+  border-color: #ffe08a;
+}
+
+.ribbon.is-danger:not(.is-outlined) {
+  background-color: #f14668;
+  border-color: transparent;
+  color: #fff !important;
+}
+
+.ribbon.is-danger.is-outlined {
+  background-color: transparent;
+  border-color: #f14668;
+}
+
+.ribbon.is-small {
+  font-size: 0.75rem;
+}
+
+.ribbon.is-medium {
+  font-size: 1.25rem;
+}
+
+.ribbon.is-large {
+  font-size: 1.5rem;
+}
+
+.ribbon.is-outlined {
+  background-color: transparent;
+}
+
 /*# sourceMappingURL=bulma.css.map */

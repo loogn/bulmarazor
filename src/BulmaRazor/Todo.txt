@@ -10,6 +10,4 @@
 
 []树形控件
 
-[]ribbonhttps://github.com/Wikiki/bulma-ribbon
-
 []级联选择

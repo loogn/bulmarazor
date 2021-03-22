@@ -6,32 +6,7 @@
     <link href="_content/BulmaRazor/bulma.min.css" rel="stylesheet"/>
     <link href="_content/BulmaRazor/bulmarazor.min.css?v=1" rel="stylesheet"/>
     <style>
-       
-        .rate {
-            /*white-space: pre;*/
-        }
 
-        /*.rate i:before {*/
-        /*    display: block;*/
-        /*    z-index: 1;*/
-        /*    position: absolute;*/
-        /*    top: 0;*/
-        /*    left: 0;*/
-        /*    width: 30%;*/
-        /*    content: 'S'; !* 伪元素的动态获取内容 *!*/
-        /*    overflow: hidden;*/
-        /*    color: #f00;*/
-        /*}*/
-        .rates{
-            position: relative;
-            color:lightgray;
-        }
-        .rates i{
-            position: absolute;
-            left: 0;
-            top: 0;
-            overflow: hidden;
-        } 
     </style>
 
 </head>
@@ -41,18 +16,83 @@
 
 <div class="container">
 
-  <span class="icon rate">
-      <i class="fa fa-star rates">
-          <i class="fa fa-star" style="color: rgb(247, 186, 42); width: 70%;"></i>
-      </i>
-  </span>
+    <div class="columns is-multiline">
+        <div class="column">
+            <div class="has-ribbon">
+                <div class="ribbon">Default</div>
+                Box contenthr
+                <br>
+                sdfafd <br>sdfaf <br>ksddf
+            </div>
+        </div>
+        <div class="column">
+            <div class="box has-ribbon">
+                <div class="ribbon is-primary is-outlined">Primary</div>
+                Box content
+            </div>
+        </div>
+        <div class="column">
+            <div class="box has-ribbon">
+                <div class="ribbon is-primary">Primary</div>
+                Box content
+            </div>
+        </div>
+        <div class="column">
+            <div class="box has-ribbon">
+                <div class="ribbon is-warning">Warning</div>
+                Box content
+            </div>
+        </div>
+        <div class="column">
+            <div class="box has-ribbon">
+                <div class="ribbon is-danger">Danger</div>
+                Box content
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        <div class="column">
+            <div class="box has-ribbon is-small">
+                <div class="ribbon is-small is-primary">Small ribbon</div>
+                Box content
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="box has-ribbon is-small">
+                <div class="ribbon is-medium is-primary">Medium ribbon</div>
+                Box content
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="box has-ribbon is-small">
+                <div class="ribbon is-large is-primary">Large ribbon</div>
+                Box content
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        <div class="column">
+            <div class="box has-ribbon-left is-small">
+                <div class="ribbon is-small is-primary">Left ribbon</div>
+                Box content
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="box has-ribbon-bottom is-small">
+                <div class="ribbon is-small is-primary">Bottom ribbon</div>
+                Box content
+            </div>
+        </div>
+    </div>
 
 </div>
 
 
 <script>
-    // var picker = new JSColor("#cp", {closeButton: true});
-    // editor.getHtml();
+   
 </script>
 </body>
 </html>

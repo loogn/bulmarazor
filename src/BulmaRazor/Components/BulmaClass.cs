@@ -539,5 +539,11 @@ namespace BulmaRazor.Components
         public static readonly string TooltipDanger = "has-tooltip-danger";
 
         #endregion
+        
+        #region ribbon
+        public static readonly string Ribbon = "has-ribbon";
+        public static readonly string RibbonBottom = "has-ribbon-bottom";
+        public static readonly string RibbonLeft = "has-ribbon-left";
+        #endregion
     }
 }

@@ -1,0 +1,38 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@classes">
+    @ChildContent
+</div>
+
+
+@code {
+    string classes => CssBuilder.Default("ribbon")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-outlined", IsOutlined)
+        .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+    
+    [Parameter]
+    public bool IsSmall { get; set; }
+    [Parameter]
+    public bool IsNormal { get; set; }
+    [Parameter]
+    public bool IsMedium { get; set; }
+    [Parameter]
+    public bool IsLarge { get; set; }
+    
+    [Parameter]
+    public bool IsOutlined { get; set; }
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
