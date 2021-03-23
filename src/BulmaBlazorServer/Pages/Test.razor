@@ -6,48 +6,28 @@
 
 <Container style="overflow: scroll" class="@B.PY6">
 
-    
-    <div style="width:670px;">
-        score:<span>@score</span>
-        <Rate @bind-Value="score"
-               LowColor="#99A9BF"
-               MiddleColor="#F7BA2A"
-               HighColor="#FF0000"
-               LowIconClass="fa-frown-o"
-               MiddleIconClass="fa-meh-o"
-               HighIconClass="fa-smile-o"
-               VoidIconClass="fa-meh-o"
-               TextColor="#ff9900" ShowScore OnChanged="divFun">
-        </Rate>
-    </div>
+    <Carousel style="width:900px; overflow: hidden" Options="options">
+        @foreach (var bgclass in new[]
+        {
+            B.BackgroundBlack, B.BackgroundDanger,
+            B.BackgroundGrey, B.BackgroundInfo, B.BackgroundLink, B.BackgroundPrimary,
+            B.BackgroundSuccess
+        })
+        {
+            <div class="@bgclass" style="width:300px; height:240px;">
+            @bgclass
+            </div>
+        }
+
+    </Carousel>
+
 </Container>
 
 @code{
-    double score = 4.8;
-    void divFun(double score)
-    {
-        ToastService.Show(score.ToString());
-    }
 
-    bool filterFunc(Person p, string kw)
+    CarouselOptions options = new CarouselOptions()
     {
-        if (p.Id == 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    void show()
-    {
-        ToastService.Show("show.click");
-    }
-
-    void fun()
-    {
-    }
+        SlidesToShow = 3
+    };
 
 }

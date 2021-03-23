@@ -27,7 +27,8 @@ namespace BulmaRazorServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor()
+                .AddHubOptions(options => options.MaximumReceiveMessageSize = 4 * 1024 * 1024);
             
             services.AddJSWindow();
             services.AddBulmaRazor(options =>

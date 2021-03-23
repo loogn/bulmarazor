@@ -1,12 +1,12 @@
 
 
-[]编辑器 https://summernote.org/
+[X]编辑器 https://doc.wangeditor.com
+[X]carouselhttps://bulma-carousel.onrender.com/
+
 
 []tagsinput多选select?
 
-[]Slider 滑块
-
-[]carouselhttps://bulma-carousel.onrender.com/
+[]Slider 滑块 https://github.com/Wikiki/bulma-slider
 
 []树形控件
 

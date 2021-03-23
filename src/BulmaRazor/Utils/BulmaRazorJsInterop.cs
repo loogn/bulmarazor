@@ -16,6 +16,8 @@ namespace BulmaRazor.Components
         private readonly Lazy<Task<IJSObjectReference>> tuiEditorModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> fdatepickerModuleTask;
         private readonly Lazy<Task<IJSObjectReference>> jsColorModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> wangEditorModuleTask;
+        private readonly Lazy<Task<IJSObjectReference>> carouselModuleTask;
 
 
         public BulmaRazorJsInterop(IJSRuntime jsRuntime)
@@ -35,10 +37,9 @@ namespace BulmaRazor.Components
             collapsibleModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/collapsible.min.js").AsTask());
 
-            //collapsible
+            //tuiEditor
             tuiEditorModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/tuieditor.min.js").AsTask());
-
 
             //fdatepickerModuleTask
             fdatepickerModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
@@ -47,6 +48,14 @@ namespace BulmaRazor.Components
             //jscolor
             jsColorModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/BulmaRazor/js/jscolor.min.js").AsTask());
+
+            //wangEditor
+            wangEditorModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/js/wangEditor.min.js").AsTask());
+
+            //carousel
+            carouselModuleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/BulmaRazor/js/carousel.min.js").AsTask());
         }
 
         //fdatepicker
@@ -95,11 +104,18 @@ namespace BulmaRazor.Components
             return ToastShow(new ToastOptions() {Message = message});
         }
 
-        //editor
+        //markdown editor
         public async ValueTask<IJSObjectReference> TuiEditorInit(TuiEditorOptions options)
         {
             var module = await tuiEditorModuleTask.Value;
             return await module.InvokeAsync<IJSObjectReference>("initEditor", options.ToParams());
+        }
+
+        //wangeditor
+        public async ValueTask<IJSObjectReference> WangEditorInit(string id, WangEditorOptions options)
+        {
+            var module = await wangEditorModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("init", id, options.ToParams());
         }
 
         // js color
@@ -108,6 +124,13 @@ namespace BulmaRazor.Components
             options ??= new ColorPickerOptions();
             var module = await jsColorModuleTask.Value;
             return await module.InvokeAsync<IJSObjectReference>("init", "#" + id, options.ToParams());
+        }
+
+        // Carousel
+        public async ValueTask<IJSObjectReference> CarouselAttach(string id, CarouselOptions options)
+        {
+            var module = await carouselModuleTask.Value;
+            return await module.InvokeAsync<IJSObjectReference>("attach", id, options.ToParams());
         }
 
         #region 公共

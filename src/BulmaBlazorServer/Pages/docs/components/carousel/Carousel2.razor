@@ -1,0 +1,28 @@
+<Carousel style="overflow: hidden" Options="options">
+    @foreach (var bgclass in itemBgs)
+    {
+        <div class="@bgclass @B.Flex @B.JustifyContentCenter @B.AlignItemsCenter" style="height:340px;">
+            <Title>@bgclass</Title>
+        </div>
+    }
+</Carousel>
+
+
+@code{
+
+    string[] itemBgs =
+    {
+        B.BackgroundWarning, B.BackgroundBlack, B.BackgroundDanger,
+        B.BackgroundGrey, B.BackgroundInfo, B.BackgroundLink,
+        B.BackgroundSuccess, B.BackgroundGreyLighter
+    };
+
+    CarouselOptions options = new()
+    {
+        SlidesToShow = 3,
+        Autoplay = true,
+        Loop = true,
+        Infinite = true
+    };
+
+}

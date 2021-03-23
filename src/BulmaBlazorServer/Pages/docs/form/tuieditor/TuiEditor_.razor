@@ -14,10 +14,10 @@
 </Title>
 
 <DataTable TItem="ParamsInfo" Data="data" WithContainer IsBordered IsHoverable>
-    <DataTableColumn TItem="ParamsInfo" Label="参数名" Prop="Name"></DataTableColumn>
-    <DataTableColumn TItem="ParamsInfo" Label="类型" Prop="Type"></DataTableColumn>
-    <DataTableColumn TItem="ParamsInfo" Label="描述" Prop="Desc"></DataTableColumn>
-    <DataTableColumn TItem="ParamsInfo" Width="200px" Label="默认值" TdStyle="word-break: break-all;" Prop="Default"></DataTableColumn>
+    <DataTableColumn Label="参数名" Prop="Name"></DataTableColumn>
+    <DataTableColumn Label="类型" Prop="Type"></DataTableColumn>
+    <DataTableColumn Label="描述" Prop="Desc"></DataTableColumn>
+    <DataTableColumn Width="200px" Label="默认值" TdStyle="word-break: break-all;" Prop="Default"></DataTableColumn>
 </DataTable>
 
 @code{
@@ -33,8 +33,12 @@
         new() {Name = "UseCommandShortcut", Type = "bool?", Default = "true", Desc = "whether use keyboard shortcuts to perform commands"},
         new() {Name = "UseDefaultHTMLSanitizer", Type = "bool?", Default = "true", Desc = "use default htmlSanitizer"},
         new() {Name = "UsageStatistics", Type = "bool?", Default = "false", Desc = "send hostname to google analytics"},
-        new() {Name = "ToolbarItems", Type = "IEnumerable<string>", Default = "[heading,bold,italic,strike,divider,hr,quote,divider,ul,ol,task,indent," +
-                                                                              "outdent,divider,table,image,link,divider,code,codeblock]", Desc = "toolbar items."},
+        new()
+        {
+            Name = "ToolbarItems", Type = "IEnumerable<string>", Default = "[heading,bold,italic,strike,divider,hr,quote,divider,ul,ol,task,indent," +
+                                                                           "outdent,divider,table,image,link,divider,code,codeblock]",
+            Desc = "toolbar items."
+        },
         new() {Name = "Height", Type = "bool", Default = "", Desc = ""},
         new() {Name = "HideModeSwitch", Type = "bool?", Default = "true", Desc = "hide mode switch tab bar"},
         new() {Name = "Placeholder", Type = "string", Default = "", Desc = "The placeholder text of the editable element."},

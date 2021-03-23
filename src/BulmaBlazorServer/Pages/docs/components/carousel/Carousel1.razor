@@ -1,0 +1,40 @@
+<Columns>
+    <Column style="overflow: hidden">
+        <Carousel style="overflow: hidden">
+            @foreach (var bgclass in itemBgs)
+            {
+                <div class="@bgclass @B.Flex @B.JustifyContentCenter @B.AlignItemsCenter" style="height:340px;">
+                    <Title>@bgclass</Title>
+                </div>
+            }
+        </Carousel>
+    </Column>
+    <Column style="overflow: hidden">
+        <Carousel style="overflow: hidden" Options="options">
+            @foreach (var bgclass in itemBgs)
+            {
+                <div class="@bgclass @B.Flex @B.JustifyContentCenter @B.AlignItemsCenter" style="height:340px;">
+                    <Title>@bgclass</Title>
+                </div>
+            }
+        </Carousel>
+    </Column>
+</Columns>
+
+
+
+@code{
+
+    string[] itemBgs = {
+        B.BackgroundWarning,B.BackgroundBlack, B.BackgroundDanger,
+        B.BackgroundGrey, B.BackgroundInfo, B.BackgroundLink,
+        B.BackgroundSuccess,B.BackgroundGreyLighter
+    };
+    CarouselOptions options = new()
+    {
+        Autoplay = true,
+        Loop = true,
+        Infinite = true
+    };
+
+}

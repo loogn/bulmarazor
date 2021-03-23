@@ -1,0 +1,188 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+
+<div id="@Id" @attributes="Attributes" class="@classes">
+    @if (Value.HasValue())
+    {
+        @:@((MarkupString) Value) 
+    }
+    else
+    {
+        @:@ChildContent
+    }
+
+</div>
+
+@code {
+
+    // https://doc.wangeditor.com/ 
+    string classes => CssBuilder.Default()
+        .AddClassFromAttributes(Attributes)
+        .Build();
+
+    readonly string Id = "wangEditor_" + Guid.NewGuid().ToString("N");
+    IJSObjectReference editor;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public WangEditorOptions Options { get; set; }
+
+
+    [Parameter]
+    public EventCallback<WangEditor> OnChange { get; set; }
+
+    [Parameter]
+    public EventCallback<WangEditor> OnFocus { get; set; }
+
+    [Parameter]
+    public EventCallback<WangEditor> OnBlur { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Options == null)
+            Options = new WangEditorOptions();
+
+
+        JSCallbackManager.AddEventHandler(Id, "onchange", new Func<Dictionary<string, object>, Task>(async (ps) =>
+        {
+            if (BindEvent == "onchange")
+            {
+                await setValue(ps["html"].ToString());
+            }
+            await OnChange.InvokeAsync(this);
+        }));
+        JSCallbackManager.AddEventHandler(Id, "onfocus", new Func<Task>(() => OnFocus.InvokeAsync(this)));
+        JSCallbackManager.AddEventHandler(Id, "onblur", new Func<Dictionary<string, object>, Task>(async (ps) =>
+        {
+            if (BindEvent == "onblur")
+            {
+                await setValue(ps["html"].ToString());
+            }
+            await OnBlur.InvokeAsync(this);
+        }));
+
+        base.OnInitialized();
+    }
+
+    [Parameter]
+    public string BindEvent { get; set; } = "onblur"; //onblur|onchange
+
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task setValue(string html)
+    {
+        Value = html;
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        editor = await JsInterop.WangEditorInit(Id, Options);
+        if (Value.NoValue())
+        {
+            await setValue(await GetHtml());
+        }
+    }
+
+    #region  funs
+
+    public void SetContent(string html)
+    {
+        editor?.InvokeVoidAsync("txt.html", html);
+    }
+
+    public void AppendContent(string html)
+    {
+        editor?.InvokeVoidAsync("txt.append", html);
+    }
+
+    public ValueTask<string> GetHtml()
+    {
+        return editor?.InvokeAsync<string>("txt.html") ?? new ValueTask<string>("");
+    }
+
+    public ValueTask<string> GetText()
+    {
+        return editor?.InvokeAsync<string>("txt.text") ?? new ValueTask<string>("");
+    }
+
+    public void SetJSON(string json)
+    {
+        editor?.InvokeVoidAsync("txt.setJSON", json);
+    }
+
+    public ValueTask<string> GetJSON()
+    {
+        return editor?.InvokeAsync<string>("txt.getJSON") ?? new ValueTask<string>("");
+    }
+
+    public void ClearContent()
+    {
+        editor?.InvokeVoidAsync("txt.clear");
+    }
+
+    public void FullScreen()
+    {
+        editor?.InvokeVoidAsync("fullScreen");
+    }
+
+    public void UnFullScreen()
+    {
+        editor?.InvokeVoidAsync("unFullScreen");
+    }
+
+    public void CollapseSelectionRange()
+    {
+        editor?.InvokeVoidAsync("selection.collapseRange");
+    }
+
+    public ValueTask<string> GetSelectionText()
+    {
+        return editor?.InvokeAsync<string>("selection.getSelectionText") ?? new ValueTask<string>("");
+    }
+
+    public ValueTask<bool> IsSelectionEmpty()
+    {
+        return editor?.InvokeAsync<bool>("selection.isSelectionEmpty") ?? new ValueTask<bool>(false);
+    }
+
+    public void Disable()
+    {
+        editor?.InvokeVoidAsync("disable");
+    }
+
+    public void Enable()
+    {
+        editor?.InvokeVoidAsync("enable");
+    }
+
+    public void Destroy()
+    {
+        editor?.InvokeVoidAsync("destroy");
+    }
+
+    #endregion
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+
+
+    protected override ValueTask DisposeAsync(bool disposing)
+    {
+        Destroy();
+        JSCallbackManager.DisposeObject(Id);
+        return base.DisposeAsync(disposing);
+    }
+
+}

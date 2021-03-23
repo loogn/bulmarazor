@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Version>0.2.0</Version>
+        <Version>0.2.1</Version>
         <Description>BulmaRazor</Description>
         <Copyright>loogn@2021</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -10,14 +10,14 @@
         <RepositoryUrl>https://gitee.com/loogn/bulmarazor</RepositoryUrl>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageId>BulmaRazor</PackageId>
-        <AssemblyVersion>0.2.0.0</AssemblyVersion>
+        <AssemblyVersion>0.2.1.0</AssemblyVersion>
         <PackageIcon>nuget-logo.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
         <SupportedPlatform Include="browser" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+<!--        <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />-->
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
     </ItemGroup>
     <ItemGroup>
@@ -25,9 +25,33 @@
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
+        <None Remove="wwwroot\jsplugin\**" />
     </ItemGroup>
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\calendar\bulma-calendar-export.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\calendar\bulma-calendar.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\carousel\bulma-carousel-exports.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\carousel\bulma-carousel.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\collapsible\bulma-collapsible-export.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\collapsible\bulma-collapsible.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\fdatepicker\foundation-datepicker-export.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\fdatepicker\foundation-datepicker.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\jscolor\jscolor-export.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\jscolor\jscolor.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\quickview\bulma-quickview-export.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\quickview\bulma-quickview.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\tagsinput\bulma-tagsinput-export.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\tagsinput\bulma-tagsinput.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\tagsinput\bulma-tagsinput.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\toast\toast.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\tuieditor\toastui-editor-all.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\tuieditor\toastui-editor-export.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\wangEditor\wangEditor-exports.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\wangEditor\wangEditor.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\jsplugin\.DS_Store" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="wwwroot\jsplugin\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="wwwroot\jsplugin\**" />
     </ItemGroup>
 </Project>

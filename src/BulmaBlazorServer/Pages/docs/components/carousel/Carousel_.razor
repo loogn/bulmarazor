@@ -1,0 +1,546 @@
+@page "/docs/components/carousel"
+@layout DocLayout
+
+<Title>Carousel轮播</Title>
+<Subtitle Size="Size.Size4">
+    移植于 https://bulma-carousel.onrender.com/
+</Subtitle>
+<hr>
+
+<Content>
+    Carousel组件的子元素直接是轮播项即可
+</Content>
+
+<DocView ComType="Carousel1"/>
+
+<hr>
+<Title Size="Size.Size4">
+    多项显示
+</Title>
+<DocView ComType="Carousel2"/>
+<hr>
+
+<Title Size="Size.Size4">
+    Options参数说明
+</Title>
+
+<Table IsBordered IsFullwidth>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Default value</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Default value</th>
+    </tr>
+    </tfoot>
+    <tbody>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">InitialSlide</code>
+        </td>
+        <td>
+            Initial item index
+        </td>
+        <td>
+            <code>0</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">SlidesToScroll</code>
+        </td>
+        <td>
+            Slide to scroll on each step
+        </td>
+        <td>
+            <code>1</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">SlidesToShow</code>
+        </td>
+        <td>
+            Slides to show at a time
+        </td>
+        <td>
+            <code>1</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Navigation</code>
+        </td>
+        <td>
+            Display navigation buttons
+        </td>
+        <td>
+            <code>true</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">NavigationKeys</code>
+        </td>
+        <td>
+            Enable navigation with arrow keys
+        </td>
+        <td>
+            <code>true</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">NavigationSwipe</code>
+        </td>
+        <td>
+            Enable swipe navigation
+        </td>
+        <td>
+            <code>true</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Pagination</code>
+        </td>
+        <td>
+            Display pagination bullets
+        </td>
+        <td>
+            <code>true</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Loop</code>
+        </td>
+        <td>
+            Activate loop display mode
+        </td>
+        <td>
+            <code>false</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Infinite</code>
+        </td>
+        <td>
+            Activate infinite display mode
+        </td>
+        <td>
+            <code>false</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Effect</code>
+        </td>
+        <td>
+            Animation effect for item transition (translate|fade)
+        </td>
+        <td>
+            <code>translate</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Duration</code>
+        </td>
+        <td>
+            Transition animation duration (in ms)
+        </td>
+        <td>
+            <code>300</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Timing</code>
+        </td>
+        <td>
+            Transiation animation type
+        </td>
+        <td>
+            <code>ease</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">Autoplay</code>
+        </td>
+        <td>
+            Autoplay carousel
+        </td>
+        <td>
+            <code>false</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">AutoplaySpeed</code>
+        </td>
+        <td>
+            Time between each transition when autoplay is active (ms)
+        </td>
+        <td>
+            <code>3000</code>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <code style="white-space: nowrap;">PauseOnHover</code>
+        </td>
+        <td>
+            Stop autoplay when cursor hover carousel
+        </td>
+        <td>
+            <code>true</code>
+        </td>
+    </tr>
+    </tbody>
+</Table>
+
+<hr>
+<Title Size="Size.Size4">
+    方法
+</Title>
+
+
+<section class="section is-paddingless">
+<p>Carousel component provides some public methods to manually work with it.</p>
+<div class="table-container">
+    <table class="table is-bordered is-fullwidth ">
+        <thead>
+        <tr>
+            <th colspan="3">next()</th>
+        </tr>
+        <tr>
+            <th colspan="3">
+                <span class="has-text-weight-light">Slide to next item</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Parameters</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td>
+                <span></span>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Return values</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td colspan="2">
+                <span></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table class="table is-bordered is-fullwidth ">
+        <thead>
+        <tr>
+            <th colspan="3">previous()</th>
+        </tr>
+        <tr>
+            <th colspan="3">
+                <span class="has-text-weight-light">Slide to previous item</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Parameters</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td>
+                <span></span>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Return values</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td colspan="2">
+                <span></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table class="table is-bordered is-fullwidth ">
+        <thead>
+        <tr>
+            <th colspan="3">start()</th>
+        </tr>
+        <tr>
+            <th colspan="3">
+                <span class="has-text-weight-light">Start autoplay</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Parameters</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td>
+                <span></span>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Return values</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td colspan="2">
+                <span></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table class="table is-bordered is-fullwidth ">
+        <thead>
+        <tr>
+            <th colspan="3">stop()</th>
+        </tr>
+        <tr>
+            <th colspan="3">
+                <span class="has-text-weight-light">Stop autoplay</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Parameters</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td>
+                <span></span>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Return values</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td colspan="2">
+                <span></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table class="table is-bordered is-fullwidth ">
+        <thead>
+        <tr>
+            <th colspan="3">show(index, force)</th>
+        </tr>
+        <tr>
+            <th colspan="3">
+                <span class="has-text-weight-light">Show item at "index" a</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Parameters</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">index</code>
+            </td>
+            <td>
+                <span>Integer|null</span>
+            </td>
+            <td>
+                <span>Index of item to show</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">force</code>
+            </td>
+            <td>
+                <span>Boolean</span>
+            </td>
+            <td>
+                <span>Animate transition if true (default) or not if false</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Return values</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td colspan="2">
+                <span></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container">
+    <table class="table is-bordered is-fullwidth ">
+        <thead>
+        <tr>
+            <th colspan="3">reset()</th>
+        </tr>
+        <tr>
+            <th colspan="3">
+                <span class="has-text-weight-light">Reset Carousel to initial values</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Parameters</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td>
+                <span></span>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <span class="title is-7">Return values</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <code style="white-space: nowrap;">none</code>
+            </td>
+            <td colspan="2">
+                <span></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</section>

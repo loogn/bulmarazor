@@ -5,8 +5,14 @@
     <title>Title</title>
     <link href="_content/BulmaRazor/bulma.min.css" rel="stylesheet"/>
     <link href="_content/BulmaRazor/bulmarazor.min.css?v=1" rel="stylesheet"/>
-    <style>
 
+
+    <style>
+        .box1 {
+            height: 200px;
+            width: 300px !important;
+            border: 1px solid #ccc;
+        }
     </style>
 
 </head>
@@ -16,83 +22,44 @@
 
 <div class="container">
 
-    <div class="columns is-multiline">
-        <div class="column">
-            <div class="has-ribbon">
-                <div class="ribbon">Default</div>
-                Box contenthr
-                <br>
-                sdfafd <br>sdfaf <br>ksddf
-            </div>
-        </div>
-        <div class="column">
-            <div class="box has-ribbon">
-                <div class="ribbon is-primary is-outlined">Primary</div>
-                Box content
-            </div>
-        </div>
-        <div class="column">
-            <div class="box has-ribbon">
-                <div class="ribbon is-primary">Primary</div>
-                Box content
-            </div>
-        </div>
-        <div class="column">
-            <div class="box has-ribbon">
-                <div class="ribbon is-warning">Warning</div>
-                Box content
-            </div>
-        </div>
-        <div class="column">
-            <div class="box has-ribbon">
-                <div class="ribbon is-danger">Danger</div>
-                Box content
-            </div>
-        </div>
-    </div>
-    <div class="columns is-multiline">
-        <div class="column">
-            <div class="box has-ribbon is-small">
-                <div class="ribbon is-small is-primary">Small ribbon</div>
-                Box content
-            </div>
-        </div>
+    <div style="width:300px; overflow:hidden;">
+        <div id="carousel-demo" class="carousel">
 
-        <div class="column">
-            <div class="box has-ribbon is-small">
-                <div class="ribbon is-medium is-primary">Medium ribbon</div>
-                Box content
+            <div class="box1" style="background-color: silver">
+                <!-- Slide Content -->11111
             </div>
-        </div>
 
-        <div class="column">
-            <div class="box has-ribbon is-small">
-                <div class="ribbon is-large is-primary">Large ribbon</div>
-                Box content
+            <div class="box1" style="background-color: #0C9A9A">
+                <!-- Slide Content -->22222
             </div>
-        </div>
-    </div>
-    <div class="columns is-multiline">
-        <div class="column">
-            <div class="box has-ribbon-left is-small">
-                <div class="ribbon is-small is-primary">Left ribbon</div>
-                Box content
-            </div>
-        </div>
 
-        <div class="column">
-            <div class="box has-ribbon-bottom is-small">
-                <div class="ribbon is-small is-primary">Bottom ribbon</div>
-                Box content
+            <div class="box1" style="background-color: #0e2231">
+                <!-- Slide Content -->3333333
+            </div>
+
+            <div class="box1" style="background-color: darkgray">
+                <!-- Slide Content -->44444
+            </div>
+
+            <div class="box1" style="background-color: #4C566A">
+                <!-- Slide Content -->55555
             </div>
         </div>
     </div>
 
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
 <script>
-   
+
+    bulmaCarousel.attach('#carousel-demo',
+        {
+            slidesToShow: 1,
+            loop: true,
+            autoplay: true,
+            infinite:true,
+        });
+
 </script>
 </body>
 </html>

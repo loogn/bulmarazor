@@ -15,7 +15,7 @@
         .AddClass("is-active", isActive)
         .Build();
 
-    internal string contentCls => CssBuilder.Default("content")
+    internal string contentCls => CssBuilder.Default()
         .AddClass(B.Hidden, !isActive)
         .Build();
     

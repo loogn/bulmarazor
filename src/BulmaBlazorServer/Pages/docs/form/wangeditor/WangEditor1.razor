@@ -1,0 +1,21 @@
+<WangEditor @bind-Value="Value">
+    <blockquote>争做国内使用体验Z好的开源 Web 富文本编辑器！</blockquote>
+    <h1>为何选择 wangEditor</h1>
+    <ul>
+        <li>万星项目 <a href="https://github.com/wangeditor-team/wangEditor/releases">Github Star 1w+</a></li>
+        <li>简洁、轻量级、<a href="//doc.wangeditor.com/">文档</a>齐全</li>
+        <li>巴拉巴拉...</li>
+    </ul>
+    <h1>注意：</h1>
+    <p>上传图片默认是base64编码到内容中，内容较大，需要设置HubOptions.MaximumReceiveMessageSize,默认32kb</p>
+    <pre type="JavaScript"><code>services.AddServerSideBlazor()
+.AddHubOptions(options => options.MaximumReceiveMessageSize =5 * 1024 * 1024);</code></pre>
+</WangEditor>
+<h2>预览：</h2>
+<Content>
+    @((MarkupString) Value)
+</Content>
+
+@code{
+    private string Value; //使用WangEditor的ChildContent可以代替Value初始化
+}

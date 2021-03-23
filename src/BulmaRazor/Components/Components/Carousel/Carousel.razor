@@ -1,0 +1,72 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+<div id="@Id" @attributes="Attributes" class="@classes">
+    @ChildContent
+</div>
+
+@code{
+
+    string classes => CssBuilder.Default("carousel")
+        .AddClassFromAttributes(Attributes)
+        .Build();
+
+    readonly string Id = "carousel_" + Guid.NewGuid().ToString("N");
+    IJSObjectReference carousel;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+    [Parameter]
+    public CarouselOptions Options { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+        {
+            carousel = await JsInterop.CarouselAttach(Id, Options ?? new CarouselOptions());
+        }
+    }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+
+    #region  Func
+
+    public void Next()
+    {
+        carousel?.InvokeVoidAsync("next");
+    }
+
+    public void Prev()
+    {
+        carousel?.InvokeVoidAsync("previous");
+    }
+
+    public void Start()
+    {
+        carousel?.InvokeVoidAsync("start");
+    }
+
+    public void Stop()
+    {
+        carousel?.InvokeVoidAsync("stop");
+    }
+
+    public void Show(int index, bool isAnimateTransition = true)
+    {
+        carousel?.InvokeVoidAsync("show", index, isAnimateTransition);
+    }
+
+    public void Reset()
+    {
+        carousel?.InvokeVoidAsync("reset");
+    }
+
+    #endregion
+
+}

@@ -78,6 +78,28 @@
       "enabled": false
     }
   }
+,
+  {
+    "outputFileName": "wwwroot/js/wangEditor.min.js",
+    "inputFiles": [
+      "wwwroot/jsplugin/wangEditor/wangEditor.min.js",
+      "wwwroot/jsplugin/wangEditor/wangEditor-exports.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  }
+,
+  {
+    "outputFileName": "wwwroot/js/carousel.min.js",
+    "inputFiles": [
+      "wwwroot/jsplugin/carousel/bulma-carousel.min.js",
+      "wwwroot/jsplugin/carousel/bulma-carousel-exports.js"
+    ],
+    "minify": {
+      "enabled": false
+    }
+  }
   //    ,
   //    {
   //        "outputFileName": "wwwroot/js/site.min.js",
