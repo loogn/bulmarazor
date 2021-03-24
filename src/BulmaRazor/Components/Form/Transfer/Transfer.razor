@@ -14,35 +14,35 @@
                     @leftCount/@leftView.Count
                 </span>
             </p>
-           @if (Filterable)
-           {
-               <div class="panel-block">
-                   <div class="control has-icons-left">
-                       <input type="text" @bind="leftWord" @bind:event="oninput" @onkeyup="() => leftWordChange()" placeholder="@FilterPlaceholder" class="input"/>
-                       <span class="icon is-left">
-                           <i class="fa fa-search" aria-hidden="true"></i>
-                       </span>
-                   </div>
-               </div>
-           }
-           <div class="panel-block is-flex-grow-1 is-align-items-flex-start px-4">
-               <ul style="@ulStyle">
-                   @foreach (var item in leftView)
-                   {
-                       <li class="@B.Join(B.MB2, item.IsHidden? B.Hidden:"")">
-                       <label class="is-flex  is-align-items-center">
-                           <input type="checkbox" class="mr-2" checked="@item.IsChecked" @onchange="() => ItemCheckChange(item)"/>
-                           @item.ShowValue
-                       </label>
+            @if (Filterable)
+            {
+                <div class="panel-block">
+                    <div class="control has-icons-left">
+                        <input type="text" @bind="leftWord" @bind:event="oninput" @onkeyup="leftWordChange" placeholder="@FilterPlaceholder" class="input"/>
+                        <span class="icon is-left">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            }
+            <div class="panel-block is-flex-grow-1 is-align-items-flex-start px-4">
+                <ul style="@ulStyle">
+                    @foreach (var item in leftView)
+                    {
+                        <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : "")">
+                            <label class="is-flex  is-align-items-center">
+                                <input type="checkbox" class="mr-2" checked="@item.IsChecked" @onchange="()=> ItemCheckChange(item)"/>
+                                @item.ShowValue
+                            </label>
                         </li>
-                   }
-               </ul>
-           </div>
-           @if (LeftFooterSlot != null)
-           {
-               <div class="panel-block">@LeftFooterSlot</div>
-           }
-            
+                    }
+                </ul>
+            </div>
+            @if (LeftFooterSlot != null)
+            {
+                <div class="panel-block">@LeftFooterSlot</div>
+            }
+
         </nav>
 
     </div>
@@ -52,12 +52,14 @@
                 <span class="icon">
                     <i class="fa fa-angle-left"></i>
                 </span>
-                @if(LeftButtonText.HasValue()){
+                @if (LeftButtonText.HasValue())
+                {
                     <span>@LeftButtonText</span>
                 }
             </button>
             <button class="button is-link" disabled="@(leftCount == 0)" @onclick="() => Trans(leftView, rightView)">
-                @if(RightButtonText.HasValue()){
+                @if (RightButtonText.HasValue())
+                {
                     <span>@RightButtonText</span>
                 }
                 <span class="icon">
@@ -82,7 +84,7 @@
             {
                 <div class="panel-block">
                     <div class="control has-icons-left">
-                        <input type="text" @bind="rightWord" @bind:event="oninput" @onkeyup="() => rightWordChange()" placeholder="@FilterPlaceholder" class="input"/>
+                        <input type="text" @bind="rightWord" @bind:event="oninput" @onkeyup="rightWordChange" placeholder="@FilterPlaceholder" class="input"/>
                         <span class="icon is-left">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </span>
@@ -93,19 +95,19 @@
                 <ul style="@ulStyle">
                     @foreach (var item in rightView)
                     {
-                        <li class="@B.Join(B.MB2, item.IsHidden? B.Hidden:"")">
-                        <label class="is-flex is-align-items-center">
-                            <input class="mr-2" type="checkbox" checked="@item.IsChecked" @onchange="() => ItemCheckChange(item)"/>
-                            @item.ShowValue
-                        </label>
+                        <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : string.Empty)">
+                            <label class="is-flex is-align-items-center">
+                                <input class="mr-2" type="checkbox" checked="@item.IsChecked" @onchange="()=>ItemCheckChange(item)"/>
+                                @item.ShowValue
+                            </label>
                         </li>
                     }
                 </ul>
             </div>
             @if (RightFooterSlot != null)
-           {
-               <div class="panel-block">@RightFooterSlot</div>
-           }
+            {
+                <div class="panel-block">@RightFooterSlot</div>
+            }
         </nav>
     </div>
 </div>

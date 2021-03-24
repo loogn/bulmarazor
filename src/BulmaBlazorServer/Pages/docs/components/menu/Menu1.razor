@@ -1,7 +1,7 @@
 ﻿@inject NavigationManager nm
 @inject IJSRuntime js
 
-<Input @ref="            kwInput" class="@B.MB2" placeholder="Enter for search" @bind-Value="kw" @onkeypress="inputHandle">
+<Input @ref="kwInput" class="@B.MB2" placeholder="Enter for search" @bind-Value="kw" @onkeypress="inputHandle">
 <Menu OnItemClick="OnMenuClick">
     @foreach (var item in MenuData)
     {
@@ -9,10 +9,10 @@
         <MenuList>
             @foreach (var sub in item.Children)
             {
-                var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) | item.Keywords.Contains(kw.ToLower())));
-                var cls = flag ? "" : B.Hidden;
+                var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) || item.Keywords.Contains(kw.ToLower())));
+                var cls = (flag ? "" : B.Hidden);
                 <MenuItem class="@cls">
-                    <MenuLink href="@sub.Href">@sub.Label</MenuLink>
+                <MenuLink href="@sub.Href">@sub.Label</MenuLink>
                 </MenuItem>
             }
         </MenuList>

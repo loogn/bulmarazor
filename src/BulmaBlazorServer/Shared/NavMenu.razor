@@ -20,9 +20,7 @@
                            && (sub.Keywords.Any(x => x.StartsWith(kw.ToLower()))
                                || item.Keywords.Any(x => x.StartsWith(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
-                <MenuItem class="@cls" >
-                    <MenuLink href="@sub.Href">@sub.Label</MenuLink>
-                </MenuItem>
+                <MenuItem class="@cls"><MenuLink href="@sub.Href">@sub.Label</MenuLink></MenuItem>
             }
         </MenuList>
     }
@@ -110,6 +108,7 @@
                 new MItem("复选框(CheckBox)", "/docs/form/checkbox", "checkbox,复选"),
                 new MItem("单选框(Radio)", "/docs/form/radio", "单选,radio"),
                 new MItem("开关(Switch)", "/docs/form/switch", "开关,switch"),
+                new MItem("滑块(Slider)", "/docs/form/slider", "slider,滑块"),
                 new MItem("文件(File)", "/docs/form/file", "file,上传,文件"),
                 new MItem("标签输入框(TagsInput)", "/docs/form/tagsinput", "input,tag,tags,tagsinput,标签"),
                 new MItem("日期选择(DatePicker)", "/docs/form/datepicker", "date,datepicker,picker,日期,日期选择"),

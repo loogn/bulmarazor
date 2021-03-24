@@ -5,7 +5,8 @@
     <title>Title</title>
     <link href="_content/BulmaRazor/bulma.min.css" rel="stylesheet"/>
     <link href="_content/BulmaRazor/bulmarazor.min.css?v=1" rel="stylesheet"/>
-
+    <script src="_content/BulmaRazor/bulmarazor.min.js"></script>
+    <script src="_content/BulmaRazor/jsplugin/slider/bulma-slider.js"></script>
 
     <style>
         .box1 {
@@ -21,45 +22,29 @@
 <body>
 
 <div class="container">
-
-    <div style="width:300px; overflow:hidden;">
-        <div id="carousel-demo" class="carousel">
-
-            <div class="box1" style="background-color: silver">
-                <!-- Slide Content -->11111
-            </div>
-
-            <div class="box1" style="background-color: #0C9A9A">
-                <!-- Slide Content -->22222
-            </div>
-
-            <div class="box1" style="background-color: #0e2231">
-                <!-- Slide Content -->3333333
-            </div>
-
-            <div class="box1" style="background-color: darkgray">
-                <!-- Slide Content -->44444
-            </div>
-
-            <div class="box1" style="background-color: #4C566A">
-                <!-- Slide Content -->55555
-            </div>
-        </div>
-    </div>
-
+    <p>sdfds</p>
+    <p>dsfsdf</p>
+    <input id="sliderWithValue" oninput="fun(this.value,this)" onchange="fun(this.value,this)" 
+           class="is-info slider has-output is-fullwidth" min="21" max="22" value="21.01" step="0.01"
+           type="range">
+    <output id="aa" for="sliderWithValue">50</output>
+    
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
 <script>
-
-    bulmaCarousel.attach('#carousel-demo',
-        {
-            slidesToShow: 1,
-            loop: true,
-            autoplay: true,
-            infinite:true,
-        });
-
+    // bulmaSlider.attach();
+    function fun(val,e){
+        //  let width=$(e).width();
+        //  max=$(e).attr('max');
+        //
+        // var px= (width* val/ max -$("#aa").width())+"px";
+        //
+        //
+        //  $("#aa").css("left",px);
+        //  var top= $(e).offset().top-30;
+        // $("#aa").css('top',top);
+         $("#aa").val(val);
+    }
 </script>
 </body>
 </html>

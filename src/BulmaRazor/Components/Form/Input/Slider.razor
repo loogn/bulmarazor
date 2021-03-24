@@ -1,0 +1,81 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@typeparam TValue
+
+
+<input id="@Id" type="range" @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent"
+       class="@classes"/>
+@if (HasOutput)
+{
+    <output for="@Id">@ShowValue</output>
+}
+
+
+@code {
+
+    string Id = "slider_" + Guid.NewGuid().ToString("N");
+
+    protected string classes => CssBuilder.Default("slider")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-fullwidth", IsFullwidth)
+        .AddClass("has-output",HasOutput)
+        .AddClass("is-circle",IsCircle)
+        .Build();
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+    
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsNormal { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+    [Parameter]
+    public bool IsFullwidth { get; set; }
+    [Parameter]
+    public bool IsCircle { get; set; }
+ 
+    [Parameter]
+    public bool HasOutput { get; set; }
+
+    
+    [Parameter]
+    public string BindEvent { get; set; } = "onchange";
+
+    [Parameter]
+    public TValue Value { get; set; }
+
+   
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+
+
+    private TValue ShowValue
+    {
+        get { return Value; }
+        set
+        {
+            Value = value;
+            ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+        }
+    }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        if (HasOutput) BindEvent = "oninput";
+    }
+
+}

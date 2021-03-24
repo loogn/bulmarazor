@@ -1,13 +1,4 @@
-
-
-[X]编辑器 https://doc.wangeditor.com
-[X]carouselhttps://bulma-carousel.onrender.com/
-
-
 []tagsinput多选select?
-
-[]Slider 滑块 https://github.com/Wikiki/bulma-slider
-
 []树形控件
-
 []级联选择
+v1.0完成，休息一下
