@@ -9,11 +9,87 @@
     <script src="_content/BulmaRazor/jsplugin/slider/bulma-slider.js"></script>
 
     <style>
-        .box1 {
-            height: 200px;
-            width: 300px !important;
-            border: 1px solid #ccc;
+
+        .urp-cascader-content {
+            white-space: nowrap;
+            background: #fff;
+            border: 1px solid #e4e7ed;
+            border-right: 0px;
+            border-radius: 2px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+            position: absolute;
+            left: 0px;
+            top: 100%;
+            margin-top: 12px;
+            display: flex;
         }
+
+        ul.urp-cascader-child {
+            display: inline-block;
+            vertical-align: top;
+            height: 204px;
+            overflow: auto;
+            border-right: 1px solid #e4e7ed;
+            background-color: #fff;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 6px 0;
+            min-width: 135px;
+        }
+
+        ul.urp-cascader-child > li > i {
+            float: right;
+        }
+
+        ul.urp-cascader-child > li {
+            font-size: 14px;
+            padding: 8px 20px;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #606266;
+            height: 34px;
+            line-height: 1.5;
+            box-sizing: border-box;
+            cursor: pointer;
+            outline: none;
+        }
+
+        ul.urp-cascader-child li.active {
+            color: #409eff;
+        }
+
+        ul.urp-cascader-child > li:hover {
+            background-color: #f5f5f5;
+        }
+
+        ul.urp-cascader-child:first-of-type:after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 35px;
+            z-index: -1;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            transform: rotate(45deg);
+            border: 1px solid #e4e7ed;
+        }
+
+
+        /*input>.cascader{*/
+        /*    */
+        /*}*/
+        /*.cascader{*/
+        /*    display: flex;*/
+        /*    position: absolute;*/
+        /*    z-index: 100;*/
+        /*}*/
+        /*.cascader>ul{*/
+        /*    width:120px;*/
+        /*}*/
     </style>
 
 </head>
@@ -24,27 +100,90 @@
 <div class="container">
     <p>sdfds</p>
     <p>dsfsdf</p>
-    <input id="sliderWithValue" oninput="fun(this.value,this)" onchange="fun(this.value,this)" 
-           class="is-info slider has-output is-fullwidth" min="21" max="22" value="21.01" step="0.01"
-           type="range">
-    <output id="aa" for="sliderWithValue">50</output>
-    
+    <p>dsfsdf</p>
+    <p>dsfsdf</p>
+    <p>dsfsdf</p>
+
+    <div class="tags-input">
+        <span class="tag is-rounded" data-value="aa">
+        aa
+        <i class="delete is-small" data-tag="delete"></i>
+    </span><span class="tag is-rounded" data-value="bb">
+        bb
+        <i class="delete is-small" data-tag="delete"></i>
+    </span><span class="tag is-rounded" data-value="wewewe">
+        wewewe
+        <i class="delete is-small" data-tag="delete"></i>
+    </span><span class="tag is-rounded" data-value="ef233333">
+        ef233333
+        <i class="delete is-small" data-tag="delete"></i>
+    </span><span class="tag is-rounded is-selected" data-value="222222222222222222222222222222222222vvvvvvvvvvv">
+        222222222222222222222222222222222222vvvvvvvvvvv
+        <i class="delete is-small" data-tag="delete"></i>
+    </span>
+    </div>
+
+    <div class="select">
+        <input class="input" style="padding-right: 40px;text-overflow: ellipsis" readonly id="i1"
+               value="11,33,22,3,3,3,3,2222222222222s"/>
+
+        <div id="s1" class=" urp-cascader-content" style="display:none;">
+            <ul class="urp-cascader-child">
+                <li><input type="checkbox"/> 22</li>
+                <li class="active">33</li>
+                <li>444</li>
+                <li>555</li>
+            </ul>
+            <ul class="urp-cascader-child">
+                <li>22</li>
+                <li>33</li>
+                <li>444</li>
+                <li>555</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <p>dsfsdf</p>
+    <p>dsfsdf</p>
+    <p>dsfsdf</p>
+    <p>dsfsdf</p>
+
 </div>
 
 <script>
-    // bulmaSlider.attach();
-    function fun(val,e){
-        //  let width=$(e).width();
-        //  max=$(e).attr('max');
-        //
-        // var px= (width* val/ max -$("#aa").width())+"px";
-        //
-        //
-        //  $("#aa").css("left",px);
-        //  var top= $(e).offset().top-30;
-        // $("#aa").css('top',top);
-         $("#aa").val(val);
+    let s1 = $("#s1");
+    let i1 = $("#i1");
+    i1.click(function (e) {
+        // s1.css('top', 40);
+
+        s1.toggle();
+        e.stopPropagation();
+    })
+
+    function ClickWithoutSelf(id, selector) {
+        $(document).click(function (e) {
+            if (e.target.id == id || $(e.target).parents("#" + id).length > 0)
+                return;
+
+            if (selector) {
+                let self = false;
+                $(selector).each(function (index, ele) {
+                    if (ele === e.target) {
+                        self = true;
+                    }
+                });
+                if (self) return;
+
+                if ($(e.target).parents(selector).length > 0)
+                    return;
+            }
+            $("#" + id).hide();
+
+        })
     }
+
+    ClickWithoutSelf("s1");
 </script>
 </body>
 </html>

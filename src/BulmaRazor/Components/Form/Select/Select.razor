@@ -4,7 +4,7 @@
 @typeparam TValue
 
 <div class="@selectCls">
-    <select @attributes="Attributes" @onchange="ChangeHandle" multiple="@Multiple" size="@Rows">
+    <select @attributes="Attributes" @onchange="ChangeHandle">
         <CascadingValue Value="this" IsFixed="true">
             @ChildContent
         </CascadingValue>
@@ -14,7 +14,6 @@
 @code {
 
     string selectCls => CssBuilder.Default("select")
-        .AddClass("is-multiple", Multiple)
         .AddClass("is-rounded", IsRounded)
         .AddClass("is-hovered", IsHovered)
         .AddClass("is-focused", IsFocused)
@@ -86,35 +85,17 @@
 
     private async Task ChangeHandle(ChangeEventArgs e)
     {
-        if (Multiple)
+        if (e.Value.ToString().SetRealValue<TValue>(out TValue val))
         {
-            _values.Clear();
-            foreach (var item in items)
+            _value = val;
+            if (ValueChanged.HasDelegate)
             {
-                if (await item.GetSelected())
-                {
-                    _values.Add(item.Value);
-                }
-            }
-            if (ValuesChanged.HasDelegate)
-            {
-                await ValuesChanged.InvokeAsync(_values);
-            }
-        }
-        else
-        {
-            if (e.Value.ToString().SetRealValue<TValue>(out TValue val))
-            {
-                _value = val;
-                if (ValueChanged.HasDelegate)
-                {
-                    await ValueChanged.InvokeAsync(_value);
-                }
+                await ValueChanged.InvokeAsync(_value);
             }
         }
     }
 
-    private List<Option<TValue>> items { get; set; } = new List<Option<TValue>>();
+    private List<Option<TValue>> items { get; set; } = new();
 
     private int index = 0;
 
@@ -123,31 +104,5 @@
         item.Index = index++;
         items.Add(item);
     }
-
-
-        @* [Parameter] *@
-    public bool Multiple { get; set; }
-        @* [Parameter] *@
-    public int Rows { get; set; }
-
-
-    private HashSet<TValue> _values;
-        @* [Parameter] *@
-
-    public HashSet<TValue> Values
-    {
-        get { return _values; }
-        set
-        {
-            _values = value;
-            foreach (var item in items)
-            {
-                item.SetSelected(_values.Contains(item.Value));
-            }
-        }
-    }
-
-        @* [Parameter] *@
-    public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
 
 }

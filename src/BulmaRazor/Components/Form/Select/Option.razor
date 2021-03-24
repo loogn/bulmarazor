@@ -5,17 +5,20 @@
 
 @if (Selected)
 {
-    <option @ref="opt" @attributes="Attributes" class="@classes" value="@ShowValue" selected>@ChildContent
-</option>
+    <option @ref="opt" @attributes="Attributes" class="@classes" value="@ShowValue" selected>
+        @ChildContent
+    </option>
 }
 else
 {
-    <option @ref="opt" @attributes="Attributes" class="@classes" value="@ShowValue">@ChildContent
-</option>
+    <option @ref="opt" @attributes="Attributes" class="@classes" value="@ShowValue">
+        @ChildContent
+    </option>
 }
 
 
 @code {
+
     string classes => CssBuilder.Default("")
         .AddClassFromAttributes(Attributes)
         .Build();
@@ -28,7 +31,7 @@ else
 
     public async Task<bool> GetSelected()
     {
-        var result = await js.InvokeAsync<bool>("BulmaRazor.GetOptionSelected", new object[] { opt });
+        var result = await js.InvokeAsync<bool>("BulmaRazor.GetOptionSelected", new object[] {opt});
         Selected = result;
         return Selected;
     }
@@ -37,14 +40,7 @@ else
     public void SetSelected(bool ck)
     {
         Selected = ck;
-        if (Parent.Multiple)
-        {
-            js.InvokeVoidAsync("BulmaRazor.SetOptionSelected", new object[] { opt, ck }).GetAwaiter().GetResult();
-        }
-        else
-        {
-            StateHasChanged();
-        }
+        StateHasChanged();
     }
 
     [Parameter]
@@ -52,27 +48,21 @@ else
 
     private string ShowValue
     {
-        get
-        {
-            return  ExtendMethods.GetShowValue(Value,string.Empty);
-        }
+        get { return ExtendMethods.GetShowValue(Value, string.Empty); }
     }
 
     [CascadingParameter]
     public Select<TValue> Parent { get; set; }
 
     public int Index { get; set; }
+
     protected override void OnInitialized()
     {
         if (Parent == null) throw new ArgumentException("Option必须是Select的子组件");
         base.OnInitialized();
 
         Parent.AddItem(this);
-        if (Parent.Multiple && Parent.Values != null)
-        {
-            Selected = Parent.Values.Contains(Value);
-        }
-        else if (Parent.Value != null)
+        if (Parent.Value != null)
         {
             Selected = Parent.Value.Equals(Value);
         }
@@ -80,4 +70,5 @@ else
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }
