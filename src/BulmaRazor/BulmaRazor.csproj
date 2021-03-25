@@ -29,9 +29,6 @@
         <None Remove="wwwroot\css\**" />
     </ItemGroup>
     <ItemGroup>
-<!--        <Content Remove="wwwroot\jsplugin\**" />-->
-<!--        <Content Remove="wwwroot\css\**" />-->
-<!--        <Content Remove="bundleconfig.json" />-->
-<!--        <Content Remove="Todo.txt" />-->
+      <_ContentIncludedByDefault Remove="Components\Elements\Cascader\Cascader.razor" />
     </ItemGroup>
 </Project>

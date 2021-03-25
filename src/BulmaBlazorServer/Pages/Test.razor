@@ -4,14 +4,50 @@
 @inject BulmaRazorJsInterop JsInterop
 @inject ToastService ToastService
 
-<Container style="overflow: scroll" class="@B.PY6">
-    
-    <p>
-    value: @val    
-    </p>
-    <Slider disabled HasOutput IsCircle max="10" min="1" Color="Color.Primary" @bind-Value="val"></Slider>
+<Container class="@B.PY6">
+    <Button @onclick="fun">Click</Button>
+    <p>val:@Val</p>
+    <p>vals:@string.Join(",",Vals)</p>
 
+    <Cascader @ref="c1" style="width:40%" Data="getItems()" @bind-Values="Vals" IsRoundedTag IsIsolated IsMultiple>
+        <ItemSlot>
+            @context.Text
+            @if (context.Children.Any())
+            {
+                <span>(@context.Children.Count)</span>
+            }
+        </ItemSlot>
+    </Cascader>
+    
 </Container>
+
 @code{
-    int val=3;
+    Cascader<int> c1;
+    void fun()
+    {
+        
+    }
+
+    private int Val = 22;
+    HashSet<int> Vals = new() {11};
+    private List<CascaderItem<int>> getItems()
+    {
+        var list = new List<CascaderItem<int>>();
+        list.Add(new CascaderItem<int>() {Value = 1, Text = "1111"});
+        list.Add(new CascaderItem<int>() {Value = 2, Text = "2222"});
+        list[0].AddItem(11, "1-11");
+        list[0].AddItem(12, "1-12");
+        list[0].AddItem(13, "1-13");
+
+        list[1].AddItem(21, "2-11");
+        list[1].AddItem(22, "2-12");
+
+        list[1].Children[0].Disabled = false;
+        list[1].Children[0].AddItem(211, "211111");
+        list[1].Children[0].AddItem(212, "212222");
+        list[1].Children[0].AddItem(213, "2133333");
+
+        return list;
+    }
+
 }

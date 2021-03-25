@@ -1,0 +1,117 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@typeparam TValue
+
+<div id="@Id" @attributes="Attributes" class="@classes">
+    <div class="@tagsInputCls" style="min-height:auto; padding-right:40px;" @onclick="Toggle" @onclick:stopPropagation>
+
+        @if (IsMultiple)
+        {
+            if (IsCollapseTags)
+            {
+                if (SelectedList.Any())
+                {
+                    <span class="@GetTagCls()">
+                        @GetText(SelectedList.FirstOrDefault())
+                        <i class="delete is-small" @onclick="() => Remove(SelectedList.FirstOrDefault())" @onclick:stopPropagation></i>
+                    </span>
+                }
+                if (SelectedList.Count > 1)
+                {
+                    <span class="@GetTagCls()">
+                        + @(SelectedList.Count - 1)
+                    </span>
+                }
+            }
+            else
+            {
+                foreach (var item in SelectedList)
+                {
+                    <span class="@GetTagCls()">
+                        @GetText(item)
+                        <i class="delete is-small" @onclick="() => Remove(item)" @onclick:stopPropagation></i>
+                    </span>
+                }
+            }
+        }
+        else if (SelectedList.Any())
+        {
+            <span class="tag" style="background-color:unset;">
+                @GetText(SelectedList.FirstOrDefault())
+            </span>
+        }
+        @if (!SelectedList.Any())
+        {
+            <span class="tag placeholder">
+                @Placeholder
+            </span>
+        }
+        
+    </div>
+
+    <div class="@dropDownCls" @onclick:stopPropagation>
+        @RenderUL(dataView)
+
+        @{ var parent = dataView.FirstOrDefault(x => x.IsSelected && x.Children.Any()); }
+        @while (parent != null)
+        {
+            @:@RenderUL(parent.Children)
+            parent = parent.Children.FirstOrDefault(x => x.IsSelected && x.Children.Any());
+        }
+
+    </div>
+
+    @if (Clearable && SelectedList.Any())
+    {
+        <span class="icon @B.TextGreyLight @B.Clickable" @onclick="ClearSelectedNodes" @onclick:stopPropagation>
+            <i class="fa fa-times-circle-o"></i>
+        </span>
+    }
+    else
+    {
+        <span class="icon @B.Clickable" @onclick="Toggle" @onclick:stopPropagation>
+            
+            <i class="fa @(isShow?"fa-angle-up":"fa-angle-down")"></i>
+        </span>
+    }
+
+</div>
+
+@code {
+
+    RenderFragment<IEnumerable<CascaderItem<TValue>>> RenderUL => list =>
+        @<ul class="cascader-item">
+            @foreach (var item in list)
+            {
+                <li class="@GetItemCls(item)" @onclick="() => SelectOne(list, item)" @onclick:stopPropagation>
+                    @if (IsMultiple)
+                    {
+                        var cked = GetItemChecked(item);
+                        <input checked="@cked" disabled="@item.Disabled" type="checkbox" @onchange="() => Check(item, cked)" />
+                    }
+                    @if (IsIsolated && !IsMultiple)
+                    {
+                        <input name="@Id" checked="@item.IsChecked" disabled="@item.Disabled"
+                        type="radio" @onchange="() => CheckRadio(item)" />
+                    }
+                    <span class="is-flex-grow-1">
+                    @if (ItemSlot != null)
+                    {
+                        @:@ItemSlot(item)
+                    }
+                    else
+                    {
+                        @:@item.Text 
+                    }
+                    </span>
+                    @if (item.Children.Any())
+                    {
+                        <span class="icon">
+                            <i class="fa fa-angle-right"></i>
+                        </span>
+                    }
+                </li>
+            }
+        </ul>;
+
+}
