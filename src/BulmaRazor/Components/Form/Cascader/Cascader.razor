@@ -3,7 +3,7 @@
 @typeparam TValue
 
 <div id="@Id" @attributes="Attributes" class="@classes">
-    <div class="@tagsInputCls" style="min-height:auto; padding-right:40px;" @onclick="Toggle" @onclick:stopPropagation>
+    <div class="@tagsInputCls" @onclick="Toggle" @onclick:stopPropagation>
 
         @if (IsMultiple)
         {
@@ -36,7 +36,7 @@
         }
         else if (SelectedList.Any())
         {
-            <span class="tag" style="background-color:unset;">
+            <span class="tag tag-label">
                 @GetText(SelectedList.FirstOrDefault())
             </span>
         }
@@ -49,31 +49,33 @@
         
     </div>
 
-    <div class="@dropDownCls" @onclick:stopPropagation>
-        @RenderUL(dataView)
+    <div class="@B.FlexShrink0">
+        <div class="@dropDownCls" @onclick:stopPropagation>
+            @RenderUL(dataView)
 
-        @{ var parent = dataView.FirstOrDefault(x => x.IsSelected && x.Children.Any()); }
-        @while (parent != null)
+            @{ var parent = dataView.FirstOrDefault(x => x.IsSelected && x.Children.Any()); }
+            @while (parent != null)
+            {
+                @:@RenderUL(parent.Children)
+                parent = parent.Children.FirstOrDefault(x => x.IsSelected && x.Children.Any());
+            }
+
+        </div>
+
+        @if (Clearable && SelectedList.Any())
         {
-            @:@RenderUL(parent.Children)
-            parent = parent.Children.FirstOrDefault(x => x.IsSelected && x.Children.Any());
+            <span class="drop-icon icon @B.TextGreyLight @B.Clickable" @onclick="ClearSelectedNodes" @onclick:stopPropagation>
+                <i class="fa fa-times-circle-o"></i>
+            </span>
         }
-
+        else
+        {
+            <span class="drop-icon icon @B.Clickable" @onclick="Toggle" @onclick:stopPropagation>
+                
+                <i class="fa @(isShow?"fa-angle-up":"fa-angle-down")"></i>
+            </span>
+        }
     </div>
-
-    @if (Clearable && SelectedList.Any())
-    {
-        <span class="icon @B.TextGreyLight @B.Clickable" @onclick="ClearSelectedNodes" @onclick:stopPropagation>
-            <i class="fa fa-times-circle-o"></i>
-        </span>
-    }
-    else
-    {
-        <span class="icon @B.Clickable" @onclick="Toggle" @onclick:stopPropagation>
-            
-            <i class="fa @(isShow?"fa-angle-up":"fa-angle-down")"></i>
-        </span>
-    }
 
 </div>
 
@@ -87,14 +89,15 @@
                     @if (IsMultiple)
                     {
                         var cked = GetItemChecked(item);
-                        <input checked="@cked" disabled="@item.Disabled" type="checkbox" @onchange="() => Check(item, cked)" />
+                        <input class="@B.Clickable" checked="@cked" disabled="@item.Disabled" type="checkbox"
+                               @onclick="() => Check(item, cked)" />
                     }
                     @if (IsIsolated && !IsMultiple)
                     {
-                        <input name="@Id" checked="@item.IsChecked" disabled="@item.Disabled"
-                        type="radio" @onchange="() => CheckRadio(item)" />
+                        <input class="@B.Clickable" name="@Id" checked="@item.IsChecked" disabled="@item.Disabled"
+                        type="radio" @onclick="() => CheckRadio(item)" />
                     }
-                    <span class="is-flex-grow-1">
+                    <span class="cascader-label">
                     @if (ItemSlot != null)
                     {
                         @:@ItemSlot(item)

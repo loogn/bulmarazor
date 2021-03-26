@@ -1,0 +1,88 @@
+@page "/docs/form/cascader"
+@layout DocLayout
+
+<Title>Cascader级联选择器</Title>
+
+<hr>
+<Content>
+    <p>当一个数据集合有清晰的层级结构时，可通过级联选择器逐级查看并选择。</p>
+</Content>
+
+
+<Title Size="Size.Size4">
+    基本用法
+</Title>
+<Content>
+    <p>数据源可以从json数据加载过来</p>
+</Content>
+<DocView ComType="Cascader1"/>
+<hr>
+
+<Title Size="Size.Size4">
+    禁用选项
+</Title>
+<Content>
+    <p>通过在数据源中设置 Disabled 字段来声明该选项是禁用的</p>
+</Content>
+<DocView ComType="Cascader2"/>
+<hr>
+
+
+<Title Size="Size.Size4">
+    可清空
+</Title>
+<Content>
+    <p>通过 Clearable 设置输入框可清空</p>
+</Content>
+<DocView ComType="Cascader3"/>
+<hr>
+<Title Size="Size.Size4">
+    仅显示最后一级
+</Title>
+<Content>
+    <p>通过设置 ShowAllLevels="false" 可以仅在输入框中显示选中项最后一级的标签，而不是选中项所在的完整路径。</p>
+</Content>
+<DocView ComType="Cascader4"/>
+<hr>
+
+<Title Size="Size.Size4">
+    多选
+</Title>
+<Content>
+    <p>可通过 IsMultiple = true 来开启多选模式</p>
+    <p>在开启多选模式后，默认情况下会展示所有已选中的选项的Tag可通过 IsCollapseTags = true 来折叠Tag</p>
+</Content>
+
+<DocView ComType="Cascader5"/>
+
+<hr>
+
+<Title Size="Size.Size4">
+    选择任意一级选项
+</Title>
+<Content>
+    <p>可通过设置 IsIsolated = true 让父子节点取消关联选，择任意一级选项。</p>
+    <p>单选和多选模式都可以使用</p>
+</Content>
+
+<DocView ComType="Cascader6"/>
+
+<hr>
+
+<Title Size="Size.Size4">
+    自定义节点内容
+</Title>
+<Content>
+    <p>可以使用 ItemSlot 自定义选项的节点内容</p>
+</Content>
+
+<DocView ComType="Cascader7"/>
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+

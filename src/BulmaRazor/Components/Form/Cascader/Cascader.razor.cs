@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using BulmaRazor.Utils;
 using Microsoft.AspNetCore.Components;
@@ -13,9 +14,12 @@ namespace BulmaRazor.Components
 
         readonly string Id = "cascader_" + Guid.NewGuid().ToString("N");
 
-        private bool hoverInput;
-
-        string classes => CssBuilder.Default("cascader")
+        string classes => CssBuilder.Default("input")
+            .AddClass("cascader")
+            .AddClass("is-small", IsSmall)
+            .AddClass("is-normal", IsNormal)
+            .AddClass("is-medium", IsMedium)
+            .AddClass("is-large", IsLarge)
             .AddClassFromAttributes(Attributes)
             .Build();
 
@@ -23,32 +27,27 @@ namespace BulmaRazor.Components
             .AddClass(B.Hidden, !isShow)
             .Build();
 
-        private string tagsInputCls => CssBuilder.Default("tags-input")
+        private string tagsInputCls => CssBuilder.Default("cascader-tags")
             .AddClass(B.Clickable)
-            .AddClass("is-small", IsSmall)
-            .AddClass("is-normal", IsNormal)
-            .AddClass("is-medium", IsMedium)
-            .AddClass("is-large", IsLarge)
             .Build();
 
         private string GetItemCls(CascaderItem<TValue> item)
         {
             return CssBuilder.Default()
-                .AddClass("active", item.IsSelected)
+                .AddClass("active", item.IsSelected || item.IsChecked)
                 .AddClass("is-disabled", item.Disabled)
+                .AddClass(B.Clickable, !item.Disabled)
                 .Build();
         }
 
         private bool GetItemChecked(CascaderItem<TValue> item)
         {
-            if (item.Children.Any())
+            if (IsMultiple && !IsIsolated && item.Children.Any())
             {
                 return item.Children.All(x => x.IsChecked);
             }
-            else
-            {
-                return item.IsChecked;
-            }
+
+            return item.IsChecked;
         }
 
         private string GetTagCls()
@@ -117,7 +116,7 @@ namespace BulmaRazor.Components
                 await JsInterop.BindClickWithoutSelf(Id);
             }
         }
-        
+
         private void CheckValues(CascaderItem<TValue> item, HashSet<TValue> values)
         {
             if (values.Contains(item.Value))
@@ -128,6 +127,7 @@ namespace BulmaRazor.Components
                     SelectedList.Add(item);
                 }
             }
+
             foreach (var subItem in item.Children)
             {
                 CheckValues(subItem, values);
@@ -200,8 +200,6 @@ namespace BulmaRazor.Components
         {
             if (item.Disabled) return;
 
-            if (IsMultiple && item.Children.Count == 0) return;
-
 
             foreach (var cascaderItem in list)
             {
@@ -209,7 +207,9 @@ namespace BulmaRazor.Components
                 cascaderItem.Children.ForEach(x => x.IsSelected = false);
             }
 
-            if (IsIsolated && !IsMultiple) return;
+            if (IsMultiple && item.Children.Count == 0) return;
+            if (IsIsolated && !IsMultiple && item.Children.Count == 0) return;
+
 
             if (item.Children.Count == 0)
             {
@@ -217,7 +217,6 @@ namespace BulmaRazor.Components
                 SelectedList.Add(item);
                 isShow = false;
                 await Fire();
-                
             }
         }
 
@@ -285,10 +284,16 @@ namespace BulmaRazor.Components
 
         private async Task CheckRadio(CascaderItem<TValue> item)
         {
+            foreach (var existsItems in SelectedList)
+            {
+                existsItems.IsChecked = false;
+                // existsItems.IsSelected = false;
+            }
+
             SelectedList.Clear();
-            SelectedList.Add(item);
             item.IsChecked = true;
             item.IsSelected = true;
+            SelectedList.Add(item);
             await Fire();
         }
 
@@ -317,5 +322,19 @@ namespace BulmaRazor.Components
             return SelectedList;
         }
 
+        public static List<CascaderItem<TValue>> BuildDataFromJson(string json)
+        {
+            var list = JsonSerializer.Deserialize<List<CascaderItem<TValue>>>(json, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            foreach (var item in list)
+            {
+                item.SetParent();
+            }
+
+            return list;
+        }
     }
 }

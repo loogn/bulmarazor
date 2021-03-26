@@ -9,14 +9,7 @@
     <p>val:@Val</p>
     <p>vals:@string.Join(",",Vals)</p>
 
-    <Cascader @ref="c1" style="width:40%" Data="getItems()" @bind-Values="Vals" IsRoundedTag IsIsolated IsMultiple>
-        <ItemSlot>
-            @context.Text
-            @if (context.Children.Any())
-            {
-                <span>(@context.Children.Count)</span>
-            }
-        </ItemSlot>
+    <Cascader @ref="c1" style="width:40%" Data="getItems()" @bind-Values="Vals" Clearable IsMultiple>
     </Cascader>
     
 </Container>

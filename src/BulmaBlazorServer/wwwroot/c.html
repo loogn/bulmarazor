@@ -9,7 +9,24 @@
     <script src="_content/BulmaRazor/jsplugin/slider/bulma-slider.js"></script>
     <link href="/css/site.css" rel="stylesheet"/>
     <style>
+        .cascader {
+            display: flex;
+            align-items: center;
+            height: auto;
+            
+        }
 
+        .cascader > .cascader-tags {
+            flex-grow: 1;
+            align-content: flex-start;
+            display: flex;
+            flex-wrap: wrap;
+            height: auto;
+            /*padding: 0;*/
+        }
+        .cascader > .cascader-tags .tag{
+            margin:.1rem;
+        }
     </style>
 
 </head>
@@ -24,8 +41,8 @@
     <p>dsfsdf</p>
     <p>dsfsdf</p>
 
-    <div class="cascader">
-        <div class="tags-input" id="i1">
+    <div class="cascader input">
+        <div class="cascader-tags" id="i1">
         
             <span class="tag is-rounded" data-value="aa">
             aa
@@ -46,22 +63,25 @@
 
 
         </div>
+        <div>
 
-        <div id="s1" class="cascader-dropdown" style="display:none;">
-            <ul class="cascader-item">
-                <li><input type="checkbox"/> 22</li>
-                <li class="active">33</li>
-                <li>444</li>
-                <li>555</li>
-            </ul>
-            <ul class="cascader-item">
-                <li>22</li>
-                <li>33</li>
-                <li>444</li>
-                <li>555</li>
-            </ul>
+            <div id="s1" class="cascader-dropdown" style="display:none;">
+                <ul class="cascader-item">
+                    <li><input type="checkbox"/> 22</li>
+                    <li class="active">33</li>
+                    <li>444</li>
+                    <li>555</li>
+                </ul>
+                <ul class="cascader-item">
+                    <li>22</li>
+                    <li>33</li>
+                    <li>444</li>
+                    <li>555</li>
+                </ul>
+            </div>
+            <div class="delete"></div>
         </div>
-        <div class="delete"></div>
+
     </div>
     <p>dsfsdf</p>
     <p>dsfsdf</p>

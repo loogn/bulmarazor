@@ -1,0 +1,10 @@
+<Cascader style="width:400px;" Data="data" @bind-Value="Val">
+</Cascader>
+
+@code{
+
+    string Val = "";
+    static string dataFile = "Pages/docs/form/cascader/data2.json";
+    List<CascaderItem<string>> data = Cascader<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));
+    
+}

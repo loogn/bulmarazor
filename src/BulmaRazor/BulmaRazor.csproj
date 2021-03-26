@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Version>0.2.1</Version>
+        <Version>0.2.2</Version>
         <Description>BulmaRazor is a component library built on top of Bulma and Blazor.</Description>
         <Copyright>loogn@2021</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -10,7 +10,7 @@
         <RepositoryUrl>https://gitee.com/loogn/bulmarazor</RepositoryUrl>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageId>BulmaRazor</PackageId>
-        <AssemblyVersion>0.2.1.0</AssemblyVersion>
+        <AssemblyVersion>0.2.2.0</AssemblyVersion>
         <PackageIcon>nuget-logo.png</PackageIcon>
     </PropertyGroup>
     <ItemGroup>
@@ -29,6 +29,8 @@
         <None Remove="wwwroot\css\**" />
     </ItemGroup>
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Components\Elements\Cascader\Cascader.razor" />
+<!--      <Content Remove="wwwroot\jsplugin\**" />-->
+<!--      <Content Remove="wwwroot\css\**" />-->
     </ItemGroup>
+   
 </Project>

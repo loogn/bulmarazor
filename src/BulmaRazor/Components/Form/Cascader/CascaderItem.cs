@@ -27,6 +27,15 @@ namespace BulmaRazor.Components
             var item = new CascaderItem<TValue>() {Value = value, Text = text};
             AddItem(item);
         }
+
+        public void SetParent()
+        {
+            foreach (var sub in Children)
+            {
+                sub.Parent = this;
+                sub.SetParent();
+            }
+        }
         
     }
 }
