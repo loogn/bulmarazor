@@ -6,10 +6,10 @@
     <div class="column is-flex is-flex-direction-column">
         <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
             <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
-                <label class="is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
-                    <input type="checkbox" class="mr-2" checked="@leftAll" @ref="leftCk" @onchange="() => CheckAll(1, !leftAll)"/>
+                <span @onclick="() => CheckAll(1, !(leftAll ?? false))" class="is-clickable is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
+                    <IconCheckBox Checked="@leftAll"></IconCheckBox>
                     @LeftTitle
-                </label>
+                </span>
                 <span class="is-flex-shrink-0 has-text-grey">
                     @leftCount/@leftView.Count
                 </span>
@@ -30,10 +30,11 @@
                     @foreach (var item in leftView)
                     {
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : "")">
-                            <label class="is-flex  is-align-items-center">
-                                <input type="checkbox" class="mr-2" checked="@item.IsChecked" @onchange="()=> ItemCheckChange(item)"/>
+
+                            <span class="is-flex is-align-items-center is-clickable" @onclick="() => ItemCheckChange(item)">
+                                <IconCheckBox  Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
-                            </label>
+                            </span>
                         </li>
                     }
                 </ul>
@@ -48,7 +49,7 @@
     </div>
     <div class="column is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
         <div class="buttons is-flex">
-            <button class="button is-link" disabled="@(rightCount == 0)" @onclick="() => Trans(rightView, leftView)">
+            <Button disabled="@(rightCount == 0)" @onclick="() => Trans(rightView, leftView)">
                 <span class="icon">
                     <i class="fa fa-angle-left"></i>
                 </span>
@@ -56,8 +57,8 @@
                 {
                     <span>@LeftButtonText</span>
                 }
-            </button>
-            <button class="button is-link" disabled="@(leftCount == 0)" @onclick="() => Trans(leftView, rightView)">
+            </Button>
+            <Button disabled="@(leftCount == 0)" @onclick="() => Trans(leftView, rightView)">
                 @if (RightButtonText.HasValue())
                 {
                     <span>@RightButtonText</span>
@@ -65,17 +66,18 @@
                 <span class="icon">
                     <i class="fa fa-angle-right"></i>
                 </span>
-            </button>
+            </Button>
         </div>
     </div>
     <div class="column is-flex is-flex-direction-column">
         <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
             <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
 
-                <label class="is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
-                    <input type="checkbox" class="mr-2" checked="@rightAll" @ref="rightCk" @onchange="() => CheckAll(2, !rightAll)"/>
+                <span @onclick="() => CheckAll(2, !(rightAll ?? false))" class="is-clickable is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
+                    <IconCheckBox Checked="@rightAll"></IconCheckBox>
                     @RightTitle
-                </label>
+                </span>
+
                 <span class="is-flex-shrink-0 has-text-grey">
                     @rightCount/@rightView.Count
                 </span>
@@ -96,10 +98,10 @@
                     @foreach (var item in rightView)
                     {
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : string.Empty)">
-                            <label class="is-flex is-align-items-center">
-                                <input class="mr-2" type="checkbox" checked="@item.IsChecked" @onchange="()=>ItemCheckChange(item)"/>
+                            <span class="is-flex is-align-items-center is-clickable" @onclick="() => ItemCheckChange(item)">
+                                <IconCheckBox  Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
-                            </label>
+                            </span>
                         </li>
                     }
                 </ul>

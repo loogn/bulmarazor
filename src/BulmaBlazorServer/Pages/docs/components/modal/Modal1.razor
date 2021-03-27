@@ -1,18 +1,34 @@
-<Modal @ref="m1" IsActive="isV">
-    <Content class="@B.BackgroundLight">
-        <p>
-            没有边框的弹出框
-        </p>
-    </Content>
+<Modal @ref="m1" IsActive="isV" ShowClose="@false">
+    <Message Color="Color.Warning">
+        <HeaderSlot>
+            <p>
+                完全自定义
+            </p>
+            <Delete @onclick="close"></Delete>
+        </HeaderSlot>
+        <BodySlot>
+            <Title Size="Size.Size4">这是一个Message组件</Title>
+            <p>
+                你可以放置任何东西
+            </p>
+            <Button Color="Color.Info" @onclick="close">关闭</Button>
+        </BodySlot>
+    </Message>
 </Modal>
 <Button @onclick=Show>Open</Button>
 
 @code{
     bool isV = false;
     Modal m1;
+
+    void close()
+    {
+        isV = false;
+    }
+
     void Show()
     {
-        isV = true;
-        // or  m1.Show();
+        isV = true; // or  m1.Show();
     }
+
 }

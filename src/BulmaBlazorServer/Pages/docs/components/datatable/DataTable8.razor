@@ -1,8 +1,10 @@
 @inject ToastService ToastService
 
-<Button @onclick="() => t1.ClearCheckedRows()">Clear</Button>
-<Button @onclick="() => t1.ToggleCheckedRows()">Toggle</Button>
-<Button @onclick="() => showChecked()">Show Checked Count</Button>
+<Buttons HasAddons>
+    <Button Color="Color.Danger" @onclick="() => t1.ClearCheckedRows()">Clear</Button>
+    <Button Color="Color.Info" @onclick="() => t1.ToggleCheckedRows()">Toggle</Button>
+    <Button Color="Color.Success" @onclick="() => showChecked()">Show Checked Count</Button>
+</Buttons>
 
 <DataTable @ref="t1" Data="data" TdClass="@B.TextCentered" ThClass="@B.TextCentered" TItem="Person"
             IsNarrow IsHoverable IsBordered IsStriped IsFullwidth>

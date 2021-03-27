@@ -9,6 +9,7 @@
     // https://github.com/CreativeBulma/bulma-divider/tree/master/dist
     
     string classes => CssBuilder.Default("divider")
+        .AddClass("has-label",ChildContent!=null)
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-left", IsLeft)

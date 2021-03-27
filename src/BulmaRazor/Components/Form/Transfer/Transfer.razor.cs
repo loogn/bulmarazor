@@ -13,15 +13,13 @@ namespace BulmaRazor.Components
         private TypeCachedInfo<TItem> typeCachedInfo = TypeCachedDict.GetTypeCachedInfo<TItem>();
         private List<TransferItem<TItem>> leftView = new();
         private List<TransferItem<TItem>> rightView = new();
-        private ElementReference leftCk;
-        private ElementReference rightCk;
-        private bool leftAll;
-        private bool rightAll;
+        
+        private bool? leftAll=false;
+        private bool? rightAll;
         private int leftCount;
         private int rightCount;
         private string leftWord;
         private string rightWord;
-
 
         private string ulStyle =>
             $"min-height: {MinHeight}px; max-height: {MaxHeight}px;margin:0; width:100%; overflow: hidden;overflow-y: auto";
@@ -44,6 +42,7 @@ namespace BulmaRazor.Components
 
         [Parameter] public string ShowProp { get; set; }
         [Parameter] public string Format { get; set; }
+        [Parameter] public Color Color { get; set; } = Color.Link;
 
         [Parameter] public Func<TItem, string> ShowFunc { get; set; }
 
@@ -113,35 +112,30 @@ namespace BulmaRazor.Components
 
             if (leftCount == 0)
             {
-                SetIndeterminate(leftCk, false);
                 leftAll = false;
             }
             else if (leftCount >= leftView.Count(x => !x.IsHidden))
             {
-                SetIndeterminate(leftCk, false);
                 leftAll = true;
             }
             else
             {
-                leftAll = false;
-                SetIndeterminate(leftCk, true);
+                leftAll = null;
             }
 
             rightCount = rightView.Count(x => x.IsChecked);
             if (rightCount == 0)
             {
-                SetIndeterminate(rightCk, false);
+                
                 rightAll = false;
             }
             else if (rightCount >= rightView.Count(x => !x.IsHidden))
             {
-                SetIndeterminate(rightCk, false);
                 rightAll = true;
             }
             else
             {
-                rightAll = false;
-                SetIndeterminate(rightCk, true);
+                rightAll = null;
             }
 
             StateHasChanged();
@@ -185,12 +179,7 @@ namespace BulmaRazor.Components
 
             DealCheckBoxStatus();
         }
-
-        public ValueTask SetIndeterminate(ElementReference ck, bool flag = true)
-        {
-            return JsInterop.SetIndeterminate(ck, flag);
-        }
-
+        
         protected override void OnInitialized()
         {
             base.OnInitialized();

@@ -3,6 +3,7 @@
 中文名字:布尔玛·瑞  
 官网地址: [http://bulmarazor.loogn.net/](http://bulmarazor.loogn.net/)  
 
+
 Bulma 是一个基于 Flexbox 构建的免费、开源的 CSS
 框架，已经有超过200,000开发者在使用。而BulmaRazor是基于Bulma样式框架开发的一套适用于Blazor的组件库。
 qq交流群:995865650
@@ -35,74 +36,17 @@ Install-Package BulmaRazor
     ```xml
     <Button Color="Color.Primary">Click</Button>
     ```
-# 包含的组件
-
-*☆代表稳定性,最高五颗星*
-
-- Columns
-	- Column :		☆☆☆☆☆
-- Layout
-	- Container :		☆☆☆☆☆
-	- Footer :		☆☆☆☆☆
-	- Hero :			☆☆☆☆
-	- Level :			☆☆☆☆☆
-	- Media :			☆☆☆☆☆
-	- Section :		☆☆☆☆☆
-	- Tile :			☆☆☆☆☆
-	- Divider : 		☆☆☆☆☆
-- Form
-	- Input:			☆☆☆☆☆
-	- CheckBox:		☆☆☆☆☆
-	- Switch:		☆☆☆☆
-	- Radio:			☆☆☆☆☆
-	- Select:			☆☆☆☆ 不支持多选
-	- Textarea:		☆☆☆☆☆
-	- Field:			☆☆☆☆☆
-	- Help:			☆☆☆☆☆
-	- Label:			☆☆☆☆☆
-	- Control:		☆☆☆☆☆
-	- File:			☆☆☆☆☆
-    - TagsInput:	☆☆☆
-    - DatePicker:   ☆☆☆
-    - ColorPicker: ☆☆☆
-    - TuiEditor:    ☆☆☆
-- Components 
-  -   DataTable     ☆☆☆
-	- Breadcrumb :	☆☆☆☆
-	- Card :			☆☆☆☆☆
-	- Dropdown ：		☆☆☆☆
-	- Menu ：			☆☆☆
-	- Message ：		☆☆☆☆☆
-	- Modal ：		☆☆☆☆☆
-	- Navbar ：		☆☆☆☆
-	- Pagination ：	☆☆☆☆
-	- Panel :			☆☆☆☆☆
-    - Tabs :	☆☆☆☆	
-    - Timeline :	☆☆☆☆
-    - Steps :	☆☆☆☆
-    - Collapse:     ☆☆☆☆
-- Elements
-	- Block :			☆☆☆☆☆
-	- Box :			☆☆☆☆☆
-	- Button :		☆☆☆☆☆
-	- Content :		☆☆☆☆☆
-	- Delete :		☆☆☆☆☆
-	- Icon :			☆☆☆☆☆
-	- Image ：		☆☆☆☆☆
-	- Notification ：	☆☆☆☆☆
-	- Progress ：		☆☆☆☆☆
-	- Table ：		☆☆☆☆☆
-	- Tag ：			☆☆☆☆☆
-	- Badge ：		☆☆☆
-	- Title ：		☆☆☆☆☆
-    - Tooltip ：	☆☆☆☆
-    - BlockList ：	☆☆☆☆
-    - Pageloader:   ☆☆☆☆
 	
 
 # 许可
 
 [MIT](https://gitee.com/loogn/bulmarazor/blob/master/LICENSE)  @ loogn
+
+# 感谢
+
+- 感谢微软Blazor框架
+- 感谢Bulma.css作者
+- 感谢所有使用者
 
 # 相关项目
 
