@@ -1,9 +1,21 @@
-<Cascader style="width:400px;" Data="data" @bind-Value="Val" IsLarge>
-</Cascader>
+<Content>
+    Value的值: @Value
+</Content>
+<Columns>
+    <Column>
+        <Cascader Data="data" @bind-Value="Value">
+        </Cascader>
+    </Column>
+    <Column>
+        <Cascader Data="data" @bind-Value="Value" IsSmall>
+        </Cascader>
+    </Column>
+</Columns>
+
 
 @code{
 
-    string Val = "";
+    string Value = "";
     //下面为了方便，直接从json文件加载数据
     static string dataFile = "Pages/docs/form/cascader/data1.json";
     List<CascaderItem<string>> data = Cascader<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));

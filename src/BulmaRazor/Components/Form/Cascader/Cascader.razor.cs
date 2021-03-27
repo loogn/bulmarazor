@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Transactions;
 using BulmaRazor.Utils;
 using Microsoft.AspNetCore.Components;
 
@@ -34,19 +35,24 @@ namespace BulmaRazor.Components
         private string GetItemCls(CascaderItem<TValue> item)
         {
             return CssBuilder.Default()
-                .AddClass("active", item.IsSelected || item.IsChecked)
+                .AddClass("active", item.GetIsActive())
                 .AddClass("is-disabled", item.Disabled)
                 .AddClass(B.Clickable, !item.Disabled)
                 .Build();
         }
+        private string GetCheckCls(CascaderItem<TValue> item)
+        {
+            return CssBuilder.Default()
+                .AddClass("active", item.GetHasChildrenChecked())
+                .Build();
+        }
 
-        private bool GetItemChecked(CascaderItem<TValue> item)
+        private bool? GetItemChecked(CascaderItem<TValue> item)
         {
             if (IsMultiple && !IsIsolated && item.Children.Any())
             {
-                return item.Children.All(x => x.IsChecked);
+                return item.GetCheckedStatus();
             }
-
             return item.IsChecked;
         }
 
@@ -85,10 +91,12 @@ namespace BulmaRazor.Components
         [Parameter] public RenderFragment<CascaderItem<TValue>> ItemSlot { get; set; }
 
         [Parameter] public EventCallback<Cascader<TValue>> OnChange { get; set; }
-        [Parameter] public TValue Value { get; set; }
-        [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
 
+        [Parameter] public TValue Value { get; set; }
+
+        [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
         [Parameter] public HashSet<TValue> Values { get; set; }
+
         [Parameter] public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
 
         private async Task Fire()
@@ -134,10 +142,11 @@ namespace BulmaRazor.Components
             }
         }
 
-        protected override Task OnInitializedAsync()
+        private void InitData()
         {
             if (Data != null)
             {
+                SelectedList.Clear();
                 HashSet<TValue> values = null;
                 if (IsMultiple && Values != null && Values.Any())
                 {
@@ -158,7 +167,17 @@ namespace BulmaRazor.Components
 
                 dataView = Data;
             }
+        }
 
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
+            InitData();
+        }
+
+        protected override Task OnInitializedAsync()
+        {
+            // InitData();
             JSCallbackManager.AddEventHandler(Id, "clickWithoutSelf", new Action(() =>
             {
                 isShow = false;
@@ -200,32 +219,43 @@ namespace BulmaRazor.Components
         {
             if (item.Disabled) return;
 
-
             foreach (var cascaderItem in list)
             {
-                cascaderItem.IsSelected = cascaderItem == item;
-                cascaderItem.Children.ForEach(x => x.IsSelected = false);
+                cascaderItem.IsOpen = false;
+                cascaderItem.IsSelected = false;
+                cascaderItem.Children.ForEach(x =>
+                {
+                    x.IsOpen = false;
+                    x.IsSelected = false;
+                });
             }
 
             if (IsMultiple && item.Children.Count == 0) return;
             if (IsIsolated && !IsMultiple && item.Children.Count == 0) return;
 
-
             if (item.Children.Count == 0)
             {
+                var curr = SelectedList.FirstOrDefault();
+                if (curr != null) curr.IsChecked = false;
+                item.IsChecked = true;
                 SelectedList.Clear();
                 SelectedList.Add(item);
                 isShow = false;
                 await Fire();
+            }
+            else
+            {
+                item.IsSelected = true;
+                item.IsOpen = true;
             }
         }
 
 
         private void CheckChildren(CascaderItem<TValue> item)
         {
-            item.IsChecked = true;
             if (item.Children.Count == 0)
             {
+                item.IsChecked = true;
                 SelectedList.Add(item);
             }
             else
@@ -250,23 +280,25 @@ namespace BulmaRazor.Components
 
         private async Task Check(CascaderItem<TValue> item, bool cked)
         {
+            if(item.Disabled) return;
+            
             if (IsIsolated || item.Children.Count == 0)
             {
+                //直接处理自己
                 if (item.IsChecked)
                 {
                     SelectedList.Remove(item);
                     item.IsChecked = false;
-                    item.IsSelected = false;
                 }
                 else
                 {
                     SelectedList.Add(item);
                     item.IsChecked = true;
-                    item.IsSelected = true;
                 }
             }
             else
             {
+                //级联多选
                 if (cked)
                 {
                     //取消
@@ -284,6 +316,7 @@ namespace BulmaRazor.Components
 
         private async Task CheckRadio(CascaderItem<TValue> item)
         {
+            if(item.Disabled) return;
             foreach (var existsItems in SelectedList)
             {
                 existsItems.IsChecked = false;

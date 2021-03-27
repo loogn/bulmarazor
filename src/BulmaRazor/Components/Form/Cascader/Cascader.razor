@@ -46,18 +46,18 @@
                 @Placeholder
             </span>
         }
-        
+
     </div>
 
     <div class="@B.FlexShrink0">
         <div class="@dropDownCls" @onclick:stopPropagation>
             @RenderUL(dataView)
 
-            @{ var parent = dataView.FirstOrDefault(x => x.IsSelected && x.Children.Any()); }
+            @{ var parent = dataView.FirstOrDefault(x => x.IsOpen && x.Children.Any()); }
             @while (parent != null)
             {
                 @:@RenderUL(parent.Children)
-                parent = parent.Children.FirstOrDefault(x => x.IsSelected && x.Children.Any());
+                parent = parent.Children.FirstOrDefault(x => x.IsOpen && x.Children.Any());
             }
 
         </div>
@@ -65,14 +65,14 @@
         @if (Clearable && SelectedList.Any())
         {
             <span class="drop-icon icon @B.TextGreyLight @B.Clickable" @onclick="ClearSelectedNodes" @onclick:stopPropagation>
-                <i class="fa fa-times-circle-o"></i>
+                <i class="fa fa-times-circle"></i>
             </span>
         }
         else
         {
             <span class="drop-icon icon @B.Clickable" @onclick="Toggle" @onclick:stopPropagation>
-                
-                <i class="fa @(isShow?"fa-angle-up":"fa-angle-down")"></i>
+
+                <i class="fa @(isShow ? "fa-angle-up" : "fa-angle-down")"></i>
             </span>
         }
     </div>
@@ -89,23 +89,21 @@
                     @if (IsMultiple)
                     {
                         var cked = GetItemChecked(item);
-                        <input class="@B.Clickable" checked="@cked" disabled="@item.Disabled" type="checkbox"
-                               @onclick="() => Check(item, cked)" />
+                        <IconCheckBox class="@GetCheckCls(item)" Checked="@cked" @onclick="() => Check(item, cked ?? false)"></IconCheckBox>
                     }
                     @if (IsIsolated && !IsMultiple)
                     {
-                        <input class="@B.Clickable" name="@Id" checked="@item.IsChecked" disabled="@item.Disabled"
-                        type="radio" @onclick="() => CheckRadio(item)" />
+                        <IconRadio Checked="@item.IsChecked" @onclick="() => CheckRadio(item)"></IconRadio>
                     }
                     <span class="cascader-label">
-                    @if (ItemSlot != null)
-                    {
-                        @:@ItemSlot(item)
-                    }
-                    else
-                    {
-                        @:@item.Text 
-                    }
+                        @if (ItemSlot != null)
+                        {
+                            @:@ItemSlot(item)
+                        }
+                        else
+                        {
+                            @:@item.Text
+                        }
                     </span>
                     @if (item.Children.Any())
                     {

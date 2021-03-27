@@ -1,0 +1,46 @@
+﻿@namespace BulmaRazor.Components
+
+@inherits BulmaComponentBase
+
+<span @attributes="Attributes" class="@classes">
+    <i class="@IconClass"></i>
+</span>
+
+@code {
+
+    string classes => CssBuilder.Default("icon")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass(Color.ToTextColor(), Color.Value)
+        .AddClass("is-left", IsLeft)
+        .AddClass("is-right", IsRight)
+        .Build();
+
+    string IconClass => Checked == null ? "fa fa-minus-square" : Checked.Value ? "fa fa-check-square" : "fa fa-square-o";
+
+
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    [Parameter]
+    public bool? Checked { get; set; }
+
+
+    [Parameter]
+    public bool IsLeft { get; set; }
+
+    [Parameter]
+    public bool IsRight { get; set; }
+
+}

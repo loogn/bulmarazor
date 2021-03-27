@@ -1,19 +1,18 @@
 <Columns>
     <Column>
-        <Cascader style="width:400px;" Data="data1" @bind-Value="Val" Clearable IsIsolated>
+        <Cascader style="width:400px;" Data="data1"  Clearable IsIsolated>
         </Cascader>
 
     </Column>
     <Column>
-        <Cascader style="width:400px;" Data="data2" @bind-Value="Val" Clearable IsIsolated IsMultiple>
+        <Cascader style="width:400px;" Data="data2" Clearable IsIsolated IsMultiple>
         </Cascader>
     </Column>
 
 </Columns>
 
 @code{
-
-    string Val = "";
+    
     //下面为了方便，直接从json文件加载数据
     static string dataFile = "Pages/docs/form/cascader/data1.json";
     List<CascaderItem<string>> data1 = Cascader<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));
