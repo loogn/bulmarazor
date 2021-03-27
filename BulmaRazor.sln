@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulmaRazor", "src\BulmaRazo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulmaRazorServer", "src\BulmaBlazorServer\BulmaRazorServer.csproj", "{1D5AAF22-C6F7-4205-8162-80A23F76FF01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulmaRazorWasm", "src\BulmaRazorWasm\BulmaRazorWasm.csproj", "{1B668DE6-E8F1-4AE8-9D54-5E56BA2CFBD1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{1D5AAF22-C6F7-4205-8162-80A23F76FF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D5AAF22-C6F7-4205-8162-80A23F76FF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D5AAF22-C6F7-4205-8162-80A23F76FF01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B668DE6-E8F1-4AE8-9D54-5E56BA2CFBD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B668DE6-E8F1-4AE8-9D54-5E56BA2CFBD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B668DE6-E8F1-4AE8-9D54-5E56BA2CFBD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B668DE6-E8F1-4AE8-9D54-5E56BA2CFBD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
