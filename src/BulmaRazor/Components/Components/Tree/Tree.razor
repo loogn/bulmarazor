@@ -1,0 +1,60 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@using System.Transactions
+@typeparam TValue
+
+<div id="@Id" @attributes="Attributes" class="@classes">
+    <div class="tree-root">
+        @foreach (var item in dataView)
+        {
+            @RenderLI(item)
+            if (item.Children.Any())
+            {
+                @:@RenderUL(item)
+            }
+        }
+    </div>
+
+</div>
+
+@code {
+
+    RenderFragment<TreeItem<TValue>> RenderLI => node =>
+        @<div class="@GetItemCls(node)">
+
+            <span class="icon" @onclick="() => ItemClick(node)">
+                @if (node.Children.Any())
+                {
+                    <i class="fa @(node.IsExpanded ? "fa-caret-down" : "fa-caret-right")"></i>
+                }
+            </span>
+
+            @if (ShowCheckBox)
+            {
+                var cked = GetItemChecked(node);
+                <IconCheckBox class="@GetCheckCls(node)"  Checked="cked" @onclick="() => Check(node, cked ?? false)"></IconCheckBox>
+            }
+            @if (ItemSlot != null)
+            {
+                @:@ItemSlot(node)
+            }
+            else
+            {
+                <div class="tree-content" @onclick="() => ItemClick(node)">
+                    @node.Text
+                </div>
+            }
+        </div>;
+
+    RenderFragment<TreeItem<TValue>> RenderUL => node =>
+        @<div class="@GetListCls(node)">
+            @foreach (var item in node.Children)
+            {
+                @RenderLI(item)
+                if (item.Children.Any())
+                {
+                    @:@RenderUL(item)
+                }
+            }
+        </div>;
+}

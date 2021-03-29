@@ -1,13 +1,13 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 
-<div @attributes="Attributes" class="@clesses">
+<div @attributes="Attributes" class="@classes">
     @ChildContent
 </div>
 
 @code {
 
-    string clesses => CssBuilder.Default("timeline")
+    string classes => CssBuilder.Default("timeline")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-rtl", IsRTL)
         .AddClass("is-centered", IsCentered)

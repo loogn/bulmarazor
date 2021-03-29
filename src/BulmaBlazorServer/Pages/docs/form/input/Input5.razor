@@ -1,0 +1,35 @@
+<Content>
+    <p>dbl1的值:@dbl1</p>
+    <Field>
+        <Control>
+            <Input @bind-Value="dbl1" Format="P"/><br>
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Input @bind-Value="dbl1" Format="0.000"/>
+        </Control>
+    </Field>
+    <p>int1的值:@int1</p>
+    <Field>
+        <Control>
+            <Input @bind-Value="int1" Format="0000000"/>
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Input @bind-Value="int1" Format="N1"/>
+        </Control>
+    </Field>
+    <Field>
+        <Control>
+            <Input @bind-Value="int1" Format="C"/>
+        </Control>
+    </Field>
+
+</Content>
+
+@code{
+    private double dbl1 = 0.23;
+    private int int1 = 12345;
+}

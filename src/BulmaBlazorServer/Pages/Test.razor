@@ -1,23 +1,26 @@
 @page "/test"
-@using BulmaRazorServer.Pages.docs.components.datatable
 
 @inject BulmaRazorJsInterop JsInterop
 @inject ToastService ToastService
 
 <Container class="@B.PY6">
-    
-    <p>dbl1:@dbl1</p><br>
-    <Input @bind-Value="dbl1" Format="P"></Input><br>
-    <Input @bind-Value="dbl1" Format="0.000"></Input>
-    <hr>
-    <p>int1:@int1</p><br>
-    <Input @bind-Value="int1" Format="0000000"></Input>
-    <Input @bind-Value="int1" Format="N1"></Input>
-    <Input @bind-Value="int1" Format="C"></Input>
+
+    <Tree Data="data" OnNodeClick="nodeClick" ShowCheckBox>
+    </Tree>
 </Container>
 
 @code{
-    private double dbl1 = 0.23;
-    private int int1 = 12345;
 
+    static string dataFile = "Pages/data1.json";
+    List<TreeItem<string>> data = Tree<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));
+
+    void nodeClick(TreeItem<string> node)
+    {
+         ToastService.Show(node.Text);
+    }
+
+    void Add(TreeItem<string> node)
+    {
+        ToastService.Show(node.Text);
+    }
 }
