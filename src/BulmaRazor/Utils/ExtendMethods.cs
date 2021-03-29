@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
@@ -15,12 +16,13 @@ namespace BulmaRazor.Components
         {
             return !string.IsNullOrEmpty(value);
         }
+
         public static bool NoValue(this string value)
         {
             return string.IsNullOrEmpty(value);
         }
 
-        
+
         public static bool IsNumber(this Type type)
         {
             type = Nullable.GetUnderlyingType(type) ?? type;
@@ -44,26 +46,21 @@ namespace BulmaRazor.Components
         {
             if (value == null)
                 return string.Empty;
+
             if (string.IsNullOrEmpty(format))
             {
                 return value.ToString();
             }
 
-            var type = Nullable.GetUnderlyingType(otype) ?? otype;
-            if (type == typeof(DateTime))
+            if (value is IFormattable formattableObject)
             {
-                return ((DateTime) (object) value).ToString(format);
-            }
-
-            if (type == typeof(DateTimeOffset))
-            {
-                return ((DateTimeOffset) (object) value).ToString(format);
+                return formattableObject.ToString(format, CultureInfo.GetCultureInfo("zh-CN"));
             }
 
             return value.ToString();
         }
 
-        public static bool SetRealValue<TValue>(this string str, out TValue value)
+        public static bool SetRealValue<TValue>(this string str, out TValue value, string format = null)
         {
             value = default(TValue);
 
@@ -112,6 +109,23 @@ namespace BulmaRazor.Components
             }
             else
             {
+                if (str.HasValue())
+                {
+                    if ("P".Equals(format, StringComparison.OrdinalIgnoreCase) ||
+                        "P1".Equals(format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        str = str.Replace("%", "").Trim();
+                        str = (decimal.Parse(str) / 100).ToString();
+                    }
+                    else if ("C".Equals(format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (!Char.IsDigit(str[0]))
+                        {
+                            str = str.Remove(0, 1);
+                        }
+                    }
+                }
+
                 if (BindConverter.TryConvertTo<TValue>(str, CultureInfo.InvariantCulture, out TValue val))
                 {
                     value = val;
