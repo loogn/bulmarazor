@@ -1,0 +1,10 @@
+
+<Tree Data="data1" IsAccordion>
+</Tree>
+
+@code{
+
+    //下面为了方便，直接从json文件加载数据
+    static string dataFile = "Pages/data/data1.json";
+    List<TreeItem<string>> data1 = Tree<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));
+}

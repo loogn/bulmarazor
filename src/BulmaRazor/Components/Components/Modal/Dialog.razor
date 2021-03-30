@@ -6,39 +6,39 @@
     <div class="modal-background"></div>
     @if (opts != null)
     {
-        <div class="modal-card" @attributes="Attributes">
-            <header class="modal-card-head">
-                <p class="modal-card-title">@opts.Title</p>
-                @if (opts.ShowClose)
-                {
-                    <button class="delete" aria-label="close" @onclick="Close"></button>
-                }
-            </header>
-
-            <section class="modal-card-body">
-                @if (opts.Type == 1 || opts.Type == 2)
-                {
-                    @:@opts.Message
-                }
-                else if (opts.Type == 3)
-                {
-                    <Field>
-                        <Label>@opts.Message</Label>
-                        <Control>
-                            <Input placeholder="@opts.Placeholder" @bind-Value="val" autofocus/>
-                        </Control>
-                    </Field>
-                }
-            </section>
-            <footer class="modal-card-foot">
-                <Buttons IsRight style="width:100%">
-                    @if (opts.Type == 2 || opts.Type == 3)
+        <div @attributes="Attributes" class="@contentClasses">
+            <Message Color="opts.Color">
+                <HeaderSlot>
+                    <p>@opts.Title</p>
+                    @if (opts.ShowClose)
                     {
-                        <Button @onclick="Cancel" Color="opts.CancelColor">@opts.CancelText</Button>
+                        <button class="delete" aria-label="close" @onclick="Close"></button>
                     }
-                    <Button @onclick="Ok" Color="opts.OKColor">@opts.OKText</Button>
-                </Buttons>
-            </footer>
+                </HeaderSlot>
+                <BodySlot>
+                    @if (opts.Type == 1 || opts.Type == 2)
+                    {
+                        @:@opts.Message
+                    }
+                    else if (opts.Type == 3)
+                    {
+                        <Field>
+                            <Label>@opts.Message</Label>
+                            <Control>
+                                <Input placeholder="@opts.Placeholder" @bind-Value="val" autofocus/>
+                            </Control>
+                        </Field>
+                    }
+                    <Buttons IsRight style="width:100%">
+                        @if (opts.Type == 2 || opts.Type == 3)
+                        {
+                            <Button @onclick="Cancel" Color="opts.CancelColor">@opts.CancelText</Button>
+                        }
+                        <Button @onclick="Ok" Color="opts.OKColor">@opts.OKText</Button>
+                    </Buttons>
+
+                </BodySlot>
+            </Message>
         </div>
     }
 </div>
@@ -48,14 +48,15 @@
     string classes => CssBuilder.Default("modal")
         .AddClass("is-active", IsActive)
         .Build();
-
+    
+    string contentClasses => CssBuilder.Default("modal-content")
+        .AddClassFromAttributes(Attributes)
+        .Build();
 
     private string HeaderText { get; set; }
     private string val = "";
 
     private bool IsActive { get; set; }
-
-    public bool ShowClose { get; set; } = true;
 
     private DialogOptions opts;
 

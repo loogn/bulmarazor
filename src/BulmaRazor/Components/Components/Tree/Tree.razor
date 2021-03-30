@@ -32,11 +32,13 @@
             @if (ShowCheckBox)
             {
                 var cked = GetItemChecked(node);
-                <IconCheckBox class="@GetCheckCls(node)"  Checked="cked" @onclick="() => Check(node, cked ?? false)"></IconCheckBox>
+                <IconCheckBox class="@GetCheckCls(node)" Checked="cked" @onclick="() => Check(node, cked ?? false)"></IconCheckBox>
             }
             @if (ItemSlot != null)
             {
-                @:@ItemSlot(node)
+                <div class="@B.FlexGrow1">
+                    @ItemSlot(node)
+                </div>
             }
             else
             {
@@ -57,4 +59,5 @@
                 }
             }
         </div>;
+
 }

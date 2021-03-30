@@ -9,8 +9,7 @@
 
 
 @code {
-
-
+    
     string classes => CssBuilder.Default("textarea")
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-small", IsSmall)
@@ -67,11 +66,4 @@
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
-
-
-    public override async Task SetParametersAsync(ParameterView parameters)
-    {
-        await base.SetParametersAsync(parameters);
-    }
-
 }

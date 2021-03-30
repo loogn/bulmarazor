@@ -2,12 +2,8 @@
 
 @inherits BulmaComponentBase
 
-    <progress @attributes="Attributes" class="@classes">@ChildContent</progress>
-@* } *@
-@* else *@
-@* { *@
-@*     <progress value="@Value" max="@Max" @attributes="Attributes" class="@classes">@ChildContent</progress> *@
-@* } *@
+<progress @attributes="Attributes" class="@classes">@ChildContent</progress>
+
 
 @code {
 
@@ -25,10 +21,13 @@
 
     [Parameter]
     public bool IsSmall { get; set; }
+
     [Parameter]
     public bool IsNormal { get; set; }
+
     [Parameter]
     public bool IsMedium { get; set; }
+
     [Parameter]
     public bool IsLarge { get; set; }
 
@@ -47,5 +46,5 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-    
+
 }

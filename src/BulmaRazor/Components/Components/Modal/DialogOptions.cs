@@ -5,6 +5,7 @@ namespace BulmaRazor.Components
 {
     public class DialogOptions
     {
+        public Color Color { get; set; } = Color.Primary;
         /// <summary>
         /// //1-alert,2-confirm,3-prompt
         /// </summary>
@@ -26,6 +27,6 @@ namespace BulmaRazor.Components
         public string CancelText { get; set; } = "取消";
         public Color OKColor { get; set; } = Color.Primary;
         public Color CancelColor { get; set; } = Color.Default;
-
+        
     }
 }

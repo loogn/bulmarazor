@@ -10,12 +10,13 @@
 
     void alert()
     {
-        dialog.Alert("Hello 信息", new DialogOptions() {OKColor = Color.Info});
+        dialog.Alert("Hello 信息", new DialogOptions() {Color = Color.Dark,OKColor = Color.Info});
     }
     void confirm()
     {
         dialog.Confirm("Hello 信息", new DialogOptions()
         {
+            Color = Color.Light,
             OK = () => ToastService.Show("点击了sure"),
             Cancel = () => ToastService.Show("点击了取消")
         });
@@ -24,6 +25,7 @@
     {
         dialog.Prompt("hello", "world", new DialogOptions()
         {
+            Color = Color.Warning,
             Result = (res) => ToastService.Show("您输入了："+res)
         });
     }

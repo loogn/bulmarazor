@@ -95,10 +95,7 @@ namespace BulmaRazor.Components
             // await OnChange.InvokeAsync(this);
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-        }
+      
 
         private void CheckValues(TreeItem<TValue> item, HashSet<TValue> values, int level)
         {
@@ -269,8 +266,10 @@ namespace BulmaRazor.Components
         public HashSet<TreeItem<TValue>> GetSelectedNodes()
         {
             return SelectedList;
-        }
-
+        } 
+        
+        //Expand/collapse 
+        
         public static List<TreeItem<TValue>> BuildDataFromJson(string json)
         {
             var list = JsonSerializer.Deserialize<List<TreeItem<TValue>>>(json, new JsonSerializerOptions()

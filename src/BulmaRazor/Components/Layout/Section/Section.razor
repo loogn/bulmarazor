@@ -10,14 +10,18 @@
 
     string classes => CssBuilder.Default("section")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Size.Value, Size.Value)
+        .AddClass("is-medium",IsMedium)
+        .AddClass("is-large", IsLarge)
         .Build();
 
     /// <summary>
     /// 尺寸
     /// </summary>
     [Parameter]
-    public Size Size { get; set; } = Size.Default;
+    public bool IsMedium { get; set; }
+    
+    [Parameter]
+    public bool IsLarge { get; set; }
 
 
     [Parameter]

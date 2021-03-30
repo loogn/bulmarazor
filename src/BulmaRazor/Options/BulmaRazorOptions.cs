@@ -2,6 +2,9 @@ using BulmaRazor.Components;
 
 namespace BulmaRazor
 {
+    /// <summary>
+    /// BulmaRazorOptions
+    /// </summary>
     public class BulmaRazorOptions
     {
         internal static BulmaRazorOptions DefaultOptions { get; } = new()
@@ -14,11 +17,29 @@ namespace BulmaRazor
             CarouselOptions = new CarouselOptions()
         };
 
-        public TuiEditorOptions TuiEditorOptions { get; set; }
+        /// <summary>
+        /// TuiEditorOptions
+        /// </summary>
+        public TuiEditorOptions  TuiEditorOptions { get; private init; }
+        /// <summary>
+        /// ToastOptions
+        /// </summary>
         public ToastOptions ToastOptions { get; private init; }
+        /// <summary>
+        /// DatePickerOptions
+        /// </summary>
         public DatePickerOptions DatePickerOptions { get; private init; }
+        /// <summary>
+        /// ColorPickerOptions
+        /// </summary>
         public ColorPickerOptions ColorPickerOptions { get; private init; }
-        public WangEditorOptions WangEditorOptions { get; set; }
-        public CarouselOptions CarouselOptions { get; set; }
+        /// <summary>
+        /// WangEditorOptions
+        /// </summary>
+        public WangEditorOptions WangEditorOptions { get; private init; }
+        /// <summary>
+        /// CarouselOptions
+        /// </summary>
+        public CarouselOptions CarouselOptions { get; private init;}
     }
 }

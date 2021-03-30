@@ -13,36 +13,13 @@ namespace BulmaRazor.Components
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
-            if (Attributes == null)
-            {
-                Attributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            }
+            Attributes ??= new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         }
-
-        // /// <summary>
-        // /// Dispose 方法
-        // /// </summary>
-        // /// <param name="disposing"></param>
-        // protected virtual void Dispose(bool disposing)
-        // {
-        // }
-        //
-        //
-        // /// <summary>
-        // /// Dispose 方法
-        // /// </summary>
-        // public void Dispose()
-        // {
-        //     Dispose(disposing: true);
-        //     GC.SuppressFinalize(this);
-        // }
-
-
+        
         protected virtual ValueTask DisposeAsync(bool disposing)
         {
             return ValueTask.CompletedTask;
         }
-
         public async ValueTask DisposeAsync()
         {
             await DisposeAsync(disposing: true);

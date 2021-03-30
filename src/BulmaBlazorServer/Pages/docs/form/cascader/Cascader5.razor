@@ -16,7 +16,7 @@
 
     HashSet<string> Vals = new HashSet<string>();
     //下面为了方便，直接从json文件加载数据
-    static string dataFile = "Pages/docs/form/cascader/data2.json";
+    static string dataFile = "Pages/data/data2.json";
     List<CascaderItem<string>> data1 = Cascader<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));
     // List<CascaderItem<string>> data2 = Cascader<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));
 }
