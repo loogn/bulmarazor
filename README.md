@@ -3,7 +3,6 @@
 <div align="center">
 <h2>A set of lightweight component libraries based on Bulma and Blazor.</h2>
 
-[![Github build](https://img.shields.io/github/workflow/status/ArgoZhang/BootstrapBlazor/Package%20to%20Nuget/master?label=master&logo=github&logoColor=green)](https://github.com/ArgoZhang/BootstrapAdmin/actions?query=workflow%3A%22Auto+Build+CI%22+branch%3Amaster)
 [![Nuget](https://img.shields.io/nuget/v/BulmaRazor.svg?color=red&logo=nuget&logoColor=green)](https://www.nuget.org/packages/BulmaRazor/)
 [![Nuget](https://img.shields.io/nuget/dt/BulmaRazor.svg?logo=nuget&logoColor=green)](https://www.nuget.org/packages/BulmaRazor/)
 [![Github](https://img.shields.io/github/license/loogn/bulmarazor.svg?logo=git&logoColor=red)](https://gitee.com/loogn/bulmarazor/blob/master/LICENSE)
@@ -62,12 +61,18 @@ Install-Package BulmaRazor
 
 ## Screenshots
 
-![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Button.png "Button.png")
-![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Panel.png "Panel.png")
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Button.png "Button.png") 
+
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Panel.png "Panel.png") 
+
 ![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Tabs.png "Tabs.png")
-![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Timeline.png "Timeline.png")
-![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Tooltip.png "Tooltip.png")
+
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Timeline.png "Timeline.png") 
+
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Tooltip.png "Tooltip.png") 
+
 ![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Message.png "Message.png")
+
 ![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Cascader.png "Cascader.png")
 
 

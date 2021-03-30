@@ -4,7 +4,6 @@
 
 <h2>一套基于 Bulma 和 Blazor 的轻量级组件库</h2>
 
-[![Github build](https://img.shields.io/github/workflow/status/ArgoZhang/BootstrapBlazor/Package%20to%20Nuget/master?label=master&logo=github&logoColor=green)](https://github.com/ArgoZhang/BootstrapAdmin/actions?query=workflow%3A%22Auto+Build+CI%22+branch%3Amaster)
 [![Nuget](https://img.shields.io/nuget/v/BulmaRazor.svg?color=red&logo=nuget&logoColor=green)](https://www.nuget.org/packages/BulmaRazor/)
 [![Nuget](https://img.shields.io/nuget/dt/BulmaRazor.svg?logo=nuget&logoColor=green)](https://www.nuget.org/packages/BulmaRazor/)
 [![Github](https://img.shields.io/github/license/loogn/bulmarazor.svg?logo=git&logoColor=red)](https://gitee.com/loogn/bulmarazor/blob/master/LICENSE)
@@ -80,7 +79,6 @@ Blazor 应用基于组件。 Blazor 中的组件是指 UI 元素，例如页面�
 - 可以嵌套和重用。
 - 可以作为 Razor 类库或 NuGet 包共享和分发。
 
-### 内置组件
 
 内置组件 [传送门](https://bulmarazor.loogn.net)
 
@@ -95,13 +93,21 @@ Blazor 应用基于组件。 Blazor 中的组件是指 UI 元素，例如页面�
 
 ## 项目截图
 
-![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Button.png "Button.png")
-![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Panel.png "Panel.png")
-![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Tabs.png "Tabs.png")
-![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Timeline.png "Timeline.png")
-![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Tooltip.png "Tooltip.png")
-![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Message.png "Message.png")
-![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Cascader.png "Cascader.png")
+![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Button.png "Button.png")  
+
+![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Panel.png "Panel.png")  
+
+![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Tabs.png "Tabs.png")  
+
+![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Timeline.png "Timeline.png")  
+
+![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Tooltip.png "Tooltip.png")  
+
+![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Message.png "Message.png")  
+
+![登录可查看](https://gitee.com/loogn/bulmarazor/raw/master/images/Cascader.png "Cascader.png") 
+
+
 
 
 ## 开源协议
