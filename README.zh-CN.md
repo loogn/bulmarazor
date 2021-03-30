@@ -125,7 +125,7 @@ Blazor 应用基于组件。 Blazor 中的组件是指 UI 元素，例如页面�
 
 如果这个项目对您有所帮助，请扫下方二维码打赏一杯咖啡。
 
-<img src="https://gitee.com/loogn/bulmarazor/raw/master/images/coffeemoney.png" width="382px;" />
+<img src="https://gitee.com/loogn/bulmarazor/raw/master/images/coffeemoney.png" />
 
 
 
