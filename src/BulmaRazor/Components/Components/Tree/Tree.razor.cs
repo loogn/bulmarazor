@@ -60,8 +60,7 @@ namespace BulmaRazor.Components
             return item.IsChecked;
         }
        
-        private bool isShow = false;
-
+        
         private HashSet<TreeItem<TValue>> SelectedList = new();
 
         [Parameter] public bool IsSmall { get; set; }

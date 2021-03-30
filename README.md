@@ -1,58 +1,100 @@
-# BulmaRazor 
+<h1 align="center">BulmaRazor Component</h1>
 
-中文名字:布尔玛·瑞  
-官网地址: [http://bulmarazor.loogn.net/](http://bulmarazor.loogn.net/)  
+<div align="center">
+<h2>A set of lightweight component libraries based on Bulma and Blazor.</h2>
 
+[![Github build](https://img.shields.io/github/workflow/status/ArgoZhang/BootstrapBlazor/Package%20to%20Nuget/master?label=master&logo=github&logoColor=green)](https://github.com/ArgoZhang/BootstrapAdmin/actions?query=workflow%3A%22Auto+Build+CI%22+branch%3Amaster)
+[![Nuget](https://img.shields.io/nuget/v/BulmaRazor.svg?color=red&logo=nuget&logoColor=green)](https://www.nuget.org/packages/BulmaRazor/)
+[![Nuget](https://img.shields.io/nuget/dt/BulmaRazor.svg?logo=nuget&logoColor=green)](https://www.nuget.org/packages/BulmaRazor/)
+[![Github](https://img.shields.io/github/license/loogn/bulmarazor.svg?logo=git&logoColor=red)](https://gitee.com/loogn/bulmarazor/blob/master/LICENSE)
+[![Repo Size](https://img.shields.io/github/repo-size/loogn/BulmaRazor.svg?logo=github&logoColor=green&label=repo)](https://github.com/loogn/BulmaRazor)
+[![Commit Date](https://img.shields.io/github/last-commit/loogn/BulmaRazor/master.svg?logo=github&logoColor=green&label=commit)](https://github.com/loogn/BulmaRazor)
 
-Bulma 是一个基于 Flexbox 构建的免费、开源的 CSS
-框架，已经有超过200,000开发者在使用。而BulmaRazor是基于Bulma样式框架开发的一套适用于Blazor的组件库。
-qq交流群:995865650
-![qq群:995865650](http://bulmarazor.loogn.net/images/qqqun.png)
+</div>
 
-# 安装
-通过nuget引入BulmaRazor包
+---
+
+<a href="README.md">English</a> | <span>中文</span>
+
+---
+
+## Features
+- Lightweight UI designed for web applications.
+- A set of high-quality Blazor components out of the box.
+- Supports WebAssembly-based client-side and SignalR-based server-side UI event interaction.
+- Supports Progressive Web Applications (PWA).
+- Build with C#, a multi-paradigm static language for an efficient development experience.
+- .NET5 based, with direct reference to the rich .NET ecosystem.
+- Seamless integration with existing ASP.NET Core MVC and Razor Pages projects.
+
+## Installation Guide
+Install the Nuget package reference
 ```powershell
 Install-Package BulmaRazor
 ```
 
-# 用法
+## Usage
 
-- 在Startup中添加服务
+- Add BulmaRazor Service
     ```csharp
     services.AddBulmaRazor();
     ```
-- _Host.cshtml或者index.html中引入样式和脚本
+- Add Style and Scripts in _Host.cshtml or index.html
     ```xml
-    <!--bulma.min.css可以使用自定义皮肤替换-->
+    <!--bulma.min.css can replace with customer bulma css-->
     <link href="_content/BulmaRazor/bulma.min.css" rel="stylesheet"/>
     <link href="_content/BulmaRazor/bulmarazor.min.css" rel="stylesheet" />
     <script src="_content/BulmaRazor/bulmarazor.min.js"></script>
     ```
-- 在_Imports.razor中导入名称空间
+- Import the Namespace in _Imports.razor
     ```xml
     @using BulmaRazor.Components
     ```
-- 开始使用,组件元素名对应Bulma.css中的类名
+- Get started
     ```xml
     <Button Color="Color.Primary">Click</Button>
     ```
-	
 
-# 许可
 
-[MIT](https://gitee.com/loogn/bulmarazor/blob/master/LICENSE)  @ loogn
 
-# 感谢
+## Demo
+[![website](https://img.shields.io/badge/linux-BulmaRazor-success.svg?logo=buzzfeed&logoColor=green)](https://bulmarazor.loogn.net) 
 
-- 感谢微软Blazor框架
-- 感谢Bulma.css作者
-- 感谢所有使用者
+## Screenshots
 
-# 相关项目
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Button.png "Button.png")
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Panel.png "Panel.png")
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Tabs.png "Tabs.png")
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Timeline.png "Timeline.png")
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Tooltip.png "Tooltip.png")
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Message.png "Message.png")
+![Log in to view](https://gitee.com/loogn/bulmarazor/raw/master/images/Cascader.png "Cascader.png")
 
-- [Bulma官网](https://bulma.io/)
-- [Blazor微软文档](https://blazor.net/docs/components/index.html)
-- [Bulma中文网](https://bulma.zcopy.site/)
+
+## Agreement
+[![Gitee license](https://img.shields.io/github/license/loogn/bulmarazor.svg?logo=git&logoColor=red)](https://gitee.com/loogn/bulmarazor/blob/master/LICENSE)
+
+
+## Contribution
+
+1. Fork
+2. Create Feat_xxx branch
+3. Commit
+4. Create Pull Request
+
+## Donate
+
+If this project is helpful to you, please scan the QR code below for a cup of coffee.
+
+<img src="https://gitee.com/loogn/bulmarazor/raw/master/images/coffeemoney.png" width="382px;" />
+
+
+
+## Resources
+- [Bulma](https://bulma.io/)
+- [Blazor](https://blazor.net/docs/components/index.html)
+
+## References
 - [foundation-datepicker](http://foundation-datepicker.peterbeno.com/)
 - [jscolor](https://jscolor.com/)
 - [bulma-checkradio](https://github.com/Wikiki/bulma-checkradio)
@@ -69,6 +111,3 @@ Install-Package BulmaRazor
 - [bulma-tooltip](https://github.com/CreativeBulma/bulma-tooltip)
 - [bulma-o-steps](https://github.com/octoshrimpy/bulma-o-steps)
 - [bulma-tagsinput](https://github.com/CreativeBulma/bulma-tagsinput)
-
-
-
