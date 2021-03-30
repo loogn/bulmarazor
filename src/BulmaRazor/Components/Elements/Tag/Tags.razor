@@ -6,7 +6,9 @@
         @ChildContent
     </CascadingValue>
 </div>
+
 @code {
+
     string classes => CssBuilder.Default("tags")
         .AddClassFromAttributes(Attributes)
         .AddClass("are-normal", AreNormal)
@@ -14,18 +16,34 @@
         .AddClass("are-large", AreLarge)
         .AddClass("has-addons", HasAddons)
         .Build();
-
-
+    
+    /// <summary>
+    /// 正常尺寸
+    /// </summary>
     [Parameter]
     public bool AreNormal { get; set; }
+
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool AreMedium { get; set; }
+
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool AreLarge { get; set; }
 
+    /// <summary>
+    /// 是否有插件
+    /// </summary>
     [Parameter]
     public bool HasAddons { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

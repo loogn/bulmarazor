@@ -1,5 +1,4 @@
 ﻿@namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <section @attributes="Attributes" class="@classes">
@@ -10,20 +9,25 @@
 
     string classes => CssBuilder.Default("section")
         .AddClassFromAttributes(Attributes)
-        .AddClass("is-medium",IsMedium)
+        .AddClass("is-medium", IsMedium)
         .AddClass("is-large", IsLarge)
         .Build();
 
     /// <summary>
-    /// 尺寸
+    /// 小尺寸
     /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
-    
+
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 
-
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

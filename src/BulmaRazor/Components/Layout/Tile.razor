@@ -6,6 +6,7 @@
 </div>
 
 @code {
+
     string classes => CssBuilder.Default("tile")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-child", IsChild)
@@ -16,17 +17,22 @@
         .Build();
 
 
-
-
+    /// <summary>
+    /// 是否祖先
+    /// </summary>
     [Parameter]
     public bool IsAncestor { get; set; }
 
+    /// <summary>
+    /// 是否是父组件
+    /// </summary>
     [Parameter]
     public bool IsParent { get; set; }
 
     /// <summary>
-    /// 孩子
+    /// 是否是子组件
     /// </summary>
+    [Parameter]
     public bool IsChild { get; set; }
 
 
@@ -43,6 +49,9 @@
     public Size Size { get; set; } = Size.Default;
 
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

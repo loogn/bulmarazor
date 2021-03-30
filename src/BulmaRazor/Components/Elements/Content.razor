@@ -1,49 +1,48 @@
 @namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
-<progress @attributes="Attributes" class="@classes">@ChildContent</progress>
-
+<div @attributes="Attributes" class="@classes">
+    @ChildContent
+</div>
 
 @code {
 
-    string classes => CssBuilder.Default("progress")
+    string classes => CssBuilder.Default("content")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
         .AddClass("is-small", IsSmall)
         .AddClass("is-normal", IsNormal)
         .AddClass("is-medium", IsMedium)
         .AddClass("is-large", IsLarge)
         .Build();
 
-    [Parameter]
-    public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 小尺寸
+    /// </summary>
     [Parameter]
     public bool IsSmall { get; set; }
 
+    /// <summary>
+    /// 正常尺寸
+    /// </summary>
     [Parameter]
     public bool IsNormal { get; set; }
 
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
 
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 
-    // [Parameter]
-    // public double? Value
-    // {
-    //     get => _value;
-    //     set
-    //     {
-    //         _value = value;
-    //     }
-    // }
-    //
-    // [Parameter]
-    // public double? Max { get; set; }
-
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

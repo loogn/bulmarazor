@@ -7,6 +7,7 @@
 
 
 @code {
+
     string classes => CssBuilder.Default("container")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-widescreen", IsWidescreen)
@@ -17,17 +18,28 @@
         .Build();
 
 
-
+    /// <summary>
+    /// 是否宽屏
+    /// </summary>
     [Parameter]
     public bool IsWidescreen { get; set; }
 
+    /// <summary>
+    /// 是否高清
+    /// </summary>
     [Parameter]
     public bool IsFullhd { get; set; }
 
 
+    /// <summary>
+    /// 是否最大桌面
+    /// </summary>
     [Parameter]
     public bool IsMaxDesktop { get; set; }
 
+    /// <summary>
+    /// 是否最大宽屏
+    /// </summary>
     [Parameter]
     public bool IsMaxWidescreen { get; set; }
 
@@ -38,6 +50,10 @@
     [Parameter]
     public bool IsFluid { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

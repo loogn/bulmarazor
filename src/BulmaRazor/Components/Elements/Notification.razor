@@ -1,5 +1,4 @@
 @namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <div @attributes="Attributes" class="@classes">
@@ -14,12 +13,21 @@
         .AddClass("is-light", IsLight)
         .Build();
 
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 浅色
+    /// </summary>
     [Parameter]
     public bool IsLight { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

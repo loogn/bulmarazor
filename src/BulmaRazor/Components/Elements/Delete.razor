@@ -1,5 +1,4 @@
 @namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <button @attributes="Attributes" class="@classes"></button>
@@ -11,10 +10,19 @@
         .AddClass("is-large", IsLarge)
         .Build();
 
+    /// <summary>
+    /// 小尺寸
+    /// </summary>
     [Parameter]
     public bool IsSmall { get; set; }
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
+    /// <summary>
+    /// 正常尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 

@@ -9,6 +9,7 @@ else
 {
     <button @attributes="Attributes" class="@classes">@ChildContent</button>
 }
+
 @code {
 
     string classes => CssBuilder.Default("button")
@@ -31,58 +32,114 @@ else
         .AddClass("is-selected", IsSelected)
         .Build();
 
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
-    
+
+    /// <summary>
+    /// 小尺寸
+    /// </summary>
     [Parameter]
     public bool IsSmall { get; set; }
+
+    /// <summary>
+    /// 正常尺寸
+    /// </summary>
     [Parameter]
     public bool IsNormal { get; set; }
+
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
+
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 
 
+    /// <summary>
+    /// 浅色
+    /// </summary>
     [Parameter]
     public bool IsLight { get; set; }
 
+    /// <summary>
+    /// 全宽
+    /// </summary>
     [Parameter]
     public bool IsFullwidth { get; set; }
 
+    /// <summary>
+    /// 轮廓
+    /// </summary>
     [Parameter]
     public bool IsOutlined { get; set; }
 
+    /// <summary>
+    /// 颜色反正
+    /// </summary>
     [Parameter]
     public bool IsInverted { get; set; }
 
+    /// <summary>
+    /// 圆角
+    /// </summary>
     [Parameter]
     public bool IsRounded { get; set; }
 
-
+    /// <summary>
+    /// 悬浮状态
+    /// </summary>
     [Parameter]
     public bool IsHovered { get; set; }
 
+    /// <summary>
+    /// 焦点状态
+    /// </summary>
     [Parameter]
     public bool IsFocused { get; set; }
 
+    /// <summary>
+    /// 激活状态
+    /// </summary>
     [Parameter]
     public bool IsActive { get; set; }
 
+    /// <summary>
+    /// 加载中状态
+    /// </summary>
     [Parameter]
     public bool IsLoading { get; set; }
 
+    /// <summary>
+    /// 静态
+    /// </summary>
     [Parameter]
     public bool IsStatic { get; set; }
 
+    /// <summary>
+    /// 选中状态
+    /// </summary>
     [Parameter]
     public bool IsSelected { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     private bool hasHref;
 
+    /// <summary>
+    /// 参数设置
+    /// </summary>
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
@@ -93,4 +150,5 @@ else
             Attributes["type"] = "button";
         }
     }
+
 }

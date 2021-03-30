@@ -27,7 +27,7 @@
         <SupportedPlatform Include="browser" />
     </ItemGroup>
     <ItemGroup>
-<!--        <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />-->
+        <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.2" />
     </ItemGroup>
     <ItemGroup>

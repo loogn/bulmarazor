@@ -1,0 +1,21 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div @attributes="Attributes" class="@classes">
+    <span class="title">
+        @if (ChildContent == null)
+        {
+            <text>页面加载中...</text>
+        }
+        else
+        {
+            @:@ChildContent 
+        }
+    </span>
+</div>
+
+@code {
+    
+    
+
+}

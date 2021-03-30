@@ -1,6 +1,4 @@
 ﻿@namespace BulmaRazor.Components
-
-
 @inherits BulmaComponentBase
 
 <span @attributes="Attributes" class="@classes">
@@ -8,14 +6,21 @@
 </span>
 
 @code {
+
     string classes => CssBuilder.Default("icon-text")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .Build();
-    
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

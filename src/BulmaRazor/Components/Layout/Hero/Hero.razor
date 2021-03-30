@@ -1,5 +1,4 @@
 ﻿@namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <section @attributes="Attributes" class="@classes">
@@ -27,19 +26,38 @@
     public Color Color { get; set; } = Color.Default;
 
     /// <summary>
-    /// 尺寸
+    /// 小尺寸
     /// </summary>
     [Parameter]
     public bool IsSmall { get; set; }
+
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
+
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
+
+    /// <summary>
+    /// 页面一半高
+    /// </summary>
     [Parameter]
     public bool IsHalfHeight { get; set; }
+
+    /// <summary>
+    /// 全高
+    /// </summary>
     [Parameter]
     public bool IsFullHeight { get; set; }
-    
+
+    /// <summary>
+    /// 全高带导航栏
+    /// </summary>
     [Parameter]
     public bool IsFullHeightWithNavbar { get; set; }
 
@@ -49,6 +67,10 @@
     [Parameter]
     public bool IsBold { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

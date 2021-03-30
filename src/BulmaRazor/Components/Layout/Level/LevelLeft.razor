@@ -1,5 +1,4 @@
 ﻿@namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <div @attributes="Attributes" class="@classes">
@@ -9,10 +8,12 @@
 @code {
 
     string classes => CssBuilder.Default("level-left")
-      .AddClassFromAttributes(Attributes)
+        .AddClassFromAttributes(Attributes)
+        .Build();
 
-      .Build();
-
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

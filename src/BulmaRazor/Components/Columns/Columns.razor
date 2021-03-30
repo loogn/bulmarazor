@@ -6,6 +6,7 @@
 </div>
 
 @code {
+
     string classes => CssBuilder.Default("columns")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-mobile", IsMobile)
@@ -53,21 +54,25 @@
     /// </summary>
     [Parameter]
     public GapMobile GapMobile { get; set; } = GapMobile.Default;
+
     /// <summary>
     /// 可变间隔-平板
     /// </summary>
     [Parameter]
     public GapTablet GapTablet { get; set; } = GapTablet.Default;
+
     /// <summary>
     /// 可变间隔-桌面
     /// </summary>
     [Parameter]
     public GapDesktop GapDesktop { get; set; } = GapDesktop.Default;
+
     /// <summary>
     /// 可变间隔-宽屏
     /// </summary>
     [Parameter]
     public GapWidescreen GapWidescreen { get; set; } = GapWidescreen.Default;
+
     /// <summary>
     /// 可变间隔-全高清
     /// </summary>
@@ -97,27 +102,24 @@
     [Parameter]
     public bool IsCentered { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    public override Task SetParametersAsync(ParameterView parameters)
+    /// <summary>
+    /// 设置参数
+    /// </summary>
+    public override async Task SetParametersAsync(ParameterView parameters)
     {
-        if (parameters.TryGetValue<Gap>("Gap", out Gap gap) && gap.Value.HasValue())
+        await base.SetParametersAsync(parameters);
+        
+        if (Gap.Value.HasValue() || GapMobile.Value.HasValue() || GapTablet.Value.HasValue() ||
+            GapDesktop.Value.HasValue() || GapWidescreen.Value.HasValue() || GapFullhd.Value.HasValue())
+        {
             IsVarGap = true;
-        if (parameters.TryGetValue<GapMobile>("GapMobile", out GapMobile gapMobile) && GapMobile.Value.HasValue())
-            IsVarGap = true;
-        if (parameters.TryGetValue<GapTablet>("GapTablet", out GapTablet gapTablet) && gapTablet.Value.HasValue())
-            IsVarGap = true;
-        if (parameters.TryGetValue<GapDesktop>("GapDesktop", out GapDesktop gapDesktop) && gapDesktop.Value.HasValue())
-            IsVarGap = true;
-        if (parameters.TryGetValue<GapWidescreen>("GapWidescreen", out GapWidescreen gapWidescreen) &&
-            gapWidescreen.Value.HasValue())
-            IsVarGap = true;
-        if (parameters.TryGetValue<GapFullhd>("GapFullhd", out GapFullhd gapFullhd) && gapFullhd.Value.HasValue())
-            IsVarGap = true;
-
-
-        return base.SetParametersAsync(parameters);
+        }
     }
 
 }

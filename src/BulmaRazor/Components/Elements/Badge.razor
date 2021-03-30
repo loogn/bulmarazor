@@ -5,7 +5,7 @@
 
 @code {
     //https://bulma-badge.netlify.app/get-started/
-    
+
     string classes => CssBuilder.Default("badge")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
@@ -20,41 +20,77 @@
         .AddClass("is-bottom-left", IsBottomLeft)
         .AddClass("is-left", IsLeft)
         .Build();
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 浅色
+    /// </summary>
     [Parameter]
     public bool IsLight { get; set; }
 
+    /// <summary>
+    /// 轮廓
+    /// </summary>
     [Parameter]
     public bool IsOutlined { get; set; }
 
+    /// <summary>
+    /// 左上方
+    /// </summary>
     [Parameter]
     public bool IsTopLeft { get; set; }
 
+    /// <summary>
+    /// 上方
+    /// </summary>
     [Parameter]
     public bool IsTop { get; set; }
 
+    /// <summary>
+    /// 右上方
+    /// </summary>
     [Parameter]
     public bool IsTopRight { get; set; }
 
+    /// <summary>
+    /// 右方
+    /// </summary>
     [Parameter]
     public bool IsRight { get; set; }
 
 
+    /// <summary>
+    /// 右下方
+    /// </summary>
     [Parameter]
     public bool IsBottomRight { get; set; }
 
+    /// <summary>
+    /// 下方
+    /// </summary>
     [Parameter]
     public bool IsBottom { get; set; }
 
-
+    /// <summary>
+    /// 左下方
+    /// </summary>
     [Parameter]
     public bool IsBottomLeft { get; set; }
 
+    /// <summary>
+    /// 左方
+    /// </summary>
     [Parameter]
     public bool IsLeft { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

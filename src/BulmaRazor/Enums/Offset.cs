@@ -2,7 +2,7 @@
 namespace BulmaRazor.Components
 {
     /// <summary>
-    /// 列偏移
+    /// Column 偏移
     /// </summary>
     public class Offset : EnumBase
     {

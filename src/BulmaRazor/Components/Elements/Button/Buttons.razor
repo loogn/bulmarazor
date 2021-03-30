@@ -4,21 +4,35 @@
 <div @attributes="Attributes" class="@classes">@ChildContent</div>
 
 @code {
+
     string classes => CssBuilder.Default("buttons ")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-centered", IsCentered)
         .AddClass("is-right", IsRight)
         .AddClass("has-addons", HasAddons)
         .Build();
-
-
+    
+    /// <summary>
+    /// 是否插件
+    /// </summary>
     [Parameter]
     public bool HasAddons { get; set; }
 
+    /// <summary>
+    /// 居中
+    /// </summary>
     [Parameter]
     public bool IsCentered { get; set; }
+
+    /// <summary>
+    /// 靠右
+    /// </summary>
     [Parameter]
     public bool IsRight { get; set; }
+
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

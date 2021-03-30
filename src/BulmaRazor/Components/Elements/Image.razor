@@ -16,15 +16,27 @@
         .Build();
 
 
+    /// <summary>
+    /// 尺寸
+    /// </summary>
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
+    /// <summary>
+    /// 比例
+    /// </summary>
     [Parameter]
     public Ratio Ratio { get; set; } = Ratio.Default;
 
+    /// <summary>
+    /// 全宽
+    /// </summary>
     [Parameter]
     public bool IsFullwidth { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

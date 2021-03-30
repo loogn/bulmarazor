@@ -2,7 +2,7 @@
 namespace BulmaRazor.Components
 {
     /// <summary>
-    /// 列可变间隙
+    /// Columns 间隙
     /// </summary>
     public class Gap : EnumBase
     {

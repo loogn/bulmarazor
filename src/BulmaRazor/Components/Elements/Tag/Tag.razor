@@ -1,43 +1,68 @@
 @namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <span @attributes="Attributes" class="@classes">
     @ChildContent
 </span>
+
 @code {
+
     string classes => CssBuilder.Default("tag")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-normal", IsNormal)
         .AddClass("is-medium", IsMedium)
         .AddClass("is-large", IsLarge)
-        .AddClass("is-light",IsLight)
+        .AddClass("is-light", IsLight)
         .AddClass("is-rounded", IsRounded)
         .AddClass("is-delete", IsDelete)
         .Build();
 
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 浅色
+    /// </summary>
     [Parameter]
-    public bool IsLight{get;set;}
+    public bool IsLight { get; set; }
 
-    
+    /// <summary>
+    /// 正常尺寸
+    /// </summary>
     [Parameter]
     public bool IsNormal { get; set; }
+
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
+
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 
+    /// <summary>
+    /// 圆角
+    /// </summary>
     [Parameter]
     public bool IsRounded { get; set; }
 
+    /// <summary>
+    /// 显示删除
+    /// </summary>
     [Parameter]
     public bool IsDelete { get; set; }
-
-
+    
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

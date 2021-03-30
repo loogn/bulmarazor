@@ -1,7 +1,5 @@
 @namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
-
 
 @if (WithContainer)
 {
@@ -13,17 +11,13 @@
 }
 else
 {
-
     <table @attributes="Attributes" class="@classes">
         @ChildContent
     </table>
 }
 
-
 @code {
-
-
-
+    
     string classes => CssBuilder.Default("table")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-bordered", IsBordered)
@@ -52,7 +46,7 @@ else
     public bool IsNarrow { get; set; }
 
     /// <summary>
-    /// hover
+    /// 可悬浮
     /// </summary>
     [Parameter]
     public bool IsHoverable { get; set; }
@@ -63,12 +57,16 @@ else
     [Parameter]
     public bool IsFullwidth { get; set; }
 
-
+    /// <summary>
+    /// 带容器
+    /// </summary>
     [Parameter]
     public bool WithContainer { get; set; }
 
 
-
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

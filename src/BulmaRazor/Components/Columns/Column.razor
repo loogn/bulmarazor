@@ -5,8 +5,8 @@
     @ChildContent
 </div>
 
-
 @code {
+
     string classes => CssBuilder.Default("column")
         .AddClassFromAttributes(Attributes)
         .AddClass(Offset.Value)
@@ -18,12 +18,18 @@
         .AddClass("is-narrow-desktop", IsNarrowDesktop)
         .AddClass("is-narrow-widescreen", IsNarrowWidescreen)
         .AddClass("is-narrow-fullhd", IsNarrowFullhd)
-
         .Build();
 
 
+    /// <summary>
+    /// 偏移量
+    /// </summary> 
     [Parameter]
     public Offset Offset { get; set; } = Offset.Default;
+
+    /// <summary>
+    /// 尺寸大小
+    /// </summary>
     [Parameter]
     public Size Size { get; set; } = Size.Default;
 
@@ -72,7 +78,9 @@
     public bool IsNarrowFullhd { get; set; }
 
 
-
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

@@ -7,9 +7,9 @@
 
 @code {
     // https://github.com/CreativeBulma/bulma-divider/tree/master/dist
-    
+
     string classes => CssBuilder.Default("divider")
-        .AddClass("has-label",ChildContent!=null)
+        .AddClass("has-label", ChildContent != null)
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-left", IsLeft)
@@ -18,20 +18,39 @@
         .AddClass("is-vertical", IsVertical)
         .Build();
 
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
-    
+
+    /// <summary>
+    /// 文字是否靠左
+    /// </summary>
     [Parameter]
     public bool IsLeft { get; set; }
+
+    /// <summary>
+    /// 文字是否靠右
+    /// </summary>
     [Parameter]
     public bool IsRight { get; set; }
-    
+
+    /// <summary>
+    /// 是否是浅色
+    /// </summary>
     [Parameter]
     public bool IsLight { get; set; }
-    
+
+    /// <summary>
+    /// 是否垂直
+    /// </summary>
     [Parameter]
     public bool IsVertical { get; set; }
-    
+
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

@@ -2,6 +2,9 @@
 namespace BulmaRazor.Components
 {
     
+    /// <summary>
+    /// Image 比例
+    /// </summary>
     public class Ratio : EnumBase
     {
 

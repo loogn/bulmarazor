@@ -2,6 +2,9 @@
 namespace BulmaRazor.Components
 {
 
+    /// <summary>
+    /// 仿枚举值基类
+    /// </summary>
     public abstract class EnumBase
     {
         protected EnumBase(string value) { Value = value; }
@@ -9,6 +12,11 @@ namespace BulmaRazor.Components
 
 
 
+        /// <summary>
+        /// 按具体的值比较
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj is EnumBase e)

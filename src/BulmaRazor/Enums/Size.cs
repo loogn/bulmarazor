@@ -1,6 +1,9 @@
 ﻿using System;
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 大小
+    /// </summary>
     public class Size : EnumBase
     {
 
