@@ -15,15 +15,27 @@
         .AddClass("has-gaps", HasGaps)
         .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// 激活
+    /// </summary>
     [Parameter]
     public bool IsActive { get; set; }
 
+    /// <summary>
+    /// 虚线样式
+    /// </summary>
     [Parameter]
     public bool IsDashed { get; set; }
 
+    /// <summary>
+    /// 有间隙
+    /// </summary>
     [Parameter]
     public bool HasGaps { get; set; }
 

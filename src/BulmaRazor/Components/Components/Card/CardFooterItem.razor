@@ -21,19 +21,24 @@ else
         .AddClassFromAttributes(Attributes)
         .Build();
 
+    private bool hasHref;
+    
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-
-    private bool hasHref;
-
+    
+    /// <summary>
+    /// 设置参数
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
-
-        if (Attributes != null)
-        {
-            hasHref = Attributes.ContainsKey("href");
-        }
+        hasHref = Attributes.ContainsKey("href");
     }
+
 }

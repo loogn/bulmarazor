@@ -5,11 +5,17 @@
 <a @attributes="Attributes" class="@clesses" aria-label="more options">
     @ChildContent
 </a>
+
 @code {
+
     string clesses => CssBuilder.Default("card-header-icon")
         .AddClassFromAttributes(Attributes)
-       .Build();
+        .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

@@ -11,65 +11,6 @@
 </nav>
 
 @code{
-    string classes => CssBuilder.Default("breadcrumb")
-        .AddClassFromAttributes(Attributes)
-        .AddClass("is-small", IsSmall)
-        .AddClass("is-medium", IsMedium)
-        .AddClass("is-large", IsLarge)
-        .AddClass("has-arrow-separator", HasArrowSeparator)
-        .AddClass("has-bullet-separator", HasBulletSeparator)
-        .AddClass("has-dot-separator", HasDotSeparator)
-        .AddClass("has-succeeds-separator", HasSucceedsSeparator)
-        .AddClass("is-centered", IsCentered)
-        .AddClass("is-right", IsRight)
-        .Build();
-    [Parameter]
-    public bool IsSmall { get; set; }
     
-    [Parameter]
-    public bool IsMedium { get; set; }
-    [Parameter]
-    public bool IsLarge { get; set; }
-
-    [Parameter]
-    public bool HasArrowSeparator { get; set; }
-    [Parameter]
-    public bool HasBulletSeparator { get; set; }
-    [Parameter]
-    public bool HasDotSeparator { get; set; }
-    [Parameter]
-    public bool HasSucceedsSeparator { get; set; }
-
-
-    [Parameter]
-    public bool IsCentered { get; set; }
-    [Parameter]
-    public bool IsRight { get; set; }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    private List<BreadcrumbItem> items { get; set; } = new List<BreadcrumbItem>();
-
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender)
-        {
-            if (items != null && !items.Any(x => x.IsActive))
-            {
-                items.LastOrDefault().Active(true);
-            }
-        }
-    }
-
-    private int index = 0;
-    public void AddItem(BreadcrumbItem item)
-    {
-        item.Index = index++;
-        items.Add(item);
-    }
-
 
 }

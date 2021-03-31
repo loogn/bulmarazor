@@ -2,66 +2,8 @@
 @inherits BulmaComponentBase
 
 
-
 <li @attributes="Attributes" class='@classes'>
     <a @attributes="AddAtts">
         @ChildContent
     </a>
 </li>
-
-
-@code{
-    string classes => CssBuilder.Default("")
-        .AddClassFromAttributes(Attributes)
-        .AddClass("is-active", IsActive)
-        .Build();
-
-    [Parameter]
-    public bool IsActive { get; set; }
-
-    private Dictionary<string, object> AddAtts = new Dictionary<string, object>();
-
-    [Parameter]
-    public string Href { get; set; }
-    [Parameter]
-    public string Target { get; set; }
-
-    public void Active(bool isActive)
-    {
-        if (isActive != IsActive)
-        {
-            IsActive = isActive;
-            StateHasChanged();
-        }
-    }
-
-    public int Index { get; set; }
-
-
-    [CascadingParameter]
-    public Breadcrumb Parent { get; set; }
-
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        //
-        if (Parent != null)
-        {
-            Parent.AddItem(this);
-        }
-
-        if (Href.HasValue())
-        {
-            AddAtts.Add("href", Href);
-        }
-        if (Target.HasValue())
-        {
-            AddAtts.Add("target", Target);
-        }
-    }
-
-}

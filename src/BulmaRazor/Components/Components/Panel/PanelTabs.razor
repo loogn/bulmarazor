@@ -6,15 +6,23 @@
 </p>
 
 @code {
-    string classes => CssBuilder.Default("panel-tabs")
-  .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
-  .Build();
 
+    string classes => CssBuilder.Default("panel-tabs")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .Build();
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

@@ -30,6 +30,7 @@ namespace BulmaRazor.Components
             Add(item);
         }
 
+        
         public void SetParent()
         {
             foreach (var sub in Children)

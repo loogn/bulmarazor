@@ -5,17 +5,24 @@
 <p @attributes="Attributes" class="@clesses">
     @ChildContent
 </p>
+
 @code {
+
     string clesses => CssBuilder.Default("card-header-title")
         .AddClassFromAttributes(Attributes)
-        .AddClass("is-centered",IsCentered)
-       .Build();
+        .AddClass("is-centered", IsCentered)
+        .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+    
+    /// <summary>
+    /// 是否居中
+    /// </summary>
     [Parameter]
-    public bool  IsCentered { get; set; }
+    public bool IsCentered { get; set; }
+
 }
-
-
-

@@ -1,0 +1,32 @@
+@inherits BulmaComponentBase
+@namespace BulmaRazor.Components
+@inject BulmaRazorJsInterop JsInterop
+
+<div id="@Id" @attributes="Attributes" class="@classes">
+    <header class="quickview-header">
+        <p class="title">
+            @if (HeaderSlot != null)
+            {
+                <text>@HeaderSlot</text>
+            }
+            else
+            {
+                <text>@HeaderText</text>
+            }
+        </p>
+        <span class="delete" @onclick="Hide" data-dismiss="quickview"></span>
+    </header>
+
+    <div class="quickview-body">
+        <div class="quickview-block">
+            @(BodySlot ?? ChildContent)
+        </div>
+    </div>
+
+    @if (FooterSlot != null)
+    {
+        <footer class="quickview-footer">
+            @FooterSlot
+        </footer>
+    }
+</div>

@@ -1,5 +1,4 @@
 @namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <article @attributes="Attributes" class="@classes">
@@ -32,31 +31,54 @@
         .AddClass("is-large", IsLarge)
         .Build();
 
-    
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
-
+    /// <summary>
+    /// 小尺寸
+    /// </summary>
     [Parameter]
     public bool IsSmall { get; set; }
 
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
 
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 
 
+    /// <summary>
+    /// 头文本，优先级低于 HeaderSlot
+    /// </summary>
     [Parameter]
     public string HeaderText { get; set; }
 
+    /// <summary>
+    /// 头部卡槽
+    /// </summary>
     [Parameter]
     public RenderFragment HeaderSlot { get; set; }
 
+    /// <summary>
+    /// Body卡槽
+    /// </summary>
     [Parameter]
     public RenderFragment BodySlot { get; set; }
 
 
+    /// <summary>
+    /// 子内容，优先级低于BodySlot
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

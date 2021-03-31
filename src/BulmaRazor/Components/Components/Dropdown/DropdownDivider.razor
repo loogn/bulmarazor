@@ -2,11 +2,12 @@
 @inherits BulmaComponentBase
 
 
-<hr @attributes="Attributes" class="@clesses" />
+<hr @attributes="Attributes" class="@clesses"/>
 
 @code {
+
     string clesses => CssBuilder.Default("dropdown-divider")
         .AddClassFromAttributes(Attributes)
-       .Build();
+        .Build();
 
 }

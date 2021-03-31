@@ -2,13 +2,13 @@
 @namespace BulmaRazor.Components
 @* @inject BulmaRazorJsInterop JsInterop *@
 
-<ul id="@Id" @attributes="Attributes" class="@classes">
+<ul @attributes="Attributes" class="@classes">
     @ChildContent
 </ul>
 
 @code {
 
-    readonly string Id = "steps_" + Guid.NewGuid().ToString("N");
+    
 
     string classes => CssBuilder.Default("steps")
         .AddClassFromAttributes(Attributes)
@@ -31,55 +31,114 @@
         .Build();
 
 
+    /// <summary>
+    /// 小尺寸
+    /// </summary>
     [Parameter]
     public bool IsSmall { get; set; }
 
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
 
+
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 
+    /// <summary>
+    /// 瘦样式
+    /// </summary>
     [Parameter]
     public bool IsThin { get; set; }
 
+
+    /// <summary>
+    /// 狭窄
+    /// </summary>
     [Parameter]
     public bool IsNarrow { get; set; }
 
+    /// <summary>
+    /// 居中
+    /// </summary>
     [Parameter]
     public bool IsCentered { get; set; }
 
+
+    /// <summary>
+    /// 靠右
+    /// </summary>
     [Parameter]
     public bool IsRight { get; set; }
 
+    /// <summary>
+    /// 是否垂直
+    /// </summary>
     [Parameter]
     public bool IsVertical { get; set; }
 
+
+    /// <summary>
+    /// 是否水平
+    /// </summary>
     [Parameter]
     public bool IsHorizontal { get; set; }
 
+    /// <summary>
+    /// 短样式
+    /// </summary>
     [Parameter]
     public bool IsShort { get; set; }
 
-    //是否空心
+
+    /// <summary>
+    /// //是否空心
+    /// </summary>
     [Parameter]
     public bool IsHollow { get; set; }
 
+
+    /// <summary>
+    /// 是否虚线
+    /// </summary>
     [Parameter]
     public bool IsDashed { get; set; }
 
+    /// <summary>
+    /// 是否间隙
+    /// </summary>
     [Parameter]
     public bool HasGaps { get; set; }
 
+
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+
+    /// <summary>
+    /// 左右平均显示
+    /// </summary>
     [Parameter]
     public bool IsBalanced { get; set; }
 
+    /// <summary>
+    /// 内容在中间
+    /// </summary>
     [Parameter]
     public bool HasContentCentered { get; set; }
 
+
+    /// <summary>
+    /// 内容在上部
+    /// </summary>
     [Parameter]
     public bool HasContentAbove { get; set; }
 

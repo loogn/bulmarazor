@@ -5,14 +5,17 @@
 <header @attributes="Attributes" class="@clesses">
     @ChildContent
 </header>
+
 @code {
+
     string clesses => CssBuilder.Default("card-header")
         .AddClassFromAttributes(Attributes)
-       .Build();
+        .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }
-
-
-

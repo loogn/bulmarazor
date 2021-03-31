@@ -4,12 +4,17 @@
 <div @attributes="Attributes" class="@clesses">
     @ChildContent
 </div>
+
 @code {
+
     string clesses => CssBuilder.Default("card")
         .AddClassFromAttributes(Attributes)
-       .Build();
+        .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-    
+
 }

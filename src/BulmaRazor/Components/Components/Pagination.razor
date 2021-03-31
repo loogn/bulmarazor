@@ -1,0 +1,80 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+@if (HideOnSinglePage && PageCount < 2)
+{
+    <!-- <div>HideOnSinglePage </div> -->
+}
+else
+{
+    <nav @attributes="Attributes" class="@clesses" role="navigation" aria-label="pagination">
+
+        @if (PrevText.HasValue() || PrevSlot != null)
+        {
+            <a class="pagination-previous" disabled="@DisablePrev" @onclick="e => PrevPage()">
+                @if (PrevSlot != null)
+                {
+                    @:@PrevSlot
+                }
+                else
+                {
+                    @:@PrevText
+                }
+            </a>
+        }
+        @if (NextText.HasValue() || NextSlot != null)
+        {
+            <a class="pagination-next" disabled="@DisableNext" @onclick="e => NextPage()">
+                @if (NextSlot != null)
+                {
+                    @:@NextSlot
+                }
+                else
+                {
+                    @:@NextText
+                }
+            </a>
+        }
+        
+        <ul class="pagination-list">
+
+            @itemReader(1)
+            @if (PageIndex >= ItemSize)
+            {
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+            }
+            @if (PageCount > 2)
+            {
+                for (var i = StartIndex; i <= EndIndex; i++)
+                {
+                    @:@itemReader(i)
+                }
+            }
+
+            @if (StartIndex + ItemSize < PageCount)
+            {
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+            }
+            @if (PageCount > 1)
+            {
+                @:@itemReader(PageCount)
+            }
+        </ul>
+    </nav>
+}
+
+@code {
+    
+    RenderFragment<int> itemReader => pageIndex =>
+        @<li>
+            <a class="pagination-link @CssBuilder.Css("is-current", pageIndex == PageIndex)" @onclick="e => ChangePage(pageIndex)"
+               aria-label="Page @pageIndex" aria-current="page">
+                @pageIndex
+            </a>
+        </li>
+    ;
+}

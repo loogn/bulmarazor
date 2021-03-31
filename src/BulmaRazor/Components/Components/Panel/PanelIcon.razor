@@ -13,9 +13,11 @@
     string classes => CssBuilder.Default("panel-icon")
         .AddClassFromAttributes(Attributes)
         .Build();
-    
+
+    /// <summary>
+    /// 图标类名
+    /// </summary>
     [Parameter]
     public string IconClass { get; set; }
 
 }
-

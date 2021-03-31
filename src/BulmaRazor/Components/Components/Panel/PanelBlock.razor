@@ -12,12 +12,21 @@
         .AddClass("is-active",IsActive)
   .Build();
 
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 是否激活
+    /// </summary>
     [Parameter]
     public bool IsActive { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 }

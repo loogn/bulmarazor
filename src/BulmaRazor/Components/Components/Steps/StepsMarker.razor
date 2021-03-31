@@ -15,25 +15,40 @@ else
 }
 
 @code {
-
-
+    
     string classes => CssBuilder.Default("steps-marker")
         .AddClassFromAttributes(Attributes)
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-hollow", IsHollow)
         .Build();
 
+    private bool hasHref;
+
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-    
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+
+    /// <summary>
+    /// 空心样式
+    /// </summary>
     [Parameter]
     public bool IsHollow { get; set; }
 
-    private bool hasHref;
 
+    /// <summary>
+    /// 设置参数
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);

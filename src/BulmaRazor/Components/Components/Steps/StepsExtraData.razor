@@ -15,12 +15,23 @@
         .AddClass("has-overflow-right", HasOverflowRight)
         .Build();
 
+
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// 左溢出
+    /// </summary>
     [Parameter]
     public bool HasOverflowLeft { get; set; }
 
+
+    /// <summary>
+    /// 右溢出
+    /// </summary>
     [Parameter]
     public bool HasOverflowRight { get; set; }
 

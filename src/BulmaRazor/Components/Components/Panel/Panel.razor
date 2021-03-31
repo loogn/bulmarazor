@@ -2,12 +2,15 @@
 @inherits BulmaComponentBase
 <nav @attributes="Attributes" class="@classes">
 
-    @if (HeaderText.HasValue() || HeaderSlot!=null)
+    @if (HeaderText.HasValue() || HeaderSlot != null)
     {
         <p class="panel-heading">
-            @if(HeaderSlot!=null){
+            @if (HeaderSlot != null)
+            {
                 @:@HeaderSlot
-            }else{
+            }
+            else
+            {
                 @:@HeaderText
             }
         </p>
@@ -16,21 +19,34 @@
 </nav>
 
 @code {
-    string classes => CssBuilder.Default("panel")
-  .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
-  .Build();
 
+    string classes => CssBuilder.Default("panel")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .Build();
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
-
+    /// <summary>
+    /// 头部文本
+    /// </summary>
     [Parameter]
     public string HeaderText { get; set; }
 
+    /// <summary>
+    /// 头部卡槽
+    /// </summary>
     [Parameter]
     public RenderFragment HeaderSlot { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

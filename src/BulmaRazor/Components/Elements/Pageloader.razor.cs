@@ -14,14 +14,13 @@ namespace BulmaRazor.Components
             .AddClass("is-right-to-left", IsRightToLeft)
             .Build();
 
-        private bool isActive;
 
         /// <summary>
         /// 显示
         /// </summary>
         public void Show()
         {
-            isActive = true;
+            IsActive = true;
             StateHasChanged();
         }
 
@@ -30,7 +29,7 @@ namespace BulmaRazor.Components
         /// </summary>
         public void Hide()
         {
-            isActive = false;
+            IsActive = false;
             StateHasChanged();
         }
 
@@ -69,18 +68,5 @@ namespace BulmaRazor.Components
         /// </summary>
         [Parameter]
         public RenderFragment ChildContent { get; set; }
-
-
-        /// <summary>
-        /// 设置参数
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public override async Task SetParametersAsync(ParameterView parameters)
-        {
-            await base.SetParametersAsync(parameters);
-
-            isActive = IsActive;
-        }
     }
 }

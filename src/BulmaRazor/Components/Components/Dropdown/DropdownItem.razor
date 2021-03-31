@@ -13,19 +13,35 @@ else
         @ChildContent
     </div>
 }
+
 @code {
+
     string clesses => CssBuilder.Default("dropdown-item")
         .AddClassFromAttributes(Attributes)
-        .AddClass("is-active",IsActive)
-       .Build();
+        .AddClass("is-active", IsActive)
+        .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-    [Parameter]
-    public  bool IsActive { get; set; }
 
+    /// <summary>
+    /// 是否当前
+    /// </summary>
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    /// <summary>
+    /// 链接地址
+    /// </summary>
     [Parameter]
     public string Href { get; set; }
+
+    /// <summary>
+    /// 链接目标
+    /// </summary>
     [Parameter]
     public string Target { get; set; } = "_self";
 
