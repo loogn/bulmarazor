@@ -10,9 +10,11 @@
 
     string classes => CssBuilder.Default("field-body")
         .AddStyleFromAttributes(Attributes)
-
         .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

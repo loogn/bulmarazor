@@ -44,9 +44,8 @@ else
 
                             @if (col.IsCheckBox)
                             {
-                                <CheckBox @ref="                                        cball" TValue="string" OnCheckedChanged="CheckAllRows" Checked="col.CheckedAll">
-                                    @RenderHeaderContent(col)
-                                </CheckBox>
+                                <IconCheckBox Color="Color" OnChange="CheckAllRows" Checked="col.CheckedAll"></IconCheckBox>
+                                @RenderHeaderContent(col)
                             }
                             else
                             {
@@ -70,14 +69,15 @@ else
                                             &nbsp;<Icon class="@getFilterIconClass(col)" IconClass="fa fa-filter"></Icon>&nbsp;
                                         </TriggerSlot>
                                         <MenuSlot>
-                                            <CheckBoxes @bind-Values="col.Filters">
-                                                @foreach (var filterItem in col.AllFilters)
-                                                {
-                                                    <DropdownItem>
-                                                        <CheckBox IsSmall="IsNarrow" Color="Color" Value="filterItem" TValue="string">@filterItem</CheckBox>
-                                                    </DropdownItem>
-                                                }
-                                            </CheckBoxes>
+
+                                            @foreach (var filterItem in col.FilterItems)
+                                            {
+                                                <DropdownItem>
+                                                    <IconCheckBox Color="Color" class="is-inline is-clickable" IsSmall="IsNarrow" @bind-Checked="filterItem.Checked">
+                                                        <span class="ml-1 has-text-grey">@filterItem.Value</span>
+                                                    </IconCheckBox>
+                                                </DropdownItem>
+                                            }
                                             <DropdownDivider class="@B.MY1"/>
                                             <DropdownItem>
                                                 <Buttons>
@@ -111,7 +111,8 @@ else
                             else if (col.IsCheckBox)
                             {
                                 <span>
-                                    <CheckBox TValue="string" OnCheckedChanged="b => CheckBoxClick(row, b)" @bind-Checked="@row.IsChecked">@tdContent?.Invoke(row.Item)</CheckBox>
+                                    <IconCheckBox Color="Color" Checked="row.IsChecked" OnChange="b => CheckBoxClick(row, b)"></IconCheckBox>
+                                    @tdContent?.Invoke(row.Item)
                                 </span>
                             }
                             else if (col.IsExpand)
@@ -152,7 +153,7 @@ else
             @if (dataView.Count == 0 && EmptySlot != null)
             {
                 <tr>
-                    <td class="@B.TextCentered"  colspan="@columns.Count">
+                    <td class="@B.TextCentered" colspan="@columns.Count">
                         @EmptySlot
                     </td>
                 </tr>

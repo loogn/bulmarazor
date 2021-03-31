@@ -10,22 +10,28 @@
 
     string classes => CssBuilder.Default("control")
         .AddStyleFromAttributes(Attributes)
-        .AddClass("has-icons-left",HasIconsLeft)
-        .AddClass("has-icons-right",HasIconsRight)
+        .AddClass("has-icons-left", HasIconsLeft)
+        .AddClass("has-icons-right", HasIconsRight)
         .AddClass("is-expanded", IsExpanded)
-        .AddClass("is-loading",IsLoading)
+        .AddClass("is-loading", IsLoading)
         .Build();
 
 
     /// <summary>
-    /// 用于textbox
+    /// 用于 Textarea 组件显示加载图标
     /// </summary>
     [Parameter]
     public bool IsLoading { get; set; }
 
-
+    /// <summary>
+    /// 左侧是否有图标
+    /// </summary>
     [Parameter]
     public bool HasIconsLeft { get; set; }
+
+    /// <summary>
+    /// 右侧是否有图标
+    /// </summary>
     [Parameter]
     public bool HasIconsRight { get; set; }
 
@@ -35,6 +41,9 @@
     [Parameter]
     public bool IsExpanded { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

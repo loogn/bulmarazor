@@ -1,48 +1,34 @@
-﻿using System;
 using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BulmaRazor.Components
 {
     /// <summary>
-    /// Input组件基类
+    /// 文本域
     /// </summary>
-    /// <typeparam name="TValue"></typeparam>
-    public abstract class InputBase<TValue> : BulmaComponentBase
+    public partial class Textarea
     {
-        internal string Id = "input_" + Guid.NewGuid().ToString("N");
-
-        protected string classes => CssBuilder.Default("input")
-            .AddClassFromAttributes(Attributes)
+        string classes => CssBuilder.Default("textarea")
             .AddClass(Color.Value, Color.Value)
             .AddClass("is-small", IsSmall)
-            .AddClass("is-normal", IsNormal)
             .AddClass("is-medium", IsMedium)
             .AddClass("is-large", IsLarge)
-            .AddClass("is-rounded", IsRounded)
             .AddClass("is-hovered", IsHovered)
             .AddClass("is-focused", IsFocused)
-            .AddClass("is-static", IsStatic)
+            .AddClass("has-fixed-size", FixedSize)
             .Build();
+
 
         /// <summary>
         /// 颜色
         /// </summary>
         [Parameter]
         public Color Color { get; set; } = Color.Default;
-        
+
         /// <summary>
         /// 小尺寸
         /// </summary>
         [Parameter]
         public bool IsSmall { get; set; }
-
-        /// <summary>
-        /// 正常尺寸
-        /// </summary>
-        [Parameter]
-        public bool IsNormal { get; set; }
 
         /// <summary>
         /// 中尺寸
@@ -56,6 +42,7 @@ namespace BulmaRazor.Components
         [Parameter]
         public bool IsLarge { get; set; }
 
+
         /// <summary>
         /// 悬浮样式
         /// </summary>
@@ -65,41 +52,42 @@ namespace BulmaRazor.Components
         /// <summary>
         /// 获焦样式
         /// </summary>
-
         [Parameter]
         public bool IsFocused { get; set; }
 
         /// <summary>
-        /// 圆角样式
+        /// 固定尺寸
         /// </summary>
-
         [Parameter]
-        public bool IsRounded { get; set; }
+        public bool FixedSize { get; set; }
+
 
         /// <summary>
-        /// 静态样式
+        /// 绑定事件 onchange | oninputt
         /// </summary>
-
-        [Parameter]
-        public bool IsStatic { get; set; }
-
-        /// <summary>
-        /// 绑定事件 onchange | oninput
-        /// </summary>
-
         [Parameter]
         public string BindEvent { get; set; } = "onchange";
 
         /// <summary>
-        /// 值
+        /// 文本值
         /// </summary>
         [Parameter]
-        public TValue Value { get; set; }
+        public string Value { get; set; }
 
         /// <summary>
-        /// 绑定值事件
+        /// 文本值改变事件
         /// </summary>
         [Parameter]
-        public EventCallback<TValue> ValueChanged { get; set; }
+        public EventCallback<string> ValueChanged { get; set; }
+
+        private string ShowValue
+        {
+            get => Value;
+            set
+            {
+                Value = value;
+                ValueChanged.InvokeAsync(Value);
+            }
+        }
     }
 }

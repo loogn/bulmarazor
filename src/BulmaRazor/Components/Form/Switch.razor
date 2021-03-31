@@ -2,122 +2,44 @@
 @inherits BulmaComponentBase
 
 
-<input id="@id" @attributes="Attributes" class="@classes" disabled="@Disabled" type="checkbox" checked="@Checked" @onchange="ChangeHandle"/>
+<input id="@id" @attributes="Attributes" class="@classes" type="checkbox" checked="@Checked" @onchange="ChangeHandle"/>
 <label for="@id">
     @if (Checked)
     {
-        if (ChildContent != null)
-        {
-            @:@ChildContent 
-        }
-        else if (OnSlot != null)
+        if (OnSlot != null)
         {
             @:@OnSlot 
         }
+        else if (OnLabel.HasValue())
+        {
+            @:@OnLabel
+        }
+        else if (ChildContent != null)
+        {
+            @:@ChildContent
+        }
         else
         {
-            @:@(OnLabel??Label)
+            @:@Label
         }
     }
     else
     {
-        if (ChildContent != null)
-        {
-            @:@ChildContent 
-        }
-        else if (OffSlot != null)
+        if (OffSlot != null)
         {
             @:@OffSlot 
         }
+        else if (OffLabel.HasValue())
+        {
+            @:@OffLabel
+        }
+        else if (ChildContent != null)
+        {
+            @:@ChildContent 
+        }
         else
         {
-            @:@(OffLabel??Label)
-        } 
+            @:@Label
+        }
     }
 </label>
-
-@code {
-
-
-    string classes => CssBuilder.Default("switch")
-        .AddClassFromAttributes(Attributes)
-        .AddClass(B.Invisible)
-        .AddClass("is-rtl", IsRTL)
-        .AddClass(Color.Value, Color.Value)
-        .AddClass("is-small", IsSmall)
-        .AddClass("is-normal", IsNormal)
-        .AddClass("is-medium", IsMedium)
-        .AddClass("is-large", IsLarge)
-        .AddClass("is-thin", IsThin)
-        .AddClass("is-rounded", IsRounded)
-        .AddClass("is-outlined", IsOutlined)
-        .Build();
-
-    string id = "switch_" + Guid.NewGuid().ToString("N");
-
-    [Parameter]
-    public bool IsRTL { get; set; }
-
-    [Parameter]
-    public Color Color { get; set; } = Color.Default;
-
-    [Parameter]
-    public bool IsSmall { get; set; }
-
-    [Parameter]
-    public bool IsNormal { get; set; }
-
-    [Parameter]
-    public bool IsMedium { get; set; }
-
-    [Parameter]
-    public bool IsLarge { get; set; }
-
-    [Parameter]
-    public bool IsThin { get; set; }
-
-    [Parameter]
-    public bool IsRounded { get; set; }
-
-    [Parameter]
-    public bool IsOutlined { get; set; }
-
-    [Parameter]
-    public bool Checked { get; set; }
-
-    [Parameter]
-    public EventCallback<bool> CheckedChanged { get; set; }
-
-    [Parameter]
-    public EventCallback<bool> OnCheckedChanged { get; set; }
-
-    private async Task ChangeHandle(ChangeEventArgs e)
-    {
-        Checked = !Checked;
-        await CheckedChanged.InvokeAsync(Checked);
-        await OnCheckedChanged.InvokeAsync(Checked);
-    }
-
-    [Parameter]
-    public bool Disabled { get; set; }
-
-    [Parameter]
-    public string OnLabel { get; set; }
-
-    [Parameter]
-    public string OffLabel { get; set; }
-
-    [Parameter]
-    public string Label { get; set; }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public RenderFragment OnSlot { get; set; }
-
-    [Parameter]
-    public RenderFragment OffSlot { get; set; }
-
-
-}

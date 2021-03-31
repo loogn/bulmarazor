@@ -5,7 +5,7 @@
 <div @attributes="Attributes" class="@classes">
     <label class="file-label">
 
-        <InputFile OnChange="ChangeHandle" multiple="@Multiple" class="file-input" />
+        <InputFile OnChange="ChangeHandle" multiple="@Multiple" class="file-input"/>
         <span class="file-cta">
             <span class="file-icon">
                 <i class="@IconClass"></i>
@@ -22,84 +22,3 @@
         }
     </label>
 </div>
-
-@code {
-    string classes => CssBuilder.Default("file")
-        .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
-        .AddClass("is-small", IsSmall)
-        .AddClass("is-normal", IsNormal)
-        .AddClass("is-medium", IsMedium)
-        .AddClass("is-large", IsLarge)
-        .AddClass("has-name", HasName)
-        .AddClass("is-fullwidth", IsFullwidth)
-        .AddClass("is-centered",IsCentered)
-        .AddClass("is-right",IsRight)
-        .AddClass("is-boxed", IsBoxed)
-        .Build();
-
-    [Parameter]
-    public Color Color { get; set; } = Color.Default;
-
-    [Parameter]
-    public bool IsSmall { get; set; }
-    [Parameter]
-    public bool IsNormal { get; set; }
-    [Parameter]
-    public bool IsMedium { get; set; }
-    [Parameter]
-    public bool IsLarge { get; set; }
-    
-    [Parameter]
-    public bool HasName { get; set; }
-
-    [Parameter]
-    public bool IsCentered{get;set;}
-    [Parameter]
-    public bool IsRight{get;set;}
-
-    [Parameter]
-    public bool IsFullwidth { get; set; }
-    [Parameter]
-    public bool IsBoxed { get; set; }
-
-    [Parameter]
-    public string Label { get; set; } = "选择文件";
-
-    [Parameter]
-    public bool Multiple { get; set; }
-
-    [Parameter]
-    public int MaxCount { get; set; } = 1;
-    [Parameter]
-    public string DefaultName { get; set; } = "没有文件";
-
-    [Parameter]
-    public string IconClass { get; set; } = "fa fa-upload";
-
-    private string name = "";
-
-    private async Task ChangeHandle(InputFileChangeEventArgs e)
-    {
-        if (e.FileCount > MaxCount)
-        {
-
-            return;
-        }
-        name = e.File.Name;
-
-        if (OnChange.HasDelegate)
-        {
-            await OnChange.InvokeAsync(e);
-        }
-    }
-
-    [Parameter]
-    public EventCallback<InputFileChangeEventArgs> OnChange { get; set; }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        name = DefaultName;
-    }
-}

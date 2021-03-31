@@ -1,18 +1,37 @@
 ﻿@namespace BulmaRazor.Components
 @inherits IconBase
 
-<span @attributes="Attributes" class="@classes">
+<span @attributes="Attributes" class="@classes" @onclick="ClickHandle">
     <i class="@IconClass"></i>
+    @ChildContent
 </span>
 
 @code {
-    
+
     string IconClass => Checked == null ? "fa fa-minus-square" : Checked.Value ? "fa fa-check-square" : "fa fa-square-o";
+
 
     /// <summary>
     /// 状态
     /// </summary>
     [Parameter]
     public bool? Checked { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> CheckedChanged { get; set; }
+    
+    [Parameter]
+    public EventCallback<bool> OnChange { get; set; }
+
+
+    private async Task ClickHandle()
+    {
+        Checked = Checked != true;
+        await CheckedChanged.InvokeAsync(Checked.Value);
+        await OnChange.InvokeAsync(Checked.Value);
+    }
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
 }

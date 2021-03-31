@@ -1,0 +1,11 @@
+﻿@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@typeparam TValue
+
+
+<input id="@Id" type="range" @attributes="Attributes" @bind-value="@ShowValue" @bind-value:event="@BindEvent"
+       class="@classes"/>
+@if (HasOutput)
+{
+    <output for="@Id">@ShowValue</output>
+}

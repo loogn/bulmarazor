@@ -1,60 +1,6 @@
-﻿
-@namespace BulmaRazor.Components
-
+﻿@namespace BulmaRazor.Components
 @typeparam TValue
 
 <CascadingValue Value="this" IsFixed="true">
     @ChildContent
 </CascadingValue>
-
-@code {
-
-    private HashSet<TValue> _values;
-    [Parameter]
-    public HashSet<TValue> Values
-    {
-        get { return _values; }
-        set
-        {
-            _values = value;
-            foreach (var item in items)
-            {
-                item.SetChecked(_values.Contains(item.Value));
-            }
-        }
-    }
-
-    [Parameter]
-    public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
-
-
-    public async Task CheckTagger(bool ck, TValue value)
-    {
-        if (ck)
-        {
-            _values.Add(value);
-        }
-        else
-        {
-            _values.Remove(value);
-        }
-
-        if (ValuesChanged.HasDelegate)
-        {
-            await ValuesChanged.InvokeAsync(Values);
-        }
-    }
-
-
-    private List<CheckBox<TValue>> items = new List<CheckBox<TValue>>();
-
-    private int index = 0;
-    public void AddItem(CheckBox<TValue> item)
-    {
-        item.Index = index++;
-        items.Add(item);
-    }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-}

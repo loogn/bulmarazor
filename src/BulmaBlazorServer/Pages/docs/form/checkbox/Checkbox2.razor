@@ -6,7 +6,7 @@
         </Control>
     </Field>
     <Field>
-        <Label>复选框列表：</Label>
+        <Label>复选框列表1：</Label>
         <Control>
             <CheckBoxes @bind-Values="val">
                 @for (var i = 0; i < 8; i++)
@@ -19,6 +19,20 @@
             </CheckBoxes>
         </Control>
     </Field>
+    <Field>
+            <Label>复选框列表2：</Label>
+            <Control>
+                <CheckBoxes @bind-Values="val">
+                    @for (var i = 0; i < 8; i++)
+                    {
+                        var newi=i;
+                        <CheckBox Color="Color.Info" Value="newi">
+                            name@(newi)
+                        </CheckBox>
+                    }
+                </CheckBoxes>
+            </Control>
+        </Field>
 </Content>
 @code{
     HashSet<int> val = new HashSet<int>() { 1, 2 };

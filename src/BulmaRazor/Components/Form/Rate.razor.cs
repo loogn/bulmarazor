@@ -1,13 +1,14 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 评分组件
+    /// </summary>
     public partial class Rate
     {
-        string classes => CssBuilder.Default("rate")
+        private string classes => CssBuilder.Default("rate")
             .AddClassFromAttributes(Attributes)
             .Build();
 
@@ -22,12 +23,18 @@ namespace BulmaRazor.Components
         [Parameter]
         public double Value { get; set; }
 
+        /// <summary>
+        /// Value 绑定事件
+        /// </summary>
         [Parameter] public EventCallback<double> ValueChanged { get; set; }
 
+        /// <summary>
+        /// Value 改变事件
+        /// </summary>
         [Parameter] public EventCallback<double> OnChanged { get; set; }
 
         /// <summary>
-        /// 最大分值
+        /// 最大分值 默认5
         /// </summary>
         [Parameter]
         public int Max { get; set; } = 5;
@@ -39,13 +46,13 @@ namespace BulmaRazor.Components
         public bool Disabled { get; set; }
 
         /// <summary>
-        /// 低分和中等分数的界限值，值本身被划分在低分中
+        /// 低分和中等分数的界限值，值本身被划分在低分中，默认2
         /// </summary>
         [Parameter]
         public int LowThreshold { get; set; } = 2;
 
         /// <summary>
-        /// 高分和中等分数的界限值，值本身被划分在高分中
+        /// 高分和中等分数的界限值，值本身被划分在高分中，默认4
         /// </summary>
         [Parameter]
         public int HighThreshold { get; set; } = 4;
@@ -111,7 +118,7 @@ namespace BulmaRazor.Components
         public string DisabledVoidIconClass { get; set; } = "fa-star";
 
         /// <summary>
-        /// 是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容
+        /// 是否显示辅助文字，若为真，则会从 Texts 数组中选取当前分数对应的文字内容
         /// </summary>
         [Parameter]
         public bool ShowText { get; set; }
@@ -135,7 +142,7 @@ namespace BulmaRazor.Components
         public string[] Texts { get; set; } = {"极差", "失望", "一般", "满意", "惊喜"};
 
         /// <summary>
-        /// 分数显示模板
+        /// 分数显示卡槽
         /// </summary>
         [Parameter]
         public RenderFragment<double> ScoreSlot { get; set; } = value => builder
@@ -203,14 +210,7 @@ namespace BulmaRazor.Components
             var cls = CssBuilder.Default("fa")
                 .AddClass(B.Clickable, !Disabled)
                 .AddClass("mr-2");
-            if (index + 1 <= showValue)
-            {
-                cls.AddClass(GetIconClass());
-            }
-            else
-            {
-                cls.AddClass(GetVoidClass());
-            }
+            cls.AddClass(index + 1 <= showValue ? GetIconClass() : GetVoidClass());
 
             return cls.Build();
         }

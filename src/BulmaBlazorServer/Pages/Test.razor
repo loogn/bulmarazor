@@ -4,23 +4,15 @@
 @inject ToastService ToastService
 
 <Container class="@B.PY6">
-
-    <Tree Data="data" OnNodeClick="nodeClick" ShowCheckBox>
-    </Tree>
+    <Switch OnLabel="上架" OffLabel="下架">233</Switch>
+    <Content>
+        val:@val
+    </Content>
+    <Textarea @bind-Value="val" BindEvent="oninput"></Textarea>
 </Container>
 
 @code{
 
-    static string dataFile = "Pages/data1.json";
-    List<TreeItem<string>> data = Tree<string>.BuildDataFromJson(System.IO.File.ReadAllText(dataFile));
-
-    void nodeClick(TreeItem<string> node)
-    {
-         ToastService.Show(node.Text);
-    }
-
-    void Add(TreeItem<string> node)
-    {
-        ToastService.Show(node.Text);
-    }
+    private string val = "232";
+   
 }

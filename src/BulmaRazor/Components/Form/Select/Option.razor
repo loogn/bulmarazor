@@ -1,7 +1,6 @@
 ﻿@namespace BulmaRazor.Components
 @inherits BulmaComponentBase
 @typeparam TValue
-@inject IJSRuntime js
 
 @if (Selected)
 {
@@ -14,61 +13,4 @@ else
     <option @ref="opt" @attributes="Attributes" class="@classes" value="@ShowValue">
         @ChildContent
     </option>
-}
-
-
-@code {
-
-    string classes => CssBuilder.Default("")
-        .AddClassFromAttributes(Attributes)
-        .Build();
-
-
-    [Parameter]
-    public bool Selected { get; set; }
-
-    private ElementReference opt;
-
-    public async Task<bool> GetSelected()
-    {
-        var result = await js.InvokeAsync<bool>("BulmaRazor.GetOptionSelected", new object[] {opt});
-        Selected = result;
-        return Selected;
-    }
-
-
-    public void SetSelected(bool ck)
-    {
-        Selected = ck;
-        StateHasChanged();
-    }
-
-    [Parameter]
-    public TValue Value { get; set; }
-
-    private string ShowValue
-    {
-        get { return ExtendMethods.GetShowValue(Value, string.Empty); }
-    }
-
-    [CascadingParameter]
-    public Select<TValue> Parent { get; set; }
-
-    public int Index { get; set; }
-
-    protected override void OnInitialized()
-    {
-        if (Parent == null) throw new ArgumentException("Option必须是Select的子组件");
-        base.OnInitialized();
-
-        Parent.AddItem(this);
-        if (Parent.Value != null)
-        {
-            Selected = Parent.Value.Equals(Value);
-        }
-    }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
 }

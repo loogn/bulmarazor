@@ -15,15 +15,27 @@
         .AddClass("is-large", IsLarge)
         .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// 小尺寸
+    /// </summary>
     [Parameter]
     public bool IsSmall { get; set; }
 
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
     [Parameter]
     public bool IsMedium { get; set; }
 
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
     [Parameter]
     public bool IsLarge { get; set; }
 

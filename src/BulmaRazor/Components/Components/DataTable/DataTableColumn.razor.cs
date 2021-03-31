@@ -7,10 +7,36 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    internal class DataTableFilterItem
+    {
+        public string Value { get; set; }
+        public bool Checked { get; set; }
+        public override bool Equals(object? obj)
+        {
+            if (obj is DataTableFilterItem other)
+            {
+                return other.Value == this.Value;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
     public partial class DataTableColumn
     {
-        public HashSet<string> AllFilters { get; set; } = new();
-        public HashSet<string> Filters { get; set; } = new();
+        internal HashSet<DataTableFilterItem> FilterItems { get; set; } = new();
+
+        internal void ClearCheckedFilter()
+        {
+            foreach (var item in FilterItems)
+            {
+                item.Checked = false;
+            }
+        }
         public int Index { get; set; }
 
         [Parameter] public string Width { get; set; }
@@ -21,7 +47,7 @@ namespace BulmaRazor.Components
             .Build();
 
 
-        public bool CheckedAll { get; set; }
+        public bool? CheckedAll { get; set; } = false;
 
 
         /// <summary>

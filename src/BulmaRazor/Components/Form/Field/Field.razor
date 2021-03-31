@@ -7,6 +7,7 @@
 
 
 @code {
+
     string classes => CssBuilder.Default("field")
         .AddStyleFromAttributes(Attributes)
         .AddClass("has-addons", HasAddons || HasAddonsCentered || HasAddonsRight)
@@ -17,35 +18,68 @@
         .AddClass("is-grouped-centered", IsGroupedCentered)
         .AddClass("is-grouped-multiline", IsGroupedMultiline)
         .AddClass("is-horizontal", IsHorizontal)
-        .AddClass("is-expanded",IsExpanded)
+        .AddClass("is-expanded", IsExpanded)
         .Build();
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// 是否有插件
+    /// </summary>
     [Parameter]
     public bool HasAddons { get; set; }
 
+    /// <summary>
+    /// 是否展开空间
+    /// </summary>
     [Parameter]
-    public bool IsExpanded{get;set;}
+    public bool IsExpanded { get; set; }
 
+    /// <summary>
+    /// 是否有中插件
+    /// </summary>
     [Parameter]
     public bool HasAddonsCentered { get; set; }
+
+    /// <summary>
+    /// 是否有右插件
+    /// </summary>
     [Parameter]
     public bool HasAddonsRight { get; set; }
 
+    /// <summary>
+    /// 分组
+    /// </summary>
     [Parameter]
     public bool IsGrouped { get; set; }
 
+    /// <summary>
+    /// 分组居右
+    /// </summary>
     [Parameter]
     public bool IsGroupedRight { get; set; }
+
+    /// <summary>
+    /// 分组居中
+    /// </summary>
     [Parameter]
     public bool IsGroupedCentered { get; set; }
 
+    /// <summary>
+    /// 分组多行
+    /// </summary>
     [Parameter]
     public bool IsGroupedMultiline { get; set; }
 
+    /// <summary>
+    /// 是否水平
+    /// </summary>
     [Parameter]
     public bool IsHorizontal { get; set; }
+
+    /// <summary>
+    /// 子内容
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
 }

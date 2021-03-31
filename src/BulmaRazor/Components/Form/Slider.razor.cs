@@ -1,29 +1,27 @@
-﻿using System;
-using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
     /// <summary>
-    /// Input组件基类
+    /// 滑块组件
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
-    public abstract class InputBase<TValue> : BulmaComponentBase
+    public partial class Slider<TValue>
     {
-        internal string Id = "input_" + Guid.NewGuid().ToString("N");
+        string Id = "slider_" + Guid.NewGuid().ToString("N");
 
-        protected string classes => CssBuilder.Default("input")
+        string classes => CssBuilder.Default("slider")
             .AddClassFromAttributes(Attributes)
             .AddClass(Color.Value, Color.Value)
             .AddClass("is-small", IsSmall)
             .AddClass("is-normal", IsNormal)
             .AddClass("is-medium", IsMedium)
             .AddClass("is-large", IsLarge)
-            .AddClass("is-rounded", IsRounded)
-            .AddClass("is-hovered", IsHovered)
-            .AddClass("is-focused", IsFocused)
-            .AddClass("is-static", IsStatic)
+            .AddClass("is-fullwidth", IsFullwidth)
+            .AddClass("has-output", HasOutput)
+            .AddClass("is-circle", IsCircle)
             .Build();
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace BulmaRazor.Components
         /// </summary>
         [Parameter]
         public Color Color { get; set; } = Color.Default;
-        
+
         /// <summary>
         /// 小尺寸
         /// </summary>
@@ -57,49 +55,62 @@ namespace BulmaRazor.Components
         public bool IsLarge { get; set; }
 
         /// <summary>
-        /// 悬浮样式
+        /// 全宽
         /// </summary>
         [Parameter]
-        public bool IsHovered { get; set; }
+        public bool IsFullwidth { get; set; }
 
         /// <summary>
-        /// 获焦样式
+        /// 圆形样式
         /// </summary>
-
         [Parameter]
-        public bool IsFocused { get; set; }
+        public bool IsCircle { get; set; }
 
         /// <summary>
-        /// 圆角样式
+        /// 是否显示值
         /// </summary>
-
         [Parameter]
-        public bool IsRounded { get; set; }
-
-        /// <summary>
-        /// 静态样式
-        /// </summary>
-
-        [Parameter]
-        public bool IsStatic { get; set; }
+        public bool HasOutput { get; set; }
 
         /// <summary>
         /// 绑定事件 onchange | oninput
         /// </summary>
-
         [Parameter]
         public string BindEvent { get; set; } = "onchange";
 
         /// <summary>
-        /// 值
+        /// 值，数字类型
         /// </summary>
         [Parameter]
         public TValue Value { get; set; }
 
+
         /// <summary>
-        /// 绑定值事件
+        /// Value 绑定事件
         /// </summary>
         [Parameter]
         public EventCallback<TValue> ValueChanged { get; set; }
+
+
+        private TValue ShowValue
+        {
+            get => Value;
+            set
+            {
+                Value = value;
+                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
+            }
+        }
+
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public override async Task SetParametersAsync(ParameterView parameters)
+        {
+            await base.SetParametersAsync(parameters);
+            if (HasOutput) BindEvent = "oninput";
+        }
     }
 }

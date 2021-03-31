@@ -3,67 +3,6 @@
 
 
 <textarea @attributes="Attributes"
-          @bind-value="@CurrentValue" @bind-value:event="@BindEvent"
+          @bind-value="@ShowValue" @bind-value:event="@BindEvent"
           class="@classes">
 </textarea>
-
-
-@code {
-    
-    string classes => CssBuilder.Default("textarea")
-        .AddClass(Color.Value, Color.Value)
-        .AddClass("is-small", IsSmall)
-        .AddClass("is-medium", IsMedium)
-        .AddClass("is-large", IsLarge)
-        .AddClass("is-hovered", IsHovered)
-        .AddClass("is-focused", IsFocused)
-        .AddClass("has-fixed-size", FixedSize)
-        .Build();
-
-
-    [Parameter]
-    public Color Color { get; set; } = Color.Default;
-
-    [Parameter]
-    public bool IsSmall { get; set; }
-
-    [Parameter]
-    public bool IsMedium { get; set; }
-
-    [Parameter]
-    public bool IsLarge { get; set; }
-
-
-    [Parameter]
-    public bool IsHovered { get; set; }
-
-    [Parameter]
-    public bool IsFocused { get; set; }
-
-    [Parameter]
-    public bool FixedSize { get; set; }
-
-
-    [Parameter]
-    public string BindEvent { get; set; } = "onchange";
-
-    [Parameter]
-    public string Value { get; set; }
-
-
-    private string CurrentValue
-    {
-        get { return Value; }
-        set
-        {
-            Value = value;
-            if (ValueChanged.HasDelegate)
-            {
-                ValueChanged.InvokeAsync(Value).GetAwaiter().GetResult();
-            }
-        }
-    }
-
-    [Parameter]
-    public EventCallback<string> ValueChanged { get; set; }
-}
