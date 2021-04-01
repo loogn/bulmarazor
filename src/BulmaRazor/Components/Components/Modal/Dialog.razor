@@ -1,9 +1,8 @@
 @namespace BulmaRazor.Components
-
 @inherits BulmaComponentBase
 
 <div class="@classes">
-    <div class="modal-background"></div>
+    <ModalBackground/>
     @if (opts != null)
     {
         <div @attributes="Attributes" class="@contentClasses">
@@ -48,7 +47,7 @@
     string classes => CssBuilder.Default("modal")
         .AddClass("is-active", IsActive)
         .Build();
-    
+
     string contentClasses => CssBuilder.Default("modal-content")
         .AddClassFromAttributes(Attributes)
         .Build();
@@ -140,8 +139,8 @@
         {
             opts.Cancel?.Invoke();
         }
+        opts.Close?.Invoke();
     }
 
-    // private RenderFragment BodySlot { get; set; }
 
 }

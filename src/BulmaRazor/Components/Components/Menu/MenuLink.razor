@@ -22,12 +22,14 @@
 
 @code{
 
-    internal readonly string Id = "menutitle" + Guid.NewGuid().ToString("N");
+    private readonly string Id = "menulink" + Guid.NewGuid().ToString("N");
 
     string classes => CssBuilder.Default("")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
+
+    internal string Href { get; set; }
 
     [Parameter]
     public bool IsActive { get; set; }
@@ -35,9 +37,18 @@
     [Parameter]
     public bool IsClose { get; set; }
 
-    internal string Href { get; set; }
 
-    public void Active(bool isActive)
+    [CascadingParameter]
+    public Menu MenuParent { get; set; }
+
+    [CascadingParameter]
+    public MenuItem ItemParent { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+    internal void Active(bool isActive)
     {
         if (isActive != IsActive)
         {
@@ -67,16 +78,6 @@
         }
     }
 
-    public int Index { get; set; }
-
-    [CascadingParameter]
-    public Menu MenuParent { get; set; }
-
-    [CascadingParameter]
-    public MenuItem ItemParent { get; set; }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
 
     protected override void OnInitialized()
     {

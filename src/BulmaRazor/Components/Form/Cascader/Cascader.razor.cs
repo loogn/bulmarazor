@@ -40,6 +40,7 @@ namespace BulmaRazor.Components
                 .AddClass(B.Clickable, !item.Disabled)
                 .Build();
         }
+
         private string GetCheckCls(CascaderItem<TValue> item)
         {
             return CssBuilder.Default()
@@ -53,6 +54,7 @@ namespace BulmaRazor.Components
             {
                 return item.GetCheckedStatus();
             }
+
             return item.IsChecked;
         }
 
@@ -71,34 +73,123 @@ namespace BulmaRazor.Components
         private bool isShow = false;
 
         private HashSet<CascaderItem<TValue>> SelectedList = new();
-
-        [Parameter] public bool IsSmall { get; set; }
-        [Parameter] public bool IsNormal { get; set; }
-        [Parameter] public bool IsMedium { get; set; }
-        [Parameter] public bool IsLarge { get; set; }
-        [Parameter] public bool Clearable { get; set; }
-        [Parameter] public bool IsMultiple { get; set; }
-        [Parameter] public bool IsIsolated { get; set; }
-        [Parameter] public bool IsRoundedTag { get; set; }
-        [Parameter] public string Separator { get; set; } = "/";
-
         private IEnumerable<CascaderItem<TValue>> dataView = new List<CascaderItem<TValue>>();
-        [Parameter] public IEnumerable<CascaderItem<TValue>> Data { get; set; }
 
-        [Parameter] public string Placeholder { get; set; } = "请选择";
-        [Parameter] public bool ShowAllLevels { get; set; } = true;
-        [Parameter] public bool IsCollapseTags { get; set; }
-        [Parameter] public RenderFragment<CascaderItem<TValue>> ItemSlot { get; set; }
+        /// <summary>
+        /// 小尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsSmall { get; set; }
 
-        [Parameter] public EventCallback<Cascader<TValue>> OnChange { get; set; }
+        /// <summary>
+        /// 正常尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsNormal { get; set; }
 
-        [Parameter] public TValue Value { get; set; }
+        /// <summary>
+        /// 中尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsMedium { get; set; }
 
-        [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
-        [Parameter] public HashSet<TValue> Values { get; set; }
+        /// <summary>
+        /// 大尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsLarge { get; set; }
 
-        [Parameter] public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
+        /// <summary>
+        /// 是否可清空
+        /// </summary>
+        [Parameter]
+        public bool Clearable { get; set; }
 
+        /// <summary>
+        /// 是否多选
+        /// </summary>
+        [Parameter]
+        public bool IsMultiple { get; set; }
+
+        /// <summary>
+        /// 节点是否孤立
+        /// </summary>
+        [Parameter]
+        public bool IsIsolated { get; set; }
+
+        /// <summary>
+        /// 是否圆角Tag
+        /// </summary>
+        [Parameter]
+        public bool IsRoundedTag { get; set; }
+
+        /// <summary>
+        /// 级联值的分隔符
+        /// </summary>
+        [Parameter]
+        public string Separator { get; set; } = "/";
+
+        /// <summary>
+        /// 数据源
+        /// </summary>
+        [Parameter]
+        public IEnumerable<CascaderItem<TValue>> Data { get; set; }
+
+        /// <summary>
+        /// 未选择时占位符
+        /// </summary>
+        [Parameter]
+        public string Placeholder { get; set; } = "请选择";
+
+        /// <summary>
+        /// 显示所有层级，默认true
+        /// </summary>
+        [Parameter]
+        public bool ShowAllLevels { get; set; } = true;
+
+        /// <summary>
+        /// 多选时，是否折叠选中tag
+        /// </summary>
+        [Parameter]
+        public bool IsCollapseTags { get; set; }
+
+        /// <summary>
+        /// 节点显示卡槽
+        /// </summary>
+        [Parameter]
+        public RenderFragment<CascaderItem<TValue>> ItemSlot { get; set; }
+
+        /// <summary>
+        /// 选中值发生变化事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<Cascader<TValue>> OnChange { get; set; }
+
+        /// <summary>
+        /// 单选时的值
+        /// </summary>
+        [Parameter]
+        public TValue Value { get; set; }
+
+        /// <summary>
+        /// Value绑定事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<TValue> ValueChanged { get; set; }
+
+        /// <summary>
+        /// 多选时的值
+        /// </summary>
+        [Parameter]
+        public HashSet<TValue> Values { get; set; }
+
+        /// <summary>
+        /// Values绑定事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
+
+        //触发事件
         private async Task Fire()
         {
             if (IsMultiple)
@@ -116,15 +207,8 @@ namespace BulmaRazor.Components
             await OnChange.InvokeAsync(this);
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            await base.OnAfterRenderAsync(firstRender);
-            if (firstRender)
-            {
-                await JsInterop.BindClickWithoutSelf(Id);
-            }
-        }
 
+        //选中值
         private void CheckValues(CascaderItem<TValue> item, HashSet<TValue> values)
         {
             if (values.Contains(item.Value))
@@ -142,42 +226,49 @@ namespace BulmaRazor.Components
             }
         }
 
+        //初始化数据
         private void InitData()
         {
-            if (Data != null)
+            if (Data == null) return;
+            SelectedList.Clear();
+            HashSet<TValue> values = null;
+            if (IsMultiple && Values != null && Values.Any())
             {
-                SelectedList.Clear();
-                HashSet<TValue> values = null;
-                if (IsMultiple && Values != null && Values.Any())
-                {
-                    values = Values;
-                }
-                else if (Value != null)
-                {
-                    values = new HashSet<TValue>() {Value};
-                }
-
-                if (values != null)
-                {
-                    foreach (var item in Data)
-                    {
-                        CheckValues(item, values);
-                    }
-                }
-
-                dataView = Data;
+                values = Values;
             }
+            else if (Value != null)
+            {
+                values = new HashSet<TValue>() {Value};
+            }
+
+            if (values != null)
+            {
+                foreach (var item in Data)
+                {
+                    CheckValues(item, values);
+                }
+            }
+
+            dataView = Data;
         }
 
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
             InitData();
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <returns></returns>
         protected override Task OnInitializedAsync()
         {
-            // InitData();
             JSCallbackManager.AddEventHandler(Id, "clickWithoutSelf", new Action(() =>
             {
                 isShow = false;
@@ -186,17 +277,33 @@ namespace BulmaRazor.Components
             return base.OnInitializedAsync();
         }
 
+        /// <summary>
+        /// 渲染后
+        /// </summary>
+        /// <param name="firstRender"></param>
+        /// <returns></returns>
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await base.OnAfterRenderAsync(firstRender);
+            if (firstRender)
+            {
+                await JsInterop.BindClickWithoutSelf(Id);
+            }
+        }
+
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        /// <param name="disposing"></param>
+        /// <returns></returns>
         protected override ValueTask DisposeAsync(bool disposing)
         {
             JSCallbackManager.DisposeObject(Id);
             return base.DisposeAsync(disposing);
         }
 
-        public void Toggle()
-        {
-            isShow = !isShow;
-        }
 
+        //获取显示文本
         private string GetText(CascaderItem<TValue> item)
         {
             if (item == null) return string.Empty;
@@ -215,17 +322,18 @@ namespace BulmaRazor.Components
             return String.Join(" " + Separator + " ", linkList);
         }
 
+        //单击选中一项
         private async Task SelectOne(IEnumerable<CascaderItem<TValue>> list, CascaderItem<TValue> item)
         {
             if (item.Disabled) return;
 
             foreach (var cascaderItem in list)
             {
-                cascaderItem.IsOpen = false;
+                cascaderItem.IsExpanded = false;
                 cascaderItem.IsSelected = false;
                 cascaderItem.Children.ForEach(x =>
                 {
-                    x.IsOpen = false;
+                    x.IsExpanded = false;
                     x.IsSelected = false;
                 });
             }
@@ -246,13 +354,14 @@ namespace BulmaRazor.Components
             else
             {
                 item.IsSelected = true;
-                item.IsOpen = true;
+                item.IsExpanded = true;
             }
         }
 
-
+        //选中子节点
         private void CheckChildren(CascaderItem<TValue> item)
         {
+            if (item.Disabled) return;
             if (item.Children.Count == 0)
             {
                 item.IsChecked = true;
@@ -267,8 +376,10 @@ namespace BulmaRazor.Components
             }
         }
 
+        //取消子节点选择
         private void UnCheckChildren(CascaderItem<TValue> item)
         {
+            if (item.Disabled) return;
             item.IsChecked = false;
             SelectedList.Remove(item);
 
@@ -278,10 +389,11 @@ namespace BulmaRazor.Components
             }
         }
 
+        //选中Checkbox
         private async Task Check(CascaderItem<TValue> item, bool cked)
         {
-            if(item.Disabled) return;
-            
+            if (item.Disabled) return;
+
             if (IsIsolated || item.Children.Count == 0)
             {
                 //直接处理自己
@@ -301,26 +413,26 @@ namespace BulmaRazor.Components
                 //级联多选
                 if (cked)
                 {
-                    //取消
-                    UnCheckChildren(item);
+                    //全选
+                    CheckChildren(item);
                 }
                 else
                 {
-                    //全选
-                    CheckChildren(item);
+                    //取消
+                    UnCheckChildren(item);
                 }
             }
 
             await Fire();
         }
 
+        //选中Radio
         private async Task CheckRadio(CascaderItem<TValue> item)
         {
-            if(item.Disabled) return;
+            if (item.Disabled) return;
             foreach (var existsItems in SelectedList)
             {
                 existsItems.IsChecked = false;
-                // existsItems.IsSelected = false;
             }
 
             SelectedList.Clear();
@@ -330,6 +442,7 @@ namespace BulmaRazor.Components
             await Fire();
         }
 
+        //移除项
         private async Task Remove(CascaderItem<TValue> item)
         {
             item.IsSelected = false;
@@ -338,6 +451,10 @@ namespace BulmaRazor.Components
             await Fire();
         }
 
+        /// <summary>
+        /// 清空选中节点
+        /// </summary>
+        /// <returns></returns>
         public async Task ClearSelectedNodes()
         {
             foreach (var item in SelectedList)
@@ -350,11 +467,28 @@ namespace BulmaRazor.Components
             await Fire();
         }
 
+        /// <summary>
+        /// 切换显示状态
+        /// </summary>
+        public void Toggle(bool? visible = null)
+        {
+            isShow = visible ?? !isShow;
+        }
+
+        /// <summary>
+        /// 获取选中节点
+        /// </summary>
+        /// <returns></returns>
         public HashSet<CascaderItem<TValue>> GetSelectedNodes()
         {
             return SelectedList;
         }
 
+        /// <summary>
+        /// 从json数据加载级联数据
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public static List<CascaderItem<TValue>> BuildDataFromJson(string json)
         {
             var list = JsonSerializer.Deserialize<List<CascaderItem<TValue>>>(json, new JsonSerializerOptions()

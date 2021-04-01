@@ -15,6 +15,8 @@ namespace BulmaRazor.Components
 
         [Inject] private BulmaRazorJsInterop JsInterop { get; set; }
         private TreeItem<TValue> CurrentSelected;
+        private IEnumerable<TreeItem<TValue>> dataView = new List<TreeItem<TValue>>();
+        private HashSet<TreeItem<TValue>> SelectedList = new();
 
         string classes => CssBuilder.Default("tree")
             // .AddClass("is-small", IsSmall)
@@ -38,8 +40,6 @@ namespace BulmaRazor.Components
         {
             return CssBuilder.Default("tree-list")
                 .AddClass("show", item.IsExpanded)
-
-                // .AddClass(B.Clickable, !item.Disabled)
                 .Build();
         }
 
@@ -59,50 +59,120 @@ namespace BulmaRazor.Components
 
             return item.IsChecked;
         }
-       
-        
-        private HashSet<TreeItem<TValue>> SelectedList = new();
 
-        [Parameter] public bool IsSmall { get; set; }
-        [Parameter] public bool IsNormal { get; set; }
-        [Parameter] public bool IsMedium { get; set; }
-        [Parameter] public bool IsLarge { get; set; }
 
-        [Parameter] public bool IsAccordion { get; set; }
-        [Parameter] public bool ExpandOnClickNode { get; set; } = true;
-        [Parameter] public bool CheckOnClickNode { get; set; }
-        [Parameter] public bool IsIsolated { get; set; }
+        /// <summary>
+        /// 小尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsSmall { get; set; }
 
-        private IEnumerable<TreeItem<TValue>> dataView = new List<TreeItem<TValue>>();
-        [Parameter] public IEnumerable<TreeItem<TValue>> Data { get; set; }
-        [Parameter] public bool ShowCheckBox { get; set; }
+        /// <summary>
+        /// 正常尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsNormal { get; set; }
 
-        [Parameter] public RenderFragment<TreeItem<TValue>> ItemSlot { get; set; }
+        /// <summary>
+        /// 中尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsMedium { get; set; }
 
-        [Parameter] public Action<TreeItem<TValue>> OnItemClick { get; set; }
-        [Parameter] public Action<TreeItem<TValue>> OnCheckClick { get; set; }
+        /// <summary>
+        /// 大尺寸
+        /// </summary>
+        [Parameter]
+        public bool IsLarge { get; set; }
 
-        [Parameter] public EventCallback<Tree<TValue>> OnChange { get; set; }
+        /// <summary>
+        /// 是否手风琴模式
+        /// </summary>
+        [Parameter]
+        public bool IsAccordion { get; set; }
 
-        [Parameter] public HashSet<TValue> Values { get; set; }
+        /// <summary>
+        /// 是否点击节点展开，默认true
+        /// </summary>
+        [Parameter]
+        public bool ExpandOnClickNode { get; set; } = true;
 
-        [Parameter] public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
+        /// <summary>
+        /// 是否点击节点就选中
+        /// </summary>
+        [Parameter]
+        public bool CheckOnClickNode { get; set; }
 
+        /// <summary>
+        /// 是否孤立选择
+        /// </summary>
+        [Parameter]
+        public bool IsIsolated { get; set; }
+
+
+        /// <summary>
+        /// 数据源
+        /// </summary>
+        [Parameter]
+        public IEnumerable<TreeItem<TValue>> Data { get; set; }
+
+        /// <summary>
+        /// 是否显示复选框
+        /// </summary>
+        [Parameter]
+        public bool ShowCheckBox { get; set; }
+
+        /// <summary>
+        /// Item卡槽
+        /// </summary>
+        [Parameter]
+        public RenderFragment<TreeItem<TValue>> ItemSlot { get; set; }
+
+        /// <summary>
+        /// Item点击事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<TreeItem<TValue>> OnItemClick { get; set; }
+
+        /// <summary>
+        /// CheckBox点击事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<TreeItem<TValue>> OnCheckClick { get; set; }
+
+        /// <summary>
+        /// 选中节点变化事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<Tree<TValue>> OnChange { get; set; }
+
+        /// <summary>
+        /// 选中节点值
+        /// </summary>
+        [Parameter]
+        public HashSet<TValue> Values { get; set; }
+
+        /// <summary>
+        /// Values绑定事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<HashSet<TValue>> ValuesChanged { get; set; }
+
+        //触发事件
         private async Task Fire()
         {
             Values = new HashSet<TValue>(SelectedList.Select(x => x.Value));
             await ValuesChanged.InvokeAsync(Values);
-            // await OnChange.InvokeAsync(this);
+            await OnChange.InvokeAsync(this);
         }
 
-      
-
+        //选中值
         private void CheckValues(TreeItem<TValue> item, HashSet<TValue> values, int level)
         {
             if (values.Contains(item.Value))
             {
                 item.IsChecked = true;
-                
+
                 if (IsIsolated || item.Children.Count == 0)
                 {
                     SelectedList.Add(item);
@@ -116,31 +186,34 @@ namespace BulmaRazor.Components
             }
         }
 
+        //初始化数据
         private void InitData()
         {
-            if (Data != null)
+            if (Data == null) return;
+            SelectedList.Clear();
+            if (Values != null && Values.Any())
             {
-                SelectedList.Clear();
-                HashSet<TValue> values = null;
-                if (Values != null && Values.Any())
+                var values = Values;
+                foreach (var item in Data)
                 {
-                    values = Values;
-                    foreach (var item in Data)
-                    {
-                        CheckValues(item, values, 0);
-                    }
+                    CheckValues(item, values, 0);
                 }
-
-                dataView = Data;
             }
+            dataView = Data;
         }
 
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
             InitData();
         }
-        
+
+        //单击节点
         private async Task ItemClick(TreeItem<TValue> item)
         {
             if (item.Disabled) return;
@@ -166,20 +239,18 @@ namespace BulmaRazor.Components
 
             item.IsExpanded = !item.IsExpanded;
             item.IsSelected = true;
-            
-            OnItemClick?.Invoke(item);
+
+            await OnItemClick.InvokeAsync(item);
         }
 
+        //选中子节点
         private void CheckChildren(TreeItem<TValue> item)
         {
             if (item.Disabled) return;
             if (item.Children.Count == 0)
             {
-                if (!item.Disabled)
-                {
-                    item.IsChecked = true;
-                    SelectedList.Add(item);
-                }
+                item.IsChecked = true;
+                SelectedList.Add(item);
             }
             else
             {
@@ -190,14 +261,12 @@ namespace BulmaRazor.Components
             }
         }
 
+        //取消选中子节点
         private void UnCheckChildren(TreeItem<TValue> item)
         {
             if (item.Disabled) return;
-            if (!item.Disabled)
-            {
-                item.IsChecked = false;
-                SelectedList.Remove(item);
-            }
+            item.IsChecked = false;
+            SelectedList.Remove(item);
 
             foreach (var subItem in item.Children)
             {
@@ -205,10 +274,11 @@ namespace BulmaRazor.Components
             }
         }
 
+        //选中CheckBox
         private async Task Check(TreeItem<TValue> item, bool cked)
         {
             if (item.Disabled) return;
-            if (IsIsolated ||  item.Children.Count == 0)
+            if (IsIsolated || item.Children.Count == 0)
             {
                 //直接处理自己
                 if (item.IsChecked)
@@ -227,30 +297,25 @@ namespace BulmaRazor.Components
                 //级联多选
                 if (cked)
                 {
-                    //取消
-                    UnCheckChildren(item);
-                }
-                else
-                {
                     //全选
                     CheckChildren(item);
                 }
+                else
+                {
+                    //取消
+                    UnCheckChildren(item);
+                }
             }
 
-            OnCheckClick?.Invoke(item);
+            await OnCheckClick.InvokeAsync(item);
 
             await Fire();
         }
 
-
-        private async Task Remove(TreeItem<TValue> item)
-        {
-            item.IsSelected = false;
-            item.IsChecked = false;
-            SelectedList.Remove(item);
-            await Fire();
-        }
-
+        /// <summary>
+        /// 情况选中节点
+        /// </summary>
+        /// <returns></returns>
         public async Task ClearSelectedNodes()
         {
             foreach (var item in SelectedList)
@@ -263,13 +328,32 @@ namespace BulmaRazor.Components
             await Fire();
         }
 
+        /// <summary>
+        /// 获取选中节点
+        /// </summary>
+        /// <returns></returns>
         public HashSet<TreeItem<TValue>> GetSelectedNodes()
         {
             return SelectedList;
-        } 
+        }
+
+        // public void Remove(TreeItem<TValue> item)
+        // {
+        //     SelectedList.Remove(item);
+        //     if (item.Parent != null)
+        //     {
+        //         item.Parent.Children.Remove(item);
+        //         item.Parent = null;
+        //     }
+        //     else
+        //     {
+        //     }
+        // }
+        // insertBefore
+        // insertAfter
         
         //Expand/collapse 
-        
+
         public static List<TreeItem<TValue>> BuildDataFromJson(string json)
         {
             var list = JsonSerializer.Deserialize<List<TreeItem<TValue>>>(json, new JsonSerializerOptions()

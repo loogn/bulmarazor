@@ -4,8 +4,7 @@
 
 
 <div @attributes="Attributes" class="@classes">
-    <div class="modal-background" @onclick="backgroundClickHandle"></div>
-
+    <ModalBackground @onclick="backgroundClickHandle"/>
     <div class="modal-content">
         @ChildContent
     </div>
@@ -21,12 +20,54 @@
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
-
+    
+    /// <summary>
+    /// 是否显示
+    /// </summary>
     [Parameter]
     public bool IsActive { get; set; }
-    
+
+    /// <summary>
+    /// 点击背景是否关闭，默认true
+    /// </summary>
     [Parameter]
     public bool CloseOnClickBackground { get; set; } = true;
+
+    /// <summary>
+    /// 是否显示关闭图标
+    /// </summary>
+    [Parameter]
+    public bool ShowClose { get; set; } = true;
+
+    
+    /// <summary>
+    /// 关闭回调
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+    
+    /// <summary>
+    /// 子内容
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// 关闭
+    /// </summary>
+    public Task Close()
+    {
+        IsActive = false;
+        return OnClose.InvokeAsync();
+    }
+
+    /// <summary>
+    /// 显示
+    /// </summary>
+    public void Show()
+    {
+        IsActive = true;
+    }
 
     private void backgroundClickHandle()
     {
@@ -35,30 +76,5 @@
             Close();
         }
     }
-
-    [Parameter]
-    public bool ShowClose { get; set; } = true;
-
-
-    [Parameter]
-    public Size Size { get; set; } = Size.Default;
-
-
-    [Parameter]
-    public EventCallback OnClose { get; set; }
-
-    public Task Close()
-    {
-        IsActive = false;
-        return OnClose.InvokeAsync();
-    }
-
-    public void Show()
-    {
-        IsActive = true;
-    }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
 
 }

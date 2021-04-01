@@ -16,33 +16,26 @@
         .AddClassFromAttributes(Attributes)
         .Build();
 
+    private List<MenuItem> items = new();
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    private List<MenuItem> items = new List<MenuItem>();
-
-
-    private int index = 0;
-
-    public void AddItem(MenuItem item)
-    {
-        item.Index = index++;
-        items.Add(item);
-    }
 
     [Parameter]
     public EventCallback<MenuItem> OnItemClick { get; set; }
 
-    public async Task ClickItem(MenuItem menuItem)
+    internal void AddItem(MenuItem item)
+    {
+        items.Add(item);
+    }
+    
+    internal async Task ClickItem(MenuItem menuItem)
     {
         foreach (var item in items)
         {
             item.Title.Active(item == menuItem);
         }
-        if (OnItemClick.HasDelegate)
-        {
-            await OnItemClick.InvokeAsync(menuItem);
-        }
+        await OnItemClick.InvokeAsync(menuItem);
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -60,6 +53,5 @@
         }
         base.OnAfterRender(firstRender);
     }
-
 
 }

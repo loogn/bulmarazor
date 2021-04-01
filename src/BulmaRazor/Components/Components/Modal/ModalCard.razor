@@ -3,9 +3,9 @@
 @inherits BulmaComponentBase
 
 <div @attributes="Attributes" class="@classes">
-    <div class="modal-background" @onclick="backgroundClickHandle"></div>
-    <div class="modal-card">
 
+    <ModalBackground @onclick="backgroundClickHandle"/>
+    <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title">@HeaderText</p>
             @if (ShowClose)
@@ -23,25 +23,72 @@
 </div>
 
 @code{
-    
+
     string classes => CssBuilder.Default("modal")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-active", IsActive)
         .Build();
 
+    /// <summary>
+    /// 标题文本
+    /// </summary>
 
     [Parameter]
     public string HeaderText { get; set; }
 
+    /// <summary>
+    /// 是否显示
+    /// </summary>
     [Parameter]
     public bool IsActive { get; set; }
+    
 
-    [Parameter]
-    public Size Size { get; set; } = Size.Default;
-
-
+    /// <summary>
+    /// 点击背景是否关闭
+    /// </summary>
     [Parameter]
     public bool CloseOnClickBackground { get; set; } = false;
+
+    /// <summary>
+    /// 是否显示关闭图标
+    /// </summary>
+    [Parameter]
+    public bool ShowClose { get; set; } = true;
+
+    /// <summary>
+    /// 内容卡槽
+    /// </summary>
+    [Parameter]
+    public RenderFragment BodySlot { get; set; }
+
+    /// <summary>
+    /// 脚部卡槽
+    /// </summary>
+    [Parameter]
+    public RenderFragment FootSlot { get; set; }
+
+    /// <summary>
+    /// 关闭事件回调
+    /// </summary>
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    /// <summary>
+    /// 关闭
+    /// </summary>
+    public Task Close()
+    {
+        IsActive = false;
+        return OnClose.InvokeAsync();
+    }
+
+    /// <summary>
+    /// 显示
+    /// </summary>
+    public void Show()
+    {
+        IsActive = true;
+    }
 
     private void backgroundClickHandle()
     {
@@ -51,29 +98,5 @@
         }
     }
 
-    [Parameter]
-    public bool ShowClose { get; set; } = true;
-
-
-    [Parameter]
-    public EventCallback OnClose { get; set; }
-
-    public Task Close()
-    {
-        IsActive = false;
-        return OnClose.InvokeAsync();
-    }
-
-    public void Show()
-    {
-        IsActive = true;
-        StateHasChanged();
-    }
-
-    [Parameter]
-    public RenderFragment BodySlot { get; set; }
-
-    [Parameter]
-    public RenderFragment FootSlot { get; set; }
 
 }

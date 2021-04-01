@@ -18,8 +18,6 @@ namespace BulmaRazor.Components
         /// </summary>
         internal bool IsHidden { get; set; }
         
-        // internal  Type Type { get; set; }
-        // internal  object Value { get; set; }
         
         internal string ShowValue { get; set; }
     }

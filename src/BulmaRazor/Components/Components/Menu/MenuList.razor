@@ -15,12 +15,23 @@
 
     //这里设置是否手风琴
 
+    
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    /// <summary>
+    /// 父Item
+    /// </summary>
     [CascadingParameter]
     public MenuItem ItemParent { get; set; }
 
+    
+    /// <summary>
+    /// 初始化
+    /// </summary>
     protected override void OnInitialized()
     {
         if (ItemParent != null)
@@ -29,5 +40,4 @@
         }
         base.OnInitialized();
     }
-
 }

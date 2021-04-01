@@ -13,12 +13,22 @@
         .AddClass("is-centered", IsCentered)
         .Build();
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public bool IsCentered { get; set; }
 
+    /// <summary>
+    /// 从右到左
+    /// </summary>
     [Parameter]
     public bool IsRTL { get; set; }
 
+    
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

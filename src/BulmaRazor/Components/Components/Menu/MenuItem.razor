@@ -8,7 +8,7 @@
 </li>
 
 @code{
-    internal readonly string Id = "menuitem_" + Guid.NewGuid().ToString("N");
+    private readonly string Id = "menuitem_" + Guid.NewGuid().ToString("N");
 
     string classes => CssBuilder.Default("")
         .AddClassFromAttributes(Attributes)
@@ -18,8 +18,7 @@
 
     internal MenuList SubList { get; set; }
 
-    public int Index { get; set; }
-
+    
     [CascadingParameter]
     public MenuList ListParent { get; set; }
 
@@ -32,17 +31,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
         MenuParent?.AddItem(this);
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        if (firstRender && ListParent != null)
-        {
-    // await JsInterop.CollapsibleAttach($"#{ListParent.Id}");
-        }
     }
 
 }

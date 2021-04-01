@@ -11,6 +11,7 @@ namespace BulmaRazor.Components
     {
         public string Value { get; set; }
         public bool Checked { get; set; }
+
         public override bool Equals(object? obj)
         {
             if (obj is DataTableFilterItem other)
@@ -26,9 +27,11 @@ namespace BulmaRazor.Components
             return Value.GetHashCode();
         }
     }
+
     public partial class DataTableColumn
     {
         internal HashSet<DataTableFilterItem> FilterItems { get; set; } = new();
+        public bool SortAsc { get; set; }
 
         internal void ClearCheckedFilter()
         {
@@ -37,9 +40,9 @@ namespace BulmaRazor.Components
                 item.Checked = false;
             }
         }
+
         public int Index { get; set; }
 
-        [Parameter] public string Width { get; set; }
 
         internal string thStyle => CssBuilder.Default()
             .AddClass("width:" + Width, Width)
@@ -48,7 +51,13 @@ namespace BulmaRazor.Components
 
 
         public bool? CheckedAll { get; set; } = false;
+        public bool FilterShow { get; set; }
 
+        /// <summary>
+        /// 列宽
+        /// </summary>
+        [Parameter]
+        public string Width { get; set; }
 
         /// <summary>
         /// 是否是索引列
@@ -68,41 +77,90 @@ namespace BulmaRazor.Components
         [Parameter]
         public bool IsExpand { get; set; }
 
-        [Parameter] public string Label { get; set; }
+        /// <summary>
+        /// 列名
+        /// </summary>
+        [Parameter]
+        public string Label { get; set; }
 
-        [Parameter] public string Prop { get; set; }
-        [Parameter] public string Format { get; set; }
+        /// <summary>
+        /// 绑定属性名
+        /// </summary>
+        [Parameter]
+        public string Prop { get; set; }
 
-        [Parameter] public string ThClass { get; set; }
+        /// <summary>
+        /// 格式话，支持时间和数字的ToString格式
+        /// </summary>
+        [Parameter]
+        public string Format { get; set; }
 
-        [Parameter] public string TdClass { get; set; }
-        [Parameter] public string ThStyle { get; set; }
+        /// <summary>
+        /// th头样式类
+        /// </summary>
+        [Parameter]
+        public string ThClass { get; set; }
 
-        [Parameter] public string TdStyle { get; set; }
+        /// <summary>
+        /// td样式类
+        /// </summary>
+        [Parameter]
+        public string TdClass { get; set; }
 
-        [Parameter] public bool Sortable { get; set; }
-        public bool SortAsc { get; set; }
-        [Parameter] public bool Filterable { get; set; }
+        /// <summary>
+        /// th样式
+        /// </summary>
+        [Parameter]
+        public string ThStyle { get; set; }
 
-        public bool FilterShow { get; set; }
+        /// <summary>
+        /// td样式
+        /// </summary>
+        [Parameter]
+        public string TdStyle { get; set; }
+
+        /// <summary>
+        /// 可排序
+        /// </summary>
+        [Parameter]
+        public bool Sortable { get; set; }
+
+        /// <summary>
+        /// 可过滤
+        /// </summary>
+        [Parameter]
+        public bool Filterable { get; set; }
+
 
         /// <summary>
         /// Item作为参数，返回排序对象
         /// </summary>
-        [Parameter] public Func<object, object> SortFunc { get; set; }
+        [Parameter]
+        public Func<object, object> SortFunc { get; set; }
 
-        [CascadingParameter] public IDataTable DataTable { get; set; }
+        /// <summary>
+        /// dataTable对象引用
+        /// </summary>
+        [CascadingParameter]
+        public IDataTable DataTable { get; set; }
 
-        [Parameter] public RenderFragment ThSlot { get; set; }
-        
+        /// <summary>
+        /// th头卡槽
+        /// </summary>
+        [Parameter]
+        public RenderFragment ThSlot { get; set; }
+
         /// <summary>
         /// Item做为参数，填充Td
         /// </summary>
-        [Parameter]public RenderFragment<object> ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment<object> ChildContent { get; set; }
+
         /// <summary>
         /// Item作为参数,填充Td
         /// </summary>
-        [Parameter] public RenderFragment<object> TdSlot { get; set; }
+        [Parameter]
+        public RenderFragment<object> TdSlot { get; set; }
 
         protected override void OnInitialized()
         {

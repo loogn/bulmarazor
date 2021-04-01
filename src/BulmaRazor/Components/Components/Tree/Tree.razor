@@ -32,7 +32,7 @@
             @if (ShowCheckBox)
             {
                 var cked = GetItemChecked(node);
-                <IconCheckBox class="@GetCheckCls(node)" Checked="cked" @onclick="() => Check(node, cked ?? false)"></IconCheckBox>
+                <IconCheckBox class="@GetCheckCls(node)" Checked="cked" OnChange="(v) => Check(node, v)"></IconCheckBox>
             }
             @if (ItemSlot != null)
             {

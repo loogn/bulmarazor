@@ -15,33 +15,55 @@ else
 }
 
 @code {
+
     string clesses => CssBuilder.Default("navbar-item")
-          .AddClassFromAttributes(Attributes)
+        .AddClassFromAttributes(Attributes)
         .AddClass("has-dropdown", HasDropdown)
         .AddClass("has-dropdown-up", HasDropdownUp)
         .AddClass("is-hoverable", IsHoverable)
         .AddClass("is-active", IsActive)
-       .Build();
+        .Build();
 
     private bool hasHref;
 
+    /// <summary>
+    /// 是否可悬浮
+    /// </summary>
     [Parameter]
     public bool IsHoverable { get; set; }
 
+    /// <summary>
+    /// 是否激活
+    /// </summary>
     [Parameter]
     public bool IsActive { get; set; }
 
 
+    /// <summary>
+    /// 是否有下拉菜单
+    /// </summary>
     [Parameter]
     public bool HasDropdown { get; set; }
 
+    /// <summary>
+    /// 是否向上显示菜单
+    /// </summary>
     [Parameter]
     public bool HasDropdownUp { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    public async override Task SetParametersAsync(ParameterView parameters)
+
+    /// <summary>
+    /// 设置参数
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
+    public override async Task SetParametersAsync(ParameterView parameters)
     {
         await base.SetParametersAsync(parameters);
         if (Attributes != null)
@@ -53,4 +75,5 @@ else
             IsHoverable = true;
         }
     }
+
 }

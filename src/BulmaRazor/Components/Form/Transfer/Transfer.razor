@@ -7,7 +7,7 @@
         <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
             <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
                 <span @onclick="() => CheckAll(1, !(leftAll ?? false))" class="is-clickable is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
-                    <IconCheckBox Checked="@leftAll"></IconCheckBox>
+                    <IconCheckBox Color="Color" Checked="@leftAll"></IconCheckBox>
                     @LeftTitle
                 </span>
                 <span class="is-flex-shrink-0 has-text-grey">
@@ -18,7 +18,7 @@
             {
                 <div class="panel-block">
                     <div class="control has-icons-left">
-                        <input type="text" @bind="leftWord" @bind:event="oninput" @onkeyup="leftWordChange" placeholder="@FilterPlaceholder" class="input"/>
+                        <input type="text" @bind="leftWord" @bind:event="oninput" @onkeyup="leftWordChange" placeholder="@FilterPlaceholder" class="input is-small"/>
                         <span class="icon is-left">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </span>
@@ -32,7 +32,7 @@
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : "")">
 
                             <span class="is-flex is-align-items-center is-clickable" @onclick="() => ItemCheckChange(item)">
-                                <IconCheckBox  Checked="item.IsChecked"></IconCheckBox>
+                                <IconCheckBox Color="Color" Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
                             </span>
                         </li>
@@ -72,9 +72,8 @@
     <div class="column is-flex is-flex-direction-column">
         <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
             <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
-
                 <span @onclick="() => CheckAll(2, !(rightAll ?? false))" class="is-clickable is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
-                    <IconCheckBox Checked="@rightAll"></IconCheckBox>
+                    <IconCheckBox Color="Color" Checked="@rightAll"></IconCheckBox>
                     @RightTitle
                 </span>
 
@@ -86,7 +85,7 @@
             {
                 <div class="panel-block">
                     <div class="control has-icons-left">
-                        <input type="text" @bind="rightWord" @bind:event="oninput" @onkeyup="rightWordChange" placeholder="@FilterPlaceholder" class="input"/>
+                        <input type="text" @bind="rightWord" @bind:event="oninput" @onkeyup="rightWordChange" placeholder="@FilterPlaceholder" class="input  is-small"/>
                         <span class="icon is-left">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </span>
@@ -99,7 +98,7 @@
                     {
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : string.Empty)">
                             <span class="is-flex is-align-items-center is-clickable" @onclick="() => ItemCheckChange(item)">
-                                <IconCheckBox  Checked="item.IsChecked"></IconCheckBox>
+                                <IconCheckBox Color="Color" Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
                             </span>
                         </li>

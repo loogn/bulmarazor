@@ -7,15 +7,23 @@
 
 
 @code {
+
     string clesses => CssBuilder.Default("navbar-link")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-arrowless", IsArrowless)
-       .Build();
+        .Build();
 
 
+    /// <summary>
+    /// 是否无箭头
+    /// </summary>
     [Parameter]
     public bool IsArrowless { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }

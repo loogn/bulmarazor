@@ -7,19 +7,29 @@
 
 
 @code {
+
     string clesses => CssBuilder.Default("navbar-dropdown")
         .AddClassFromAttributes(Attributes)
         .AddClass("is-right", IsRight)
         .AddClass("is-boxed", IsBoxed)
-       .Build();
+        .Build();
 
 
+    /// <summary>
+    /// 居右显示
+    /// </summary>
     [Parameter]
     public bool IsRight { get; set; }
 
+    /// <summary>
+    /// 块状显示
+    /// </summary>
     [Parameter]
     public bool IsBoxed { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

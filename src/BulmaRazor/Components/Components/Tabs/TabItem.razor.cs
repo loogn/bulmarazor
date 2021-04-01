@@ -23,6 +23,53 @@ namespace BulmaRazor.Components
 
         private Dictionary<string, object> AddAtts = new();
 
+        /// <summary>
+        /// 索引，从0开始
+        /// </summary>
+        public int Index { get; set; }
+
+        /// <summary>
+        /// Tabs父组件
+        /// </summary>
+        [CascadingParameter]
+        public Tabs Parent { get; set; }
+
+        /// <summary>
+        /// 标签
+        /// </summary>
+        [Parameter]
+        public string Label { get; set; }
+
+        /// <summary>
+        /// 标签卡槽
+        /// </summary>
+        [Parameter]
+        public RenderFragment LabelSlot { get; set; }
+
+        /// <summary>
+        /// 内容卡槽
+        /// </summary>
+        [Parameter]
+        public RenderFragment ContentSlot { get; set; }
+
+        /// <summary>
+        /// 子内容
+        /// </summary>
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
+
+        /// <summary>
+        /// 连接地址
+        /// </summary>
+        [Parameter]
+        public string Href { get; set; }
+
+        /// <summary>
+        /// 连接目标
+        /// </summary>
+        [Parameter]
+        public string Target { get; set; }
+
         internal void Active(bool isAct)
         {
             isActive = isAct;
@@ -31,25 +78,14 @@ namespace BulmaRazor.Components
 
         private Task HandleClick()
         {
-            return Tabs.ClickTab(this);
+            return Parent.ClickTab(this);
         }
 
-        public int Index { get; set; }
-
-        [CascadingParameter] public Tabs Tabs { get; set; }
-
-        [Parameter] public string Label { get; set; }
-
-        [Parameter] public RenderFragment LabelSlot { get; set; }
-
-        [Parameter] public RenderFragment ContentSlot { get; set; }
-
-        [Parameter] public RenderFragment ChildContent { get; set; }
-
-        [Parameter] public string Href { get; set; }
-
-        [Parameter] public string Target { get; set; }
-
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
@@ -57,12 +93,16 @@ namespace BulmaRazor.Components
             ContentSlot ??= ChildContent;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <exception cref="ArgumentException"></exception>
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            if (Tabs == null) throw new ArgumentException("TabItem must in Tabs");
+            if (Parent == null) throw new ArgumentException("TabItem must in Tabs");
             //添加
-            Tabs.AddItem(this);
+            Parent.AddItem(this);
             if (Href.HasValue())
             {
                 AddAtts.Add("href", Href);

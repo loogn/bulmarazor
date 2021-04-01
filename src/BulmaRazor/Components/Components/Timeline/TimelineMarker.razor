@@ -15,17 +15,32 @@
         .AddClass("is-image", IsImage)
         .Build();
 
+    /// <summary>
+    /// 尺寸，使用Square*大小
+    /// </summary>
     [Parameter]
     public Size Size { get; set; } = Size.Default;
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 是否是Icon
+    /// </summary>
     [Parameter]
     public bool IsIcon { get; set; }
 
+    /// <summary>
+    /// 是否是图片
+    /// </summary>
     [Parameter]
     public bool IsImage { get; set; }
 
+    /// <summary>
+    /// 子内容
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

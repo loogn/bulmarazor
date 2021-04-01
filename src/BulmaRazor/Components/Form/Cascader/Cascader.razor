@@ -3,7 +3,7 @@
 @typeparam TValue
 
 <div id="@Id" @attributes="Attributes" class="@classes">
-    <div class="@tagsInputCls" @onclick="Toggle" @onclick:stopPropagation>
+    <div class="@tagsInputCls" @onclick="()=>Toggle()" @onclick:stopPropagation>
 
         @if (IsMultiple)
         {
@@ -53,11 +53,11 @@
         <div class="@dropDownCls" @onclick:stopPropagation>
             @RenderUL(dataView)
 
-            @{ var parent = dataView.FirstOrDefault(x => x.IsOpen && x.Children.Any()); }
+            @{ var parent = dataView.FirstOrDefault(x => x.IsExpanded && x.Children.Any()); }
             @while (parent != null)
             {
                 @:@RenderUL(parent.Children)
-                parent = parent.Children.FirstOrDefault(x => x.IsOpen && x.Children.Any());
+                parent = parent.Children.FirstOrDefault(x => x.IsExpanded && x.Children.Any());
             }
 
         </div>
@@ -70,7 +70,7 @@
         }
         else
         {
-            <span class="drop-icon icon @B.Clickable" @onclick="Toggle" @onclick:stopPropagation>
+            <span class="drop-icon icon @B.Clickable" @onclick="()=>Toggle()" @onclick:stopPropagation>
 
                 <i class="fa @(isShow ? "fa-angle-up" : "fa-angle-down")"></i>
             </span>
@@ -89,7 +89,7 @@
                     @if (IsMultiple)
                     {
                         var cked = GetItemChecked(item);
-                        <IconCheckBox class="@GetCheckCls(item)" Checked="@cked" @onclick="() => Check(item, cked ?? false)"></IconCheckBox>
+                        <IconCheckBox class="@GetCheckCls(item)" Checked="@cked" OnChange="(v) => Check(item,v)"></IconCheckBox>
                     }
                     @if (IsIsolated && !IsMultiple)
                     {

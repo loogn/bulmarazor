@@ -13,8 +13,8 @@ namespace BulmaRazor.Components
         private TypeCachedInfo<TItem> typeCachedInfo = TypeCachedDict.GetTypeCachedInfo<TItem>();
         private List<TransferItem<TItem>> leftView = new();
         private List<TransferItem<TItem>> rightView = new();
-        
-        private bool? leftAll=false;
+
+        private bool? leftAll = false;
         private bool? rightAll;
         private int leftCount;
         private int rightCount;
@@ -25,34 +25,113 @@ namespace BulmaRazor.Components
             $"min-height: {MinHeight}px; max-height: {MaxHeight}px;margin:0; width:100%; overflow: hidden;overflow-y: auto";
 
         /// <summary>
-        /// 数据源
+        /// 左侧数据
         /// </summary>
 
         [Parameter]
         public IEnumerable<TItem> LeftData { get; set; }
 
-        [Parameter] public IEnumerable<TItem> RightData { get; set; }
+        /// <summary>
+        /// 右侧数据
+        /// </summary>
+        [Parameter]
+        public IEnumerable<TItem> RightData { get; set; }
 
-        [Parameter] public bool Filterable { get; set; }
+        /// <summary>
+        /// 是否可过滤
+        /// </summary>
+        [Parameter]
+        public bool Filterable { get; set; }
 
-        [Parameter] public string FilterPlaceholder { get; set; } = "请输入搜索内容";
-        [Parameter] public Func<TItem, string, bool> FilterFunc { get; set; }
-        [Parameter] public string LeftTitle { get; set; } = "列表1";
-        [Parameter] public string RightTitle { get; set; } = "列表2";
+        /// <summary>
+        /// 过滤搜索占位符
+        /// </summary>
+        [Parameter]
+        public string FilterPlaceholder { get; set; } = "请输入搜索内容";
 
-        [Parameter] public string ShowProp { get; set; }
-        [Parameter] public string Format { get; set; }
-        [Parameter] public Color Color { get; set; } = Color.Link;
+        /// <summary>
+        /// 过滤函数
+        /// </summary>
+        [Parameter]
+        public Func<TItem, string, bool> FilterFunc { get; set; }
 
-        [Parameter] public Func<TItem, string> ShowFunc { get; set; }
+        /// <summary>
+        /// 左标题 默认：列表1
+        /// </summary>
+        [Parameter]
+        public string LeftTitle { get; set; } = "列表1";
 
-        [Parameter] public RenderFragment LeftFooterSlot { get; set; }
-        [Parameter] public RenderFragment RightFooterSlot { get; set; }
+        /// <summary>
+        /// 右标题 默认：列表2
+        /// </summary>
+        [Parameter]
+        public string RightTitle { get; set; } = "列表2";
 
-        [Parameter] public int MinHeight { get; set; } = 150;
-        [Parameter] public int MaxHeight { get; set; } = 250;
-        [Parameter] public string LeftButtonText { get; set; }
-        [Parameter] public string RightButtonText { get; set; }
+        /// <summary>
+        /// 显示属性
+        /// </summary>
+        [Parameter]
+        public string ShowProp { get; set; }
+
+        /// <summary>
+        /// 格式，支持日期和数字
+        /// </summary>
+        [Parameter]
+        public string Format { get; set; }
+
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        [Parameter]
+        public Color Color { get; set; } = Color.Default;
+
+        /// <summary>
+        /// 自定义显示函数
+        /// </summary>
+        [Parameter]
+        public Func<TItem, string> ShowValueFunc { get; set; }
+
+        /// <summary>
+        /// 左侧脚部卡槽
+        /// </summary>
+        [Parameter]
+        public RenderFragment LeftFooterSlot { get; set; }
+
+        /// <summary>
+        /// 右侧脚部卡槽
+        /// </summary>
+        [Parameter]
+        public RenderFragment RightFooterSlot { get; set; }
+
+        /// <summary>
+        /// 最小高度 默认150
+        /// </summary>
+        [Parameter]
+        public int MinHeight { get; set; } = 150;
+
+        /// <summary>
+        /// 最大高度 默认260
+        /// </summary>
+        [Parameter]
+        public int MaxHeight { get; set; } = 260;
+
+        /// <summary>
+        /// 左移按钮文本
+        /// </summary>
+        [Parameter]
+        public string LeftButtonText { get; set; }
+
+        /// <summary>
+        /// 右移按钮文本
+        /// </summary>
+        [Parameter]
+        public string RightButtonText { get; set; }
+
+        /// <summary>
+        /// 改变事件
+        /// </summary>
+        [Parameter]
+        public EventCallback<Transfer<TItem>> OnChange { get; set; }
 
         private void ItemCheckChange(TransferItem<TItem> item)
         {
@@ -72,7 +151,7 @@ namespace BulmaRazor.Components
 
             if (list.Count > 0)
             {
-                OnChange?.Invoke(this);
+                OnChange.InvokeAsync(this);
             }
 
             DealCheckBoxStatus();
@@ -126,7 +205,6 @@ namespace BulmaRazor.Components
             rightCount = rightView.Count(x => x.IsChecked);
             if (rightCount == 0)
             {
-                
                 rightAll = false;
             }
             else if (rightCount >= rightView.Count(x => !x.IsHidden))
@@ -179,7 +257,7 @@ namespace BulmaRazor.Components
 
             DealCheckBoxStatus();
         }
-        
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -198,9 +276,9 @@ namespace BulmaRazor.Components
                         Item = item
                     };
 
-                    if (ShowFunc != null)
+                    if (ShowValueFunc != null)
                     {
-                        titem.ShowValue = ShowFunc(item);
+                        titem.ShowValue = ShowValueFunc(item);
                     }
                     else
                     {
@@ -238,21 +316,23 @@ namespace BulmaRazor.Components
             }
         }
 
-        [Parameter] public Action<Transfer<TItem>> OnChange { get; set; }
 
+        /// <summary>
+        /// 获取左侧数据
+        /// </summary>
+        /// <returns></returns>
         public List<TItem> GetLeftData()
         {
             return leftView.Select(x => x.Item).ToList();
         }
 
+        /// <summary>
+        /// 获取右侧数据
+        /// </summary>
+        /// <returns></returns>
         public List<TItem> GetRightData()
         {
             return rightView.Select(x => x.Item).ToList();
-        }
-
-        public override async Task SetParametersAsync(ParameterView parameters)
-        {
-            await base.SetParametersAsync(parameters);
         }
     }
 }

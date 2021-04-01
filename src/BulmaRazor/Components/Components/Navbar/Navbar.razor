@@ -22,12 +22,13 @@
 </nav>
 
 @code {
+
     string clesses => CssBuilder.Default("navbar")
         .AddClass(Color.Value, Color.Value)
         .AddClass("is-transparent", IsTransparent)
         .AddClass("is-spaced", IsSpaced)
-        .AddClass("is-fixed-top",IsFixedTop)
-        .AddClass("is-fixed-bottom",IsFixedBottom)
+        .AddClass("is-fixed-top", IsFixedTop)
+        .AddClass("is-fixed-bottom", IsFixedBottom)
         .Build();
 
     string activeClass = "";
@@ -49,24 +50,52 @@
     string navBarId = "navbar_" + Guid.NewGuid().ToString("N");
 
 
+    /// <summary>
+    /// 颜色
+    /// </summary>
     [Parameter]
     public Color Color { get; set; } = Color.Default;
 
+    /// <summary>
+    /// 固定头部
+    /// </summary>
     [Parameter]
-    public bool IsFixedTop{get;set;}
+    public bool IsFixedTop { get; set; }
+
+
+    /// <summary>
+    /// 固定底部
+    /// </summary>
     [Parameter]
-    public bool IsFixedBottom{get;set;}
+    public bool IsFixedBottom { get; set; }
+
+    /// <summary>
+    /// 间隔显示
+    /// </summary>
     [Parameter]
     public bool IsSpaced { get; set; }
+
+    /// <summary>
+    /// 透明显示
+    /// </summary>
     [Parameter]
     public bool IsTransparent { get; set; }
 
+    /// <summary>
+    /// Brand卡槽
+    /// </summary>
     [Parameter]
     public RenderFragment BrandSlot { get; set; }
 
+    /// <summary>
+    /// 开始位置卡槽
+    /// </summary>
     [Parameter]
     public RenderFragment StartSlot { get; set; }
 
+    /// <summary>
+    /// 结束位置卡槽
+    /// </summary>
     [Parameter]
     public RenderFragment EndSlot { get; set; }
 
