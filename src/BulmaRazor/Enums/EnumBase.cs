@@ -1,15 +1,25 @@
 ﻿using System;
+
 namespace BulmaRazor.Components
 {
-
     /// <summary>
     /// 仿枚举值基类
     /// </summary>
     public abstract class EnumBase
     {
-        protected EnumBase(string value) { Value = value; }
-        public string Value { get;  }
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="value"></param>
+        protected EnumBase(string value)
+        {
+            Value = value;
+        }
 
+        /// <summary>
+        /// 值
+        /// </summary>
+        public string Value { get; }
 
 
         /// <summary>
@@ -23,21 +33,31 @@ namespace BulmaRazor.Components
             {
                 return e.Value == Value;
             }
+
             if (obj is string str)
             {
                 return str == Value;
             }
+
             return false;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return Value.GetHashCode();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return Value;
         }
     }
-
 }

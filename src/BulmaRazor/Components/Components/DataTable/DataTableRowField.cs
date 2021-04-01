@@ -2,6 +2,9 @@ using System;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 数据表格字段
+    /// </summary>
     public class DataTableRowField
     {
         /// <summary>

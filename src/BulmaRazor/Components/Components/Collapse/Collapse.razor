@@ -28,7 +28,7 @@
     [Parameter]
     public string ItemGap { get; set; } = B.MB1;
 
-    private List<CollapseItem> items = new List<CollapseItem>();
+    private List<CollapseItem> items = new();
 
     public void AddItem(CollapseItem item)
     {

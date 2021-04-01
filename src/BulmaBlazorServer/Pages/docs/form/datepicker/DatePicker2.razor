@@ -2,11 +2,10 @@ dt:<span>@(timeSpan) </span><br>
 <DatePicker @bind-Value="timeSpan" Options="opt"></DatePicker>
 
 @code {
-    // DateTime? dt1;
     TimeSpan? timeSpan;
     DatePickerOptions opt = new()
     {
-        Format = "HH:mm",
+        Format = @"hh\:mm",
         StartView = 0,
         PickTime = true
     };

@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 轮播组件参数
+    /// </summary>
     public class CarouselOptions
     {
         ///<summary>

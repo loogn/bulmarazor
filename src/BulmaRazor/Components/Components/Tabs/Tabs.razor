@@ -11,10 +11,12 @@
 </div>
 @if (!IsTabOnly)
 {
-    foreach (var item in items)
+    <div class="mb-1">
+    @foreach (var item in items)
     {
         <div class="@item.contentCls">
             @item.ContentSlot
         </div>
     }
+    </div>
 }

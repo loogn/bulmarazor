@@ -34,8 +34,8 @@
     [Parameter]
     public EventCallback<TuiEditor> OnBlur { get; set; }
 
-    [Parameter]
-    public string BindEvent { get; set; } = "onblur";
+    // [Parameter]
+    private string BindEvent { get; set; } = "onchange";
 
     protected override void OnInitialized()
     {
@@ -45,22 +45,22 @@
         Options.elid = Id;
 
         JSCallbackManager.AddEventHandler(Id, "load", new Func<Task>(() => OnLoad.InvokeAsync(this)));
-        JSCallbackManager.AddEventHandler(Id, "change", new Func<Task>(async() =>
+        JSCallbackManager.AddEventHandler(Id, "change", new Func<Task>(async () =>
         {
-            if ("onchange".Equals(BindEvent, StringComparison.OrdinalIgnoreCase))
+            if ("oninput".Equals(BindEvent, StringComparison.OrdinalIgnoreCase))
             {
-                await setValue();    
+                await setValue();
             }
             await OnChange.InvokeAsync(this);
         }));
         JSCallbackManager.AddEventHandler(Id, "focus", new Func<Task>(() => OnFocus.InvokeAsync(this)));
         JSCallbackManager.AddEventHandler(Id, "blur", new Func<Task>(async () =>
         {
-            if ("onblur".Equals(BindEvent, StringComparison.OrdinalIgnoreCase))
+            if ("onchange".Equals(BindEvent, StringComparison.OrdinalIgnoreCase))
             {
-                await setValue();    
+                await setValue();
             }
-            
+
             await OnBlur.InvokeAsync(this);
         }));
         JSCallbackManager.AddEventHandler(Id, "stateChange", new Func<Task>(() => OnStateChange.InvokeAsync(this)));

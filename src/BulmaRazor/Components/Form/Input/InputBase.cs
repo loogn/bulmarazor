@@ -13,6 +13,9 @@ namespace BulmaRazor.Components
     {
         internal string Id = "input_" + Guid.NewGuid().ToString("N");
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected string classes => CssBuilder.Default("input")
             .AddClassFromAttributes(Attributes)
             .AddClass(Color.Value, Color.Value)

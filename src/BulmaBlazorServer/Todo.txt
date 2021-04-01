@@ -2,7 +2,7 @@ TuiEditor
 WangEditor
 ColorPicker
 DatePicker
-TagsInput   
+TagsInput
 Carousel
 Collapse
 Collapsible

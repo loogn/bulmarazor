@@ -31,6 +31,9 @@ namespace BulmaRazor.Components
         [Parameter]
         public bool IsActive { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Parameter] public EventCallback<bool> IsActiveChanged { get; set; }
 
         /// <summary>

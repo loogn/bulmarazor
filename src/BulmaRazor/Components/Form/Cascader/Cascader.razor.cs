@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 级联组件
+    /// </summary>
+    /// <typeparam name="TValue"></typeparam>
     public partial class Cascader<TValue>
     {
         [Inject] private BulmaRazorJsInterop JsInterop { get; set; }

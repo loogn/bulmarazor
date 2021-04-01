@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WangEditorOptions
     {
         /// <summary>

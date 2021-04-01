@@ -2,6 +2,7 @@ using System;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+#pragma warning disable 1591
 
 namespace BulmaRazor.Components
 {

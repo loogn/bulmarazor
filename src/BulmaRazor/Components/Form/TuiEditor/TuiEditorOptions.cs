@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TuiEditorOptions
     {
         internal string elid { get; set; }
@@ -78,7 +81,10 @@ namespace BulmaRazor.Components
         /// <summary>
         /// whether use the front matter
         /// </summary>
-        public bool? FrontMatter { get; set; } 
+        public bool? FrontMatter { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public bool? Viewer { get; set; }
 
         internal JsParams ToParams()

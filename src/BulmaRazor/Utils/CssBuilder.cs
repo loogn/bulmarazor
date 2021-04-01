@@ -10,6 +10,12 @@ namespace BulmaRazor.Components
     public class CssBuilder
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="flag"></param>
+        /// <returns></returns>
         public static string Css(string value, bool flag) => flag ? value : string.Empty;
 
 
@@ -20,7 +26,7 @@ namespace BulmaRazor.Components
         /// Call Build() to return the completed CSS Classes as a string.
         /// </summary>
         /// <param name="value"></param>
-        public static CssBuilder Default(string value = null) => new CssBuilder(value);
+        public static CssBuilder Default(string value = null) => new(value);
 
 
         /// <summary>
@@ -62,6 +68,12 @@ namespace BulmaRazor.Components
         public CssBuilder AddClass(string value, Func<bool> when) => AddClass(value, when());
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="originValue"></param>
+        /// <returns></returns>
         public CssBuilder AddClass(string value, string originValue) => AddClass(value, originValue.HasValue());
 
         /// <summary>

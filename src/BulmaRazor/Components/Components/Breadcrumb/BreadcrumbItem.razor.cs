@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 面包屑项
+    /// </summary>
     public partial class BreadcrumbItem
     {
         string classes => CssBuilder.Default("")

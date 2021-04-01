@@ -5,37 +5,51 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
-    public static class ExtendMethods
+    /// <summary>
+    /// 
+    /// </summary>
+    internal static class ExtendMethods
     {
-        public static bool IsSimpleType(this Type type)
-        {
-            return type.IsPrimitive || type == typeof(string);
-        }
+        // public static bool IsSimpleType(this Type type)
+        // {
+        //     return type.IsPrimitive || type == typeof(string);
+        // }
 
+        /// <summary>
+        /// 是否有值
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool HasValue(this string value)
         {
             return !string.IsNullOrEmpty(value);
         }
 
+        /// <summary>
+        /// 是否空或null
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool NoValue(this string value)
         {
             return string.IsNullOrEmpty(value);
         }
 
 
-        public static bool IsNumber(this Type type)
-        {
-            type = Nullable.GetUnderlyingType(type) ?? type;
-            return type == typeof(byte) ||
-                   type == typeof(sbyte) ||
-                   type == typeof(int) ||
-                   type == typeof(long) ||
-                   type == typeof(short) ||
-                   type == typeof(float) ||
-                   type == typeof(double) ||
-                   type == typeof(decimal);
-        }
+        // public static bool IsNumber(this Type type)
+        // {
+        //     type = Nullable.GetUnderlyingType(type) ?? type;
+        //     return type == typeof(byte) ||
+        //            type == typeof(sbyte) ||
+        //            type == typeof(int) ||
+        //            type == typeof(long) ||
+        //            type == typeof(short) ||
+        //            type == typeof(float) ||
+        //            type == typeof(double) ||
+        //            type == typeof(decimal);
+        // }
 
+        
         public static string GetShowValue<TValue>(TValue value, string format)
         {
             var otype = typeof(TValue);
@@ -51,6 +65,7 @@ namespace BulmaRazor.Components
             {
                 return value.ToString();
             }
+            
 
             if (value is IFormattable formattableObject)
             {

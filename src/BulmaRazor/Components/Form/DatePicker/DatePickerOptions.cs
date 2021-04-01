@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DatePickerOptions
     {
         /// <summary>
@@ -87,8 +90,11 @@ namespace BulmaRazor.Components
                 //d, dd, m, mm, yy, yyyy, hh, ii.
                 format = format.Replace("H", "h")
                     .Replace("m", "i")
-                    .Replace("M", "m");
+                    .Replace("M", "m")
+                    .Replace("\\","");
+                    
                 ps.AddNotNull("format", format);
+                
             }
 
             ps.AddNotNull("language", Language ?? def.Language);

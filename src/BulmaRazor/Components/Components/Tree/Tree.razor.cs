@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 树形组件
+    /// </summary>
+    /// <typeparam name="TValue"></typeparam>
     public partial class Tree<TValue>
     {
         readonly string Id = "tree_" + Guid.NewGuid().ToString("N");
@@ -354,6 +358,11 @@ namespace BulmaRazor.Components
         
         //Expand/collapse 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public static List<TreeItem<TValue>> BuildDataFromJson(string json)
         {
             var list = JsonSerializer.Deserialize<List<TreeItem<TValue>>>(json, new JsonSerializerOptions()

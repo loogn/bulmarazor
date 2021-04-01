@@ -15,15 +15,29 @@ namespace BulmaRazor.Components
     {
         private readonly BulmaRazorJsInterop jsInterop;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jsInterop"></param>
         public ToastService(BulmaRazorJsInterop jsInterop)
         {
             this.jsInterop = jsInterop;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public ValueTask Show(ToastOptions options)
         {
             return jsInterop.ToastShow(options);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public ValueTask Show(string message)
         {
             return jsInterop.ToastShow(new ToastOptions() {Message = message});

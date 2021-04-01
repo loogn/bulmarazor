@@ -14,7 +14,6 @@ namespace BulmaRazor.Utils
         /// <summary>
         /// 实例化对象 用EMIT
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="constructor"></param>
         /// <returns></returns>
         public static Func<object> BuildConstructorInvoker(ConstructorInfo constructor)
@@ -38,86 +37,88 @@ namespace BulmaRazor.Utils
             //return (Func<object>)dynamicMethod.CreateDelegate(typeof(Func<object>));
         }
 
-        public static Func<object> BuildConstructorInvoker(Type type)
-        {
-            var constructor = type.GetConstructor(Type.EmptyTypes);
-            if (constructor != null)
-            {
-                return BuildConstructorInvoker(constructor);
-            }
-            else
-            {
-                return () =>
-                {
-                    throw new Exception(type.FullName + " 类型没有无参构造，无法实例化。");
-                };
-            }
-        }
+        // public static Func<object> BuildConstructorInvoker(Type type)
+        // {
+        //     var constructor = type.GetConstructor(Type.EmptyTypes);
+        //     if (constructor != null)
+        //     {
+        //         return BuildConstructorInvoker(constructor);
+        //     }
+        //     else
+        //     {
+        //         return () =>
+        //         {
+        //             throw new Exception(type.FullName + " 类型没有无参构造，无法实例化。");
+        //         };
+        //     }
+        // }
 
         public static Func<object, object> BuildGetterInvoker(MethodInfo methodInfo)
         {
             if (methodInfo == null) return (obj) => { return null; };
             var instanceParameter = Expression.Parameter(typeof(object), "instance");
-            var instanceExpr = methodInfo.IsStatic ? null : Expression.Convert(instanceParameter, methodInfo.ReflectedType);
+            var instanceExpr = methodInfo.IsStatic
+                ? null
+                : Expression.Convert(instanceParameter, methodInfo.ReflectedType);
             var callExpr = Expression.Call(instanceExpr, methodInfo, null);
             UnaryExpression castCallExpr = Expression.Convert(callExpr, typeof(object));
             var fun = Expression.Lambda<Func<object, object>>(castCallExpr, instanceParameter).Compile();
             return fun;
         }
 
-        public static Action<object, object> BuildSetterInvoker(MethodInfo methodInfo)
-        {
-            if (methodInfo == null) return (obj, value) => {; };
+        // public static Action<object, object> BuildSetterInvoker(MethodInfo methodInfo)
+        // {
+        //     if (methodInfo == null) return (obj, value) => {; };
+        //
+        //     var instanceParameter = Expression.Parameter(typeof(object), "instance");
+        //     var parametersParameter = Expression.Parameter(typeof(object), "value");
+        //     var instanceExpr = methodInfo.IsStatic ? null : Expression.Convert(instanceParameter, methodInfo.ReflectedType);
+        //     var paramInfo = methodInfo.GetParameters().First();
+        //
+        //     Expression caseExp = null;
+        //     var underlyingType = Nullable.GetUnderlyingType(paramInfo.ParameterType);
+        //     if (underlyingType != null && underlyingType.IsEnum)
+        //     {
+        //         var case1 = Expression.Convert(parametersParameter, Enum.GetUnderlyingType(underlyingType));
+        //         caseExp = Expression.Convert(case1, paramInfo.ParameterType);
+        //     }
+        //     else
+        //     {
+        //         if (paramInfo.ParameterType == Types.Bool)
+        //         {
+        //             var changeTypeMethod = typeof(Convert).GetMethod("ChangeType", new Type[] {Types.Object, Types.Type});
+        //             caseExp = Expression.Convert(Expression.Call(null, changeTypeMethod, 
+        //                     parametersParameter,
+        //                     Expression.Constant(paramInfo.ParameterType)),
+        //                 paramInfo.ParameterType);
+        //         }
+        //         else
+        //         {
+        //             caseExp = Expression.Convert(parametersParameter, paramInfo.ParameterType);    
+        //         }
+        //         
+        //     }
+        //     var callExpr = Expression.Call(instanceExpr, methodInfo, caseExp);
+        //     var action = Expression.Lambda<Action<object, object>>(callExpr,
+        //         instanceParameter, parametersParameter).Compile();
+        //     return action;
+        // }
 
-            var instanceParameter = Expression.Parameter(typeof(object), "instance");
-            var parametersParameter = Expression.Parameter(typeof(object), "value");
-            var instanceExpr = methodInfo.IsStatic ? null : Expression.Convert(instanceParameter, methodInfo.ReflectedType);
-            var paramInfo = methodInfo.GetParameters().First();
-
-            Expression caseExp = null;
-            var underlyingType = Nullable.GetUnderlyingType(paramInfo.ParameterType);
-            if (underlyingType != null && underlyingType.IsEnum)
-            {
-                var case1 = Expression.Convert(parametersParameter, Enum.GetUnderlyingType(underlyingType));
-                caseExp = Expression.Convert(case1, paramInfo.ParameterType);
-            }
-            else
-            {
-                if (paramInfo.ParameterType == Types.Bool)
-                {
-                    var changeTypeMethod = typeof(Convert).GetMethod("ChangeType", new Type[] {Types.Object, Types.Type});
-                    caseExp = Expression.Convert(Expression.Call(null, changeTypeMethod, 
-                            parametersParameter,
-                            Expression.Constant(paramInfo.ParameterType)),
-                        paramInfo.ParameterType);
-                }
-                else
-                {
-                    caseExp = Expression.Convert(parametersParameter, paramInfo.ParameterType);    
-                }
-                
-            }
-            var callExpr = Expression.Call(instanceExpr, methodInfo, caseExp);
-            var action = Expression.Lambda<Action<object, object>>(callExpr,
-                instanceParameter, parametersParameter).Compile();
-            return action;
-        }
-
-        public static Action<object, object> BuildEnumSetterInvoker(Type underlyingType, MethodInfo methodInfo)
-        {
-            if (methodInfo == null) return (obj, value) => {; };
-
-            var instanceParameter = Expression.Parameter(typeof(object), "instance");
-            var parametersParameter = Expression.Parameter(typeof(object), "value");
-            var instanceExpr = methodInfo.IsStatic ? null : Expression.Convert(instanceParameter, methodInfo.ReflectedType);
-            var paramInfo = methodInfo.GetParameters().First();
-            var arrCase = Expression.Convert(parametersParameter, underlyingType);
-            var arrCase1 = Expression.Convert(arrCase, paramInfo.ParameterType);
-            var callExpr = Expression.Call(instanceExpr, methodInfo, arrCase1);
-            var action = Expression.Lambda<Action<object, object>>(callExpr,
-                instanceParameter, parametersParameter).Compile();
-            return action;
-        }
+        // public static Action<object, object> BuildEnumSetterInvoker(Type underlyingType, MethodInfo methodInfo)
+        // {
+        //     if (methodInfo == null) return (obj, value) => {; };
+        //
+        //     var instanceParameter = Expression.Parameter(typeof(object), "instance");
+        //     var parametersParameter = Expression.Parameter(typeof(object), "value");
+        //     var instanceExpr = methodInfo.IsStatic ? null : Expression.Convert(instanceParameter, methodInfo.ReflectedType);
+        //     var paramInfo = methodInfo.GetParameters().First();
+        //     var arrCase = Expression.Convert(parametersParameter, underlyingType);
+        //     var arrCase1 = Expression.Convert(arrCase, paramInfo.ParameterType);
+        //     var callExpr = Expression.Call(instanceExpr, methodInfo, arrCase1);
+        //     var action = Expression.Lambda<Action<object, object>>(callExpr,
+        //         instanceParameter, parametersParameter).Compile();
+        //     return action;
+        // }
 
 
         public static Func<T> BuildConstructorInvoker<T>(Type type)
@@ -129,10 +130,7 @@ namespace BulmaRazor.Utils
             }
             else
             {
-                return () =>
-                {
-                    throw new Exception(type.FullName + " 类型没有无参构造，无法实例化。");
-                };
+                return () => { throw new Exception(type.FullName + " 类型没有无参构造，无法实例化。"); };
             }
         }
     }

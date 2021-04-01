@@ -2,9 +2,16 @@ using System;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TItem"></typeparam>
     public class TransferItem<TItem>
     {
         
+        /// <summary>
+        /// 
+        /// </summary>
         public TItem Item { get; set; }
 
         /// <summary>

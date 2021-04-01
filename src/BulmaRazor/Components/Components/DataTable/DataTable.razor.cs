@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 数据表格组件
+    /// </summary>
+    /// <typeparam name="TItem"></typeparam>
     public partial class DataTable<TItem> : IDataTable where TItem : new()
     {
         #region 私有变量
@@ -26,7 +30,7 @@ namespace BulmaRazor.Components
 
         private List<DataTableColumn> columns = new(); //列集合
 
-        private int colIndex = 0; //列索引
+        // private int colIndex = 0; //列索引
 
         private TItem selectedItem; //选中的当前项
         internal HashSet<TItem> CheckItemSet { get; set; }
@@ -36,7 +40,7 @@ namespace BulmaRazor.Components
         private DataTableColumn checkColumn = null; //复选列
 
         // private CheckBox<string> cball; //全选复选框
-        private bool checkAll;
+        // private bool checkAll;
 
         private List<DataTableRow<TItem>> checkedRows = new(); //复选中的行
 
@@ -177,9 +181,13 @@ namespace BulmaRazor.Components
 
         #region 私有方法
 
+        /// <summary>
+        /// 添加列
+        /// </summary>
+        /// <param name="column"></param>
         public void AddColumns(DataTableColumn column)
         {
-            column.Index = colIndex++;
+            // column.Index = colIndex++;
             columns.Add(column);
             if (column.IsCheckBox)
             {
@@ -372,6 +380,11 @@ namespace BulmaRazor.Components
 
         #endregion
 
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);

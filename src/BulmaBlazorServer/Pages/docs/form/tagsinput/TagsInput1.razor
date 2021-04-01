@@ -7,7 +7,9 @@ str:<span>@str</span><br>
 
     string str = "aa,bb";
     TagsInput tinput;
-    TagsInputOptions opts = new() {MaxTags = 5,Removable =true};
+    TagsInputOptions opts = new() {MaxTags = 5,
+        Source=new []{"aa","bb","cc","dd","eee","ff"},
+        Removable =true};
 
     void clear()
     {

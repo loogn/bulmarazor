@@ -12,7 +12,7 @@ namespace BulmaRazor.Components
         public string Value { get; set; }
         public bool Checked { get; set; }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (obj is DataTableFilterItem other)
             {
@@ -28,9 +28,15 @@ namespace BulmaRazor.Components
         }
     }
 
+    /// <summary>
+    /// 数据表格列
+    /// </summary>
     public partial class DataTableColumn
     {
         internal HashSet<DataTableFilterItem> FilterItems { get; set; } = new();
+        /// <summary>
+        /// 是否正序
+        /// </summary>
         public bool SortAsc { get; set; }
 
         internal void ClearCheckedFilter()
@@ -41,7 +47,7 @@ namespace BulmaRazor.Components
             }
         }
 
-        public int Index { get; set; }
+        // public int Index { get; set; }
 
 
         internal string thStyle => CssBuilder.Default()
@@ -50,7 +56,13 @@ namespace BulmaRazor.Components
             .Build();
 
 
+        /// <summary>
+        /// 全选状态
+        /// </summary>
         public bool? CheckedAll { get; set; } = false;
+        /// <summary>
+        /// 过滤弹框是否显示
+        /// </summary>
         public bool FilterShow { get; set; }
 
         /// <summary>
@@ -162,6 +174,10 @@ namespace BulmaRazor.Components
         [Parameter]
         public RenderFragment<object> TdSlot { get; set; }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
         protected override void OnInitialized()
         {
             if (DataTable == null)

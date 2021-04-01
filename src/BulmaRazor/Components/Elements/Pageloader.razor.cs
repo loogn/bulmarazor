@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 页面加载组件
+    /// </summary>
     public partial class Pageloader
     {
         string classes => CssBuilder.Default("pageloader")

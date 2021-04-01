@@ -2,18 +2,35 @@ using BulmaRazor.Utils;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 吐司动画
+    /// </summary>
     public class ToastAnimate
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_in"></param>
+        /// <param name="_out"></param>
         public ToastAnimate(string _in, string _out)
         {
             @in = _in;
             @out = _out;
 
         }
+        /// <summary>
+        /// 进入动画
+        /// </summary>
         public string @in { get; set; }
+        /// <summary>
+        /// 消失动画
+        /// </summary>
         public string @out { get; set; }
     };
 
+    /// <summary>
+    /// 吐司选项
+    /// </summary>
     public class ToastOptions
     {
         /// <summary>

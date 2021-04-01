@@ -140,6 +140,10 @@ namespace BulmaRazor.Components
             await OnChanged.InvokeAsync(Checked);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ck"></param>
         public void SetChecked(bool ck)
         {
             Checked = ck;

@@ -3,6 +3,9 @@ using BulmaRazor.Utils;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TagsInputOptions
     {
         /// <summary>

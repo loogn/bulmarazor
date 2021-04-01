@@ -6,7 +6,8 @@ using Microsoft.JSInterop;
 
 namespace BulmaRazor.Utils
 {
-    public static class JSCallbackManager
+    
+    internal static class JSCallbackManager
     {
         private static ConcurrentDictionary<string, Dictionary<string, Delegate>> eventHandlerDict = new();
 
@@ -24,20 +25,20 @@ namespace BulmaRazor.Utils
             }
         }
 
-        public static void RemoveEventHandler(string objId, string eventKey)
-        {
-            var eventHandlerList = eventHandlerDict.GetOrAdd(objId, (key) => new Dictionary<string, Delegate>());
-            eventHandlerList.Remove(eventKey);
-        }
-        public static void RemoveEventHandler(string objId, string eventKey,Delegate @delegate)
-        {
-            var eventHandlerList = eventHandlerDict.GetOrAdd(objId, (key) => new Dictionary<string, Delegate>());
-            
-            if (eventHandlerList.TryGetValue(eventKey, out Delegate oldDel))
-            {
-                eventHandlerList[eventKey] = Delegate.Remove(oldDel, @delegate);
-            }
-        }
+        // public static void RemoveEventHandler(string objId, string eventKey)
+        // {
+        //     var eventHandlerList = eventHandlerDict.GetOrAdd(objId, (key) => new Dictionary<string, Delegate>());
+        //     eventHandlerList.Remove(eventKey);
+        // }
+        // public static void RemoveEventHandler(string objId, string eventKey,Delegate @delegate)
+        // {
+        //     var eventHandlerList = eventHandlerDict.GetOrAdd(objId, (key) => new Dictionary<string, Delegate>());
+        //     
+        //     if (eventHandlerList.TryGetValue(eventKey, out Delegate oldDel))
+        //     {
+        //         eventHandlerList[eventKey] = Delegate.Remove(oldDel, @delegate);
+        //     }
+        // }
 
         public static void DisposeObject(string objId)
         {

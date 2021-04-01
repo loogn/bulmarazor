@@ -7,6 +7,9 @@ namespace BulmaRazor.Components
     /// </summary>
     public class BlockListBase : BulmaComponentBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected string classes => CssBuilder.Default()
             .AddClassFromAttributes(Attributes)
             .AddClass(Color.Value, Color.Value)

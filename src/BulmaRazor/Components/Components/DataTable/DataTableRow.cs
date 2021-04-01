@@ -4,10 +4,20 @@ using System.IO;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TItem"></typeparam>
     public class DataTableRow<TItem> where TItem : new()
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int Index { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TItem Item { get; set; }
 
         /// <summary>
@@ -30,9 +40,10 @@ namespace BulmaRazor.Components
         /// </summary>
         internal bool IsHidden { get; set; }
 
-        public Dictionary<string, DataTableRowField> Fields { get; } = new(StringComparer.OrdinalIgnoreCase);
+        internal Dictionary<string, DataTableRowField> Fields { get; } = new(StringComparer.OrdinalIgnoreCase);
 
-        public string GetShowValue(string prop)
+       
+        internal string GetShowValue(string prop)
         {
             if (string.IsNullOrEmpty(prop)) return string.Empty;
             if (Fields.TryGetValue(prop, out DataTableRowField field))

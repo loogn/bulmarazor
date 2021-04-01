@@ -8,6 +8,10 @@ using Microsoft.JSInterop;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 穿梭框组件
+    /// </summary>
+    /// <typeparam name="TItem"></typeparam>
     public partial class Transfer<TItem>
     {
         private TypeCachedInfo<TItem> typeCachedInfo = TypeCachedDict.GetTypeCachedInfo<TItem>();
@@ -258,6 +262,9 @@ namespace BulmaRazor.Components
             DealCheckBoxStatus();
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         protected override void OnInitialized()
         {
             base.OnInitialized();
