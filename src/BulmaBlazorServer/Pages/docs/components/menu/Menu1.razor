@@ -10,7 +10,7 @@
             <MenuList>
                 @foreach (var sub in item.Children)
                 {
-                    var flag = string.IsNullOrEmpty(kw) || (kw.HasValue() && (sub.Keywords.Contains(kw.ToLower()) || item.Keywords.Contains(kw.ToLower())));
+                    var flag = string.IsNullOrEmpty(kw) || ( !string.IsNullOrEmpty(kw) && (sub.Keywords.Contains(kw.ToLower()) || item.Keywords.Contains(kw.ToLower())));
                     var cls = (flag ? "" : B.Hidden);
                     <MenuItem class="@cls">
                     <MenuLink href="@sub.Href">@sub.Label</MenuLink>

@@ -16,7 +16,7 @@
             @foreach (var sub in item.Children)
             {
                 var flag = string.IsNullOrEmpty(kw)
-                           || kw.HasValue()
+                           || !string.IsNullOrEmpty(kw) 
                            && (sub.Keywords.Any(x => x.StartsWith(kw.ToLower()))
                                || item.Keywords.Any(x => x.StartsWith(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
