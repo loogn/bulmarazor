@@ -1,0 +1,22 @@
+<Columns>
+
+    <Column>
+        <NumberInput IsLarge TValue="int" @bind-Value="num1"></NumberInput>
+    </Column>
+    <Column>
+        <NumberInput IsMedium TValue="int" @bind-Value="num2"></NumberInput>
+    </Column>
+    <Column>
+        <NumberInput TValue="int" @bind-Value="num3"></NumberInput>
+    </Column>
+    <Column>
+        <NumberInput IsSmall TValue="int" @bind-Value="num4"></NumberInput>
+    </Column>
+</Columns>
+
+@code {
+    private int num1 = 1;
+    private int num2 = 1;
+    private int num3 = 1;
+    private int num4 = 1;
+}

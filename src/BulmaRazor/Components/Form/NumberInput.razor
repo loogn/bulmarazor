@@ -1,0 +1,15 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@typeparam TValue
+
+<div class="@classes" @attributes="Attributes">
+    <div class="control">
+        <button type="button" @onclick="Reduce" disabled="@Disabled" class="button @elementClasses">-</button>
+    </div>
+    <div class="control is-expanded">
+        <input class="input has-text-centered @elementClasses" disabled="@Disabled" @bind-value="@ShowValue" @bind-value:event="@BindEvent">
+    </div>
+    <div class="control">
+        <button type="button" @onclick="Increase" disabled="@Disabled" class="button @elementClasses">+</button>
+    </div>
+</div>

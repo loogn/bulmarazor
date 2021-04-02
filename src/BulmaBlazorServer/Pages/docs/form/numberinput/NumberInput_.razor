@@ -1,0 +1,85 @@
+@page "/docs/form/numberinput"
+@layout DocLayout
+
+<Title>NumberInput 计数器</Title>
+<Subtitle Size="Size.Size4">
+    仅允许输入标准的数字值，可定义范围
+</Subtitle>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    基础用法
+</Title>
+<DocView ComType="NumberInput1"/>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    尺寸
+</Title>
+<div class="content">
+    <p>
+        额外提供了 Large、Medium、Small 三种尺寸的数字输入框
+    </p>
+</div>
+<DocView ComType="NumberInput6"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    颜色
+</Title>
+<div class="content">
+    <p>
+        可以使用Color属性改变颜色
+    </p>
+</div>
+<DocView ComType="NumberInput7"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    禁用状态
+</Title>
+<div class="content">
+    <p>
+        Disabled属性接受一个Boolean，设置为true即可禁用整个组件，
+        如果你只需要控制数值在某一范围内，可以设置Min属性和Max属性。
+    </p>
+</div>
+<DocView ComType="NumberInput2"/>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    步长
+</Title>
+<div class="content">
+    <p>
+        允许设置Step属性定义递增递减的步长控制
+    </p>
+</div>
+<DocView ComType="NumberInput3"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    严格步长
+</Title>
+<div class="content">
+    <p>
+        IsStrictStep属性接受一个bool。如果这个属性被设置为true，则只能输入步数的倍数。
+    </p>
+</div>
+<DocView ComType="NumberInput4"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    精度
+</Title>
+<div class="content">
+    <p>
+        设置 Precision 属性可以控制数值精度，接收一个 Int。
+    </p>
+    <p>
+        Precision 的值必须是一个非负整数，并且不能小于 step 的小数位数。
+    </p>
+</div>
+<DocView ComType="NumberInput5"/>

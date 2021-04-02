@@ -50,13 +50,13 @@ namespace BulmaRazor.Components
         // }
 
         
-        public static string GetShowValue<TValue>(TValue value, string format)
+        public static string GetShowValue<TValue>(TValue value, string format=null)
         {
             var otype = typeof(TValue);
             return GetShowValue(otype, value, format);
         }
 
-        public static string GetShowValue(Type otype, object value, string format)
+        public static string GetShowValue(Type otype, object value, string format=null)
         {
             if (value == null)
                 return string.Empty;
