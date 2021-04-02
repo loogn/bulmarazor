@@ -9,7 +9,7 @@
 
     string classes => CssBuilder.Default("icon-text")
         .AddClassFromAttributes(Attributes)
-        .AddClass(Color.Value, Color.Value)
+        .AddClass(Color.ToTextColor(), Color.Value)
         .Build();
 
     /// <summary>

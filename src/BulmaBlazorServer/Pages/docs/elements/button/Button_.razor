@@ -1,26 +1,60 @@
 @page "/docs/elements/button"
 @layout DocLayout
 
-<Title>Button</Title>
+<Title>Button按钮</Title>
 <Subtitle Size="Size.Size4">
-    经典的按钮，可以有不同的Color，Size,States等等
+    如果添加了,href属性，组件会表现为a标签，否则就是button
 </Subtitle>
 <hr>
 
-<Content>
-    <p>如果添加了,href属性，组件会表现为a标签，否则就是button</p>
-</Content>
+
+<Title Size="Size.Size4" IsSpaced>
+    基本用法
+</Title>
 <DocView ComType="Button1"/>
 
 <hr>
 
 <Title Size="Size.Size4" IsSpaced>
-    Buttons和插件
+    禁用状态
 </Title>
 <Content>
     <p>
-        可以使用Field的HasAddons来实现，也可以使用Buttons来实现，下面是Buttons的例子
+        按钮不可用状态。
     </p>
 </Content>
-
 <DocView ComType="Button2"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    图标按钮
+</Title>
+<Content>
+    <p>
+        带图标的按钮可增强辨识度（有文字）或节省空间（无文字）。
+    </p>
+</Content>
+<DocView ComType="Button3"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    插件形式（按钮组）
+</Title>
+<Content>
+    <p>
+        以按钮组的方式出现，常用于多项类似操作。
+    </p>
+</Content>
+<DocView ComType="Button4"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    不同尺寸
+</Title>
+<Content>
+    <p>
+        Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+    </p>
+</Content>
+<DocView ComType="Button5"/>
+<hr>
