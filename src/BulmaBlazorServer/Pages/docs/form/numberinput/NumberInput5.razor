@@ -1,5 +1,13 @@
+<Columns>
+    <Column>
+        <NumberInput style="width:180px" TValue="double" @bind-Value="num1" Precision="2" Step="0.1" Min="1" Max="10"></NumberInput>
+    </Column>
+    <Column>
+        <NumberInput style="width:180px" TValue="double" @bind-Value="num2" Precision="2" Step="0.01" Min="1" Max="10"></NumberInput>
+    </Column>
+</Columns>
 
-<NumberInput style="width:180px" TValue="double" @bind-Value="num"  Precision="2" Step="0.1" Min="1" Max="10"></NumberInput>
 @code {
-    private double num = 1;
+    private double num1 = 1;
+    private double num2 = 1;
 }

@@ -27,9 +27,7 @@ namespace BulmaRazor.Components
             .AddClass("is-normal", IsNormal)
             .AddClass("is-medium", IsMedium)
             .AddClass("is-large", IsLarge)
-            // .AddClass("is-hovered", IsHovered)
-            // .AddClass("is-focused", IsFocused)
-            // .AddClass("is-static", IsStatic)
+            .AddClass("is-outlined", IsOutlined)
             .Build();
 
         private string format;
@@ -40,6 +38,11 @@ namespace BulmaRazor.Components
         /// </summary>
         [Parameter]
         public Color Color { get; set; } = Color.Default;
+
+        /// <summary>
+        /// 轮廓样式
+        /// </summary>
+        [Parameter] public bool IsOutlined { get; set; }
 
         /// <summary>
         /// 小尺寸
@@ -78,13 +81,28 @@ namespace BulmaRazor.Components
         [Parameter]
         public string BindEvent { get; set; } = "onchange";
 
+        /// <summary>
+        /// 最大值
+        /// </summary>
         [Parameter] public TValue? Max { get; set; }
+        /// <summary>
+        /// 最小值
+        /// </summary>
         [Parameter] public TValue? Min { get; set; }
 
+        /// <summary>
+        /// 步长 默认1
+        /// </summary>
         [Parameter] public TValue Step { get; set; } = (TValue) Convert.ChangeType(1, typeof(TValue));
 
+        /// <summary>
+        /// 是否严格步长
+        /// </summary>
         [Parameter] public bool IsStrictStep { get; set; }
 
+        /// <summary>
+        /// 精度，小数位
+        /// </summary>
         [Parameter] public int? Precision { get; set; }
 
         /// <summary>
@@ -161,6 +179,11 @@ namespace BulmaRazor.Components
             return Convert.ToDecimal(val);
         }
 
+        /// <summary>
+        /// 设置参数
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override async Task SetParametersAsync(ParameterView parameters)
         {
             await base.SetParametersAsync(parameters);
