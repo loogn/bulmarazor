@@ -1,0 +1,19 @@
+<File OnChange="upload" HasName DefaultName="请选择要上传的文件..."></File><br>
+
+<File OnChange="upload" IsRight HasName DefaultName="请选择要上传的文件..."></File><br>
+
+<File OnChange="upload" IsBoxed></File><br>
+
+<File OnChange="upload" IsBoxed HasName DefaultName="请选择要上传的文件..."></File><br>
+
+<File OnChange="upload"  HasName IsRight Multiple MaxCount="3"
+Label="Choose Files" Color="Color.Primary"  IconClass="fa fa-cloud-upload"></File>
+
+@code{
+
+    void upload(InputFileChangeEventArgs e)
+    {
+    //上传逻辑
+    //https://docs.microsoft.com/zh-cn/aspnet/core/blazor/file-uploads?view=aspnetcore-5.0
+    }
+}

@@ -11,15 +11,35 @@
 <div class="content">
     <p>
         用法请参考Input组件，有Color、Size、IsRounded等属性，也可以结合Icon使用，参考通用组件<br>
-        <Tag Color="Color.Warning">暂时不支持多选</Tag>
+        <Tag Color="Color.Warning">不支持多选</Tag>
     </p>
 </div>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    颜色
+</Title>
+<DocView ComType="Select3"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    尺寸
+</Title>
+<DocView ComType="Select4"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    其他
+</Title>
+<DocView ComType="Select5"/>
+<hr>
+
 
 <Title Size="Size.Size4" IsSpaced>
     数据绑定
 </Title>
 <DocView ComType="Select1"/>
-<br>
+<hr>
 <div class="content">
     <p>
         可空类型绑定例子

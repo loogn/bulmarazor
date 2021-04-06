@@ -108,10 +108,10 @@ namespace BulmaRazor.Components
         public RenderFragment RightFooterSlot { get; set; }
 
         /// <summary>
-        /// 最小高度 默认150
+        /// 最小高度 默认260
         /// </summary>
         [Parameter]
-        public int MinHeight { get; set; } = 150;
+        public int MinHeight { get; set; } = 260;
 
         /// <summary>
         /// 最大高度 默认260

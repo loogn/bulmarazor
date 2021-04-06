@@ -1,24 +1,8 @@
 @using System.Timers
-<Progress value="15" max="100">15%</Progress>
-<Level>
-    <LevelItem>
-        <Progress Color="Color.Primary" value="@val" max="100">50%</Progress>
-    </LevelItem>
-    <LevelItem>
-        <Button Color="Color.Primary" @onclick="fun">增加进度</Button>
-    </LevelItem>
-</Level>
-<Progress Color="Color.Success" IsLarge value="30" max="100">30%</Progress>
-<Progress Color="Color.Danger">doing</Progress>
-
-@code{
-    int val = 50;
-    void fun()
-    {
-        val = val += 10;
-        if (val > 100)
-        {
-            val = 0;
-        }
-    }
-}
+<Progress value="15" max="100"></Progress>
+<Progress Color="Color.Primary" value="30" max="100"></Progress>
+<Progress Color="Color.Link" value="45" max="100"></Progress>
+<Progress Color="Color.Info" value="60" max="100"></Progress>
+<Progress Color="Color.Success" value="75" max="100"></Progress>
+<Progress Color="Color.Warning" value="90" max="90"></Progress>
+<Progress Color="Color.Danger" value="100" max="100"></Progress>

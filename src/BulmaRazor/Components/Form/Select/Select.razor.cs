@@ -12,8 +12,7 @@ namespace BulmaRazor.Components
     {
         string selectCls => CssBuilder.Default("select")
             .AddClass("is-rounded", IsRounded)
-            .AddClass("is-hovered", IsHovered)
-            .AddClass("is-focused", IsFocused)
+            
             .AddClass("is-loading", IsLoading)
             .AddClass("is-fullwidth", IsFullwidth)
             .AddClass(Color.Value, Color.Value)
@@ -23,6 +22,13 @@ namespace BulmaRazor.Components
             .AddClass("is-large", IsLarge)
             .Build();
 
+        private string ddlCls => CssBuilder.Default()
+            .AddClass("is-hovered", IsHovered)
+            .AddClass("is-focused", IsFocused)
+            .Build();
+        
+
+        
         private List<Option<TValue>> items { get; set; } = new();
 
         /// <summary>

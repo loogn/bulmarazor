@@ -1,0 +1,20 @@
+<Level>
+    <LevelItem>
+        <Progress Color="Color.Primary" value="@val" max="100">50%</Progress>
+    </LevelItem>
+    <LevelItem>
+        <Button Color="Color.Primary" @onclick="fun">增加进度</Button>
+    </LevelItem>
+</Level>
+
+@code{
+    int val = 50;
+    void fun()
+    {
+        val = val += 10;
+        if (val > 100)
+        {
+            val = 0;
+        }
+    }
+}

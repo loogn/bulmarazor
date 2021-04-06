@@ -3,7 +3,7 @@
 @typeparam TValue
 
 <div class="@selectCls">
-    <select @attributes="Attributes" @onchange="ChangeHandle">
+    <select class="@ddlCls"  @attributes="Attributes" @onchange="ChangeHandle">
         <CascadingValue Value="this" IsFixed="true">
             @ChildContent
         </CascadingValue>

@@ -14,7 +14,7 @@ namespace BulmaRazor.Components
             .AddClass("is-large", IsLarge)
             .AddClass("is-hovered", IsHovered)
             .AddClass("is-focused", IsFocused)
-            .AddClass("has-fixed-size", FixedSize)
+            .AddClass("has-fixed-size", HasFixedSize)
             .Build();
 
 
@@ -59,7 +59,7 @@ namespace BulmaRazor.Components
         /// 固定尺寸
         /// </summary>
         [Parameter]
-        public bool FixedSize { get; set; }
+        public bool HasFixedSize { get; set; }
 
 
         /// <summary>
