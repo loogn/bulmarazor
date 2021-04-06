@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -134,14 +132,14 @@ namespace BulmaRazor.Components
             }
         }
 
-        private void SetValue(decimal val)
+        private async Task SetValue(decimal val)
         {
             if (IsStrictStep)
             {
-                var dstep = Dec(Step);
-                if (dstep != 0)
+                var dec_step = Dec(Step);
+                if (dec_step != 0)
                 {
-                    if (val % dstep != 0)
+                    if (val % dec_step != 0)
                     {
                         return;
                     }
@@ -152,7 +150,7 @@ namespace BulmaRazor.Components
             if (Max.HasValue && Dec(Max.Value) < val) return;
 
             Value = (TValue) Convert.ChangeType(val, typeof(TValue));
-            Fire();
+            await Fire();
         }
 
         private async Task Fire()
@@ -164,14 +162,14 @@ namespace BulmaRazor.Components
         private async Task Increase()
         {
             var val = Dec(Value) + Dec(Step);
-            SetValue(val);
+            await SetValue(val);
         }
 
         private async Task Reduce()
         {
             var val = Dec(Value) - Dec(Step);
 
-            SetValue(val);
+            await SetValue(val);
         }
 
         private decimal Dec(TValue val)

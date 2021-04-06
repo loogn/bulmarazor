@@ -19,7 +19,6 @@ export function BindClickWithoutSelf(id, selector) {
             if ($(e.target).parents(selector).length > 0)
                 return;
         }
-
         DotNet.invokeMethodAsync("BulmaRazor", "JSCallback", id, "clickWithoutSelf");
     })
 }
