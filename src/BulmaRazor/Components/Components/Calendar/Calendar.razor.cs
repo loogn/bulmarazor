@@ -72,6 +72,9 @@ namespace BulmaRazor.Components
             };
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         protected override void OnInitialized()
         {
             base.OnInitialized();

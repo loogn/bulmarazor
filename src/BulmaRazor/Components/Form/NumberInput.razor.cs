@@ -128,7 +128,7 @@ namespace BulmaRazor.Components
             set
             {
                 if (!value.SetRealValue(out TValue val)) return;
-                SetValue(Dec(val));
+                SetValue(Dec(val)).GetAwaiter().GetResult();
             }
         }
 

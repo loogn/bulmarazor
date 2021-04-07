@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace BulmaRazor.Components
 {
+    /// <summary>
+    /// 日期天
+    /// </summary>
     public class CalendarDay
     {
         /// <summary>
@@ -23,7 +26,10 @@ namespace BulmaRazor.Components
         /// </summary>
         public bool IsPrevMonth { get; set; }
         
-        internal bool IsSelected { get; set; }
+        /// <summary>
+        /// 是否选中
+        /// </summary>
+        public bool IsSelected { get; set; }
 
         /// <summary>
         /// 阴历信息
