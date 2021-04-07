@@ -1,8 +1,27 @@
-<Button id="qvTrigger" Color="Color.Primary" @onclick="toggleShow">
-    QuickView    
+
+<Button id="qvTrigger1" Color="Color.Primary" @onclick="toggleShowLeft">
+    QuickView Left
 </Button>
 
-<Quickview @ref="qv" TriggerSelector="#qvTrigger" HeaderText="HeaderText标题">
+<Button id="qvTrigger2" Color="Color.Primary" @onclick="toggleShow">
+    QuickView Right
+</Button>
+
+<Quickview @ref="qv1" IsLeft TriggerSelector="#qvTrigger1" HeaderText="HeaderText标题">
+    <HeaderSlot>
+        HeaderSlot标题
+    </HeaderSlot>
+    <BodySlot>
+        <p>BodySlot</p>
+        <p>设置了HeaderSlot会替换掉HeaderText</p>
+        <p>需要设置TriggerSelector为触发器的选择器</p>
+    </BodySlot>
+    <FooterSlot>
+        这里是脚部，可以没有
+    </FooterSlot>
+</Quickview>
+
+<Quickview @ref="qv2" TriggerSelector="#qvTrigger2" HeaderText="HeaderText标题">
     <HeaderSlot>
         HeaderSlot标题
     </HeaderSlot>
@@ -17,9 +36,17 @@
 </Quickview>
 
 @code{
-    Quickview qv;
+    Quickview qv1;
+    Quickview qv2;
+
     void toggleShow()
     {
-        qv.Toggle();
+        qv2.Toggle();
     }
+
+    void toggleShowLeft()
+    {
+        qv1.Toggle();
+    }
+
 }

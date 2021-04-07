@@ -14,15 +14,25 @@ namespace BulmaRazor.Components
 
         string classes => CssBuilder.Default("quickview")
             .AddClassFromAttributes(Attributes)
+            .AddClass("is-left",IsLeft)
             .AddClass("is-active", IsActive)
             .Build();
 
+
+        
         /// <summary>
         /// 是否显示
         /// </summary>
         [Parameter]
         public bool IsActive { get; set; }
-
+        
+        /// <summary>
+        /// 是否在左侧显示
+        /// </summary>
+        [Parameter]
+        public bool IsLeft { get; set; }
+        
+        
         /// <summary>
         /// 开关选择器
         /// </summary>
