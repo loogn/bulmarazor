@@ -42,31 +42,3 @@ html, body {
     right: 0.75rem;
     top: 0.5rem;
 }
-
-
-
-/*.tree .tree-item .tree-content .fa-caret-right {*/
-/*    width: 18px;*/
-/*    height: 18px;*/
-/*    transition: transform .3s linear;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-
-/*.tree .tree-item .tree-content .show .fa-caret-right {*/
-/*    transform: rotate(90deg);*/
-/*}*/
-
-/*.tree .tree-node {*/
-/*    flex: 1;*/
-/*}*/
-
-
-/*.tree .form-checkbox {*/
-/*    margin: 0 4px;*/
-/*}*/
-
-/*.tree-icon {*/
-/*    width: 18px;*/
-/*}*/

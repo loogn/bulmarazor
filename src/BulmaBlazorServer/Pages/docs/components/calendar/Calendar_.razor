@@ -1,0 +1,41 @@
+@page "/docs/components/calendar"
+@layout DocLayout
+
+<Title>Calendar日历</Title>
+<Subtitle Size="Size.Size4">
+    显示日期,支持农历和自定义内容
+</Subtitle>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    基本用法
+</Title>
+<Content>
+    FirstDayOfWeek可以设置从星期几开始，默认是周一
+</Content>
+<DocView ComType="Calendar1"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    显示农历
+</Title>
+<DocView ComType="Calendar2"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    绑定和事件
+</Title>
+<Content>
+    OnValueChanged事件参数是CalendarDay对象，可以访问当前日期和农历信息
+</Content>
+<DocView ComType="Calendar3"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    自定义内容
+</Title>
+<Content>
+    使用DaySlot卡槽可以自定义内容
+</Content>
+<DocView ComType="Calendar4"/>
+

@@ -1,0 +1,40 @@
+
+<Calendar>
+    <DaySlot>
+        @if (dateDatas.TryGetValue(context.Date.ToString("yyyyMMdd"),out List<string> data))
+        {
+            <ul class="has-text-left">
+                <li class="has-text-right has-text-danger">@context.Date.Day @context.Lunar.DayName</li>
+                @foreach (var tag in data)
+                {
+                    <li> <Tag Color="Color.Warning">@tag</Tag></li>
+                }
+            </ul>
+        }
+        else
+        {
+            @:@context.RenderDefault
+        }
+    </DaySlot>
+</Calendar>
+
+@code{
+
+    
+    //数据库中的数据
+    Dictionary<string, List<string>> dateDatas = new();
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        dateDatas.Add(DateTime.Now.AddDays(-2).ToString("yyyyMMdd"),new List<string>
+        {
+            "看电影","逛街"
+        });
+        dateDatas.Add(DateTime.Now.AddDays(6).ToString("yyyyMMdd"),new List<string>
+        {
+            "学习","看书","《月亮和六便士》","《刀锋》","《人生的枷锁》"
+        });
+    }
+
+}

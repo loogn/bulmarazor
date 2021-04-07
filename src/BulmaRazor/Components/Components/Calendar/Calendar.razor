@@ -1,0 +1,70 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div class="calendar">
+    <div class="calendar-header">
+        <div class="calender-title">
+            <span>@currentMonth.ToString("yyyy 年 MM 月")</span>
+            @if (ShowLunar)
+            {
+                var lunar = CalendarLunar.GetLunar(chineseLunisolarCalendar, Value);
+                <span class="ml-2">
+                    @(lunar.YearName + lunar.MonthName + lunar.DayName)
+                </span>
+            }
+        </div>
+        <div class="buttons has-addons">
+            <button class="button is-small" @onclick="GoToPrevMonth">上个月</button>
+            <button class="button is-small" @onclick="GoToToday">今天</button>
+            <button class="button is-small" @onclick="GoToNextMonth">下个月</button>
+        </div>
+    </div>
+    <div class="calendar-body">
+        <table class="table is-bordered is-fullwidth">
+            <thead>
+            <tr>
+                @foreach (var name in weekDays)
+                {
+                    <th>@name</th>
+                }
+            </tr>
+            </thead>
+            <tbody>
+            @for (int i = 0; i < days.Count / 7; i++)
+            {
+                <tr>
+                    @for (var j = 0; j < 7; j++)
+                    {
+                        var day = days[i * 7 + j];
+                        <td class="@day.GetTdClasses()" @onclick="() => DayClick(day)">
+                            @if (DaySlot != null)
+                            {
+                                @:@DaySlot(day)
+                            }
+                            else
+                            {
+                                @:@DefaultRender(day)
+                            }
+
+                        </td>
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@code {
+
+    private RenderFragment<CalendarDay> DefaultRender => day =>
+        @<div class="day" style="height: @DayHeight">
+            <span>@day.Date.Day</span>
+            @if (ShowLunar)
+            {
+                <span>@day.Lunar.DayName</span>
+            }
+        </div>;
+
+}

@@ -1,0 +1,16 @@
+@inject ToastService ToastService
+<Message Color="Color.Info">
+    date : @date
+</Message>
+<Calendar @bind-Value="date" OnValueChanged="Change" DayHeight="40px"></Calendar>
+
+@code{
+
+    DateTime date = DateTime.Now.AddDays(2);
+
+    void Change(CalendarDay day)
+    {
+        var msg = day.Date.ToString("yyyy-MM-dd") + " " + day.Lunar.MonthName + day.Lunar.DayName;
+        ToastService.Show(msg);
+    }
+}
