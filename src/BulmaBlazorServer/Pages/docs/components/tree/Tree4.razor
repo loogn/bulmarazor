@@ -1,5 +1,5 @@
 <p>Vals的值:@string.Join(",", Vals)</p><br>
-<Tree Data="data1" ShowCheckBox @bind-Values="Vals">
+<Tree Data="data1" Color="Color.Link" ShowCheckBox @bind-Values="Vals">
     <ItemSlot>
         <div class="@B.Flex @B.JustifyContentSpaceBetween">
             <div>
@@ -11,8 +11,6 @@
                 <a>delete</a>
             </span>
         </div>
-
-
     </ItemSlot>
 </Tree>
 

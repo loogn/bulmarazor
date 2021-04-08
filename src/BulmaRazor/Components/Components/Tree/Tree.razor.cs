@@ -23,10 +23,6 @@ namespace BulmaRazor.Components
         private HashSet<TreeItem<TValue>> SelectedList = new();
 
         string classes => CssBuilder.Default("tree")
-            // .AddClass("is-small", IsSmall)
-            // .AddClass("is-normal", IsNormal)
-            // .AddClass("is-medium", IsMedium)
-            // .AddClass("is-large", IsLarge)
             .AddClassFromAttributes(Attributes)
             .Build();
 
@@ -50,6 +46,7 @@ namespace BulmaRazor.Components
         private string GetCheckCls(TreeItem<TValue> item)
         {
             return CssBuilder.Default("cb")
+                .AddClass(Color.Value, Color.Value)
                 .AddClass("active", item.GetHasChildrenChecked())
                 .Build();
         }
@@ -64,30 +61,11 @@ namespace BulmaRazor.Components
             return item.IsChecked;
         }
 
-
         /// <summary>
-        /// 小尺寸
+        /// CheckBox颜色
         /// </summary>
         [Parameter]
-        public bool IsSmall { get; set; }
-
-        /// <summary>
-        /// 正常尺寸
-        /// </summary>
-        [Parameter]
-        public bool IsNormal { get; set; }
-
-        /// <summary>
-        /// 中尺寸
-        /// </summary>
-        [Parameter]
-        public bool IsMedium { get; set; }
-
-        /// <summary>
-        /// 大尺寸
-        /// </summary>
-        [Parameter]
-        public bool IsLarge { get; set; }
+        public Color Color { get; set; } = Color.Info;
 
         /// <summary>
         /// 是否手风琴模式
@@ -203,6 +181,7 @@ namespace BulmaRazor.Components
                     CheckValues(item, values, 0);
                 }
             }
+
             dataView = Data;
         }
 
@@ -355,7 +334,7 @@ namespace BulmaRazor.Components
         // }
         // insertBefore
         // insertAfter
-        
+
         //Expand/collapse 
 
         /// <summary>
