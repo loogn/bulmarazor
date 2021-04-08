@@ -19,14 +19,14 @@ namespace BulmaRazor.Components
         private List<TransferItem<TItem>> rightView = new();
 
         private bool? leftAll = false;
-        private bool? rightAll;
+        private bool? rightAll=false;
         private int leftCount;
         private int rightCount;
         private string leftWord;
         private string rightWord;
 
         private string ulStyle =>
-            $"min-height: {MinHeight}px; max-height: {MaxHeight}px;margin:0; width:100%; overflow: hidden;overflow-y: auto";
+            $"min-height: {MinHeight}px; max-height: {MaxHeight}px;margin:0;padding-top:0.5rem;width:100%; overflow: hidden;overflow-y: auto";
 
         /// <summary>
         /// 左侧数据
@@ -87,7 +87,7 @@ namespace BulmaRazor.Components
         /// 颜色
         /// </summary>
         [Parameter]
-        public Color Color { get; set; } = Color.Default;
+        public Color Color { get; set; } = Color.Info;
 
         /// <summary>
         /// 自定义显示函数

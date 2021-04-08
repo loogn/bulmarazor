@@ -1,7 +1,7 @@
 ﻿@namespace BulmaRazor.Components
 @inherits IconBase
 
-<span @attributes="Attributes" class="@classes" @onclick="ClickHandle">
+<span @attributes="Attributes" class="icon-checkbox @classes" @onclick="ClickHandle">
     <i class="@IconClass"></i>
     @ChildContent
 </span>
@@ -17,9 +17,16 @@
     [Parameter]
     public bool? Checked { get; set; }
 
+    
+    /// <summary>
+    /// 状态绑定事件
+    /// </summary>
     [Parameter]
     public EventCallback<bool> CheckedChanged { get; set; }
     
+    /// <summary>
+    /// 状态改变事件
+    /// </summary>
     [Parameter]
     public EventCallback<bool> OnChange { get; set; }
 

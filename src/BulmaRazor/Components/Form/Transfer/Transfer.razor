@@ -2,15 +2,15 @@
 @inherits BulmaComponentBase
 @inject BulmaRazorJsInterop JsInterop
 @typeparam TItem
-<div class="columns m-4 is-gapless">
-    <div class="column is-flex is-flex-direction-column">
-        <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
-            <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
-                <span @onclick="() => CheckAll(1, !(leftAll ?? false))" class="is-clickable is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
-                    <IconCheckBox Color="Color" Checked="@leftAll"></IconCheckBox>
+<div class="transfer">
+    <div class="transfer-side">
+        <nav class="panel">
+            <p class="panel-heading">
+                <span @onclick="() => CheckAll(1, !(leftAll ?? false))" class="transfer-title">
+                    <IconCheckBox Checked="@leftAll" class="@(leftAll==false?Color.Value:"is-checked "+Color.Value)"></IconCheckBox>
                     @LeftTitle
                 </span>
-                <span class="is-flex-shrink-0 has-text-grey">
+                <span class="transfer-num">
                     @leftCount/@leftView.Count
                 </span>
             </p>
@@ -25,14 +25,14 @@
                     </div>
                 </div>
             }
-            <div class="panel-block is-flex-grow-1 is-align-items-flex-start px-4">
+            <div class="panel-block transfer-list">
                 <ul style="@ulStyle">
                     @foreach (var item in leftView)
                     {
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : "")">
 
-                            <span class="is-flex is-align-items-center is-clickable" @onclick="() => ItemCheckChange(item)">
-                                <IconCheckBox Color="Color" Checked="item.IsChecked"></IconCheckBox>
+                            <span class="transfer-item @(Color.Value+(item.IsChecked ? " is-checked" : ""))" @onclick="() => ItemCheckChange(item)">
+                                <IconCheckBox Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
                             </span>
                         </li>
@@ -47,9 +47,9 @@
         </nav>
 
     </div>
-    <div class="column is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+    <div class="transfer-middle">
         <div class="buttons is-flex">
-            <Button disabled="@(rightCount == 0)" @onclick="() => Trans(rightView, leftView)">
+            <Button Color="Color" disabled="@(rightCount == 0)" @onclick="() => Trans(rightView, leftView)">
                 <span class="icon">
                     <i class="fa fa-angle-left"></i>
                 </span>
@@ -58,7 +58,7 @@
                     <span>@LeftButtonText</span>
                 }
             </Button>
-            <Button disabled="@(leftCount == 0)" @onclick="() => Trans(leftView, rightView)">
+            <Button Color="Color" disabled="@(leftCount == 0)" @onclick="() => Trans(leftView, rightView)">
                 @if (RightButtonText.HasValue())
                 {
                     <span>@RightButtonText</span>
@@ -69,15 +69,15 @@
             </Button>
         </div>
     </div>
-    <div class="column is-flex is-flex-direction-column">
-        <nav class="panel is-flex-grow-1 is-flex is-flex-direction-column">
-            <p class="panel-heading is-flex is-align-items-center m-0" style="font-size: unset;font-weight: unset;">
-                <span @onclick="() => CheckAll(2, !(rightAll ?? false))" class="is-clickable is-flex-grow-1 is-flex is-align-items-center" style="overflow: hidden;text-overflow: ellipsis;word-break: keep-all">
-                    <IconCheckBox Color="Color" Checked="@rightAll"></IconCheckBox>
+    <div class="transfer-side">
+        <nav class="panel">
+            <p class="panel-heading">
+                <span @onclick="() => CheckAll(2, !(rightAll ?? false))" class="transfer-title">
+                    <IconCheckBox Checked="@rightAll" class="@(rightAll==false?Color.Value:"is-checked "+Color.Value)"></IconCheckBox>
                     @RightTitle
                 </span>
 
-                <span class="is-flex-shrink-0 has-text-grey">
+                <span class="transfer-num">
                     @rightCount/@rightView.Count
                 </span>
             </p>
@@ -92,13 +92,14 @@
                     </div>
                 </div>
             }
-            <div class="panel-block is-flex-grow-1  is-align-items-flex-start px-4">
+            <div class="panel-block transfer-list">
                 <ul style="@ulStyle">
                     @foreach (var item in rightView)
                     {
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : string.Empty)">
-                            <span class="is-flex is-align-items-center is-clickable" @onclick="() => ItemCheckChange(item)">
-                                <IconCheckBox Color="Color" Checked="item.IsChecked"></IconCheckBox>
+
+                            <span class="transfer-item @(Color.Value+(item.IsChecked ? " is-checked" : ""))" @onclick="() => ItemCheckChange(item)">
+                                <IconCheckBox Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
                             </span>
                         </li>
