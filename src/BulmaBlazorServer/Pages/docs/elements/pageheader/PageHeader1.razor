@@ -1,0 +1,17 @@
+@inject ToastService ToastService
+<PageHeader>详细信息</PageHeader>
+<hr>
+
+<PageHeader Title="GoBack">详细信息自定义Title</PageHeader>
+<hr>
+
+<PageHeader OnBack="Back">详细信息有事件</PageHeader>
+<hr>
+
+@code{
+    private void Back()
+    {
+        ToastService.Show("go back");
+    }
+
+}

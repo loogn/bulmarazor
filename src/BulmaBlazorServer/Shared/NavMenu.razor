@@ -20,7 +20,12 @@
                            && (sub.Keywords.Any(x => x.StartsWith(kw.ToLower()))
                                || item.Keywords.Any(x => x.StartsWith(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
-                <MenuItem class="@cls"><MenuLink href="@sub.Href">@sub.Label</MenuLink></MenuItem>
+                <MenuItem class="@cls"><MenuLink href="@sub.Href">@sub.Label
+                                           @if (sub.IsNew)
+                                           {
+                                               <Tag class="px-1 ml-1" style="height: auto" Color="Color.Danger">New</Tag>     
+                                           }
+                </MenuLink></MenuItem>
             }
         </MenuList>
     }
@@ -33,12 +38,14 @@
         public string Label { get; set; }
         public string Href { get; set; }
         public HashSet<string> Keywords { get; set; }
+        public bool IsNew { get; set; }
         public List<MItem> Children { get; set; }
 
-        public MItem(string label, string href = "", string kws = "")
+        public MItem(string label, string href = "", string kws = "",bool isNew=false)
         {
             Label = label;
             Href = href;
+            IsNew = isNew;
             Keywords = new HashSet<string>(kws.Split(',', StringSplitOptions.RemoveEmptyEntries));
         }
     }
@@ -103,10 +110,10 @@
             {
                 new MItem("通用(General)", "/docs/form/general", "general,edit"),
                 new MItem("输入框(Input)", "/docs/form/input", "input,text,输入,文本"),
-                new MItem("计数器(NumberInput)", "/docs/form/numberinput", "number,numberinput,计数器"),
+                new MItem("计数器(NumberInput)", "/docs/form/numberinput", "number,numberinput,计数器",true),
                 new MItem("文本域(Textarea)", "/docs/form/textarea", "textarea,文本,text,域"),
                 new MItem("下拉框(Select)", "/docs/form/select", "select,下拉框"),
-                new MItem("级联选择(Cascader)", "/docs/form/cascader", "cascader,级联选择"),
+                new MItem("级联选择(Cascader)", "/docs/form/cascader", "cascader,级联选择",true),
                 new MItem("复选框(CheckBox)", "/docs/form/checkbox", "checkbox,复选"),
                 new MItem("单选框(Radio)", "/docs/form/radio", "单选,radio"),
                 new MItem("开关(Switch)", "/docs/form/switch", "开关,switch"),
@@ -140,6 +147,7 @@
                 new MItem("工具提示(Tooltip)", "/docs/elements/tooltip", "提示,工具,tool,tip,tips,tooltip,tooltips"),
                 new MItem("块状列表(BlockList)", "/docs/elements/blocklist", "ul,li,block,列表,块状"),
                 new MItem("页面加载(Pageloader)", "/docs/elements/pageloader", "提示,loader,load,加载"),
+                new MItem("页头(PageHeader)", "/docs/elements/pageheader", "pageheader,page,header,页头",true),
                 new MItem("标题(Title)", "/docs/elements/title", "title,标题,h1,h2,h3,h3,h4,h6"),
             }
         },
@@ -148,10 +156,10 @@
             Children = new List<MItem>()
             {
                 new MItem("数据表(DataTable)", "/docs/components/datatable", "table,data,datatable,表格"),
-                new MItem("树形组件(Tree)", "/docs/components/tree", "tree,树形组件"),
+                new MItem("树形组件(Tree)", "/docs/components/tree", "tree,树形组件",true),
                 new MItem("面包屑(Breadcrumb)", "/docs/components/breadcrumb", "breadcrumb,面包屑,导航"),
                 new MItem("卡片(Card)", "/docs/components/card", "card,卡片"),
-                new MItem("日历(Calendar)", "/docs/components/calendar", "calendar,日历"),
+                new MItem("日历(Calendar)", "/docs/components/calendar", "calendar,日历",true),
                 new MItem("下拉(Dropdown)", "/docs/components/dropdown", "ddl,dropdown,下拉"),
                 new MItem("菜单(Menu)", "/docs/components/menu", "menu,菜单"),
                 new MItem("消息(Message)", "/docs/components/message", "message,消息,msg"),

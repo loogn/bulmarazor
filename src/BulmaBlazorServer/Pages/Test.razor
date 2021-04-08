@@ -5,40 +5,15 @@
 
 <Container class="@B.PY6">
 
-    <div>value:@dateTime</div>
-    <Calendar @bind-Value="dateTime" ShowLunar OnValueChanged="Change">
-        <DaySlot>
-            @if (context.IsToday)
-            {
-                <div>
-                    <ul>
-                        @for (var i = 0; i < 6; i++)
-                        {
-                            <li>
-                                <Tag>name @i</Tag>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            }
-            else
-            {
-                @:@context.RenderDefault 
-            }
-
-        </DaySlot>
-    </Calendar>
+    <br>
+    <PageHeader OnBack="Back">详细页面</PageHeader>
 
 </Container>
 
 @code{
-    private DateTime dateTime = DateTime.Now.AddDays(-1);
-    private int inta = 0;
-    private double dbla = 17.00;
 
-    private void Change(CalendarDay day)
+    private void Back()
     {
-        ToastService.Show(day.Lunar.DayName);
+        ToastService.Show("go back");
     }
-
 }

@@ -1,0 +1,23 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+
+<div class="page-header">
+    <div class="page-header-left" @onclick="OnBack">
+        <span class="icon page-header-icon">
+            <i class="fa fa-angle-left"></i>
+        </span>
+        <span class="page-header-title">
+            @if (TitleSlot != null)
+            {
+                @:@TitleSlot
+            }
+            else
+            {
+                @:@Title
+            }
+        </span>
+    </div>
+    <div class="page-header-content">
+        @ChildContent
+    </div>
+</div>

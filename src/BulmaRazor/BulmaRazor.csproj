@@ -36,4 +36,7 @@
             <PackagePath />
         </None>
     </ItemGroup>
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Components\Components\PageHeader\PageHeader.razor" />
+    </ItemGroup>
 </Project>
