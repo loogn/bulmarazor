@@ -3,12 +3,13 @@
 @* @inject BulmaRazorJsInterop JsInterop *@
 
 <ul @attributes="Attributes" class="@classes">
-    @ChildContent
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
 </ul>
 
 @code {
 
-    
 
     string classes => CssBuilder.Default("steps")
         .AddClassFromAttributes(Attributes)
@@ -19,6 +20,7 @@
         .AddClass("is-narrow", IsNarrow)
         .AddClass("is-centered", IsCentered)
         .AddClass("is-right", IsRight)
+        .AddClass("is-bottom",IsBottom)
         .AddClass("is-vertical", IsVertical)
         .AddClass("is-horizontal", IsHorizontal)
         .AddClass("is-short", IsShort)
@@ -76,6 +78,14 @@
     [Parameter]
     public bool IsRight { get; set; }
 
+    /// <summary>
+    /// 靠下
+    /// </summary>
+    [Parameter]
+    public bool IsBottom { get; set; }
+
+    
+    
     /// <summary>
     /// 是否垂直
     /// </summary>
@@ -142,4 +152,33 @@
     [Parameter]
     public bool HasContentAbove { get; set; }
 
+
+    /// <summary>
+    /// 激活索引
+    /// </summary>
+    [Parameter]
+    public int Active { get; set; }
+
+    private List<StepsSegment> Segments = new();
+
+    internal void AddSegment(StepsSegment segment)
+    {
+        segment.IsActive = Segments.Count == Active;
+        Segments.Add(segment);
+    }
+
+
+    /// <summary>
+    /// 设置参数
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        for (int i = 0; i < Segments.Count; i++)
+        {
+            Segments[i].IsActive = i == Active;
+        }
+    }
 }

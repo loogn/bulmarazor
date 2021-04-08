@@ -6,7 +6,141 @@
     移植于 https://octoshrimpy.github.io/bulma-o-steps/
 </Subtitle>
 <hr>
+
 <div class="content">
-    各种效果加到一起
+    <p>默认情况下，步骤在移动设备上垂直显示，在更大尺寸时水平显示。</p>
+    <p>无论屏幕大小如何，都可以使用 IsHorizontal或 IsVertical 始终将步骤强制对齐。</p>
+    <p>可以使用Active属性设置当前激活步骤</p>
+</div>
+
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    应用了各种样式的例子
+</Title>
+<DocView ComType="Steps0"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    基础用法
+</Title>
+<div class="content">
+    可以使用Active属性设置当前激活步骤
 </div>
 <DocView ComType="Steps1"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    颜色
+</Title>
+<div class="content">
+    <p>每个标记可以具有不同的颜色。</p>
+</div>
+<DocView ComType="Steps9"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    尺寸
+</Title>
+<DocView ComType="Steps10"/>
+<br>
+<Content>
+    <p>
+        IsThin 属性可以将宽度设置为1px,标记也变小，因此您不能再在其中放置任何内容。
+    </p>
+</Content>
+<DocView ComType="Steps11"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    Marker内容
+</Title>
+<div class="content">
+    可以在Marker中显示信息，2-3个字符或者icon都可以适配
+</div>
+<DocView ComType="Steps2"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    步骤内容
+</Title>
+<div class="content">
+    <p>使用 StepsContent 可以在步骤中添加内容.</p>
+    <p>如果最后一步有内容，需要在 Steps 上使用 IsBalanced 属性来确保最后一步和其他步骤有相同的宽高.</p>
+</div>
+
+<DocView ComType="Steps3"/>
+<br>
+<Content>
+    使用 HasContentCentered 属性可以是内容居中，如果使用了 HasContentCentered 就不需要使用 IsBalanced 了
+</Content>
+<DocView ComType="Steps4"/>
+<br>
+<Content>
+    <p>在 StepsContent 上应用 IsDividerContent 属性，可以使内容在分隔条居中</p>
+    <p>如果最后一步没有内容，需要移除 IsBalanced 来确保最后一步充满右侧边缘</p>
+</Content>
+<DocView ComType="Steps5"/>
+<br>
+<Content>
+    <p>在 Steps 上应用 HasContentAbove 属性，可以使内容在Marker之上</p>
+    <p>如果最后一步没有内容，需要移除 IsBalanced 来确保最后一步充满右侧边缘</p>
+</Content>
+<DocView ComType="Steps6"/>
+<br>
+<Content>
+    <p> HasContentAbove 可以和 IsDividerContent 一起使用</p>
+</Content>
+<DocView ComType="Steps7"/>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    附加数据
+</Title>
+<div class="content">
+    <p>使用 StepsExtraData 可以在两个步骤直接显示附加数据，可以和 HasContentAbove 一起使用</p>
+    <p>默认情况下附加数据居中并自动换行，可以使用 HasOverflowLeft 或者 HasOverflowRight 允许多余的数据溢出</p>
+</div>
+<DocView ComType="Steps8"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    狭窄样式
+</Title>
+<div class="content">
+    <p>默认情况下，Steps 组件将占用整个宽度。 添加 IsNarrow 属性仅占用所需的空间。</p>
+    <p>您可以将其与 IsCentered 或 IsRight 结合使用以更改对齐方式。</p>
+</div>
+<DocView ComType="Steps12"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    短样式
+</Title>
+<div class="content">
+    <p>默认情况下，带有 IsVertical 属性的 Steps 组件将占据整个高度。 添加 IsShort 属性仅占用所需的空间。</p>
+    <p>您可以将其与 IsCentered 或 IsBottom 结合使用以更改对齐方式。</p>
+</div>
+<DocView ComType="Steps13"/>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    标记样式
+</Title>
+<div class="content">
+    <p>可以使用 IsHollow 设置标记的样式。 通过在根步骤元素或每个标记上分别定义它，可以将其应用于所有步骤。</p>
+</div>
+<DocView ComType="Steps14"/>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>
+    分割线样式
+</Title>
+<div class="content">
+    <p>可以使用 IsDashed,HasGap 来设置分隔符的样式。 </p>
+    <p>通过在根步骤元素或每个步骤上分别定义它们，它们可以应用于所有步骤。</p>
+</div>
+<DocView ComType="Steps15"/>
+<hr>

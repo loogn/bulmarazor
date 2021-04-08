@@ -24,8 +24,8 @@
     /// <summary>
     /// 激活
     /// </summary>
-    [Parameter]
-    public bool IsActive { get; set; }
+    
+    internal bool IsActive { get; set; }
 
     /// <summary>
     /// 虚线样式
@@ -38,5 +38,20 @@
     /// </summary>
     [Parameter]
     public bool HasGaps { get; set; }
+    
+    
+    [CascadingParameter]
+    private Steps Parent { get; set; }
+
+
+    
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Parent?.AddSegment(this);
+    }
 
 }
