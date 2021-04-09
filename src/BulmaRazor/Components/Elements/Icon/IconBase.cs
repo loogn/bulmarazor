@@ -7,18 +7,7 @@ namespace BulmaRazor.Components
     /// </summary>
     public class IconBase : BulmaComponentBase
     {
-        /// <summary>
-        /// 类
-        /// </summary>
-        protected string classes => CssBuilder.Default("icon")
-            .AddClassFromAttributes(Attributes)
-            .AddClass("is-small", IsSmall)
-            .AddClass("is-medium", IsMedium)
-            .AddClass("is-large", IsLarge)
-            .AddClass(Color.ToTextColor(), Color.Value)
-            .AddClass("is-left", IsLeft)
-            .AddClass("is-right", IsRight)
-            .Build();
+        
 
         /// <summary>
         /// 小尺寸

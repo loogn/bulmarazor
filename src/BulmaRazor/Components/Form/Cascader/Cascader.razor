@@ -89,11 +89,11 @@
                     @if (IsMultiple)
                     {
                         var cked = GetItemChecked(item);
-                        <IconCheckBox class="@GetCheckCls(item)" Checked="@cked" OnChange="(v) => Check(item,v)"></IconCheckBox>
+                        <IconCheckBox Color="Color" class="@GetCheckCls(item)" Checked="@cked" OnChange="(v) => Check(item,v)"></IconCheckBox>
                     }
                     @if (IsIsolated && !IsMultiple)
                     {
-                        <IconRadio Checked="@item.IsChecked" @onclick="() => CheckRadio(item)"></IconRadio>
+                        <IconRadio Color="Color" Checked="@item.IsChecked" @onclick="() => CheckRadio(item)"></IconRadio>
                     }
                     <span class="cascader-label">
                         @if (ItemSlot != null)

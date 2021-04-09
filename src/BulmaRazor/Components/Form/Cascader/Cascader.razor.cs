@@ -21,6 +21,7 @@ namespace BulmaRazor.Components
 
         string classes => CssBuilder.Default("input")
             .AddClass("cascader")
+            .AddClass(Color.Value,Color.Value)
             .AddClass("is-small", IsSmall)
             .AddClass("is-normal", IsNormal)
             .AddClass("is-medium", IsMedium)
@@ -80,6 +81,12 @@ namespace BulmaRazor.Components
         private IEnumerable<CascaderItem<TValue>> dataView = new List<CascaderItem<TValue>>();
 
         /// <summary>
+        /// 颜色
+        /// </summary>
+        [Parameter]
+        public Color Color { get; set; } = Color.Link;
+
+            /// <summary>
         /// 小尺寸
         /// </summary>
         [Parameter]

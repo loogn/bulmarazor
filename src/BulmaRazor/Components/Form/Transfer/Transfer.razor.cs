@@ -19,7 +19,7 @@ namespace BulmaRazor.Components
         private List<TransferItem<TItem>> rightView = new();
 
         private bool? leftAll = false;
-        private bool? rightAll=false;
+        private bool? rightAll = false;
         private int leftCount;
         private int rightCount;
         private string leftWord;
@@ -87,7 +87,7 @@ namespace BulmaRazor.Components
         /// 颜色
         /// </summary>
         [Parameter]
-        public Color Color { get; set; } = Color.Info;
+        public Color Color { get; set; } = Color.Link;
 
         /// <summary>
         /// 自定义显示函数

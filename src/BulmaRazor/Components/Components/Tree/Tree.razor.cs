@@ -65,7 +65,7 @@ namespace BulmaRazor.Components
         /// CheckBox颜色
         /// </summary>
         [Parameter]
-        public Color Color { get; set; } = Color.Info;
+        public Color Color { get; set; } = Color.Link;
 
         /// <summary>
         /// 是否手风琴模式

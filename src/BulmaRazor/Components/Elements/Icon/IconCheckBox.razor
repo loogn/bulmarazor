@@ -1,12 +1,23 @@
 ﻿@namespace BulmaRazor.Components
 @inherits IconBase
 
-<span @attributes="Attributes" class="icon-checkbox @classes" @onclick="ClickHandle">
+<span @attributes="Attributes" class="icon-check-radio @classes" @onclick="ClickHandle">
     <i class="@IconClass"></i>
     @ChildContent
 </span>
 
 @code {
+
+    string classes => CssBuilder.Default("icon")
+        .AddClassFromAttributes(Attributes)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-checked",Checked!=false)
+        .AddClass("is-left", IsLeft)
+        .AddClass("is-right", IsRight)
+        .Build();
 
     string IconClass => Checked == null ? "fa fa-minus-square" : Checked.Value ? "fa fa-check-square" : "fa fa-square-o";
 
@@ -17,13 +28,13 @@
     [Parameter]
     public bool? Checked { get; set; }
 
-    
+
     /// <summary>
     /// 状态绑定事件
     /// </summary>
     [Parameter]
     public EventCallback<bool> CheckedChanged { get; set; }
-    
+
     /// <summary>
     /// 状态改变事件
     /// </summary>
@@ -37,7 +48,7 @@
         await CheckedChanged.InvokeAsync(Checked.Value);
         await OnChange.InvokeAsync(Checked.Value);
     }
-    
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

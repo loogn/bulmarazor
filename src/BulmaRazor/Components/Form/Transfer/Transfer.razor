@@ -7,7 +7,7 @@
         <nav class="panel">
             <p class="panel-heading">
                 <span @onclick="() => CheckAll(1, !(leftAll ?? false))" class="transfer-title">
-                    <IconCheckBox Checked="@leftAll" class="@(leftAll==false?Color.Value:"is-checked "+Color.Value)"></IconCheckBox>
+                    <IconCheckBox Color="Color" Checked="@leftAll"></IconCheckBox>
                     @LeftTitle
                 </span>
                 <span class="transfer-num">
@@ -32,7 +32,7 @@
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : "")">
 
                             <span class="transfer-item @(Color.Value+(item.IsChecked ? " is-checked" : ""))" @onclick="() => ItemCheckChange(item)">
-                                <IconCheckBox Checked="item.IsChecked"></IconCheckBox>
+                                <IconCheckBox Color="Color" Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
                             </span>
                         </li>
@@ -73,7 +73,7 @@
         <nav class="panel">
             <p class="panel-heading">
                 <span @onclick="() => CheckAll(2, !(rightAll ?? false))" class="transfer-title">
-                    <IconCheckBox Checked="@rightAll" class="@(rightAll==false?Color.Value:"is-checked "+Color.Value)"></IconCheckBox>
+                    <IconCheckBox Color="Color" Checked="@rightAll"></IconCheckBox>
                     @RightTitle
                 </span>
 
@@ -99,7 +99,7 @@
                         <li class="@B.Join(B.MB2, item.IsHidden ? B.Hidden : string.Empty)">
 
                             <span class="transfer-item @(Color.Value+(item.IsChecked ? " is-checked" : ""))" @onclick="() => ItemCheckChange(item)">
-                                <IconCheckBox Checked="item.IsChecked"></IconCheckBox>
+                                <IconCheckBox Color="Color" Checked="item.IsChecked"></IconCheckBox>
                                 @item.ShowValue
                             </span>
                         </li>
