@@ -1,0 +1,73 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+<div @attributes="Attributes" class="loading-mask @Color.Value" style="@loadingStyles">
+    <i class="@loadingClass"></i>
+    @if (ChildContent != null)
+    {
+        <div>@ChildContent</div>
+    }
+    else if (Text.HasValue())
+    {
+        <div>@Text</div>
+    }
+</div>
+
+@code {
+
+    string loadingStyles => CssBuilder.Default("")
+        .AddStyleFromAttributes(Attributes)
+        .AddClass($"background:{Background};", Background)
+        .AddClass("display:none;",!IsActive)
+        .Build();
+
+    string loadingClass => CssBuilder.Default("fa")
+        .AddClass("fa-spin")
+        .AddClass("fa-3x")
+        .AddClass("fa-fw")
+        .AddClass("fa-pulse", IsPulse)
+        .AddClass(IconClass)
+        .Build();
+
+    /// <summary>
+    /// 图标和提示语的颜色
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; } = Color.Link;
+
+    /// <summary>
+    /// 加载提示文本
+    /// </summary>
+    [Parameter]
+    public string Text { get; set; }
+
+    /// <summary>
+    /// 应景的图标有 fa-spinner |  fa-circle-o-notch
+    /// | fa-refresh 
+    /// </summary>
+    [Parameter]
+    public string IconClass { get; set; } = "fa-spinner";
+
+    /// <summary>
+    /// 是否脉冲旋转
+    /// </summary>
+    [Parameter]
+    public bool IsPulse { get; set; }
+
+    /// <summary>
+    /// 是否激活
+    /// </summary>
+    [Parameter]
+    public bool IsActive { get; set; }
+    /// <summary>
+    /// 遮罩背景色
+    /// </summary>
+    [Parameter]
+    public string Background { get; set; }
+
+    /// <summary>
+    /// 提示文本
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

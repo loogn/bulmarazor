@@ -6,14 +6,40 @@
 <Container class="@B.PY6">
 
     <br>
-    <PageHeader OnBack="Back">详细页面</PageHeader>
-
+    <Table IsBordered style="position: relative;">
+        <Loading IsPulse IsActive="@loading" Color="Color.Danger" Text="文本"></Loading>
+        <thead>
+        <tr>
+            <th>One</th><th>Two</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>one</td><td>two</td>
+        </tr>
+        <tr class="@B.Selected">
+            <td>one</td><td>two</td>
+        </tr>
+        <tr>
+            <td>one</td><td>two</td>
+        </tr>
+        </tbody>
+    </Table>
+    <p>sdfsdfdsfjlkas;d</p>
+    <p>sdfsdfdsfjlkas;d</p>
+    <p>sdfsdfdsfjlkas;d</p>
+    <p>sdfsdfdsfjlkas;d</p>
+    <p>sdfsdfdsfjlkas;d</p>
+    <p>sdfsdfdsfjlkas;d</p>
+    <Button @onclick="Loading">loading</Button>
 </Container>
 
 @code{
 
-    private void Back()
+    bool loading = false;
+    private void Loading()
     {
-        ToastService.Show("go back");
+        loading = !loading;
     }
+
 }

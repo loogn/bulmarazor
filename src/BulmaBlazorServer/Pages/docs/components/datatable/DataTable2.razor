@@ -1,59 +1,65 @@
-<Field HasAddons>
-    <Control>
-        <Input @bind-Value="kw" placeholder="请输入名称关键字"/>
-    </Control>
-    <Control>
-        <Button Color="Color.Info" @onclick="search">
-            <Icon IconClass="fa fa-search"></Icon><span>搜索</span>
-        </Button>
-    </Control>
-</Field>
-<DataTable Data="data" TItem="Person" IsHoverable
-           IsBordered IsStriped IsFullwidth>
-    <ColumnsSlot>
-        <DataTableColumn Label="Id" Prop="Id"/>
-        <DataTableColumn Label="名称" Prop="Name"/>
-        <DataTableColumn Label="年龄" Prop="Age"/>
-        <DataTableColumn Label="性别" Prop="Gender"/>
-        <DataTableColumn Label="生日" Format="yyyy-MM-dd HH:mm" Prop="Birthday"/>
-    </ColumnsSlot>
-    <EmptySlot>
-        <Content>--没有数据--</Content>
-    </EmptySlot>
-</DataTable>
-<Pagination TotalCount="totalCount" PageIndex="pageIndex" PageSize="pageSize" OnPageChange="onPage"
-            NextText="下一页" PrevText="上一页" IsCentered/>
+<LoadingContainer IsActive="@loading">
+    <Field HasAddons>
+        <Control>
+            <Input @bind-Value="kw" placeholder="请输入名称关键字"/>
+        </Control>
+        <Control>
+            <Button Color="Color.Info" @onclick="search">
+                <Icon IconClass="fa fa-search"></Icon><span>搜索</span>
+            </Button>
+        </Control>
+    </Field>
+    <DataTable Data="data" TItem="Person" IsHoverable
+               IsBordered IsStriped IsFullwidth>
+        <ColumnsSlot>
+            <DataTableColumn Label="Id" Prop="Id"/>
+            <DataTableColumn Label="名称" Prop="Name"/>
+            <DataTableColumn Label="年龄" Prop="Age"/>
+            <DataTableColumn Label="性别" Prop="Gender"/>
+            <DataTableColumn Label="生日" Format="yyyy-MM-dd HH:mm" Prop="Birthday"/>
+        </ColumnsSlot>
+        <EmptySlot>
+            <Content>--没有数据--</Content>
+        </EmptySlot>
+    </DataTable>
+    <Pagination TotalCount="totalCount" PageIndex="pageIndex" PageSize="pageSize" OnPageChange="onPage"
+                NextText="下一页" PrevText="上一页" IsCentered/>
+</LoadingContainer>
 
 @code{
+    bool loading = false;
     int pageIndex = 1;
     int pageSize = 5;
     int totalCount = 0;
     string kw;
     IEnumerable<Person> data;
     //分页
-    void onPage(int page)
+    async Task onPage(int page)
     {
+        loading = true;
         pageIndex = page;
-        searchData();
+        await searchData();
+        loading = false;
     }
 
-    void search()
+    async Task search()
     {
         pageIndex = 1;
-        searchData();
+        await searchData();
     }
 
     //查询后台数据
-    void searchData()
+    async Task searchData()
     {
+        await Task.Delay(1000);
         data = Person.GetPageData(kw, pageIndex, pageSize, out int total);
         totalCount = total;
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
-        searchData();
+        await base.OnInitializedAsync();
+        await searchData();
     }
 
 }
