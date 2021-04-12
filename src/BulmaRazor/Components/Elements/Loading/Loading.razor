@@ -4,11 +4,11 @@
     <i class="@loadingClass"></i>
     @if (ChildContent != null)
     {
-        <div>@ChildContent</div>
+        <div style="font-size:0.5em;" class="mt-1">@ChildContent</div>
     }
     else if (Text.HasValue())
     {
-        <div>@Text</div>
+        <div style="font-size:0.5em" class="mt-1">@Text</div>
     }
 </div>
 
@@ -17,12 +17,11 @@
     string loadingStyles => CssBuilder.Default("")
         .AddStyleFromAttributes(Attributes)
         .AddClass($"background:{Background};", Background)
-        .AddClass("display:none;",!IsActive)
+        .AddClass("display:none;", !IsActive)
         .Build();
 
     string loadingClass => CssBuilder.Default("fa")
         .AddClass("fa-spin")
-        .AddClass("fa-3x")
         .AddClass("fa-fw")
         .AddClass("fa-pulse", IsPulse)
         .AddClass(IconClass)
@@ -58,6 +57,7 @@
     /// </summary>
     [Parameter]
     public bool IsActive { get; set; }
+
     /// <summary>
     /// 遮罩背景色
     /// </summary>

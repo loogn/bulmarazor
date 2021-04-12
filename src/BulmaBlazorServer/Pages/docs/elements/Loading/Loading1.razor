@@ -1,0 +1,35 @@
+<Columns>
+    <Column>
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading IsActive="@active"></Loading>
+        </Box>
+    </Column>
+    <Column>
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading IsActive="@active" IconClass="fa-refresh">加载中...</Loading>
+        </Box>
+    </Column>
+    <Column>
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading IsActive="@active" Text="Loading..." IconClass="fa-circle-o-notch"></Loading>
+        </Box>
+    </Column>
+
+</Columns>
+<Button @onclick="() => active=!active">切换</Button>
+
+@code {
+    private bool active = true;
+}

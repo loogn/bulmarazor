@@ -1,0 +1,63 @@
+<Columns IsMultiline>
+    <Column Size="Size.Size4">
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading Color="Color.Primary" IsActive="@active"></Loading>
+        </Box>
+    </Column>
+    <Column Size="Size.Size4">
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading Color="Color.Info" IsActive="@active"></Loading>
+        </Box>
+    </Column>
+    <Column Size="Size.Size4">
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading Color="Color.Link" IsActive="@active"></Loading>
+        </Box>
+    </Column>
+
+    <Column Size="Size.Size4">
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading Color="Color.Success" IsActive="@active"></Loading>
+        </Box>
+    </Column>
+    <Column Size="Size.Size4">
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading Color="Color.Warning" IsActive="@active"></Loading>
+        </Box>
+    </Column>
+    <Column Size="Size.Size4">
+        <Box style="position: relative">
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <p>消息内容</p>
+            <Loading Color="Color.Danger" IsActive="@active"></Loading>
+        </Box>
+    </Column>
+
+</Columns>
+<Button @onclick="() => active = !active">切换</Button>
+
+@code {
+    private bool active = true;
+}

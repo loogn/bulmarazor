@@ -21,14 +21,14 @@
                                || item.Keywords.Any(x => x.StartsWith(kw.ToLower())));
                 var cls = flag ? "" : B.Hidden;
                 <MenuItem class="@cls"><MenuLink href="@sub.Href">@sub.Label
-                                           @if (sub.Tag.Equals("new"))
-                                           {
-                                               <Tag class="px-1 ml-1" style="height: auto" Color="Color.Danger">New</Tag>     
-                                           }
-                                           else if (sub.Tag.Equals("upd"))
-                                           {
-                                               <Tag class="px-1 ml-1" style="height: auto" Color="Color.Info">Upd</Tag>
-                                           }
+                                           @* @if (sub.Tag.Equals("new")) *@
+                                           @* { *@
+                                           @*     <Tag class="px-1 ml-1" style="height: auto" Color="Color.Danger">New</Tag>      *@
+                                           @* } *@
+                                           @* else if (sub.Tag.Equals("upd")) *@
+                                           @* { *@
+                                           @*     <Tag class="px-1 ml-1" style="height: auto" Color="Color.Info">Upd</Tag> *@
+                                           @* } *@
                 </MenuLink></MenuItem>
             }
         </MenuList>
@@ -145,6 +145,7 @@
                 new MItem("图片(Image)", "/docs/elements/image", "image,图片,"),
                 new MItem("通知(Notification)", "/docs/elements/notification", "notification,notify,通知"),
                 new MItem("进度条(Progress)", "/docs/elements/progress", "progress,进度条"),
+                new MItem("加载层(Loading)", "/docs/elements/loading", "loading,加载提示","new"),
                 new MItem("表格(Table)", "/docs/elements/table", "table,表格"),
                 new MItem("标签(Tag)", "/docs/elements/tag", "tag,标签,label"),
                 new MItem("徽章(Badge)", "/docs/elements/badge", "badge,徽章"),

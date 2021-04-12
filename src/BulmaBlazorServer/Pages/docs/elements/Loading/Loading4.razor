@@ -1,3 +1,4 @@
+@using BulmaRazorServer.Pages.docs.components.datatable
 <LoadingContainer IsActive="@loading">
     <Field HasAddons>
         <Control>
@@ -36,8 +37,10 @@
     //分页
     async Task onPage(int page)
     {
+        
         pageIndex = page;
         await searchData();
+        
     }
 
     async Task search()
