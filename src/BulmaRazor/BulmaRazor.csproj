@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <Version>0.3.1</Version>
+        <Version>0.3.2</Version>
         <Description>A set of lightweight component library based on Bulma and Blazor.</Description>
         <Copyright>loogn@2021</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -10,7 +10,7 @@
         <RepositoryUrl>https://gitee.com/loogn/bulmarazor</RepositoryUrl>
         <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <PackageId>BulmaRazor</PackageId>
-        <AssemblyVersion>0.3.1.0</AssemblyVersion>
+        <AssemblyVersion>0.3.2.0</AssemblyVersion>
         <PackageIcon>nuget-logo.png</PackageIcon>
         <DefaultItemExcludes>$(DefaultItemExcludes);bundleconfig.json;wwwroot\css\**;wwwroot\jsplugin\**</DefaultItemExcludes>
         <Title>BulmaRazor Component</Title>

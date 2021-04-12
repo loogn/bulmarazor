@@ -1,0 +1,40 @@
+@page "/docs/elements/loading"
+@layout DocLayout
+
+<Title>Loading</Title>
+<Subtitle Size="Size.Size4">
+    加载提示层
+</Subtitle>
+<hr>
+
+<Content>
+    <p>Loading 使用绝对定位来实现，所以父元素需要 style="position: relative;"</p>
+    <p>也可以直接使用 LoadingContainer，一个 position 为 relative 的容器内部包含了 Loading，属性和 Loading 一样</p>
+    <p>使用 IsActive控制是否显示</p>
+</Content>
+
+
+<hr>
+<Title Size="Size.Size4" IsSpaced>
+    基础用法
+</Title>
+<DocView ComType="Loading1"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    颜色
+</Title>
+<DocView ComType="Loading2"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    其他
+</Title>
+<DocView ComType="Loading3"/>
+<hr>
+
+<Title Size="Size.Size4" IsSpaced>
+    LoadingContainer
+</Title>
+<DocView ComType="Loading4"/>
+<hr>
