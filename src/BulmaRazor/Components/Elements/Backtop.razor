@@ -1,0 +1,205 @@
+@namespace BulmaRazor.Components
+@inherits BulmaComponentBase
+@inject BulmaRazorJsInterop JsInterop
+
+<button id="@Id" @attributes="Attributes" class="@classes" style="@styles">
+    @if (ChildContent != null)
+    {
+        @:@ChildContent
+    }
+    else
+    {
+        <span class="icon">
+            <i class="fa fa-arrow-up"></i>
+        </span>
+    }
+
+</button>
+
+@code {
+
+    private readonly string Id = "backtop_" + Guid.NewGuid().ToString("N");
+
+    string styles => CssBuilder.Default("position: fixed;")
+        .AddClass($"right:{Right}px;")
+        .AddClass($"bottom:{Bottom}px;")
+        .AddClass($"height:{Height}px;")
+        .AddClass($"width:{Width}px;")
+        .AddClass("z-index:5;")
+        .AddClass("display:none;")
+        .Build();
+
+    string classes => CssBuilder.Default("button")
+        .AddClass("p-0")
+        .AddClassFromAttributes(Attributes)
+        .AddClass(Color.Value, Color.Value)
+        .AddClass("is-small", IsSmall)
+        .AddClass("is-normal", IsNormal)
+        .AddClass("is-medium", IsMedium)
+        .AddClass("is-large", IsLarge)
+        .AddClass("is-light", IsLight)
+        .AddClass("is-outlined", IsOutlined)
+        .AddClass("is-inverted", IsInverted)
+        .AddClass("is-rounded", IsRounded)
+        .AddClass("is-hovered", IsHovered)
+        .AddClass("is-focused", IsFocused)
+        .AddClass("is-active", IsActive)
+        .AddClass("is-static", IsStatic)
+        .AddClass("is-selected", IsSelected)
+        .Build();
+
+    /// <summary>
+    /// 颜色
+    /// </summary>
+    [Parameter]
+    public Color Color { get; set; } = Color.Default;
+
+    /// <summary>
+    /// 小尺寸
+    /// </summary>
+    [Parameter]
+    public bool IsSmall { get; set; }
+
+    /// <summary>
+    /// 正常尺寸
+    /// </summary>
+    [Parameter]
+    public bool IsNormal { get; set; }
+
+    /// <summary>
+    /// 中尺寸
+    /// </summary>
+    [Parameter]
+    public bool IsMedium { get; set; }
+
+    /// <summary>
+    /// 大尺寸
+    /// </summary>
+    [Parameter]
+    public bool IsLarge { get; set; }
+
+
+    /// <summary>
+    /// 浅色
+    /// </summary>
+    [Parameter]
+    public bool IsLight { get; set; }
+
+
+    /// <summary>
+    /// 轮廓
+    /// </summary>
+    [Parameter]
+    public bool IsOutlined { get; set; }
+
+    /// <summary>
+    /// 颜色反正
+    /// </summary>
+    [Parameter]
+    public bool IsInverted { get; set; }
+
+    /// <summary>
+    /// 圆角
+    /// </summary>
+    [Parameter]
+    public bool IsRounded { get; set; } = true;
+
+    /// <summary>
+    /// 悬浮状态
+    /// </summary>
+    [Parameter]
+    public bool IsHovered { get; set; }
+
+    /// <summary>
+    /// 焦点状态
+    /// </summary>
+    [Parameter]
+    public bool IsFocused { get; set; }
+
+    /// <summary>
+    /// 激活状态
+    /// </summary>
+    [Parameter]
+    public bool IsActive { get; set; }
+
+    /// <summary>
+    /// 静态
+    /// </summary>
+    [Parameter]
+    public bool IsStatic { get; set; }
+
+    /// <summary>
+    /// 选中状态
+    /// </summary>
+    [Parameter]
+    public bool IsSelected { get; set; }
+
+    /// <summary>
+    /// 自定义内容
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+
+    /// <summary>
+    /// 滚动目标，默认是document
+    /// </summary>
+    [Parameter]
+    public string Target { get; set; }
+
+
+    /// <summary>
+    /// 滚动高度达到此参数值才出现,默认 200
+    /// </summary>
+    [Parameter]
+    public int VisibilityHeight { get; set; } = 200;
+
+    /// <summary>
+    /// 控制其显示位置, 距离页面右边距,默认 40
+    /// </summary>
+    [Parameter]
+    public int Right { get; set; } = 40;
+
+    /// <summary>
+    /// 控制其显示位置, 距离页面底部距离,默认 40
+    /// </summary>
+    [Parameter]
+    public int Bottom { get; set; } = 40;
+
+    /// <summary>
+    /// 滚动完成时间，毫秒,默认 200
+    /// </summary>
+    [Parameter]
+    public int Time { get; set; } = 200;
+
+
+    /// <summary>
+    /// 宽度 ,默认 40
+    /// </summary>
+    [Parameter]
+    public int Width { get; set; } = 40;
+
+    /// <summary>
+    /// 高度 ,默认 40
+    /// </summary>
+    [Parameter]
+    public int Height { get; set; } = 40;
+
+
+    /// <summary>
+    /// 呈现后初始化
+    /// </summary>
+    /// <param name="firstRender"></param>
+    /// <returns></returns>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        await JsInterop.InitBackTop(Id, Target, VisibilityHeight, Time);
+    }
+
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+
+}

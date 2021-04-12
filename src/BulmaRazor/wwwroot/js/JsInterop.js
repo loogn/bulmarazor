@@ -2,6 +2,43 @@
 // functions, and may import other JavaScript modules if required.
 
 
+export function initBackTop(id, target, visibilityHeight, time) {
+
+    // console.log('调用了initBackTop', id, target, visibilityHeight, time);
+    let $target = null;
+    let hasTarget = false;
+    if (target) {
+        hasTarget = true;
+        $target = $(target);
+    } else {
+        $target = $(document);
+    }
+    $target.scroll(function () {
+        let top = $target.scrollTop();
+        if (top > visibilityHeight) {
+            $("#" + id).show();
+        } else {
+            $("#" + id).hide();
+        }
+    });
+    if ($target.scrollTop() > visibilityHeight) {
+        $("#" + id).show();
+    }
+    
+    $("#" + id).click(function () {
+        if (hasTarget) {
+            $target.animate({scrollTop: 0}, time);
+        } else {
+            if ($("html").scrollTop() !== 0) {
+                $("html").animate({scrollTop: 0}, time);
+            } else {
+                $("body").animate({scrollTop: 0}, time);
+            }
+        }
+    });
+}
+
+
 export function BindClickWithoutSelf(id, selector) {
     $(document).click(function (e) {
         if (e.target.id == id || $(e.target).parents("#" + id).length > 0)

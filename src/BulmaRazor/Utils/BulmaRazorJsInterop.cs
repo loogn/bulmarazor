@@ -172,6 +172,12 @@ namespace BulmaRazor.Components
             await module.InvokeVoidAsync("BindClickWithoutSelf", id, selector);
         }
 
+        internal async ValueTask InitBackTop(string id, string target, int visibilityHeight, int time)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeVoidAsync("initBackTop", id, target, visibilityHeight, time);
+        }
+
         /// <summary>
         /// 
         /// </summary>
