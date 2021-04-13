@@ -26,14 +26,14 @@ jobs:
         run: cp -rf src/BulmaRazorServer/Pages publish/
         
       - name: SFTP Deploy
-        uses: swillner/sftp-sync-action@v1.0
+        uses: sahil-io/release-upload-sftp@4.2
         with:
-          user: ${{secrets.USERNAME}}
+          username: ${{secrets.USERNAME}}
           server: ${{secrets.SERVER}}
           port: ${{secrets.PORT}}
-          user_private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          local: publish
-          remote: /home/bulmarazor/publish/
+          ssh_private_key: ${{secrets.SSH_PRIVATE_KEY}}
+          local_path: ./publish/*
+          remote: ./publish/
           
       - name: Restart Service
         uses: appleboy/ssh-action@v0.1.4
