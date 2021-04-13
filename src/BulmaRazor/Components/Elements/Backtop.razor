@@ -41,11 +41,6 @@
         .AddClass("is-outlined", IsOutlined)
         .AddClass("is-inverted", IsInverted)
         .AddClass("is-rounded", IsRounded)
-        .AddClass("is-hovered", IsHovered)
-        .AddClass("is-focused", IsFocused)
-        .AddClass("is-active", IsActive)
-        .AddClass("is-static", IsStatic)
-        .AddClass("is-selected", IsSelected)
         .Build();
 
     /// <summary>
@@ -84,8 +79,7 @@
     /// </summary>
     [Parameter]
     public bool IsLight { get; set; }
-
-
+    
     /// <summary>
     /// 轮廓
     /// </summary>
@@ -104,35 +98,7 @@
     [Parameter]
     public bool IsRounded { get; set; } = true;
 
-    /// <summary>
-    /// 悬浮状态
-    /// </summary>
-    [Parameter]
-    public bool IsHovered { get; set; }
-
-    /// <summary>
-    /// 焦点状态
-    /// </summary>
-    [Parameter]
-    public bool IsFocused { get; set; }
-
-    /// <summary>
-    /// 激活状态
-    /// </summary>
-    [Parameter]
-    public bool IsActive { get; set; }
-
-    /// <summary>
-    /// 静态
-    /// </summary>
-    [Parameter]
-    public bool IsStatic { get; set; }
-
-    /// <summary>
-    /// 选中状态
-    /// </summary>
-    [Parameter]
-    public bool IsSelected { get; set; }
+   
 
     /// <summary>
     /// 自定义内容
@@ -196,10 +162,4 @@
         await base.OnAfterRenderAsync(firstRender);
         await JsInterop.InitBackTop(Id, Target, VisibilityHeight, Time);
     }
-
-    protected override bool ShouldRender()
-    {
-        return false;
-    }
-
 }

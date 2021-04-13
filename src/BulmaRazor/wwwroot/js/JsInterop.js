@@ -4,7 +4,7 @@
 
 export function initBackTop(id, target, visibilityHeight, time) {
 
-    // console.log('调用了initBackTop', id, target, visibilityHeight, time);
+    console.log('调用了initBackTop', id, target, visibilityHeight, time);
     let $target = null;
     let hasTarget = false;
     if (target) {
