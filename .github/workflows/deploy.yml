@@ -8,7 +8,7 @@ on:
   # workflow_dispatch:
 
 jobs:
-  pack:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,10 +22,7 @@ jobs:
       - name: Run Publish
         run: dotnet publish  src/BulmaRazorServer/BulmaRazorServer.csproj -c Release -o publish 
         
-      - name: Copy Pages
-        run: cp -rf src/BulmaRazorServer/Pages publish/
-        
-      - name: SFTP Deploy
+      - name: SFTP Upload Main Files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
           username: ${{secrets.USERNAME}}
@@ -44,6 +41,13 @@ jobs:
           username: ${{secrets.USERNAME}}
           script: 
               bash ~/deploy.sh
-        
-        
-      
+
+      - name: SFTP Upload Pages
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+        with:
+          username: ${{secrets.USERNAME}}
+          server: ${{secrets.SERVER}}
+          port: ${{secrets.PORT}}
+          ssh_private_key: ${{secrets.SSH_PRIVATE_KEY}}
+          local_path: ./src/BulmaRazorServer/Pages/*
+          remote_path: ./publish/Pages/
