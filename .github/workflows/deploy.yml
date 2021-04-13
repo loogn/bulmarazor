@@ -26,7 +26,7 @@ jobs:
         run: cp -rf src/BulmaRazorServer/Pages publish/
         
       - name: SFTP Deploy
-        uses: sahil-io/release-upload-sftp@4.2
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
           username: ${{secrets.USERNAME}}
           server: ${{secrets.SERVER}}
