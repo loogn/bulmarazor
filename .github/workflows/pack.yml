@@ -1,14 +1,9 @@
-# This is a basic workflow to help you get started with Actions
+name: Package to Nuget
 
-name: CI
-
-# Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ pack ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,7 +11,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  pack:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -25,16 +20,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Setup .NET Core SDK
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v1.7.2
         with:
           dotnet-version: 5.0.x
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: dotnet publish $GITHUB_WORKSPACE/src/BulmaBlazorServer/BulmaRazorServer.csproj
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      # 
+      - name: Run Pack
+        run: dotnet pack src/BulmaRazor/BulmaRazor.csproj -c Release -o package 
+        
+      - name: Publish nuget
+        env: 
+          NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
+        run: dotnet nuget push package/BulmaRazor.*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY --skip-duplicate
