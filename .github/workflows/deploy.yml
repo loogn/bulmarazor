@@ -1,0 +1,37 @@
+name: Deploy WebSite
+
+on:
+  push:
+    branches: [ deploy ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: 5.0.x
+      # 
+      - name: Run Publish
+        run: dotnet publish  src/BulmaRazorServer/BulmaRazorServer.csproj -c Release -o publish 
+        
+      - name: Copy Pages
+        run: cp -rf src/BulmaRazorServer/Pages publish/
+        
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+        with:
+          username: ${{secrets.USERNAME}}
+          server: ${{secrets.SERVER}}
+          port: ${{secrets.PORT}}
+          ssh_private_key: ${{secrets.SSH_PRIVATE_KEY}}
+          local_path: ./publish/*
+          remote_path: /publish
+      
