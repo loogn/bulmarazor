@@ -1,0 +1,26 @@
+@page "/docs/elements/backtop"
+@layout DocLayout
+
+<Title>回到顶部 (Backtop)</Title>
+<Subtitle Size="Size.Size4">
+    返回页面顶部的操作按钮
+</Subtitle>
+<hr>
+
+
+<Title Size="Size.Size4" IsSpaced>用法</Title>
+<Content>
+    <p>可以使用 VisibilityHeight 设置可见的滚动高度，默认200</p>
+    <p>可以使用 Time 设置到顶部的时长，默认200</p>
+    <p>可以使用 Target 设置滚动元素 默认Document</p>
+    <p>由于网站布局 #layoutContent 使 Document 不会滚动，所以例子中都设置了 Target="#layoutContent"</p>
+    <p>慢慢向下滚动，会依次看到展示效果</p>
+</Content>
+
+<DocView ComType="Backtop1"/>
+
+<hr>
+@for (var i = 0; i < 9; i++)
+{
+    <p class="m-6 p-6">@(i)为了滚动</p>
+}

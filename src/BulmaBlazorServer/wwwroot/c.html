@@ -11,20 +11,31 @@
     <link href="/css/site.css" rel="stylesheet"/>
 
     <style>
-        
+        .backtop {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            padding: 0 !important;
+            display: none;
+            font-size: 20px;
+            z-index: 5;
+            bottom: 40px;
+            right: 40px;
+        }
     </style>
 </head>
 <body class=" has-background-danger-light">
+
+<button id="bt" class="backtop has-shadow button is-rounded">
+    <span class="icon">
+        <i class="fa fa-arrow-up"></i>
+    </span>
+</button>
+
 <div class="container">
+
     <br>
     <div style="width:500px;height:500px;position: relative">
-        <div class="loading-mask has-text-danger">
-            <i class=" fa fa-spinner fa-spin fa-3x fa-fw"></i>
-
-
-            <div>Loading...</div>
-
-        </div>
 
         <p>sdfsfa</p>
         <p>sdfsfa</p>
@@ -36,6 +47,49 @@
     <p>sdfsfa</p>
     <p>sdfsfa</p>
     <p>sdfsfa</p>
+    <div style="width:500px;height:500px;position: relative">
+
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+    </div>
+    <div style="width:500px;height:500px;position: relative">
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+    </div>
+    <div id="scroll" style="border: 1px solid red; height:500px;overflow: auto">
+        <div style="width:500px;height:500px;position: relative">
+
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+        </div>
+        <div style="width:500px;height:500px;position: relative">
+
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+        </div>
+        <div style="width:500px;height:500px;position: relative">
+
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+            <p>sdfsfa</p>
+        </div>
+    </div>
+    <div style="width:500px;height:500px;position: relative">
+
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+        <p>sdfsfa</p>
+    </div>
     <div class="page-header" style="position: relative">
 
         <div class="page-header-left">
@@ -49,9 +103,38 @@
         </div>
     </div>
 
+
 </div>
 
 <script>
+
+    function initBackTop(id, target, visibilityHeight, time) {
+
+        var $target = $(document);
+        var isDocument = true;
+        if (target) {
+            isDocument = false;
+            $target = $(target);
+        }
+        $target.scroll(function () {
+            var top = $target.scrollTop();
+            if (top > visibilityHeight) {
+                $("#" + id).show();
+            } else {
+                $("#" + id).hide();
+            }
+        });
+        $("#" + id).click(function () {
+            if (isDocument) {
+                $('html, body').animate({scrollTop: 0}, time);
+            } else {
+                $target.animate({scrollTop: 0}, time);
+            }
+        });
+    }
+
+
+    initBackTop('bt', '#scroll', 200, 200);
 
 </script>
 </body>

@@ -44,3 +44,17 @@ html, body {
     top: 0.5rem;
 }
 
+.logo {
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo .b {
+    color: hsl(348, 100%, 61%);
+
+}

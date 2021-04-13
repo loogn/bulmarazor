@@ -5,7 +5,20 @@
 
 <Container class="@B.PY6">
 
+    <Backtop Target="#sc"></Backtop>
+    <Backtop Bottom="80" IsLight Color="Color.Danger" Target="#sc"></Backtop>
+    
+    <Backtop Right="80" IsRounded="false" Target="#sc">Up</Backtop>
     <br>
+    
+    <div id="sc" style="height:400px; border: 1px solid red; overflow: auto">
+    @for (var i = 0; i < 40; i++)
+        {
+            <p>@i sdfsdfdsfjlkas;d</p>
+            <p>sdfsdfdsfjlkas;d</p>
+        }
+    </div>
+    
     <Table IsBordered style="position: relative;">
         <Loading IsPulse IsActive="@loading" Color="Color.Danger" Text="文本"></Loading>
         <thead>
@@ -32,6 +45,16 @@
     <p>sdfsdfdsfjlkas;d</p>
     <p>sdfsdfdsfjlkas;d</p>
     <Button @onclick="Loading">loading</Button>
+  <p>sdfsdfdsfjlkas;d</p>
+      <p>sdfsdfdsfjlkas;d</p>
+      <p>sdfsdfdsfjlkas;d</p>
+      <p>sdfsdfdsfjlkas;d</p>
+    <p>sdfsdfdsfjlkas;d</p>
+    <p>sdfsdfdsfjlkas;d</p>
+        <p>sdfsdfdsfjlkas;d</p>
+        <p>sdfsdfdsfjlkas;d</p>
+        <p>sdfsdfdsfjlkas;d</p>
+        <p>sdfsdfdsfjlkas;d</p>
 </Container>
 
 @code{
