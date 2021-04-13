@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.808.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulmaRazor", "src\BulmaRazor\BulmaRazor.csproj", "{59334291-9541-4EE5-87B2-76ADBE1A8251}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulmaRazorServer", "src\BulmaBlazorServer\BulmaRazorServer.csproj", "{1D5AAF22-C6F7-4205-8162-80A23F76FF01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulmaRazorServer", "src\BulmaRazorServer\BulmaRazorServer.csproj", "{1D5AAF22-C6F7-4205-8162-80A23F76FF01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
