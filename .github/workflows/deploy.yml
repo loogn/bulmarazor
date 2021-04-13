@@ -32,8 +32,8 @@ jobs:
           server: ${{secrets.SERVER}}
           port: ${{secrets.PORT}}
           user_private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          local: 'publish/*'
-          remote: '/home/bulmarazor/publish/'
+          local: publish
+          remote: /home/bulmarazor/publish/
           
       - name: Restart Service
         uses: appleboy/ssh-action@v0.1.4
