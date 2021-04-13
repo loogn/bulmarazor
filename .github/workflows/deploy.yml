@@ -32,6 +32,6 @@ jobs:
           server: ${{secrets.SERVER}}
           port: ${{secrets.PORT}}
           ssh_private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          local_path: publish/*
-          remote_path: /home/bulmarazor/publish/
+          local_path: 'publish/*'
+          remote_path: '/home/bulmarazor/publish/'
       
