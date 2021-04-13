@@ -31,7 +31,7 @@ jobs:
           dotnet-version: 5.0.x
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: dotnet publish $GITHUB_WORKSPACE/src/bulmarazor/BulmaRazorServer/BulmaRazorServer.csproj
+        run: dotnet publish $GITHUB_WORKSPACE/src/BulmaRazorServer/BulmaRazorServer.csproj
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
