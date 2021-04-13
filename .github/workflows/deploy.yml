@@ -34,4 +34,16 @@ jobs:
           ssh_private_key: ${{secrets.SSH_PRIVATE_KEY}}
           local_path: 'publish/*'
           remote_path: '/home/bulmarazor/publish/'
+          
+      - name: Restart Service
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{secrets.SERVER}}
+          port: ${{secrets.PORT}}
+          passphrase: ${{secrets.SSH_PRIVATE_KEY}}
+          username: ${{secrets.USERNAME}}
+          script: 
+              bash ~/deploy.sh
+        
+        
       
