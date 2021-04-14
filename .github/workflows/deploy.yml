@@ -4,13 +4,11 @@ on:
   push:
     branches: [ deploy ]
 
-  # Allows you to run this workflow manually from the Actions tab
   # workflow_dispatch:
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -18,10 +16,13 @@ jobs:
         uses: actions/setup-dotnet@v1.7.2
         with:
           dotnet-version: 5.0.x
-      # 
+      
       - name: Run Publish
         run: dotnet publish  src/BulmaRazorServer/BulmaRazorServer.csproj -c Release -o publish 
-        
+  upMain:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
       - name: SFTP Upload Main Files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
@@ -41,7 +42,11 @@ jobs:
           username: ${{secrets.USERNAME}}
           script: 
               bash ~/deploy.sh
-
+  
+  upPages:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
       - name: SFTP Upload Pages
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
