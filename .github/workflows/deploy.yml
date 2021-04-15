@@ -7,8 +7,8 @@ on:
   # workflow_dispatch:
 
 jobs:
-  # publish job
-  publish:
+  
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,28 +20,7 @@ jobs:
           
       - name: Run Publish
         run: dotnet publish  src/BulmaRazorServer/BulmaRazorServer.csproj -c Release -o publish 
-      
-      - name: uploadpub
-        uses: actions/upload-artifact@v2
-        with:
-          name: publish
-          path: publish/
-          
-      - name: uploadpage
-        uses: actions/upload-artifact@v2
-        with:
-          name: pages
-          path: src/BulmaRazorServer/Pages/
-  # upload project and run        
-  uploadMain:
-    needs: [publish]
-    runs-on: ubuntu-latest
-    steps:
-      - name: download
-        uses: actions/download-artifact@v2
-        with:
-          name: publish
-          path: publish/ 
+       
       - name: SFTP Upload Main Files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
@@ -63,15 +42,10 @@ jobs:
               bash ~/deploy.sh
           
   uploadPages:
-    needs: [publish]
     runs-on: ubuntu-latest
     steps:
-      - name: download
-        uses: actions/download-artifact@v2
-        with:
-          name: pages
-          path: pages/
-
+      - uses: actions/checkout@v2
+        
       - name: SFTP Upload Pages
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
@@ -79,5 +53,5 @@ jobs:
           server: ${{secrets.SERVER}}
           port: ${{secrets.PORT}}
           ssh_private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          local_path: ./pages/*
+          local_path: ./src/BulmaRazorServer/Pages/*
           remote_path: ./publish/Pages/
